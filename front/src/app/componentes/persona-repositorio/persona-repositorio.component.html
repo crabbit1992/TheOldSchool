@@ -1,0 +1,147 @@
+<div class="container-fluid" style="padding: 0px !important;">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+
+    <h5 class="col s12 m12"><strong>Registro de Personas</strong></h5>
+
+  </div>
+
+  <div class="col row s12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px;">
+    <div class="row col s12"  style="padding: 0px !important;"> <!-- Div para mantenimiento categoria  -->
+      <div class="col s0 m3">
+      </div>
+    
+      <form class="col s12 m6">
+
+        <div class="row col s12">
+          <div class="input-field col s12">
+            <input type="text" name="perDni" id="perDni" [(ngModel)]="frmPersona.perDni" #perDni="ngModel"
+            [readonly]="dniReadOn" placeholder="DNI" maxlength="8">
+          </div>
+        </div>
+
+        <div class="row col s12">
+          <div class="input-field col s12">
+            <input type="text" name="perNom" id="perNom" [(ngModel)]="frmPersona.perNom" placeholder="Nombre">   
+          </div>
+        </div>
+
+        <div class="row col s12">
+          <div class="input-field col s12">
+            <input type="text" name="perApe" id="perApe" [(ngModel)]="frmPersona.perApe" placeholder="Apellidos"> 
+          </div>
+        </div>
+
+        <div class="row col s12">
+          <label for="" style="font-size: 15px;">Sexo :</label>
+          <label style="margin: 8px;">
+            <input name="group1" type="radio" [(ngModel)]="frmPersona.perSex" value="Masculino" />
+            <span style="color: rgb(5, 5, 90);"><strong>Masculino</strong></span>
+          </label>
+
+          <label>
+            <input name="group1" type="radio" [(ngModel)]="frmPersona.perSex" value="Femenino" />
+            <span style="color: rgb(230, 4, 154);"><strong>Femenino</strong></span>
+          </label>
+        </div>
+
+        <div class="row card-panel col s12">
+          <div class="col s12" style="margin: 10px;">
+            <label for="" style="font-size: 17px;"><strong>Fecha de nacimiento :</strong></label>
+          </div>
+          <div class="input-field col s4">
+            <select class="browser-default" name="perDia" [(ngModel)]="diaSeleccionado"
+              (ngModelChange)='capturarDia($event)'>
+              <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+            </select>
+
+          </div>
+          <div class="input-field col s4">
+            <select class="browser-default" name="perMes" [(ngModel)]="mesSeleccionado"
+              (ngModelChange)='capturarMes($event)'>
+              <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+            </select>
+          </div>
+          <div class="input-field col s4">
+            <select class="browser-default" name="perAnio" [(ngModel)]="anioSeleccionado"
+              (ngModelChange)='capturarAnio($event)'>
+              <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row col s12" style="padding: 0px;"> <!--  Fila de botones-->
+
+          <div class="col s0 m0">
+          </div>
+          
+          <div class="col s12 m12 center" style="margin-top: 0px;padding: auto;" >
+
+            <div class="col s6 m6">
+              <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)"(click)="CrearPersona()">{{nombreBotonGuardar}}</a>
+            </div>
+
+            <div class="col s6 m6">
+              <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)" (click)="LimpiarForm()">Nuevo</a>
+            </div>
+          </div>
+  
+          <div class="col s0 m0">
+          </div>
+        </div>
+
+      </form>
+
+      <div class="col s0 m3">
+      </div>
+
+      <div class="row col s12 anulaPaddMarr">
+        <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px; padding: 0px !important;"> <!--  Fila de Filtro-->
+
+          <div class="col s0 m1">
+          </div>
+          
+          <div class="col s12 m8 center" style="margin-top: 0px;padding-left: 0px;margin-bottom: 0px;" >      
+            <div class="col s7 m4" style="margin-right: 0px !important;padding-left: 0px;">             
+              <div class="input-field col s12" style="padding-left: 15px;">
+                <input placeholder="Buscar por DNI" name="listFilter" id="listFilter" [(ngModel)]="listFilter"  type="text" style="padding-left: 0px;">
+              </div>
+            </div>
+            
+            <div class="col s5 m7">
+            </div>
+          </div>
+
+          <div class="col s0 m0">
+          </div>
+
+        </div>
+
+        <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px;padding: 0px !important;"> <!--  Fila de Filtro-->
+            <form class="col s12 m12">
+            
+              <table class="centered responsive-table striped header_fijo">
+                <thead>
+                  <tr scope="col" colspan="11" id="alumnos">
+                    <th scope="col" colspan="2" id="alumnos" style="text-align: center;">DNI</th>
+                    <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Nombres</th>
+                    <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Apellidos</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                  <tr *ngFor="let persona of filteredPersona">
+                    <td scope="col" colspan="2" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepDni}}</td>
+                    <td scope="col" colspan="4" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepNom}}</td>
+                    <td scope="col" colspan="4" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepApe}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

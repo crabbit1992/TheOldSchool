@@ -1,0 +1,2484 @@
+<div class="container-fluid modPantalla" style="padding: 0px !important;">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+    <h5 class="col m12 s12"><strong>Control de perfil del colegio</strong></h5>
+  </div>
+
+  <div class="row col m12 anulaPaddMarr" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;"> <!--Modo pantalla-->
+
+    <div class="col m2" style="min-height: 500px; background-color: rgb(198, 229, 255);">
+      <ul class="menu" style="margin-top: 30px;">
+        <li><a (click)="ShowListarImagenes()" style="cursor: pointer">Galeria de imagenes</a></li>
+        <li><a style="cursor: pointer">Biografia</a>
+          <ul>
+
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivQuienesSomos()">Quienes somos</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivActividades()">Actividades</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivTalleres()">Talleres</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivNiveles()">Niveles</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivInfraestructura()">Infraestructura</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivAnuncio()">Anuncios</a></li>
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivPortada()">Portada</a></li>
+       <!-- <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivEmblema()">Emblema</a></li>-->
+            <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivImgPfl()">Imagen de perfil</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Div para subir y listar imagenes -->
+    <div class="col m10 anulaPaddMarr" *ngIf="divSubirImg">
+
+      <div class="row col m12 anulaPaddMarr">
+        <div class="col m2"></div>
+
+        <form class="col m8" style="margin-top: 40px;">
+
+          <div class="row col m12" style="margin-top: 20px;">
+            <div class="col m2"></div>
+              <div class="col m8" >
+                <input [(ngModel)]="ModeloGaleriaCol.colImgTtl" name="ModeloGaleriaCol.colImgTtl" id="colImgTtl" type="text" class="input-field col s12" placeholder="Titulo de la imagen" required style="text-align: center;">
+              </div>
+            <div class="col m2"></div>
+          </div>
+
+           
+          <div class="row col m12" style="margin-top: 10px;max-height: 230px !important; min-height: 230px !important;">
+              <div class="col m2"></div>
+                <div class="col m8" *ngIf="modEditImg" style="text-align: center;max-height: 230px !important;">
+                  
+                    <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
+                     style="margin-bottom: 0px !important;padding-bottom: 0px !important; max-height: 230px !important;padding: 0 0 0 0;">
+                </div>
+
+                <div class="col m8" *ngIf="modCreartImg" style="text-align: center;max-height: 230px !important;">
+                  <input type="file" (change)="onPhotoSelected($event)" #photoInput style="display: none;">
+                    <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
+                    (click)="photoInput.click()" style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 400px; max-height: 200px !important;padding: 0 0 0 0;">
+                </div>
+              <div class="col m2"></div>
+          </div>
+
+          <div class="row col m12" style="margin-top: 3px;">
+
+            <div class="col m1"></div>
+
+            <div class="col m10 center">
+              <div class="col m12">
+
+                <div class="col m6">
+                  <button class="btn btn-primary right col m12" (click)="uploadPhoto()">
+                    {{btnEditarGuardar}}
+                  </button>
+                </div>
+  
+                <div class="col m6">
+                  <button class="btn btn-primary left col m12" (click)="cancelar('nell')">
+                    Cancelar
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col m1"></div>
+            
+          </div>
+  
+        </form>
+        <div class="col m2"></div>
+      </div>
+
+
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="divListarImgs">
+
+      <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+        <div class="col m12">       
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="ShowSubirImagen()" matTooltip = "Agregar una imagen a la galeria">Subir imagen</button> 
+              </div>
+            </div> 
+        </div>
+      </div>
+
+      <div *ngIf="divCardImg" class="row col m12" style="margin-top: 10px;">
+        <div class="col m4"  *ngFor="let imagen of arrayImagenes">
+            <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
+              <div class="card-image">
+                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div *ngIf="divImgPfl" class="row col m12 center" style="margin-top: 10px;">
+
+        <div class="col m4"></div>
+        
+        <div class="col m4"  *ngFor="let imagen of arrayImagenes">
+          <div class="card"style="max-height: 300px; min-height: 200px;background-color: black;margin-top: 5px" >
+            <div class="card-image">
+              <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;width: 400px;height: auto;">
+            </div>
+          </div>
+        </div>
+
+        <div class="col m4"></div>
+
+      </div>
+    </div>
+
+    <!-- Div para Quienes Somos -->
+    <div class="col m10 anulaPaddMarr" *ngIf="listQuienesSomos">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearQs()" matTooltip = "Crear perfil 'Quienes Somos'">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Quienes somos</strong></h5>  
+        </div>
+
+        <div class="row col m12"  *ngIf="divMision" style="margin-top: 10px;"> 
+
+          <div class="col m4">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+                <div class="card-content white-text">
+                  <span class="card-title">{{objMision.qsTtl}}</span>
+                </div>
+              </div>
+          </div>
+
+          <div class="col m8 " style="height: 280px;">
+            <div class="card blue-grey darken-1" style="height: 280px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [value]="objMision.qsDes" readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none;">
+                
+                </textarea>
+
+              </div>
+              <div class="card-action center" style="margin-top: 0;padding-top: 0;">
+                  <a style="cursor: pointer;" (click)="EditarQs(objMision)" matTooltip = "Editar apartado 'Mision'">Editar {{objMision.qsTtl}}</a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row col m12"  *ngIf="divVision" style="margin-top: 10px;">
+
+          <div class="col m8 " style="height: 280px;">
+            <div class="card blue-grey darken-1" style="height: 280px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [value]="objVision.qsDes" name="" id="" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;">
+                
+                </textarea>
+
+              </div>
+              <div class="card-action center" style="margin-top: 0;padding-top: 0;">
+                  <a style="cursor: pointer;" (click)="EditarQs(objVision)" matTooltip = "Editar apartado 'Vision'">Editar {{objVision.qsTtl}}</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col m4">
+            <div class="card"style="background-color: black;" >
+              <div class="card-image">
+                <img (click)="openModalImg(objVision.imgCod)" class="Imagenes" [src]="'http://localhost:3000/' + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+              </div>
+              <div class="card-content white-text">
+                <span class="card-title">{{objVision.qsTtl}}</span>
+              </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="row col m12"  *ngIf="divValores" style="margin-top: 10px;"> 
+
+          <div class="col m4">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img (click)="openModalImg(objValores.imgCod)" class="Imagenes" [src]="'http://localhost:3000/' + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+                <div class="card-content white-text">
+                  <span class="card-title">{{objValores.qsTtl}}</span>
+                </div>
+              </div>
+          </div>
+
+          <div class="col m8 " style="height: 280px;">
+            <div class="card blue-grey darken-1" style="height: 280px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [value]="objValores.qsDes" name="" id="" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;">
+                
+                </textarea>
+
+              </div>
+              <div class="card-action center" style="margin-top: 0;padding-top: 0;">
+                  <a style="cursor: pointer;" (click)="EditarQs(objValores)" matTooltip = "Editar apartado 'Valores'">Editar {{objValores.qsTtl}}</a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearQuienesSomos">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Quienes somos</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloQuienesSomos.qsDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m5"></div>
+            <div class="col m2">
+              <mat-select id="ModeloQsOptions.name" [disabled]="matSelectTpoApart" name="ModeloQsOptions.name" [(ngModel)]="ModeloQsOptions.name">
+                <mat-option *ngFor="let qsOpt of arrayQsOptions" [value]="qsOpt.name">{{qsOpt.name}}</mat-option>
+              </mat-select> 
+            </div> 
+            <div class="col m5"></div>    
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="postQuienesSomos()" matTooltip = "Guardar">{{btnEditarGuardar}}</button>
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+        </div>
+      </div>
+    </div>
+  
+     <!-- Div actividades-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listActividades">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearActividad('crear')" matTooltip = "Crear encabezado actividad">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Actividades</strong></h5>  
+        </div>    
+
+        <div class="row col m12" *ngIf="encabezadoActividadTf" style="margin-top: 20px;">
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card-image" *ngIf="encabezadoActividadTf">
+                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>  
+  
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m3"></div>
+            <div class="col m6">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos" style="max-height: 315px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                    <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; "> {{encabezadoActividadArreglo.actDes}}</span>
+                  </div>
+                </div>
+              </div>  
+  
+            </div>
+            <div class="col m3"></div>
+          </div>
+
+        </div>
+        
+
+
+
+
+        <div class="row col m12" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngIf="!encabezadoActividadTf"></div>
+
+          <div class="col m4" *ngFor="let actividad of arrayActividades" style="background-color: rgb(241, 251, 253);">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image" *ngIf="!encabezadoActividadTf">
+                  <img class="Imagenes" (click)="ListarActividades()"  [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-image" *ngIf="encabezadoActividadTf">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px;"><strong>{{actividad.actTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black;">{{actividad.actDes}} </span>
+                </div>
+
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+              
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarAct(actividad)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarActividad(actividad)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoActividadTf" (click)="ShowDivCrearActividad('asociar')" matTooltip = "Agregar actividad"><i class="small material-icons">add</i></a>
+
+                </div>
+
+              </div>
+          </div>
+
+          <div class="col m4" *ngIf="!encabezadoActividadTf"></div>
+
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearActividades">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntActividad}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 ">
+                  <input [(ngModel)]="ModeloActividad.actTtl" placeholder="Titulo de la actividad" type="text"  style="text-align: center;">
+            </div>
+            <div class="col m4"></div>
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloActividad.actDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="postActividades()" matTooltip = "Guardar">{{btnEditarGuardar}}</button>
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Div niveles-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listNiveles">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearNivel('crear','')" matTooltip = "Crear Nivel">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Niveles</strong></h5>  
+        </div>
+
+        <div class="row col m12" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngFor="let nivel of arrayNiveles" style="background-color: rgb(241, 251, 253);">
+              <div class="card" >
+
+                <div class="card-image">
+                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px;"><strong>{{nivel.nivTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black;">{{nivel.nivDes}} </span>
+                </div>
+
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarNiv(nivel)" matTooltip = "Eliminar nivel"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarNivel(nivel)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="ShowDivCrearNivel('asociar',nivel.nivTtl)" matTooltip = "Agregar imagen al nivel"><i class="small material-icons">add</i></a>
+                </div>
+
+              </div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="listNivelImgs">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearNivel('crear','')" matTooltip = "Crear Nivel">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Niveles</strong></h5>  
+        </div>
+
+        <div class="row col m12" style="margin-top: 20px;">
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card-image">
+                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>  
+
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m3"></div>
+            <div class="col m6">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                    <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{encabezadoNivelArreglo.nivTtl}}</strong></span>
+                    <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; "> {{encabezadoNivelArreglo.nivDes}}</span>
+                  </div>
+                </div>
+              </div>  
+  
+            </div>
+            <div class="col m3"></div>
+          </div>
+          
+        </div>
+
+
+        <div class="row col m12" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngFor="let nivel of arrayNiveles" style="background-color: rgb(241, 251, 253);">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
+                  
+                  <span id="myTextarea" style="color: black;">{{nivel.nivDes}} </span>
+                </div>
+
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarNiv(nivel)" matTooltip = "Eliminar imagen"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarNivelImg(nivel)" matTooltip = "Editar nivel"><i class="small material-icons">edit</i></a>
+                </div>
+
+              </div>
+          </div>
+
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearNiveles">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntNivel}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m5"></div>
+            <div class="col m2">
+              <mat-select id="ModeloNivelTpo.name" [disabled]="matSelectNivTpo" name="ModeloNivelTpo.name" [(ngModel)]="ModeloNivelTpo.name">
+                <mat-option *ngFor="let nivTpo of arrayNivelTpo" [value]="nivTpo.name">{{nivTpo.name}}</mat-option>
+              </mat-select> 
+            </div> 
+            <div class="col m5"></div>    
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloNivel.nivDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="postNivel()" >{{btnEditarGuardar}}</button>
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="asociarImgNiv">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntNivel}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m5"></div>
+            <div class="col m2">
+              <mat-select [(ngModel)]="ModeloMatSltNiv.nivTtl"  [disabled]="matSelectNivTpo">
+                <mat-option *ngFor="let nivTpo of MatselectNivel" [value]="nivTpo.nivTtl">{{nivTpo.nivTtl}}</mat-option>
+              </mat-select> 
+            </div> 
+            <div class="col m5"></div>    
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloNivel.nivDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="postNivel()" >{{btnEditarGuardar}}</button>
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Taller-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listTalleres">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearTaller('crear')" matTooltip = "Crear encabezado para el apartado">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Taller</strong></h5>  
+        </div>
+
+
+        <div class="row col m12" *ngIf="encabezadoTallerTf" style="margin-top: 20px;">
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card-image">
+                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>  
+
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m3"></div>
+            <div class="col m6">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                    <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{encabezadoTallerArreglo.talTtl}}</strong></span>
+                    <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; "> {{encabezadoTallerArreglo.talDes}}</span>
+                  </div>
+                </div>
+              </div>  
+  
+            </div>
+            <div class="col m3"></div>
+          </div>
+          
+        </div>
+
+
+
+        <div class="row col m12" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngFor="let taller of arrayTaller" style="background-color: rgb(241, 251, 253);">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image" *ngIf="!encabezadoTallerTf">
+                  <img class="Imagenes" (click)="ListarTalleres()" matTooltip = "Ver talleres"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-image" *ngIf="encabezadoTallerTf">
+                  <img class="Imagenes"  matTooltip = "Ver talleres"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+
+                <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px;text-align: center;"><strong>{{taller.talTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black;text-align: center;">{{taller.talDes}} </span>
+                </div>
+
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarTaller(taller)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarTaller(taller)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoTallerTf" (click)="ShowDivCrearTaller('asociar')" matTooltip = "Agregar taller"><i class="small material-icons">add</i></a>
+                </div>
+
+              </div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearTalleres">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntTaller}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 ">
+                  <input [(ngModel)]="ModeloTaller.talTtl" placeholder="Titulo del taller" type="text"  style="text-align: center;">
+            </div>
+            <div class="col m4"></div>
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloTaller.talDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col m12 " (click)="postTaller()" >{{btnEditarGuardar}}</button>
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Infraestructura-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listInfraestructura">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearInfraestructura('crear')" matTooltip = "Crear encabezado para el apartado">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Infraestructura</strong></h5>  
+        </div>
+
+
+        <div class="row col m12" *ngIf="encabezadoInfraestructuraTf" style="margin-top: 20px;">
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card-image">
+                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>  
+
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m3"></div>
+            <div class="col m6">
+  
+              <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+                <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                    <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{encabezadoInfraestructuraArreglo.infTtl}}</strong></span>
+                    <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; "> {{encabezadoInfraestructuraArreglo.infDes}}</span>
+                  </div>
+                </div>
+              </div>  
+  
+            </div>
+            <div class="col m3"></div>
+          </div>
+          
+        </div>
+
+
+        <div class="row col m12 center" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngIf="!encabezadoInfraestructuraTf"></div>
+
+          <div class="col m4" *ngFor="let Infraestructura of arrayInfraestructura" style="margin-bottom: 20px;background-color: rgb(241, 251, 253);">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image" *ngIf="!encabezadoInfraestructuraTf">
+                  <img class="Imagenes" (click)="ListarInfraestructura()" matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
+                  <img class="Imagenes"  matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+
+                <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px;text-align: center;"><strong>{{Infraestructura.infTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black;text-align: center;">{{Infraestructura.infDes}} </span>
+                </div>
+
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarInfraestructura(Infraestructura)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarInfraestructura(Infraestructura)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoInfraestructuraTf" (click)="ShowDivCrearInfraestructura('asociar')" matTooltip = "Agregar Infraestructura"><i class="small material-icons">add</i></a>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="col m4" *ngIf="!encabezadoInfraestructuraTf"></div>
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearInfraestructura">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntInfraestructura}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 ">
+                  <input [(ngModel)]="ModeloInfraestructura.infTtl" placeholder="Titulo de la infraestructura" type="text"  style="text-align: center;">
+            </div>
+            <div class="col m4"></div>
+          </div>
+          
+          <div class="col m12">
+            <div class="col m2"></div>
+            <div class="col m8 " style="height: 280px;">
+              <div class="card blue-grey darken-1" style="height: 280px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloInfraestructura.infDes" maxlength="1000" name="" id="" cols="30" style="max-height: 219px;min-height: 219px;resize: none;font-size: 14px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+            <div class="col m2"></div>
+          </div>
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 right"  (click)="postInfraestructura()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 left" (click)="cancelar('Infraestructura')" >Cancelar</button>
+                </div>
+                
+                
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Anuncios-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listAnuncios">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearAnuncio()" matTooltip = "Crear anuncio">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Anuncios</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngFor="let anuncio of arrayAnuncio">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ShowDivAnuncio()" matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarAnuncio(anuncio)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarAnuncio(anuncio)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                </div>
+
+              </div>
+          </div>
+
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearAnuncio">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntAnuncio}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 right"  (click)="postAnuncio()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 left" (click)="cancelar('anuncio')" >Cancelar</button>
+                </div>   
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Img Portadas-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listPortada">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearPortada()" matTooltip = "Crear portada">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Portadas</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 50px;"> 
+
+          <div class="col m4" *ngFor="let portada of arrayPortada">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarPortada(portada)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarPortada(portada)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearPortada">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntPortada}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 right"  (click)="postPortada()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 left" (click)="cancelar('anuncio')" >Cancelar</button>
+                </div>   
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Emblema-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listEmblema">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearEmblema()" matTooltip = "Crear emblema">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Emblema</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 50px;"> 
+
+          <div class="col m4"></div>
+
+          <div class="col m4" *ngFor="let emblema of arrayEmblema">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes"  matTooltip = "Ver Emblema"  [src]="'http://localhost:3000/' + emblema.colImgEmb.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarEmblema(emblema)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="col m4"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearEmblema">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntEmblema}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4" style="width: 39%;"></div>
+            <div class="col m4 center" style="margin-top: 25px; width: 22%;">
+              <div class="card" style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4" style="width: 39%;"></div>
+          </div>
+
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 right"  (click)="postEmblema()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 left" (click)="cancelar('emblema')" >Cancelar</button>
+                </div>   
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Img Perfl-->
+    <div class="col m10 anulaPaddMarr" *ngIf="listImgPfl">
+
+      <div class="col m12">
+
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12">       
+              <div class="col m2 anulaPaddMarr" >
+                <div class="input-field col m12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivCrearImgPfl()" matTooltip = "Crear Imagen para el perfil">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado imagen de perfil</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 50px;"> 
+
+          <div class="col m4"></div>
+
+          <div class="col m4" *ngFor="let imagen of arrayImgPfl">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes"  matTooltip = "Ver Imagen"  [src]="'http://localhost:3000/' + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+
+                <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarImgPfl(imagen)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="col m4"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearImgPfl">
+      
+      <div class="col m12">
+        <div class="col m12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntImgPfl}}</strong></h5>  
+        </div>
+
+        <div class="row col m12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col m4"></div>
+            <div class="col m4 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                </div>
+              </div>
+            </div>
+            <div class="col m4"></div>
+          </div>
+
+
+          <div class="col m12 center" style="margin-top: 20px;">
+            <div class="col m4"></div>
+            <div class="col m4">
+              <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 right"  (click)="postImgPfl()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col m6">
+                  <button  class="waves-light btn  col m12 left" (click)="cancelar('imgPfl')" >Cancelar</button>
+                </div>   
+              </div>
+            </div> 
+            <div class="col m4"></div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid modCelular" style="padding: 0px !important; background-color: rgb(241, 251, 253);">
+
+  <div class="row col s12 center" style="margin-top: 20px;padding: 0px !important;background-color: rgb(241, 251, 253);">
+    <h5><strong>Control de perfil del colegio</strong></h5>
+  </div>
+
+  <div class="row col s12 anulaPaddMarr" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;background-color: rgb(241, 251, 253);">
+    
+    <div class="row col s12" style="margin-top: 10px;">
+      <!-- Disparador Modal -->
+      <button  (click)="openModalOptions()"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+    </div>
+
+     <!-- Div para subir y listar imagenes -->
+     <div class="col s12 anulaPaddMarr" *ngIf="divListarImgs">
+
+      <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+        <div class="col s12">       
+            <div class="col s12 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="ShowSubirImagen()" matTooltip = "Agregar una imagen a la galeria">Subir imagen</button> 
+              </div>
+            </div> 
+        </div>
+      </div>
+
+      <div *ngIf="divCardImg" class="row col s12" style="margin-top: 10px;">
+        <div class="col s6"  *ngFor="let imagen of arrayImagenes">
+            <div class="card"style="max-height: 100px; min-height: 50px;background-color: black;margin-top: 5px" >
+              <div class="card-image">
+                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="divSubirImg">
+
+      <div class="row col s12 anulaPaddMarr">
+
+        <form class="col s12" style="margin-top: 40px;">
+
+          <div class="row col s12" style="margin-top: 20px;">
+         
+              <div class="col s12" >
+                <input [(ngModel)]="ModeloGaleriaCol.colImgTtl" name="ModeloGaleriaCol.colImgTtl" id="colImgTtl" type="text" class="input-field col s12" placeholder="Titulo de la imagen" required style="text-align: center;">
+              </div>
+       
+          </div>
+
+           
+          <div class="row col s12 anulaPaddMarr" style="margin-top: 10px;max-height: 230px !important; min-height: 230px !important;">
+
+                <div class="col s12 " *ngIf="modEditImg" style="text-align: center;max-height: 230px !important;">
+                  
+                    <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
+                     style="margin-bottom: 0px !important;padding-bottom: 0px !important; max-height: 230px !important;padding: 0 0 0 0;">
+                </div>
+
+                <div class="col s12" *ngIf="modCreartImg" style="text-align: center;max-height: 230px !important;">
+                  <input type="file" (change)="onPhotoSelected($event)" #photoInput style="display: none;">
+                    <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
+                    (click)="photoInput.click()" style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 300px; max-height: 200px !important;padding: 0 0 0 0;">
+                </div>
+
+          </div>
+
+          <div class="row col s12" style="margin-top: 3px;">
+
+
+
+            <div class="col s12 center">
+              <div class="col s12">
+
+                <div class="col s6">
+                  <button class="btn btn-primary right col s12" (click)="uploadPhoto()">
+                    {{btnEditarGuardar}}
+                  </button>
+                </div>
+  
+                <div class="col s6">
+                  <button class="btn btn-primary left col s12" (click)="cancelar('nell')">
+                    Cancelar
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            
+          </div>
+  
+        </form>
+     
+      </div>
+
+
+    </div>
+
+    <!-- Div para Quienes Somos -->
+    <div class="col s12 anulaPaddMarr" *ngIf="listQuienesSomos">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr">
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearQs()" matTooltip = "Crear perfil 'Quienes Somos'">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Quienes somos</strong></h5>  
+        </div>
+
+        <div class="row col s12 center anulaPaddMarr"  *ngIf="divMision" style="margin-top: 40px;"> 
+
+          <span style="font-size: 20px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objMision.qsTtl}}</strong></span>
+          <div class="col s12">
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+                <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                </div>
+              </div>
+          </div>
+
+          <div class="col s12 center anulaPaddMarr" style="height: 370px;">
+              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  
+                      <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{objMision.qsDes}} </span>
+                  </div>
+              </div>
+              <div class="col s12" style="margin-top: 0;padding-top: 0;">
+                <a style="cursor: pointer; font-size: 15px;" (click)="EditarQs(objMision)" matTooltip = "Editar apartado 'Misión'">Editar {{objMision.qsTtl}}</a>
+              </div>
+          </div>
+        </div>
+  
+        <div class="row col s12 center anulaPaddMarr"  *ngIf="divVision" style="margin-top: 70px;">
+  
+            <span style="font-size: 20px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objVision.qsTtl}}</strong></span>
+            <div class="col s12">
+                <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+                  <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
+                    <img class="Imagenes" [src]="'http://localhost:3000/' + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                  </div>
+                </div>
+            </div>
+  
+            <div class="col s12 center anulaPaddMarr" style="height: 370px;">
+                <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                      <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{objVision.qsDes}} </span>
+                  </div>
+                </div>
+                <div class="col s12" style="margin-top: 0;padding-top: 0;">
+                  <a style="cursor: pointer; font-size: 15px;" (click)="EditarQs(objVision)" matTooltip = "Editar apartado 'Visión'">Editar {{objVision.qsTtl}}</a>
+                </div>
+            </div>
+        </div>
+  
+        <div class="row col s12 center anulaPaddMarr"  *ngIf="divValores" style="margin-top: 70px;margin-bottom: 20px; background-color: rgb(241, 251, 253);"> 
+  
+          <span style="font-size: 20px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objValores.qsTtl}}</strong></span>
+          <div class="col s12">
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+                <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                </div>
+              </div>
+          </div>
+  
+          <div class="col s12 center anulaPaddMarr" style="height: 370px;">
+              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                      <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;background-color: rgb(241, 251, 253);">{{objValores.qsDes}} </span>
+                  </div>
+              </div>
+              <div class="col s12" style="margin-top: 0;padding-top: 0;">
+                <a style="cursor: pointer; font-size: 15px;" (click)="EditarQs(objValores)" matTooltip = "Editar apartado 'Valores'">Editar {{objValores.qsTtl}}</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearQuienesSomos">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Quienes somos</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+        
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+   
+          </div>
+          
+          <div class="col s12">
+
+            <div class="col s12" style="height: 400px;">
+              <div class="card blue-grey darken-1" style="height: 400px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloQuienesSomos.qsDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+  
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+
+            <div class="col s12">
+              <mat-select id="ModeloQsOptions.name" [disabled]="matSelectTpoApart" name="ModeloQsOptions.name" [(ngModel)]="ModeloQsOptions.name">
+                <mat-option *ngFor="let qsOpt of arrayQsOptions" [value]="qsOpt.name">{{qsOpt.name}}</mat-option>
+              </mat-select> 
+            </div> 
+
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+
+            <div class="col s12">
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="postQuienesSomos()" matTooltip = "Guardar">{{btnEditarGuardar}}</button>
+              </div>
+
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="cancelar('qs')" matTooltip = "Cancelar">Cancelar</button>
+              </div>
+            </div> 
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Div actividades-->
+    <div class="col s12 anulaPaddMarr" *ngIf="listActividades">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr">
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearActividad('crear')" matTooltip = "Crear encabezado actividad">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Actividades</strong></h5>  
+        </div>
+
+        <div class="row col s12" *ngIf="encabezadoActividadTf" style="margin-top: 20px;">
+          <div class="col s12">
+
+            <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="encabezadoActividadTf">
+                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+  
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 315px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                  <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; max-height: 50px;"> {{encabezadoActividadArreglo.actDes}}</span>
+                </div>
+              </div>
+  
+            </div>  
+
+          </div>
+        </div>
+
+        <div class="row col s12" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let actividad of arrayActividades" style="margin-bottom: 20px;">
+            <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="!encabezadoActividadTf">
+                <img class="Imagenes" (click)="ListarActividades()"  [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card-image" *ngIf="encabezadoActividadTf">
+                <img class="Imagenes" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{actividad.actTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{actividad.actDes}} </span>
+                </div>
+              </div>
+
+              <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarAct(actividad)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarActividad(actividad)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoActividadTf" (click)="ShowDivCrearActividad('asociar')" matTooltip = "Agregar actividad"><i class="small material-icons">add</i></a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearActividades">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntActividad}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <div class="col s12 ">
+                  <input [(ngModel)]="ModeloActividad.actTtl" placeholder="Titulo de la actividad" type="text"  style="text-align: center;">
+            </div>
+          </div>
+
+          
+          
+          <div class="col s12">
+
+            <div class="col s12" style="height: 400px;">
+              <div class="card blue-grey darken-1" style="height: 400px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloActividad.actDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                  
+                  </textarea>
+  
+                </div>
+   
+              </div>
+            </div>
+
+          </div>
+
+          
+
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="postActividades()" matTooltip = "Guardar">{{btnEditarGuardar}}</button>
+              </div>
+
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="cancelar('ac')" matTooltip = "Cancelar">Cancelar</button>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Div talleres-->
+    <div class="col s12 anulaPaddMarr" *ngIf="listTalleres">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr">
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearTaller('crear')" matTooltip = "Crear encabezado taller">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Talleres</strong></h5>  
+        </div>
+
+        <div class="row col s12" *ngIf="encabezadoTallerTf" style="margin-top: 20px;">
+
+          <div class="col s12">
+
+            <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="encabezadoTallerTf">
+                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+  
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 315px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                  <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; max-height: 50px;"> {{encabezadoTallerArreglo.talDes}}</span>
+                </div>
+              </div>
+  
+            </div>  
+
+          </div>
+          
+        </div>
+
+        <div class="row col s12" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let taller of arrayTaller" style="margin-bottom: 20px;">
+            <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="!encabezadoTallerTf">
+                <img class="Imagenes" (click)="ListarTalleres()"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card-image" *ngIf="encabezadoTallerTf">
+                <img class="Imagenes" [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{taller.talTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{taller.talDes}} </span>
+                </div>
+              </div>
+
+              <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarTaller(taller)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarTaller(taller)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoTallerTf" (click)="ShowDivCrearTaller('asociar')" matTooltip = "Agregar taller"><i class="small material-icons">add</i></a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearTalleres">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntTaller}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <div class="col s12 ">
+                  <input [(ngModel)]="ModeloTaller.talTtl" placeholder="Titulo del taller" type="text"  style="text-align: center;">
+            </div>
+          </div>
+
+          <div class="col s12">
+
+            <div class="col s12" style="height: 400px;">
+              <div class="card blue-grey darken-1" style="height: 400px;">
+                <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                  
+                  <textarea [(ngModel)]="ModeloTaller.talDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                  
+                  </textarea>
+  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="postTaller()" matTooltip = "Guardar">{{btnEditarGuardar}}</button>
+              </div>
+
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="cancelar('ta')" matTooltip = "Cancelar">Cancelar</button>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Div niveles-->
+     <div class="col s12 anulaPaddMarr" *ngIf="listNiveles">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearNivel('crear','')" matTooltip = "Crear Nivel">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Niveles</strong></h5>  
+        </div>
+
+        <div class="row col s12" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let nivel of arrayNiveles" style="margin-bottom: 20px;">
+              <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+                <div class="card-image">
+                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                </div>
+
+                <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                    <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{nivel.nivTtl}}</strong></span>
+                    <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{nivel.nivDes}}</span>
+                  </div>
+                </div>
+  
+                <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarNiv(nivel)" matTooltip = "Eliminar nivel"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarNivel(nivel)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="ShowDivCrearNivel('asociar',nivel.nivTtl)" matTooltip = "Agregar imagen al nivel"><i class="small material-icons">add</i></a>
+                </div>
+
+              </div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="listNivelImgs">
+
+  
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearNivel('crear','')" matTooltip = "Crear Nivel">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Niveles</strong></h5>  
+        </div>
+
+        <div class="row col s12"style="margin-top: 20px;">
+          <div class="col s12">
+            <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image">
+                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+  
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{encabezadoNivelArreglo.nivTtl}}</strong></span>
+                  <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; max-height: 50px;"> {{encabezadoNivelArreglo.nivDes}}</span>
+                </div>
+              </div>
+  
+            </div>  
+          </div>  
+        </div>  
+      </div>
+      
+
+      <div class="row col s12" style="margin-top: 50px;"> 
+        <div class="col s12" *ngFor="let nivel of arrayNiveles" style="margin-bottom: 20px;">
+          <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+            <div class="card-image">
+              <img class="Imagenes" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+            </div>
+
+            <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+              <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{nivel.nivDes}} </span>
+              </div>
+            </div>
+
+            <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+              <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarNiv(nivel)" matTooltip = "Eliminar imagen"><i class="small material-icons">delete</i></a>
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarNivelImg(nivel)" matTooltip = "Editar nivel"><i class="small material-icons">edit</i></a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearNiveles">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntNivel}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+         
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+       
+
+
+          <div class="col s12" style="height: 400px;">
+            <div class="card blue-grey darken-1" style="height: 400px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [(ngModel)]="ModeloNivel.nivDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                
+                </textarea>
+
+              </div>
+  
+            </div>
+          </div>
+
+     
+
+          <div class="col s12 center" style="margin-top: 20px;">
+
+            <div class="col s12">
+              <mat-select id="ModeloNivelTpo.name" [disabled]="matSelectNivTpo" name="ModeloNivelTpo.name" [(ngModel)]="ModeloNivelTpo.name">
+                <mat-option *ngFor="let nivTpo of arrayNivelTpo" [value]="nivTpo.name">{{nivTpo.name}}</mat-option>
+              </mat-select> 
+            </div> 
+
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+
+            <div class="col s12">
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12" (click)="postNivel()" >{{btnEditarGuardar}}</button>
+              </div>
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12" (click)="cancelar('ni')" >Cancelar</button>
+              </div>
+            </div> 
+  
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="asociarImgNiv">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntNivel}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12 center" style="margin-top: 25px;">
+            <div class="card">
+              <div class="card-image">
+                <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12" style="height: 400px;">
+            <div class="card blue-grey darken-1" style="height: 400px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [(ngModel)]="ModeloNivel.nivDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                
+                </textarea>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+
+            <div class="col s12">
+              <mat-select [(ngModel)]="ModeloMatSltNiv.nivTtl"  [disabled]="matSelectNivTpo">
+                <mat-option *ngFor="let nivTpo of MatselectNivel" [value]="nivTpo.nivTtl">{{nivTpo.nivTtl}}</mat-option>
+              </mat-select> 
+            </div> 
+      
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12" (click)="postNivel()" >{{btnEditarGuardar}}</button>
+              </div>
+              <div class="input-field col s6" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12" (click)="cancelar('ni')" >Cancelar</button>
+              </div>
+            </div> 
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+     <!-- Div Infraestructura-->
+     <div class="col s12 anulaPaddMarr" *ngIf="listInfraestructura">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearInfraestructura('crear')" matTooltip = "Crear encabezado para el apartado">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Infraestructura</strong></h5>  
+        </div>
+
+
+        <div class="row col s12" *ngIf="encabezadoInfraestructuraTf" style="margin-top: 20px;">
+
+          <div class="col s12">
+
+            <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
+                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 315px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">   
+                  <span id="myTextarea" style="color: rgb(14, 0, 94); text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{encabezadoInfraestructuraArreglo.infDes}}</span>
+                </div>
+              </div>
+  
+            </div>  
+
+          </div>
+          
+        </div>
+
+
+        <div class="row col s12 center" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let infraestructura of arrayInfraestructura" style="margin-bottom: 20px;">
+            <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+              <div class="card-image" *ngIf="!encabezadoInfraestructuraTf">
+                <img class="Imagenes" (click)="ListarInfraestructura()"  [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
+                <img class="Imagenes" [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos" style="max-height: 355px;margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center;"><strong style="text-align: center;">{{infraestructura.infTtl}}</strong></span>
+                  <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px; max-height: 50px;">{{infraestructura.infDes}} </span>
+                </div>
+              </div>
+
+              <div class="card-action center" style="background-color: rgb(241, 251, 253);">
+                <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarInfraestructura(infraestructura)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarInfraestructura(infraestructura)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" *ngIf="!encabezadoInfraestructuraTf" (click)="ShowDivCrearInfraestructura('asociar')" matTooltip = "Agregar Infraestructura"><i class="small material-icons">add</i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearInfraestructura">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntInfraestructura}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <div class="col s12 ">
+                  <input [(ngModel)]="ModeloInfraestructura.infTtl" placeholder="Titulo de la infraestructura" type="text"  style="text-align: center;">
+            </div>
+          </div>
+  
+          <div class="col s12" style="height: 400px;">
+            <div class="card blue-grey darken-1" style="height: 400px;">
+              <div class="card-content white-text" style="margin-bottom: 0;padding-bottom: 0;">
+                
+                <textarea [(ngModel)]="ModeloInfraestructura.infDes" maxlength="1000" name="" id="" cols="30" style="max-height: 400px;min-height: 365px;resize: none;font-size: 13px;">
+                
+                </textarea>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 right"  (click)="postInfraestructura()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 left" (click)="cancelar('in')" >Cancelar</button>
+                </div>
+              </div>
+            </div> 
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Anuncios-->
+    <div class="col s12 anulaPaddMarr" *ngIf="listAnuncios">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearAnuncio()" matTooltip = "Crear anuncio">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Anuncios</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let anuncio of arrayAnuncio" style="margin-bottom: 20px;">
+              <div class="card white anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
+
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ShowDivAnuncio()"  [src]="'http://localhost:3000/' + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                </div>
+
+                <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-action center col s12" style="background-color: rgb(241, 251, 253);">
+                    <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarAnuncio(anuncio)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                    <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarAnuncio(anuncio)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  </div>
+                </div>
+                
+
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearAnuncio">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntAnuncio}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 right"  (click)="postAnuncio()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 left" (click)="cancelar('an')" >Cancelar</button>
+                </div>   
+              </div>
+            </div> 
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Img Portadas-->
+    <div class="col s12 anulaPaddMarr" *ngIf="listPortada">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearPortada()" matTooltip = "Crear portada">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado Portadas</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 50px;"> 
+          <div class="col s12" *ngFor="let portada of arrayPortada">
+              <div class="card"style="background-color: black;" >
+
+                <div class="card-image">
+                  <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                </div>
+
+                <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                  <div class="card-action center col s12" style="background-color: rgb(241, 251, 253);">
+                    <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarPortada(portada)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarPortada(portada)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="crearPortada">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntPortada}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col s12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card">
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 right"  (click)="postPortada()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 left" (click)="cancelar('po')" >Cancelar</button>
+                </div>   
+              </div>
+            </div>    
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Div Img Perfl-->
+    <div class="col s12 anulaPaddMarr" *ngIf="listImgPfl">
+
+      <div class="col s12">
+
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12">       
+              <div class="col s12 anulaPaddMarr" >
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn  col s12 " (click)="ShowDivCrearImgPfl()" matTooltip = "Crear Imagen para el perfil">Crear</button>
+                </div>
+              </div> 
+          </div>
+        </div>
+        
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>Apartado imagen de perfil</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 50px;"> 
+
+          <div class="col s12" *ngFor="let imagen of arrayImgPfl">
+            <div class="card"style="background-color: black;" >
+
+              <div class="card-image">
+                <img class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              </div>
+
+              <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                <div class="card-action center col s12" style="background-color: rgb(241, 251, 253);">
+                  <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarImgPfl(imagen)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12anulaPaddMarr" *ngIf="crearImgPfl">
+      
+      <div class="col s12">
+        <div class="col s12 center" style="margin-top: 20px;">        
+            <h5><strong>{{ttlMntImgPfl}}</strong></h5>  
+        </div>
+
+        <div class="row col s12 center" style="margin-top: 10px;"> 
+
+          <div class="col m12">
+            <div class="col s12 center" style="margin-top: 25px;">
+              <div class="card"style="background-color: black;" >
+                <div class="card-image">
+                  <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px; height: auto; max-height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col s12 center" style="margin-top: 20px;">
+            <div class="col s12">
+              <div class="input-field col s12 anulaPaddMarr" style="margin-top: 20px;"> 
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 right"  (click)="postImgPfl()" >{{btnEditarGuardar}}</button>
+                </div>
+                <div class="col s6">
+                  <button  class="waves-light btn  col s12 left" (click)="cancelar('ip')" >Cancelar</button>
+                </div>   
+              </div>
+            </div>  
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,126 @@
+<div class="container-fluid" style="background-color: rgb(241, 251, 253);">
+
+  <div class="row col m12 s12">
+
+    <form class="col m4 s12 right" style="margin-top: 0px;margin-bottom: 0px;">
+      <div class="row col s12 center" style="text-align: center;">
+
+        <div class="row col m12 s12" style="margin-top: 60px;">
+          <span style="color: rgb(1, 0, 36);font-size: 20px;"><strong style="font-size: 20px;"> Logo School </strong><span></span> <i class="small material-icons">school</i></span>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top: 10px;margin-bottom: 10px;">
+          <div class="col s1 m0"></div>
+          <div class="input-field col m6 s6" style="margin-top: 0px;margin-bottom: 0px;">
+            <input type="text" name="perDni" id="perDni" [(ngModel)]="frmPersona.perDni"
+              placeholder="Ingrese su DNI" maxlength="8" [readonly]="DniInputEnable">
+          </div>
+          <div class="col m4 s4" style="margin-top: 12px;">
+            <button class="btn-small green darken-2" style="margin-bottom: 20px;" (click)="ValidarDni()">{{nomBotonValidar}}</button>
+          </div>
+          <div class="col s1 m0"></div>
+        </div>
+
+
+        <div class="row col m12 s12" style="margin-top: 0px;margin-bottom: 0px;">
+          <div class="input-field col m12 s12" style="margin-top: 0px;">
+            <i class="material-icons prefix">mail_outline</i>
+            <input type="email" class="validate" name="perCorreo"  id="perCorreo" [(ngModel)]="frmPersona.perCorreo"
+              style="border-bottom: 1px solid #0E9C16 !important;
+              box-shadow: 0 1px 0 0 #0E9C16 !important" [readonly]="corRedOn" placeholder="Correo"
+              >
+          </div>
+        </div>
+      
+        <div class="row col m12 s12" style="margin-top: 0px;">
+          <div class="input-field col m12 s12" style="margin-top: 0px;margin-bottom: 0px;">
+            <i class="material-icons prefix">lock_outline</i>
+            <input type="password" name="perPas" id="perContraseña" [(ngModel)]="frmPersona.perPas"
+              required style="border-bottom: 1px solid #0E9C16 !important;
+              box-shadow: 0 1px 0 0 #0E9C16 !important;" [readonly]="pasRedOn" placeholder="Contraseña"
+              >
+          </div>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top: 0px;margin-bottom: 0px;">
+          <div class="input-field col m6 s12" style="margin-top: 0px;margin-bottom: 0px;">
+            <input type="text" style="text-align: center;" name="perNom" id="perNom" readonly [(ngModel)]="frmPersona.perNom" placeholder="Nombre">
+          </div>
+          <div class="input-field col m6 s12" style="margin-top: 0px;margin-bottom: 0px;">
+            <input type="text" style="text-align: center;" name="perApe" id="perApe" readonly [(ngModel)]="frmPersona.perApe" placeholder="Apellidos">
+          </div>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top: 20px; ">
+          <div class="col m12 s12" >
+            
+            <label for="" style="font-size: 17px;">Sexo :</label>
+
+            <label style="margin-top: 10px;">
+              <input name="group1" type="radio" disabled [(ngModel)]="frmPersona.perSex" value="Masculino" />
+              <span>Masculino</span>
+            </label>
+
+            <label>
+              <input name="group1" type="radio" disabled   [(ngModel)]="frmPersona.perSex" value="Femenino" />
+              <span>Femenino</span>
+            </label>
+
+          </div>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top: 0px;">
+            <div class="col m12 s12">
+              
+              <div class="row  col m12 s12" style="margin-top:0px;margin-bottom: 0px;">
+                <div class="col m12 s12">
+                  <label for="" style="font-size: 17px;">Fecha de nacimiento :</label>
+                </div>
+                <div class="input-field col m4 s4">
+                  <select class="browser-default" name="perDia" disabled [(ngModel)]="diaSeleccionado">
+                    <option *ngFor="let d of dia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+  
+                </div>
+                <div class="input-field col m4 s4">
+                  <select class="browser-default" name="perMes" disabled [(ngModel)]="mesSeleccionado">
+                    <option *ngFor="let m of mes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col m4 s4">
+                  <select class="browser-default" name="perAnio" disabled [(ngModel)]="anioSeleccionado">
+                    <option *ngFor="let a of anio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top:0px;margin-bottom: 0px;">
+          <div class="col m12 s12">
+            <div class="row">
+              <p>
+                <label>
+                  <input id="indeterminate-checkbox" type="checkbox" />
+                  <span>He leido y acepto los terminos y condiciones.</span>
+                </label>
+              </p>
+
+
+              <div class="row col m12 s12" style="margin-top: 20px;margin-bottom: 0px; text-align: center;">
+                <button class="btn col s12 center green darken-2" [disabled]="DniExist" (click)="CrearPersona()">Registrarme</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+

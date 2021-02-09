@@ -1,0 +1,115 @@
+<div style="width: 100%;margin: auto;margin-bottom: 2px;padding: 0px 0px 0px 0px;">
+  <div class="section container" style="width: 100%;margin: auto;padding: 0px 0px 0px 0px;">
+
+
+    <div class="row col s8">
+      <div class="row col s12">
+
+
+        <div class="row col s12" 
+          style="margin-left: 0px !important;margin-right: 0px;background:  rgb(148, 163, 190);width: 100%;margin-top: 0px;">
+          <!--Div Crear perfiles-->
+          <div class="col s7" style="margin-top: 18px;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+            <h4 style="text-align: center;"> </h4>
+            <form class="col s12" style="margin-top: 0px;margin-bottom: 0px; margin-right: 1%;">
+              <div class="row card-panel">
+                <div class="col s11" style="margin-left: 2%;height: 436px;">
+                  <div class="row" style="margin-top: 10px;margin-bottom: 0px; text-align: center">
+                    <div class="input-field col offset-s2 s4"
+                      style="margin-top: 0px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                      <input type="text" name="listFilter" id="perDni" 
+                        placeholder="Filtrar por DNI :">
+                    </div>
+                  </div>
+                  <div class="row card-panel">
+                    <table class="highlight responsive-table" style="max-width: 420px !important;">
+                      <thead>
+                        <tr>
+                          <th style="width: 3px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center;">Grado</th>
+                      <th style="width: 3px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center;">Descripcion</th>
+                      <th style="width: 3px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center;">Estado</th>
+                      <th style="width: 3px;margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center;">Opciones</th>
+                        </tr>
+                      </thead>
+
+                      <tbody >
+                        <tr *ngFor="let grado of GetGradoArray">
+                          <td style="width: 2px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center">{{grado.graNum}}</td>
+                      <td style="width: 2px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center">{{grado.graDes}}</td>
+                      <td style="width: 2px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center">{{grado.estCod.estNom}}</td>
+                      <td style="width: 2px; margin-right: 0px !important; margin-left: 0px !important;padding-right: 0px !important;padding-left: 0px !important;text-align: center">
+                        <a (click)="EditarGrado(grado)">
+                          <i class="material-icons">edit</i>
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col s6" style="margin-top: 10px;margin-left: 0px;margin-right: 0px;padding-right: 0px;scroll-padding-left: 0px;">
+            <!-- Div formulario-->
+            <h4 style="text-align: center;"> </h4>
+            <form class="col s12" style="margin-top: 7px;margin-bottom: 0px; margin-right: 0px;height: 589px;">
+              <div class="row card-panel" style="margin-right: 0px;">
+                <div style="margin-left: 2%;height: 436px;margin-right: 0px; ">
+                  <div class="row" style="margin-top: 0px;margin-bottom: 0px;margin-right: 0px;">
+                    <div class="input-field col offset-s2 s8"
+                      style="margin-top: 35px;margin-bottom: 20px;margin-right: 0px;">
+                      <h5 class="center">Grado</h5>
+                    </div>
+                  </div>
+
+                  <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                    <div class="col s4" style="padding-top: 15px;">
+                      <label for="" style="font-size: 16px;">Grado :</label>
+                    </div>
+                    <div class="col s8">
+                      <div class="input-field col s8">
+                        <select class="browser-default" name="perDia" (ngModelChange)='CapturarGrado($event)'
+                        [(ngModel)]="gradoSeleccionado" >
+                          <option *ngFor="let g of arrayGrado" [value]="g.ListGradoNom">{{g.ListGradoNom}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                    <div class="col s4" style="padding-top: 15px;">
+                      <label for="" style="font-size: 16px;">Descripcion :</label>
+                    </div>
+                    <div class="col s8">
+                      <div class="input-field col s8">
+                        <input type="text" name="graDes" id="graDes" [(ngModel)]="ModeloGrado.graDes" placeholder="Descripcion">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="row">
+                        <div class="row" style="margin-top: 20px;margin-bottom: 0px; text-align: center;">
+                          <button class="btn center green darken-2"
+                            style="display: inline-block;padding: 2px 2px;background: #504188 !important;"
+                            >Crear</button>
+                          <button class="btn center green darken-2"
+                            style="display: inline-block;padding: 2px 2px;background: #504188 !important;"
+                            (click)="LimpiarForm()">Nuevo</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+
+<div style="width: 100%;margin: auto;margin-bottom: 2px;">
+    <div class="section container" style="width: 94%;margin: auto;">
+        <nav>
+          <div class="nav-wrapper" style="background: rgb(107, 124, 219) !important;">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="sass.html">Sass</a></li>
+              <li><a href="badges.html">Components</a></li>
+              <li><a href="collapsible.html">JavaScript</a></li>
+            </ul>
+          </div>
+        </nav>
+      
+        <div class="row" style="margin-bottom: 2px;">
+          <div class="col s12" style="background-color: rgb(148, 163, 190); height: 200px;">
+            <h4 style="text-align: center;color: aliceblue;">Imagen del colegio</h4>
+          </div>
+          
+          <form class="col s12" style="margin-top: 0px;margin-bottom: 0px; margin-right: 1%;">
+              <div class="row card-panel">
+                <div class="" style="margin-left: 2%;height: 436px; ">
+        
+                  <div class="row" style="margin-top: 0px;margin-bottom: 0px; text-align: center">
+                    <div class="input-field col offset-s2 s4" style="margin-top: 0px;text-align: center">
+                      <input type="text" name="listFilter" id="perDni" [(ngModel)]="listFilter" placeholder="DNI">
+                    </div>
+                  </div>
+        
+                  <div class="row card-panel">
+                    <table class="highlight responsive-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 11px;">DNI</th>
+                          <th style="width: 20px;">Nombres</th>
+                          <th style="width: 20px;">Apellidos</th>
+                          <th style="width: 33px;">Correo</th>
+                          <th style="width: 20px;">Contraseña</th>
+                          <th style="width: 8px;"></th>
+                        </tr>
+                      </thead>
+        
+                      <tbody>
+                        <tr *ngFor="let persona of filteredPersona">
+                          <td style="width: 10px;">{{persona.perDni}}</td>
+                          <td style="width: 19px;">{{persona.perNom}}</td>
+                          <td style="width: 19px;">{{persona.perApe}}</td>
+                          <td style="width: 32px;">{{persona.perCorreo}}</td>
+                          <td style="width: 20px;">{{persona.perPas}}</td>
+                          <td style="width: 8px;">
+                         <a (click)="EliminarCuenta(persona._id)">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+</div>
+

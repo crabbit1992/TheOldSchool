@@ -1,0 +1,177 @@
+<div class="container-fluid modPantalla" style="min-height: 1000px; background-color: rgb(241, 251, 253);">
+
+
+  <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span class="spacer"></span>
+    
+    <a class="btn" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ListaColegios()" matTooltip = "Lista de colegios"><i class="material-icons">list</i></a>
+    <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ShowRegistrarse()">Registrarse</a>
+    <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ShowLogin()">Iniciar Sesión </a>
+  
+  </mat-toolbar>
+  
+  
+  <div class="row col m12 s12 anulaPaddMarr modPantalla"  style="min-height: 550px;z-index: -10; padding: 0px; background-color: rgb(241, 251, 253);">
+    <!-- Portadas de la empresa Crab-->
+    <div class="row col m12 s12 anulaPaddMarr" style="background-color: rgb(10, 24, 44);">
+      <div class="col m12 s12 anulaPaddMarr" style="height: 550px;">
+
+        <div class="carousel  center-align" >
+          <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+              <img  [src]="'/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+          </div>
+        </div>        
+      </div>  
+    </div>
+
+    <div class="row col m12 center" *ngIf="false" style="text-align: center; margin: auto;margin-top: 10px;padding: 0px;background-color: rgb(29, 51, 85);">
+      <div id="header center" >
+        <ul class="navBar">
+            <li><a style="cursor: pointer;z-index: 10000;">Inicio</a></li>
+            <li><a style="cursor: pointer;">Quienes Somos</a></li>
+            <li><a style="cursor: pointer;">Actividades</a></li>
+            <li><a style="cursor: pointer;">Niveles</a>
+                <ul>
+                    <li><a style="text-align: left;cursor: pointer;">Inicial</a></li>
+                    <li><a style="text-align: left;cursor: pointer;">Primaria</a></li>
+                    <li><a style="text-align: left;cursor: pointer;">Secundaria</a></li>
+                </ul>
+            </li>
+            <li><a style="cursor: pointer">Talleres</a></li>
+            <li><a style="cursor: pointer">Infraestructura</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row col m12 s12 anulaPaddMarr" *ngIf="listCols">
+      <div class="col m1 s2 anulaPaddMarr" style="margin-top: 20px; width: 12%;height: 600px; background-color: rgb(14, 32, 66);"></div>
+    
+      <div class="col m6 s6 anulaPaddMarr center" style="margin-top: 20px;width: 76%;">
+
+        <div class="row col m12">
+          <div class="col m3"></div>
+          <div class="col m6">
+            <input type="text" class="input-field center" [(ngModel)]="listFilter" placeholder=" Busqueda de colegio" spellcheck="true" style="background-color: rgb(0, 18, 51); height: 40px;border-radius: 20px;color: white;">
+          </div>
+          <div class="col m3"></div>
+        </div>
+
+        <div class="row col m12 s12 anulaPaddMarr">
+
+          <div class="col m4" *ngFor="let colegio of filteredCol">
+            <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
+              <div class="card-image">
+                <img (click)="verColegio(colegio)" class="Imagenes" [src]="'http://localhost:3000/' + colegio.colImgPfl.colImgRta || 'assets/no-image-icon-11.png'" style="margin-top: 0px;margin-bottom: 0px;">               
+              </div>
+              <div class="col m12" style="background-color: rgb(8, 20, 43);color: white;height: 50px; padding-top: 10px;">
+                <span class="card-title" style="font-size: 16px;">{{colegio.colNom}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col m1 s2 anulaPaddMarr" style="margin-top: 20px; width: 12%;height: 600px;background-color: rgb(14, 32, 66);"></div>
+    </div>
+
+    <div class="col m12 anulaPaddMarr" *ngIf="DivregLog">
+      <app-persona  *ngIf="mntRegistro" (send)="getMsg($event)" class="col m12" style="padding: 0px;margin-top: 65px;"></app-persona>
+      <app-login *ngIf="mntLogin" class="col m12" style="padding: 0px;margin-top: 65px;"></app-login>             
+    </div>
+  </div>
+  <div><span id="final"></span></div>
+  
+</div>
+
+
+<div class="container-fluid modCelular anulaPaddMarr" style="min-height: 700px; background-color: rgb(241, 251, 253);">
+
+  <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="BtnFlotante()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span class="spacer"></span>
+    
+    <a class="btn" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ListaColegios()" matTooltip = "Lista de colegios"><i class="material-icons">list</i></a>
+    <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ShowRegistrarse()">Registrarse</a>
+    <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);" (click)="ShowLogin()">Iniciar Sesión </a>
+  
+  </mat-toolbar>
+
+ 
+
+  <div class="row col m12 s12 anulaPaddMarr">
+
+  <!-- Portadas de la empresa Crab-->
+    <div class="row col s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53);" >
+    <div class="col s12 anulaPaddMarr">
+      <div class="carousel  center-align">
+        <div  class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+            <img  [src]="'http://localhost:3000/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+        </div>
+      </div>
+    </div>  
+    </div>
+  </div>
+ 
+
+    <div class="row col s12 anulaPaddMarr" *ngIf="listCols">
+     
+      <div class="col s12 anulaPaddMarr center" style="margin-top: 20px;">
+
+        <div class="row col s12 anulaPaddMarr">
+          <form class="col s12" >
+            <div class="col s1"></div>
+            <div class="col s10">
+              <input type="text" class="input-field center" name="listFilter" [value]="listFilter" [(ngModel)]="listFilter" placeholder=" Busqueda de colegioss" spellcheck="true" style="background-color: rgb(0, 18, 51); height: 40px;border-radius: 20px;color: white;">
+            </div>
+            <div class="col s1"> <button class="btn" (click)="buscarCol(listFilter)" style="display: none"></button> </div>
+          </form>
+        </div>
+
+        <div class="row col s12 anulaPaddMarr">
+          <div class="col s12 " *ngFor="let colegio of arrayColegio">
+            <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
+              <div class="card-image">
+                <img (click)="verColegio(colegio)" class="Imagenes" [src]="'http://localhost:3000/' + colegio.colImgPfl.colImgRta || 'assets/no-image-icon-11.png'" style="margin-top: 0px;margin-bottom: 0px;">               
+              </div>
+              <div class="col s12 anulaPaddMarr" style="background-color: rgb(8, 20, 43);color: white;height: 50px; padding-top: 10px;">
+                <span class="card-title" style="font-size: 16px;">{{colegio.colNom}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col m12 s12 anulaPaddMarr" *ngIf="DivregLog">
+      <app-persona  *ngIf="mntRegistro" class="col m12 s12" style="padding: 0px;margin-top: 65px;"></app-persona>
+      <app-login *ngIf="mntLogin" class="col m12 s12" style="padding: 0px;margin-top: 65px;"></app-login>             
+    </div>
+
+    <div><span id="final"></span></div>
+
+
+</div>
+
+
+
+
+
+

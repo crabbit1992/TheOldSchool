@@ -1,0 +1,9 @@
+<ul class="menu" style="margin-top: 30px;">
+    <li><a style="cursor: pointer" (click)="Seleccionar(1)">Mis Aulas</a></li>
+    <li><a style="cursor: pointer">Mis Cursos</a>
+      <ul *ngFor="let curso of arrayCursos">
+        <li><a style="cursor: pointer" (click)="SeleccionarCurso(curso,2)">{{curso.curCod.ncoCurNom}}</a></li>
+        
+      </ul>
+    </li>
+</ul>

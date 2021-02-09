@@ -1,0 +1,707 @@
+<div class="container-fluid" style="padding: 0px !important;">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+    <h5 class="col m12 s12"><strong>Control de Periodo</strong></h5>
+  </div>
+
+ 
+  <div class="row col m12 anulaPaddMarr modPantalla"  style="min-height: 400px; margin-bottom: 20px; margin-top: 10px;"> <!-- Modo Pantalla -->
+   
+    <div class="row col  m12 anulaPaddMarr" style="margin-top: 10px;padding: 0px !important;">
+     
+      <div class="col m2 " style="min-height: 500px; background-color: rgb(198, 229, 255);"> 
+        <ul class="menu" style="margin-top: 30px;">
+            <li><a style="cursor: pointer" (click)="ShowDivListar()" >Lista de Periodos</a></li>
+            <li><a style="cursor: pointer" (click)="ShowDivCrear()"  >Configurar periodo</a></li>
+            <li><a style="cursor: pointer" (click)="ShowDivConfDet()" *ngIf="optionsDetalle">Crear detalle</a></li>
+            <li><a style="cursor: pointer" (click)="ShowDivListarDet()" *ngIf="optionsDetalle">Lista de detalles</a></li>    
+        </ul>
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divListar">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col s6 anulaPaddMarr" style="height: 30px;">
+              
+            </div>
+          </div>
+        </div>
+
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th id="periodo" style="text-align: center;">Periodo</th>
+                    <th id="periodo" style="text-align: center;">Tipo de periodo</th>
+                    <th id="periodo" style="text-align: center;">Fecha de inicio</th>
+                    <th id="periodo" style="text-align: center;">Fecha de termino</th>
+                    <th id="periodo" style="text-align: center;">Estado</th>
+                    <th id="periodo" style="text-align: center;">Opciones</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let periodo of getPeriodoArray">
+                    <td id="periodo" style="text-align: center;">{{periodo.prdAnio.substr()}}</td>
+                    <td id="periodo" style="text-align: center;">{{periodo.tpoPrdCod.tpoPrdNom}}</td>
+                    <td id="periodo" style="text-align: center;">{{FormatearFecha(periodo.prdFchIni)}}</td>
+                    <td id="periodo" style="text-align: center;">{{FormatearFecha(periodo.prdFchFin)}}</td>
+                    <td id="periodo" style="text-align: center;">{{periodo.estCod.estNom}}</td>
+                    <td id="periodo" style="text-align: center;cursor: pointer;">
+                      <a (click)="Pre_EditarPeriodo(periodo)" [ngStyle]="{'display':periodo.estCod.estNom === 'Deshabilitado' ? 'none' : '' }" matTooltip = "Editar Periodo">
+                        <i class="material-icons">edit</i>
+                      </a>
+                      <a (click)="ShowDivDetalle(periodo)" matTooltip = "Ver Detalle">
+                        <i class="material-icons">description</i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+        </form>
+        
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divCrear">
+        
+        <div class="col m2"></div>
+
+        <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col m12">
+            <div class="row col m12">
+              <div class="input-field col offset-s2 s8">
+                <h5 class="center">{{NomBotonPeriodo}}  Periodo {{anioActual}}</h5>
+              </div>
+            </div>
+
+
+            <div class="row col m12 anulaPaddMarr">
+
+              <div class="col m3 anulaPaddMarr" style="padding-top: 15px;margin-top: 10px;">
+              <label for="" style="font-size: 16px;">Fecha de inicio :</label>
+              </div>
+
+              <div class="col m9 anulaPaddMarr">
+
+                <div class="row col m12">
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniDia" [(ngModel)]="diaSeleccionado"
+                      (ngModelChange)='capturarDia($event)'>
+                      <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                    </select>
+    
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniMes" [(ngModel)]="mesSeleccionado"
+                      (ngModelChange)='capturarMes($event)'>
+                      <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                    </select>
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniAnio" [(ngModel)]="anioSeleccionado"
+                      (ngModelChange)='capturarAnio($event)' disabled>
+                      <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row col m12 anulaPaddMarr">
+              <div class="col m3 anulaPaddMarr" style="padding-top: 15px;margin-top: 10px;">
+                <label for="" style="font-size: 16px;">Fecha de fin :</label>
+              </div>
+
+              <div class="col m9 anulaPaddMarr">
+                <div class="col m12">
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finDia" [(ngModel)]="finDiaSeleccionado"
+                      (ngModelChange)='finCapturarDia($event)'>
+                      <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                    </select>
+  
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finMes" [(ngModel)]="finMesSeleccionado"
+                      (ngModelChange)='finCapturarMes($event)'>
+                      <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                    </select>
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finAnio" [(ngModel)]="finAnioSeleccionado"
+                      (ngModelChange)='finCapturarAnio($event)'>
+                      <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row col m12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                <div class="col m2"></div>
+
+                <div class="col m8 card-panel anulaPaddMarr">
+                  <div class="col m6" style="padding-top: 15px;margin-top: 10px">
+                    <label for="" style="font-size: 16px; ;">Tipo de Periodo :</label>
+                  </div>
+  
+                  <div class="col m6">
+                    <div class="input-field col m12">
+                      <select class="browser-default" name="tpoPrd"  [(ngModel)]="ModeloTipoPrd._id">
+                        <option *ngFor="let tpoPrd of arrayTipoPrd" [value]="tpoPrd._id">{{tpoPrd.tpoPrdNom}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col m2"></div>
+            </div>
+
+            <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+
+              <div class="col m6 ">
+                <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearPeriodo()">{{NomBotonPeriodo}}</a>
+  
+              </div>
+
+              <div class="col m6 ">
+                <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="Limpiar()">Nuevo</a>
+
+              </div>
+         
+            </div>
+
+          </div>
+ 
+        </form>
+
+        <div class="col m1"></div>
+
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divDetallePrd">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+
+            <div class="col s6 anulaPaddMarr">
+             
+            </div>
+        
+          </div>
+        </div>
+
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+          <div class="col m12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Periodo</th>
+                  <th style="text-align: center;">Tipo de periodo</th>
+                  <th style="text-align: center;">Fecha de inicio</th>
+                  <th style="text-align: center;">Fecha de termino</th>
+                  <th *ngIf="habilitado" style="text-align: center;">Opcionesaa</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let detPrd of arrayDetallePrd">
+                  <td style="text-align: center;">{{detPrd.prdCod.prdAnio}}</td>
+                  <td style="text-align: center;">{{detPrd.detPrdSgt}}</td>
+                  <td style="text-align: center;">{{FormatearFecha(detPrd.detPrdIni)}}</td>
+                  <td style="text-align: center;">{{FormatearFecha(detPrd.detPrdFin)}}</td>
+                  <td *ngIf="habilitado" style="text-align: center;cursor: pointer;">
+                    <a (click)="Pre_EditarDetPeriodo(detPrd)" matTooltip = "Editar Registro">
+                      <i class="material-icons">edit</i>
+                    </a>
+                    <a (click)="eliminarDetallePrd(detPrd)"  matTooltip = "Eliminar Registro">
+                      <i class="material-icons">delete</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divConfDet">
+        <div class="col m2"></div>
+        <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col m12">
+            <div class="row col m12">
+              <div class="input-field col offset-s2 s8">
+                <h5 class="center">{{NomBtnDetPrd}} {{lblBimTrim}}</h5>
+              </div>
+            </div>
+
+
+            <div class="row col m12 anulaPaddMarr">
+
+              <div class="col m3 anulaPaddMarr" style="padding-top: 15px;margin-top: 10px;">
+              <label for="" style="font-size: 16px;">Fecha de inicio :</label>
+              </div>
+
+              <div class="col m9 anulaPaddMarr">
+
+                <div class="row col m12">
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniDia" [(ngModel)]="diaSeleccionado"
+                      (ngModelChange)='capturarDia($event)'>
+                      <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                    </select>
+    
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniMes" [(ngModel)]="mesSeleccionado"
+                      (ngModelChange)='capturarMes($event)'>
+                      <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                    </select>
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="iniAnio" [(ngModel)]="anioSeleccionado"
+                      (ngModelChange)='capturarAnio($event)' disabled>
+                      <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row col m12 anulaPaddMarr">
+              <div class="col m3 anulaPaddMarr" style="padding-top: 15px;margin-top: 10px;">
+                <label for="" style="font-size: 16px;">Fecha de fin :</label>
+              </div>
+
+              <div class="col m9 anulaPaddMarr">
+                <div class="col m12">
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finDia" [(ngModel)]="finDiaSeleccionado"
+                      (ngModelChange)='finCapturarDia($event)'>
+                      <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                    </select>
+  
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finMes" [(ngModel)]="finMesSeleccionado"
+                      (ngModelChange)='finCapturarMes($event)'>
+                      <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                    </select>
+                  </div>
+                  <div class="input-field col m4">
+                    <select class="browser-default" name="finAnio" [(ngModel)]="finAnioSeleccionado"
+                      (ngModelChange)='finCapturarAnio($event)'>
+                      <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row col m12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                <div class="col m2"></div>
+
+                <div class="col m8 card-panel anulaPaddMarr">
+                  <div class="col m6" style="padding-top: 15px;margin-top: 10px">
+                    <label for="" style="font-size: 16px;">{{lblBimTrim}} :</label>
+                  </div>
+  
+                  <div class="col m6">
+                    <div class="input-field col m12">
+                      <select class="browser-default" [disabled]="dsbSelectSeg" name="tpoPrd" [(ngModel)]="ModeloSegmento.nom">
+                        <option *ngFor="let sgt of arraySegmento" [value]="sgt.nom">{{sgt.nom}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col m2"></div>
+            </div>
+
+            <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+
+              <div class="col m6 ">
+                <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearDetallePeriodo()">{{NomBtnDetPrd}}</a>
+  
+              </div>
+
+              <div class="col m6 ">
+                <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarDetPrd()" >Nuevo</a>
+
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="col m1"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="row col s12 anulaPaddMarr modCelular" style="margin-top: 10px;">
+
+    <div class="row col s12" style="margin-top: 10px;">
+      <!-- Disparador Modal -->
+      <button  (click)="openDialogModalPeriodo()"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+    </div>
+
+    <div class="row col s12" *ngIf="divListar">
+
+
+      <div class="col s12 anulaPaddMarr" style="margin: auto; margin-bottom: 10px;">
+        <div class="row card-panel col m12 anulaPaddMarr" style="margin-top: 0px; height: 75px;width: 100%;">
+          <div class="col s12 " style="height: 30px;">
+            
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center " style="padding: 0px;margin: 0px;">
+        <table class="centered responsive-table striped ">
+          <thead>
+            <tr>
+              <th id="periodo" style="text-align: left;">Periodo</th>
+              <th id="periodo" style="text-align: left;">Tipo de periodo</th>
+              <th id="periodo" style="text-align: left;">Fecha de inicio</th>
+              <th id="periodo" style="text-align: left;">Fecha de termino</th>
+              <th id="periodo" style="text-align: left;">Estado</th>
+              <th id="periodo" style="text-align: left;">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let periodo of getPeriodoArray">
+              <td id="periodo" style="text-align: center;">{{periodo.prdAnio.substr()}}</td>
+              <td id="periodo" style="text-align: center;">{{periodo.tpoPrdCod.tpoPrdNom}}</td>
+              <td id="periodo" style="text-align: center;">{{FormatearFecha(periodo.prdFchIni)}}</td>
+              <td id="periodo" style="text-align: center;">{{FormatearFecha(periodo.prdFchFin)}}</td>
+              <td id="periodo" style="text-align: center;">{{periodo.estCod.estNom}}</td>
+              <td id="periodo" style="text-align: center;cursor: pointer;">
+                <a [ngStyle]="{'display':periodo.estCod.estNom === 'Deshabilitado' ? 'none' : '' }" (click)="Pre_EditarPeriodo(periodo)" >
+                  <i matTooltip = "Editar Periodo" class="material-icons" >edit</i>
+                </a>
+                <a (click)="ShowDivDetalle(periodo)">
+                  <i  matTooltip = "Ver Detalle" class="material-icons">description</i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      
+    </div>
+
+    <div class="row col s12" *ngIf="divCrear" style="margin-top: 66px;">
+
+      
+
+      <form class="col s12  anulaPaddMarr">
+
+        <div class="row col s12 anulaPaddMarr">
+
+          <div class="col s12 center">
+            <div class="input-field col s12 anulaPaddMarr center">
+              <h5 class="center anulaPaddMarr">{{NomBotonPeriodo}}  Periodo {{anioActual}}</h5>
+            </div>
+          </div>
+
+
+          <div class="row col 12 anulaPaddMarrs" style="margin-top: 30px;">
+
+            <div class="col s12 anulaPaddMarr center" style="margin: auto;padding-top: 15px;margin-top: 10px;">
+            <label for="" style="font-size: 16px;">Fecha de inicio</label>
+            </div>
+
+            <div class="col s12 anulaPaddMarr">
+
+              <div class="row col s12 anulaPaddMarr">
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniDia" [(ngModel)]="diaSeleccionado"
+                    (ngModelChange)='capturarDia($event)'>
+                    <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+  
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniMes" [(ngModel)]="mesSeleccionado"
+                    (ngModelChange)='capturarMes($event)'>
+                    <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniAnio" [(ngModel)]="anioSeleccionado"
+                    (ngModelChange)='capturarAnio($event)' disabled>
+                    <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row col s12 anulaPaddMarr">
+            <div class="col s12 anulaPaddMarr center" style="margin: auto;padding-top: 15px;">
+              <label for="" style="font-size: 16px;">Fecha de fin</label>
+            </div>
+
+            <div class="col s12 anulaPaddMarr">
+              <div class="col s12">
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finDia" [(ngModel)]="finDiaSeleccionado"
+                    (ngModelChange)='finCapturarDia($event)'>
+                    <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finMes" [(ngModel)]="finMesSeleccionado"
+                    (ngModelChange)='finCapturarMes($event)'>
+                    <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finAnio" [(ngModel)]="finAnioSeleccionado"
+                    (ngModelChange)='finCapturarAnio($event)'>
+                    <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row col s12 anulaPaddMarr" style="margin-bottom: 0px;">
+
+            <div class="col s12 card-panel anulaPaddMarr">
+              <div class="col s6" style="padding-top: 15px;margin-top: 10px">
+                <label for="" style="font-size: 16px; ;">Tipo de Periodo :</label>
+              </div>
+
+              <div class="col s6">
+                <div class="input-field col m12">
+                  <select class="browser-default" name="tpoPrd"  [(ngModel)]="ModeloTipoPrd._id">
+                    <option *ngFor="let tpoPrd of arrayTipoPrd" [value]="tpoPrd._id">{{tpoPrd.tpoPrdNom}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row col s12" style="margin-top: 20px;padding-bottom: 9px;">
+
+            <div class="col s6 ">
+              <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearPeriodo()">{{NomBotonPeriodo}}</a>
+
+            </div>
+
+            <div class="col s6 ">
+              <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="Limpiar()">Nuevo</a>
+
+            </div>
+       
+          </div>
+
+        </div>
+
+      </form>
+
+      
+    </div>
+
+    <div class="row col s12" *ngIf="divDetallePrd">
+
+
+      <div class="col s12 anulaPaddMarr" style="margin: auto; margin-bottom: 10px;">
+        <div class="row card-panel col m12 anulaPaddMarr" style="margin-top: 0px; height: 75px;width: 100%;">
+          <div class="col s12 " style="height: 30px;">
+            
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center " style="padding: 0px;margin: 0px;">
+        <table class="centered responsive-table striped ">
+          <thead>
+            <tr>
+              <th id="periodo" style="text-align: left;">Periodo</th>
+              <th id="periodo" style="text-align: left;">Tipo de periodo</th>
+              <th id="periodo" style="text-align: left;">Fecha de inicio</th>
+              <th id="periodo" style="text-align: left;">Fecha de termino</th>
+              <th *ngIf="habilitado" id="periodo" style="text-align: left;">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let detPrd of arrayDetallePrd">
+              <td id="periodo" style="text-align: center;">{{detPrd.prdCod.prdAnio}}</td>
+              <td id="periodo" style="text-align: center;">{{detPrd.detPrdSgt}}</td>
+              <td id="periodo" style="text-align: center;">{{FormatearFecha(detPrd.detPrdIni)}}</td>
+              <td id="periodo" style="text-align: center;">{{FormatearFecha(detPrd.detPrdFin)}}</td>
+              <td *ngIf="habilitado" id="periodo" style="text-align: center;cursor: pointer;">
+                <a (click)="Pre_EditarDetPeriodo(detPrd)" matTooltip = "Editar Registro">
+                  <i class="material-icons">edit</i>
+                </a>
+                <a (click)="eliminarDetallePrd(detPrd)" matTooltip = "Editar Registro">
+                  <i class="material-icons">delete</i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      
+    </div>
+
+    <!-- Aqui me quede-->
+
+    <div class="row col s12" *ngIf="divConfDet" style="margin-top: 66px;">
+
+      
+
+      <form class="col s12  anulaPaddMarr">
+
+        <div class="row col s12 anulaPaddMarr">
+
+          <div class="col s12 center">
+            <div class="input-field col s12 anulaPaddMarr center">
+              <h5 class="center anulaPaddMarr">{{NomBtnDetPrd}} {{lblBimTrim}}</h5>
+            </div>
+          </div>
+
+
+          <div class="row col 12 anulaPaddMarrs" style="margin-top: 30px;">
+
+            <div class="col s12 anulaPaddMarr center" style="margin: auto;padding-top: 15px;margin-top: 10px;">
+            <label for="" style="font-size: 16px;">Fecha de inicio</label>
+            </div>
+
+            <div class="col s12 anulaPaddMarr">
+
+              <div class="row col s12 anulaPaddMarr">
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniDia" [(ngModel)]="diaSeleccionado"
+                    (ngModelChange)='capturarDia($event)'>
+                    <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniMes" [(ngModel)]="mesSeleccionado"
+                    (ngModelChange)='capturarMes($event)'>
+                    <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="iniAnio" [(ngModel)]="anioSeleccionado"
+                    (ngModelChange)='capturarAnio($event)' disabled>
+                    <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row col s12 anulaPaddMarr">
+            <div class="col s12 anulaPaddMarr center" style="margin: auto;padding-top: 15px;">
+              <label for="" style="font-size: 16px;">Fecha de fin</label>
+            </div>
+
+            <div class="col s12 anulaPaddMarr">
+              <div class="col s12">
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finDia" [(ngModel)]="finDiaSeleccionado"
+                    (ngModelChange)='finCapturarDia($event)'>
+                    <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finMes" [(ngModel)]="finMesSeleccionado"
+                    (ngModelChange)='finCapturarMes($event)'>
+                    <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="finAnio" [(ngModel)]="finAnioSeleccionado"
+                    (ngModelChange)='finCapturarAnio($event)'>
+                    <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row col s12 anulaPaddMarr" style="margin-bottom: 0px;">
+
+            <div class="col s12 card-panel anulaPaddMarr">
+              <div class="col s6" style="padding-top: 15px;margin-top: 10px">
+                <label for="" style="font-size: 16px; ;">{{lblBimTrim}} :</label>
+              </div>
+
+              <div class="col s6">
+                <div class="input-field col m12">
+                  <select class="browser-default" [disabled]="dsbSelectSeg" name="tpoPrd" [(ngModel)]="ModeloSegmento.nom">
+                    <option *ngFor="let sgt of arraySegmento" [value]="sgt.nom">{{sgt.nom}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row col s12" style="margin-top: 20px;padding-bottom: 9px;">
+
+            <div class="col s6 ">
+              <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearDetallePeriodo()">{{NomBtnDetPrd}}</a>
+
+            </div>
+
+            <div class="col s6 ">
+              <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarDetPrd()" >Nuevo</a>
+
+            </div>
+       
+          </div>
+
+        </div>
+
+      </form>
+
+      
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

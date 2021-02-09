@@ -1,0 +1,942 @@
+<div class="container-fluid">
+
+    <div class="col m12" style="margin-bottom: 70px;">
+        <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+            >
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+            <span class="spacer"></span>
+            
+            <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);">Portadas</a>
+            <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);">Curricula</a>
+            <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);">Colegios</a>
+            <a class="btn" mat-list-item style="background-color: rgb(86, 161, 247);" matTooltip = "Lista de colegios"><i class="material-icons">list</i></a>  
+        </mat-toolbar>
+    </div>
+
+    <div class="row col m12">
+
+        <div class="col m2" style="min-height: 500px; background-color: rgb(232, 230, 255);">
+            <ul class="menu" style="margin-top: 30px;">
+                <li><a style="text-align: left; cursor: pointer;" (click)="showListarImagenes()">Imagenes</a></li>
+                <li><a style="text-align: left; cursor: pointer;" (click)="showListarPortadas()">Portadas</a></li>
+                <li><a style="text-align: left; cursor: pointer;" (click)="showListarColegios()">Colegios</a></li>
+                <li><a style="text-align: left; cursor: pointer;" (click)="showListarPersonas()">Personas</a></li>
+                <li><a style="text-align: left; cursor: pointer;">Curricula</a>
+                  <ul>
+
+                    <li><a style="text-align: left; cursor: pointer;" (click)="showListarArea()">Area</a></li>
+                    <li><a style="text-align: left; cursor: pointer;" (click)="showListarCurso()">Curso</a></li>
+                    <li><a style="text-align: left; cursor: pointer;" (click)="showListarCurricula()">Curricula</a></li>
+
+                  </ul>
+                
+                
+                </li>
+            </ul>
+        </div>
+
+        <!-- Div para subir y listar colegios -->
+        <div class="col m10" *ngIf="divListarColegio" style="height: 500px; ">
+
+          <div class="row col m12 anulaPaddMarr" style="background-color: rgb(232, 230, 255);padding-left: 10px; padding: 20px;">
+              <div class="row card-panel col m12 anulaPaddMarr " style="margin-top: 0px; height: 75px; ">
+                  <div class="col m12">       
+                      <div class="col m3 anulaPaddMarr">
+                        <div class="input-field col m12" style="margin-top: 20px;"> 
+                          <button  class="btn  col m12" style="background-color: rgb(144, 150, 247)" (click)="showCrearColegio()" matTooltip = "Registrar un nuevo colegio">Registrar Colegio</button> 
+                        </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+
+          <div class="col m12">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Colegio</th>
+                  <th style="text-align: center;">RUC</th>
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let ac of arrayColegio">
+                  <td style="text-align: center;">{{ac.colNom}}</td>
+                  <td style="text-align: center;">{{ac.colRuc}}</td>
+                  <td style="text-align: center;">
+                    <a   (click)="EditarColegio(ac)">
+                      <i  class="material-icons" style="cursor: pointer;">edit</i>
+                    </a>
+
+                    <a   (click)="getAdminCol(ac)">
+                      <i  class="material-icons" style="cursor: pointer;">description</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+
+        </div>
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearColegio">
+      
+          <div class="col m12">
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>{{ttlMntColegio}}</strong></h5>  
+            </div>
+    
+            <div class="row col m12 center" style="margin-top: 10px;"> 
+    
+              <div class="col m12">
+                <div class="col m4"></div>
+                <div class="col m4 center" style="margin-top: 25px;">
+                  
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="colNom" id="colNom" [(ngModel)]="ModeloColegio.colNom" placeholder="Nombre del colegio" >
+                    </div>
+                  </div>
+
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="colRuc" id="colRuc" [(ngModel)]="ModeloColegio.colRuc" placeholder="RUC del colegio" >
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col m4"></div>
+              </div>
+    
+    
+              <div class="col m12 center" style="margin-top: 20px;">
+                <div class="col m4"></div>
+                <div class="col m4">
+                  <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 right"  (click)="PostColegios()" >{{btnEditarGuardar}}</button>
+                    </div>
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 left" (click)="cancelar('col')" >Cancelar</button>
+                    </div>   
+                  </div>
+                </div> 
+                <div class="col m4"></div>    
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col m10 " *ngIf="divDetalleAdmin">
+
+          <div class="row col m12 anulaPaddMarr" style="background-color: rgb(232, 230, 255);padding-left: 10px; padding: 20px;">
+            <div class="row card-panel col m12 anulaPaddMarr " style="margin-top: 0px; height: 75px; ">
+                <div class="col m12">       
+                    <div class="col m3 anulaPaddMarr">
+                      <div class="input-field col m12" style="margin-top: 20px;"> 
+                        
+                      </div>
+                    </div> 
+                </div>
+            </div>
+          </div>
+
+          <div class="row col s12"  style="padding: 0px !important;"> 
+         
+            <div class="col m3"></div>
+            <form class="col s12 m6">
+      
+              <div class="col m12">
+                <div class="input-field col m12">
+                  <input type="text" style="text-align: center;" readonly name="perDni" id="perDni" [(ngModel)]="ModeloPerfil.perRepDni" placeholder="DNI" >
+                </div>
+              </div>
+              
+              <div class="col m12">
+                <div class="input-field col m12">
+                  <input type="text" style="text-align: center;" readonly name="perNom" id="perNom" [(ngModel)]="ModeloPerfil.perRepNom" placeholder="Nombres" >
+                </div>
+              </div>
+
+              <div class="col m12">
+                <div class="input-field col m12">
+                  <input type="text" style="text-align: center;" readonly  name="perApe" id="perApe" [(ngModel)]="ModeloPerfil.perRepApe" placeholder="Apellidos" >
+                </div>
+              </div>
+      
+              <div class="row col s12" style="padding: 0px;"> <!--  Fila de botones-->
+      
+                <div class="col s0 m0">
+                </div>
+                
+                <div class="col s12 m12 center" style="margin-top: 0px;padding: auto;" >
+      
+                  <div class="col s6 m6">
+                    <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)"(click)="postAdminCol()">{{nombreBotonGuardar}}</a>
+                  </div>
+      
+                  <div class="col s6 m6">
+                    <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)" (click)="LimpiarForm()">Nuevo</a>
+                  </div>
+                </div>
+        
+                <div class="col s0 m0">
+                </div>
+              </div>
+      
+            </form>
+            <div class="col m3"></div>
+     
+          </div>
+
+          <div class="row col s12">
+            <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px; padding: 0px !important;"> <!--  Fila de Filtro-->
+    
+              <div class="col s0 m1">
+              </div>
+              
+              <div class="col s12 m8 center" style="margin-top: 0px;padding-left: 0px;margin-bottom: 0px;" >      
+                <div class="col s7 m4" style="margin-right: 0px !important;padding-left: 0px;">             
+                  <div class="input-field col s12" style="padding-left: 15px;">
+                    <input placeholder="Buscar por DNI" name="listFilter" id="listFilter" [(ngModel)]="listFilter"  type="text" style="padding-left: 0px;">
+                  </div>
+                </div>
+                
+                <div class="col s5 m7">
+                </div>
+              </div>
+    
+              <div class="col s0 m0">
+              </div>
+    
+            </div>
+    
+            <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px;padding: 0px !important;"> <!--  Fila de Filtro-->
+                <form class="col s12 m12">
+                
+                  <table class="centered responsive-table striped header_fijo">
+                    <thead>
+                      <tr scope="col" colspan="11" id="alumnos">
+                        <th scope="col" colspan="2" id="alumnos" style="text-align: center;">DNI</th>
+                        <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Nombres</th>
+                        <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Apellidos</th>
+                      </tr>
+                    </thead>
+            
+                    <tbody>
+                      <tr *ngFor="let persona of filteredPersona">
+                        <td scope="col" colspan="2" id="alumnos" (click)="selectPersona(persona)" style="text-align: center;">{{persona.perRepDni}}</td>
+                        <td scope="col" colspan="4" id="alumnos" (click)="selectPersona(persona)" style="text-align: center;">{{persona.perRepNom}}</td>
+                        <td scope="col" colspan="4" id="alumnos" (click)="selectPersona(persona)" style="text-align: center;">{{persona.perRepApe}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                
+                </form>
+            </div>
+          </div>
+
+
+
+   
+
+        </div>
+
+        <div class="col m10" *ngIf="divDetalleAdminVoid">
+  
+
+            <div class="row col m12 anulaPaddMarr" style="background-color: rgb(232, 230, 255);padding-left: 10px; padding: 20px;">
+              
+              <div class="row card-panel col m12 anulaPaddMarr " style="margin-top: 0px; height: 75px; ">
+                  <div class="col m12">       
+                      <div class="col m3 anulaPaddMarr">
+                        <div class="input-field col m12" style="margin-top: 20px;"> 
+                          <button  class="btn  col m12" style="background-color: rgb(144, 150, 247)" (click)="showAsignarAdmin()" matTooltip = "Asociar Administrador">Asociar Administrador</button> 
+                        </div>
+                      </div> 
+                  </div>
+              </div>
+            </div>
+
+              <div class="col m12  center">
+                <h5 style="margin-top: 100px;">No hay datos</h5>
+              </div>
+
+
+            
+            
+          
+        </div>
+
+
+
+
+
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearPersona">
+          <div class="row col s12"  style="padding: 0px !important;"> <!-- Div para mantenimiento categoria  -->
+         
+            <div class="col m3"></div>
+            <form class="col s12 m6">
+      
+              <div class="row col s12">
+                <div class="input-field col s12">
+                  <input type="text" name="perDni" id="perDni" [(ngModel)]="frmPersona.perDni" #perDni="ngModel"
+                  [readonly]="dniReadOn" placeholder="DNI" maxlength="8">
+                </div>
+              </div>
+      
+              <div class="row col s12">
+                <div class="input-field col s12">
+                  <input type="text" name="perNom" id="perNom" [(ngModel)]="frmPersona.perNom" placeholder="Nombre">   
+                </div>
+              </div>
+      
+              <div class="row col s12">
+                <div class="input-field col s12">
+                  <input type="text" name="perApe" id="perApe" [(ngModel)]="frmPersona.perApe" placeholder="Apellidos"> 
+                </div>
+              </div>
+      
+              <div class="row col s12 center">
+                <label for="" style="font-size: 15px;">Sexo :</label>
+                <label style="margin: 8px;">
+                  <input name="group1" type="radio" [(ngModel)]="frmPersona.perSex" value="Masculino" />
+                  <span style="color: rgb(5, 5, 90);"><strong>Masculino</strong></span>
+                </label>
+      
+                <label>
+                  <input name="group1" type="radio" [(ngModel)]="frmPersona.perSex" value="Femenino" />
+                  <span style="color: rgb(230, 4, 154);"><strong>Femenino</strong></span>
+                </label>
+              </div>
+      
+              <div class="row card-panel col s12">
+                <div class="col s12 center" style="margin: 10px;">
+                  <label for="" style="font-size: 17px;"><strong>Fecha de nacimiento :</strong></label>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="perDia" [(ngModel)]="diaSeleccionado"
+                    (ngModelChange)='capturarDia($event)'>
+                    <option *ngFor="let d of arrayDia" [value]="d.nomDia">{{d.nomDia}}</option>
+                  </select>
+      
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="perMes" [(ngModel)]="mesSeleccionado"
+                    (ngModelChange)='capturarMes($event)'>
+                    <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
+                  <select class="browser-default" name="perAnio" [(ngModel)]="anioSelected"
+                    (ngModelChange)='capturarAnioPersona($event)'>
+                    <option *ngFor="let a of arrayAnio" [value]="a.nomAnio">{{a.nomAnio}}</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div class="row col s12" style="padding: 0px;"> <!--  Fila de botones-->
+      
+                <div class="col s0 m0">
+                </div>
+                
+                <div class="col s12 m12 center" style="margin-top: 0px;padding: auto;" >
+      
+                  <div class="col s6 m6">
+                    <a class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)"(click)="CrearPersona()">{{nombreBotonGuardar}}</a>
+                  </div>
+      
+                  <div class="col s6 m6">
+                    <a class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)" (click)="LimpiarForm()">Nuevo</a>
+                  </div>
+                </div>
+        
+                <div class="col s0 m0">
+                </div>
+              </div>
+      
+            </form>
+            <div class="col m3"></div>
+     
+            <div class="row col s12">
+              <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px; padding: 0px !important;"> <!--  Fila de Filtro-->
+      
+                <div class="col s0 m1">
+                </div>
+                
+                <div class="col s12 m8 center" style="margin-top: 0px;padding-left: 0px;margin-bottom: 0px;" >      
+                  <div class="col s7 m4" style="margin-right: 0px !important;padding-left: 0px;">             
+                    <div class="input-field col s12" style="padding-left: 15px;">
+                      <input placeholder="Buscar por DNI" name="listFilter" id="listFilter" [(ngModel)]="listFilter"  type="text" style="padding-left: 0px;">
+                    </div>
+                  </div>
+                  
+                  <div class="col s5 m7">
+                  </div>
+                </div>
+      
+                <div class="col s0 m0">
+                </div>
+      
+              </div>
+      
+              <div class="row col s12 m12" style="margin-top: 10px; background-color: rgb(198, 229, 255);margin-bottom: 0px;padding: 0px !important;"> <!--  Fila de Filtro-->
+                  <form class="col s12 m12">
+                  
+                    <table class="centered responsive-table striped header_fijo">
+                      <thead>
+                        <tr scope="col" colspan="11" id="alumnos">
+                          <th scope="col" colspan="2" id="alumnos" style="text-align: center;">DNI</th>
+                          <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Nombres</th>
+                          <th scope="col" colspan="4" id="alumnos" style="text-align: center;">Apellidos</th>
+                        </tr>
+                      </thead>
+              
+                      <tbody>
+                        <tr *ngFor="let persona of filteredPersona">
+                          <td scope="col" colspan="2" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepDni}}</td>
+                          <td scope="col" colspan="4" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepNom}}</td>
+                          <td scope="col" colspan="4" id="alumnos" (click)="editarPersona(persona)" style="text-align: center;">{{persona.perRepApe}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Div para subir y listar imagenes -->
+        <div class="col m10" *ngIf="divCrearImg">
+
+        <div class="row col m12 anulaPaddMarr">
+          <div class="col m2"></div>
+  
+          <form class="col m8" style="margin-top: 40px;">
+  
+            <div class="row col m12" style="margin-top: 20px;">
+              <div class="col m2"></div>
+                <div class="col m8" >
+                  <input [(ngModel)]="ModeloNcoImagen.ncoImgTtl" name="ModeloNcoImagen.ncoImgTtl" id="colImgTtl" type="text" class="input-field col s12" placeholder="Titulo de la imagen" required style="text-align: center;">
+                </div>
+              <div class="col m2"></div>
+            </div>
+  
+             
+            <div class="row col m12" style="margin-top: 10px;max-height: 230px !important; min-height: 230px !important;">
+                <div class="col m2"></div>
+                  <div class="col m8"  style="text-align: center;max-height: 230px !important;">
+                    <input type="file" (change)="onPhotoSelected($event)" #photoInput style="display: none;">
+                    <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
+                    (click)="photoInput.click()" style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 400px; max-height: 200px !important;padding: 0 0 0 0;">
+                  </div>
+                <div class="col m2"></div>
+            </div>
+  
+            <div class="row col m12" style="margin-top: 3px;">
+  
+              <div class="col m1"></div>
+  
+              <div class="col m10 center">
+                <div class="col m12">
+  
+                  <div class="col m6">
+                    <button class="btn btn-primary right col m12" (click)="uploadPhoto()">
+                      {{btnEditarGuardar}}
+                    </button>
+                  </div>
+    
+                  <div class="col m6">
+                    <button class="btn btn-primary left col m12" (click)="cancelar('img')">
+                      Cancelar
+                    </button>
+                  </div>
+  
+                </div>
+              </div>
+  
+              <div class="col m1"></div>
+              
+            </div>
+    
+          </form>
+          <div class="col m2"></div>
+        </div>
+  
+  
+        </div>
+
+        <div class="col m10" *ngIf="divListarImg" style="height: 500px; ">
+
+            <div class="row col m12 anulaPaddMarr" style="background-color: rgb(232, 230, 255);padding-left: 10px; padding: 20px;">
+                <div class="row card-panel col m12 anulaPaddMarr " style="margin-top: 0px; height: 75px; ">
+                    <div class="col m12">       
+                        <div class="col m3 anulaPaddMarr">
+                          <div class="input-field col m12" style="margin-top: 20px;"> 
+                            <button  class="btn  col m12" style="background-color: rgb(144, 150, 247)" (click)="showCrearImagenes()" matTooltip = "Agregar una imagen a la galeria">Subir imagen</button> 
+                          </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col m12" style="margin-top: 10px;">
+                <div class="col m4"  *ngFor="let imagen of arrayImagenes">
+                    <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
+                      <div class="card-image">
+                        <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000' + imagen.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Div Img Portadas-->
+        <div class="col m10 anulaPaddMarr" *ngIf="divListarPortada">
+
+          <div class="col m12">
+
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12">       
+                  <div class="col m2 anulaPaddMarr" >
+                    <div class="input-field col m12" style="margin-top: 20px;"> 
+                      <button  class="waves-light btn  col m12 " (click)="showCrearPortada()" matTooltip = "Crear portada">Crear</button>
+                    </div>
+                  </div> 
+              </div>
+            </div>
+            
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>Apartado Portadas</strong></h5>  
+            </div>
+
+            <div class="row col m12 center" style="margin-top: 50px;"> 
+
+              <div class="col m4" *ngFor="let portada of arrayPortada">
+                  <div class="card"style="background-color: black;" >
+
+                    <div class="card-image">
+                      <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                    </div>
+
+                    <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
+                      <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px" (click)="openDialogEliminarPortada(portada)" matTooltip = "Eliminar"><i class="small material-icons">delete</i></a>
+                      <a style="cursor: pointer;color: rgb(20, 20, 63);font-size: 12px;" (click)="EditarPortada(portada)" matTooltip = "Editar"><i class="small material-icons">edit</i></a>
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearPortada">
+      
+          <div class="col m12">
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>{{ttlMntPortada}}</strong></h5>  
+            </div>
+    
+            <div class="row col m12 center" style="margin-top: 10px;"> 
+    
+              <div class="col m12">
+                <div class="col m4"></div>
+                <div class="col m4 center" style="margin-top: 25px;">
+                  <div class="card"style="background-color: black;" >
+                    <div class="card-image">
+                      <img class="Imagenes" (click)="ModalMostrarImagenes()" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image" style="margin-top: 0px;margin-bottom: 0px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col m4"></div>
+              </div>
+    
+    
+              <div class="col m12 center" style="margin-top: 20px;">
+                <div class="col m4"></div>
+                <div class="col m4">
+                  <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 right"  (click)="postPortada()" >{{btnEditarGuardar}}</button>
+                    </div>
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 left" (click)="cancelar('por')" >Cancelar</button>
+                    </div>   
+                  </div>
+                </div> 
+                <div class="col m4"></div>    
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+        <!-- Div Areas-->
+        <div class="col m10 anulaPaddMarr" *ngIf="divListarArea">
+
+          <div class="col m12">
+
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12">       
+                  <div class="col m2 anulaPaddMarr" >
+                    <div class="input-field col m12" style="margin-top: 20px;"> 
+                      <button  class="waves-light btn  col m12 " (click)="showCrearArea()" matTooltip = "Crear Area">Crear</button>
+                    </div>
+                  </div> 
+              </div>
+            </div>
+            
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>Apartado Area</strong></h5>  
+            </div>
+
+            <div class="row col m12 center" style="margin-top: 50px;"> 
+
+              <form class="col m12" style="background-color: rgb(198, 229, 255);padding: 0px;">
+            
+                <table class="centered responsive-table striped">
+                  <thead>
+                    <tr scope="col" colspan="12" id="area">
+                      <th scope="col" colspan="11" id="area" style="text-align: center;">Area</th>
+                      <th scope="col" colspan="1" id="opc" style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr *ngFor="let area of arrayNucleoArea">
+                      <td scope="col" colspan="11" id="area" style="text-align: center;">{{area.ncoAreNom}}</td>
+                      <td scope="col" colspan="1" id="opc" (click)="preEditarArea(area)" style="text-align: center; cursor: pointer;">Editar</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearArea">
+      
+          <div class="col m12">
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>{{ttlMntArea}}</strong></h5>  
+            </div>
+    
+            <div class="row col m12 center" style="margin-top: 10px;"> 
+    
+              <div class="col m12">
+                <div class="col m4"></div>
+                <div class="col m4 center" style="margin-top: 25px;">
+                  
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="ncoAreNom" id="ncoAreNom" [(ngModel)]="ModeloNcoArea.ncoAreNom" placeholder="Nombre del Area" >
+                    </div>
+                  </div>
+
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="ncoAreDes" id="ncoAreDes" [(ngModel)]="ModeloNcoArea.ncoAreDes" placeholder="Descripcion del Area" >
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col m4"></div>
+              </div>
+    
+    
+              <div class="col m12 center" style="margin-top: 20px;">
+                <div class="col m4"></div>
+                <div class="col m4">
+                  <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 right"  (click)="postArea()" >{{btnEditarGuardar}}</button>
+                    </div>
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 left" (click)="cancelar('are')" >Cancelar</button>
+                    </div>   
+                  </div>
+                </div> 
+                <div class="col m4"></div>    
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+        <!-- Div Curso-->
+        <div class="col m10 anulaPaddMarr" *ngIf="divListarCursos">
+
+          <div class="col m12">
+
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12">       
+                  <div class="col m2 anulaPaddMarr" >
+                    <div class="input-field col m12" style="margin-top: 20px;"> 
+                      <button  class="waves-light btn  col m12 " (click)="showCrearCurso()" matTooltip = "Crear Curso">Crear</button>
+                    </div>
+                  </div> 
+
+                  <div class="col m2 anulaPaddMarr right" style="margin-right: 120px;">
+                    <div class="input-field col m12" style="margin-top: 28px;">
+                      <mat-select (ngModelChange)='capturarArea($event)' class="col m12" id="ModeloNcoArea._id" name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id" style="background-color: rgb(255, 255, 255);">
+                        <mat-option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+                      </mat-select>    
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+            
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>Apartado Curso</strong></h5>  
+            </div>
+
+            <div class="row col m12 center" style="margin-top: 50px;"> 
+
+              <form class="col m12" style="background-color: rgb(198, 229, 255);padding: 0px;">
+            
+                <table class="centered responsive-table striped">
+                  <thead>
+                    <tr scope="col" colspan="12" id="area">
+                      <th scope="col" colspan="6" id="area" style="text-align: center;">Area</th>
+                      <th scope="col" colspan="5" id="curso" style="text-align: center;">Curso</th>
+                      <th scope="col" colspan="1" id="opc" style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr *ngFor="let curso of arrayNucleoCurso">
+                      <td scope="col" colspan="5" id="area" style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
+                      <th scope="col" colspan="6" id="curso" style="text-align: center;">{{curso.ncoCurNom}}</th>
+                      <td scope="col" colspan="1" id="opc" (click)="preEditarCurso(curso)" style="text-align: center; cursor: pointer;"><i class="material-icons">edit</i></td>
+                      <td scope="col" colspan="1" id="opc" (click)="deleteCurso(curso)" style="text-align: center; cursor: pointer;"><i class="material-icons">delete</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearCurso"> 
+      
+          <div class="col m12">
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>{{ttlMntCurso}}</strong></h5>  
+            </div>
+    
+            <div class="row col m12 center" style="margin-top: 10px;"> 
+    
+              <div class="col m12">
+                <div class="col m4"></div>
+                <div class="col m4 center" style="margin-top: 25px;">
+
+                  <div class="input-field col m12">
+                    <mat-select class="col m12" id="ModeloNcoArea._id" name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id" style="background-color: rgb(232, 230, 255);">
+                      <mat-option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+                    </mat-select>    
+                  </div>
+                  
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="ncoCurNom" id="ncoCurNom" [(ngModel)]="ModeloNcoCurso.ncoCurNom" placeholder="Nombre del Curso" >
+                    </div>
+                  </div>
+
+                  <div class="col m12">
+                    <div class="input-field col m12">
+                      <input type="text" name="ncoCurDes" id="ncoCurDes" [(ngModel)]="ModeloNcoCurso.ncoCurDes" placeholder="Descripcion del Curso" >
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col m4"></div>
+              </div>
+    
+    
+              <div class="col m12 center" style="margin-top: 20px;">
+                <div class="col m4"></div>
+                <div class="col m4">
+                  <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 right"  (click)="postCurso()" >{{btnEditarGuardar}}</button>
+                    </div>
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 left" (click)="cancelar('cur')" >Cancelar</button>
+                    </div>   
+                  </div>
+                </div> 
+                <div class="col m4"></div>    
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+        <!-- Div Curricula-->
+        <div class="col m10 anulaPaddMarr" *ngIf="divListarCurricula">
+
+          <div class="col m12">
+
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12">       
+                  <div class="col m2 anulaPaddMarr" >
+                    <div class="input-field col m12" style="margin-top: 20px;"> 
+                      <button  class="waves-light btn  col m12 " (click)="showCrearCurricula()" matTooltip = "Crear Curricula">Crear</button>
+                    </div>
+                  </div> 
+
+                  <div class="col m2 anulaPaddMarr right" >
+                    <div class="input-field col m12" style="margin-top: 20px;"> 
+                      <button  class="waves-light btn  col m12 " (click)="BuscarCurricula()" matTooltip = "Buscar Curricula">Buscar</button>
+                    </div>
+                  </div> 
+
+                  <div class="col m2 anulaPaddMarr right" >
+                    <div class="input-field col m12" style="margin-top: 28px;">
+                      <mat-select class="col m12" name="Anio" (ngModelChange)='capturarAnio($event)'  [(ngModel)]="anioSeleccionado">
+                        <mat-option *ngFor="let a of anio" [value]="a.nomAnio">{{a.nomAnio}}</mat-option>
+                      </mat-select> 
+                    </div>
+                  </div>
+
+                  <div class="col m2 anulaPaddMarr right" style="margin-right: 120px;">
+                    <div class="input-field col m12" style="margin-top: 28px;">
+                      <mat-select (ngModelChange)='capturarArea_Curricula($event)' class="col m12" id="ModeloNcoArea._id" name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id" style="background-color: rgb(255, 255, 255);">
+                        <mat-option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+                      </mat-select>    
+                    </div>
+                  </div>
+
+                  
+
+              </div>
+            </div>
+            
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>Apartado Curricula</strong></h5>  
+            </div>
+
+            <div class="row col m12 center" style="margin-top: 50px;"> 
+
+              <form class="col m12" style="background-color: rgb(198, 229, 255);padding: 0px;">
+            
+                <table class="centered responsive-table striped">
+                  <thead>
+                    <tr scope="col" colspan="13" id="area">
+                      <th scope="col" colspan="1" id="area" style="text-align: center;">Curricula</th>
+                      <th scope="col" colspan="5" id="curso" style="text-align: center;">Area</th>
+                      <th scope="col" colspan="5" id="opc" style="text-align: center;">Curso</th>
+                      <th scope="col" colspan="2" id="opc" style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr *ngFor="let curricula of arrayNucleoCurricula">
+                      <td scope="col" colspan="1" id="area" style="text-align: center;">{{curricula.prd}}</td>
+                      <th scope="col" colspan="5" id="curso" style="text-align: center;">{{curricula.areCod.ncoAreNom}}</th>
+                      <th scope="col" colspan="5" id="curso" style="text-align: center;">{{curricula.curCod.ncoCurNom}}</th>
+                      <td scope="col" colspan="1" id="opc" style="text-align: center; cursor: pointer;"><i class="material-icons">edit</i></td>
+                      <td scope="col" colspan="1" id="opc" (click)="deleteCurricula(curricula)" style="text-align: center; cursor: pointer;"><i class="material-icons">delete</i></td>  
+                    </tr>
+                  </tbody>
+                </table>
+              
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col m10 anulaPaddMarr" *ngIf="divCrearCurricula"> 
+      
+          <div class="col m12">
+            <div class="col m12 center" style="margin-top: 20px;">        
+                <h5><strong>{{ttlMntCurricula}}</strong></h5>  
+            </div>
+    
+            <div class="row col m12 center" style="margin-top: 10px;"> 
+    
+              <div class="col m12">
+                <div class="col m4"></div>
+                <div class="col m4 center" style="margin-top: 25px;">
+
+                  <div class="input-field col m12">
+                    <mat-select (ngModelChange)='capturarArea_Curso($event)' class="col m12" id="ModeloNcoArea._id" name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id" style="background-color: rgb(255, 255, 255);">
+                      <mat-option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+                    </mat-select>       
+                  </div>
+
+                  <div class="input-field col m12">
+                    <mat-select class="col m12" id="ModeloNcoCurso._id" name="ModeloNcoCurso._id" [(ngModel)]="ModeloNcoCurso._id" style="background-color: rgb(255, 255, 255);">
+                      <mat-option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</mat-option>
+                    </mat-select>    
+                  </div>
+                  
+                  <div class="input-field col m12">
+                    <mat-select class="col m12" name="Anio"  [(ngModel)]="anioSeleccionado">
+                      <mat-option *ngFor="let a of anio" [value]="a.nomAnio">{{a.nomAnio}}</mat-option>
+                    </mat-select>
+                  </div>
+
+
+                </div>
+                <div class="col m4"></div>
+              </div>
+    
+    
+              <div class="col m12 center" style="margin-top: 20px;">
+                <div class="col m4"></div>
+                <div class="col m4">
+                  <div class="input-field col m12 anulaPaddMarr" style="margin-top: 20px;"> 
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 right"  (click)="postCurricula()" >{{btnEditarGuardar}}</button>
+                    </div>
+                    <div class="col m6">
+                      <button  class="waves-light btn  col m12 left" (click)="cancelar('curri')" >Cancelar</button>
+                    </div>   
+                  </div>
+                </div> 
+                <div class="col m4"></div>    
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+
+    
+
+
+  
+
+
+</div>

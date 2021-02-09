@@ -1,0 +1,95 @@
+<div class="col s12 " style="height: auto; background-color: rgb(198, 229, 255);" *ngIf="divOpciones"> 
+    <ul class="menu" style="margin-top: 30px;">
+        <li><a style="cursor: pointer" (click)="ShowDivListaMatricula()">Lista de Matricula</a></li>
+        <li><a style="cursor: pointer" (click)="ShowDivListAulas()">Matricula</a></li>
+    </ul>
+</div>
+
+<div *ngIf="divFiltros">
+    <div class="row col s12 anulaPaddMarr" style="margin-top: 5px;">
+            
+   
+      <div class="col s12 anulaPaddMarr" style="margin-top: 15px;">
+        <div class="input-field col s12 anulaPaddMarr">
+          <mat-select id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+            <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+          </mat-select>      
+        </div>
+      </div>
+  
+      <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+          <mat-select id="ModeloSeccion._id" name="ModeloSeccion._id" [(ngModel)]="ModeloSeccion._id">
+            <mat-option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+    
+      <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+          <mat-select id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+            <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+  
+      <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+  
+          <mat-select id="ModeloPeriodo._id" name="ModeloPeriodo._id" [(ngModel)]="ModeloPeriodo._id">
+            <mat-option *ngFor="let p of fltArrayPeriodo" [value]="p._id">{{p.prdAnio}}</mat-option>
+          </mat-select>
+  
+        </div>
+      </div>
+  
+      <div class="row col s12">
+        <button class="waves-light btn  col s12 " (click)="EnviarDatos()">Buscar</button>
+      </div>
+  
+    </div>   
+</div>
+
+<div *ngIf="divFiltrosListAula">
+  <div class="row col s12 anulaPaddMarr" style="margin-top: 5px;">
+          
+    <div class="col s12 anulaPaddMarr" style="margin-top: 15px;">
+      <div class="input-field col s12 anulaPaddMarr">
+        <mat-select id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+          <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+        </mat-select>      
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr">
+      <div class="input-field col s12 anulaPaddMarr">
+        <mat-select id="ModeloSeccion._id" name="ModeloSeccion._id" [(ngModel)]="ModeloSeccion._id">
+          <mat-option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  
+    <div class="col s12 anulaPaddMarr">
+      <div class="input-field col s12 anulaPaddMarr">
+        <mat-select id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+          <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr">
+      <div class="input-field col s12 anulaPaddMarr">
+
+        <mat-select id="ModeloTurno._id" name="ModeloTurno._id" [(ngModel)]="ModeloTurno._id">
+          <mat-option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</mat-option>
+        </mat-select>
+
+      </div>
+    </div>
+
+    <div class="row col s12">
+      <button class="waves-light btn  col s12 " (click)="EnviarDatos()">Buscar</button>
+    </div>
+
+  </div>   
+</div>

@@ -1,0 +1,114 @@
+<div class="container-fluid modCelular" style="min-height: 500px; background-color: rgb(241, 251, 253);">
+  <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="CallModalOptBarra()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span class="spacer"></span>
+    
+    <a class="btn" mat-list-item style="background-color: rgb(86, 161, 247);" matTooltip = "Lista de colegios"><i class="material-icons">list</i></a>
+    <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);">Registrarse</a>
+    <a class="btn ui-state-default" mat-list-item style="background-color: rgb(86, 161, 247);">Iniciar Sesión </a>
+  
+  </mat-toolbar>
+
+  <div class="row col m12 s12 anulaPaddMarr">
+
+         <!-- Portadas de la empresa Crab-->
+    <div class="row col s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53);">
+      <div class="col s12 anulaPaddMarr">
+        <div class="carousel  center-align" >
+          <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+              <img  [src]="'http://localhost:3000/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <div class="row col m12 s12">
+
+    <div class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 500px;">
+
+      <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+        <span class="card-title" style="font-size: 15px;text-align: center;">Colegio
+      </span>
+      </div>
+
+      <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;" *ngFor="let colegio of arrayColegio">
+        <span class="card-title" (click)="SeleccionarColegio(colegio)"
+          style="font-size: 15px;text-align: center;cursor: pointer;">{{colegio.colCod.colNom}}
+        </span>
+      </div>
+    </div>
+ 
+
+  </div>
+
+</div>
+
+
+
+  
+
+
+  <div class="container-fluid modPantalla" style="min-height: 1000px; background-color: rgb(241, 251, 253);">
+    
+    <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="CallModalOptBarra()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span class="spacer"></span>
+    
+    <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
+    <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(7, 18, 34); margin-top: 12px;" (click)="CallModalOptBarra()"><mat-icon aria-label="Side nav toggle icon">menu</mat-icon></a>
+    
+  
+    </mat-toolbar>
+
+    <!-- Portadas de la empresa Crab-->
+    <div class="row col s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53);" >
+      <div class="col s12 anulaPaddMarr">
+        <div class="carousel  center-align">
+          <div  class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+              <img  [src]="'http://localhost:3000/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+          </div>
+        </div>
+      </div>  
+    </div>
+
+
+  <div class="row col m12 s12">
+
+    <div class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 500px;margin: 2px;">
+
+      <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+        <span class="card-title" style="font-size: 15px;text-align: center;">Colegio
+      </span>
+      </div>
+
+      <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;" *ngFor="let colegio of arrayColegio">
+        <span class="card-title" (click)="SeleccionarColegio(colegio)"
+          style="font-size: 15px;text-align: center;cursor: pointer;">{{colegio.colCod.colNom}}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

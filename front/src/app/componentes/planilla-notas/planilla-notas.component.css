@@ -1,0 +1,258 @@
+
+  
+  td,th
+  {
+   padding: 4px 5px;
+  
+  }
+    
+   .alertas{
+   background:#f4e3e8;
+   color: red;
+   width: 200px;
+   text-align: center;
+   margin-left: 60px;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   border-radius: 50px;
+   }
+   
+  
+    
+   .nav > li {
+    background-color: #504188;
+    text-align: center;
+    margin: auto;
+    border-radius: 3px; 
+    float:left;
+   }
+   
+   #headerPrincipal{
+    margin:auto;
+    width:100%;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: auto;
+   }
+  
+   .nav > li {
+    background-color: #504188;
+    text-align: center;
+    margin: auto;
+    border-radius: 3px; 
+    height: 50px;
+    float:left;
+   }
+   
+   .nav li a {
+    background-color:#504188;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 12px;
+    height: 50px;
+    display:block;
+   }
+   
+   .nav li a:hover {
+    background-color:#434343;
+   }
+   
+   .nav li ul {
+    display:none;
+    position:absolute;
+    min-width:140px;
+   }
+   
+   .nav li:hover > ul {
+    display:block;
+   }
+   
+   .nav li ul li {
+    position:relative;
+   }
+   
+   .nav li ul li ul {
+    right:-140px;
+    top:0px;
+   }
+  
+  
+  
+   #header {
+    
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+  
+   }
+   
+   ul, ol {
+    list-style:none;
+   }
+   
+   .navBar > li {
+    background-color: #504188;
+    border-radius: 3px;
+    float: left;
+    margin: 2px 2px 2px 2px;
+   }
+   
+   .navBar li a {
+    background-color:#504188;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 15px;
+    display:block;
+   }
+   
+   .navBar li a:hover {
+    background-color:#434343;
+   }
+   
+   .navBar li ul {
+    display:none;
+    position:absolute;
+    min-width:170px;
+   }
+   
+   .navBar li:hover > ul {
+    display:block;
+   }
+   
+   .navBar li ul li {
+    position:relative;
+   }
+   
+   .navBar li ul li ul {
+    right:-140px;
+    top:0px;
+   }
+   
+  
+   /***************Menu Acordeon******************************/
+   .menu{
+    padding:0;
+    list-style:none;
+    max-width:170px;
+    font-size:14px;
+    margin: auto;
+    background:#c1c1c1;
+    border: 1px solid rgba(0,0,0,0.8);
+  }
+  
+  .menu li a{
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0, 0.2);
+    border-top: 1px solid rgba(255,255,255, 0.2);
+    background:#3e3f44;
+    text-decoration:none;
+    color:#FFF;
+    text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+    filter: dropshadow(color=#000, offx=1, offy=0);
+    padding:2px;
+    padding-left:20px;
+  }
+  
+  .menu li ul li a{
+    font-size:14px;
+    color:#47689d;
+    text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
+    
+  }
+  
+  .menu li a:hover{
+    background:#4a6ba2;
+    transition: background 0.3s ease-in;
+    -webkit-transition: background 0.3s ease-in;
+    -o-transition: background 0.3s ease-in;
+  }
+  
+  .menu ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    height:0;
+    overflow: hidden;
+    transition:0.3s;
+    -moz-transition:1s;
+    -webkit-transition:1s;
+  }
+  
+  .menu li:hover ul{
+    height:auto;
+    overflow-y:hidden;
+    overflow-x:hidden;
+  }
+  
+  .menu ul li a{
+    background:#fafafa;
+  }
+  
+  .menu ul li a:hover {
+    background: none repeat scroll 0 0 #ccc;
+    color: #fff;
+    transition: color 0.4s ease;
+    -webkit-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+  }
+  
+  /****************** Botones ************************************/
+  .thClass{
+    text-align: center;
+    background-color: rgb(148, 163, 190);
+  }
+  
+  .btnDivNuevoHorario{
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  
+  }
+  
+  .horarioTbl{
+    cursor: pointer;
+    color: #0e3069;
+    height: 50px;
+  }
+  .headerClass{
+    text-align: center;
+    background-color: rgb(148, 163, 190);
+  }
+
+  /******************* */
+  .anulaPaddMarr{
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (max-width:700px) {  
+
+    .modPantalla{
+      display: none;
+    }
+
+  }
+
+ @media (min-width:700px) {
+    table {
+      display:block;
+      overflow:auto;
+      height: 400px !important;
+      width: 100%;
+    }
+    
+    thead, tbody tr {
+      display:table;
+      width:100%;
+      table-layout:fixed;
+    }
+    
+    .modCelular{
+      display: none;
+    }
+  
+  }
+
+

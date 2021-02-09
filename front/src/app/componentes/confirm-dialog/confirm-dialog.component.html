@@ -1,0 +1,43 @@
+<div mat-dialog-content style="text-align: center;">{{message}}</div>
+
+<div class="row col s12">
+    <div class="col s2">
+
+    </div>
+
+    <div class="col s8" *ngIf="opcDeafult">
+        <div mat-dialog-actions>
+            <button class="waves-effect waves-light btn" (click)="onClickNo()" style="margin-right: 5px;">
+                No
+            </button>
+        
+            <button class="waves-effect waves-light btn" [mat-dialog-close]="true" >
+                Si
+            </button>
+        </div>
+    </div>
+
+    <div class="col s8" *ngIf="opc">
+        <div mat-dialog-actions>
+            <button class="waves-effect waves-light btn" [mat-dialog-close]="true" >
+                Entendido
+            </button>
+        </div>
+    </div>
+
+    <div class="col s8" *ngIf="opcNota">
+        <div mat-dialog-actions>
+            <button class="waves-effect waves-light btn" (click)="onClickNo()" style="margin-right: 5px;">
+                No
+            </button>
+        
+            <button class="waves-effect waves-light btn" [mat-dialog-close]="true" >
+                Si
+            </button>
+        </div>
+    </div>
+
+    <div class="col s2">
+
+    </div>
+</div>

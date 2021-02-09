@@ -1,0 +1,382 @@
+<div  class="container-fluid" style="padding: 0px !important;">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+    <h5 class="col s12 m12"><strong>Mantenimiento de Perfiles</strong></h5>
+  </div>
+
+  <div class="row col s12 m12 anulaPaddMarr" style="padding: 0; margin: 0;">
+
+    <div class="row col s12 m12" *ngIf="divCrear" [ngStyle]="{'display':varStyleListado === 1 ? 'none' : '' }" style="min-height: 400px; margin-bottom: 20px; margin-top: 10px;"> <!-- Formulario registro perfil-->
+      <div class="row col s12 modPantalla " style="margin-top: 10px;">
+        <!-- Disparador Modal -->
+        <button  (click)="ModalOptions()"  class="waves-light btn  col s12 "  style="position: relative; margin:auto;padding: auto;">Opciones <i class="large material-icons">view_list</i>  </button>
+      </div>
+      <div class="row col s12 m12" style="margin-top: 10px;padding: 0px !important;">
+        
+        <div class="col s0 m2 modCelular" style="min-height: 500px; background-color: rgb(198, 229, 255)">
+          <ul class="menu" style="margin-top: 30px;">
+            <li><a style="cursor: pointer" (click)="ShowListado()">Lista de perfiles</a></li>
+            <li><a style="cursor: pointer">Gestion de Perfiles</a>
+              <ul>
+                <li><a style="cursor: pointer" *ngIf="li_Director" (click)="ShowCrearPflDir()">Director</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_SubDirector" (click)="ShowCrearPflSubDir()">Subdirector</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Coordinador" (click)="ShowCrearPflCdr()">Coordinador</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Secretaria" (click)="ShowCrearPflSec()">Secretaria</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Apoderado" (click)="ShowCrearPflApo()">Apoderado</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Profesor" (click)="ShowCrearPflPfr()">Profesor</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Auxiliar" (click)="ShowCrearPflAux()">Auxiliar</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Alumno" (click)="ShowCrearPflAlu()">Alumno</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col s12 m10" style="margin-top: 40px;">
+
+            <div class="row col m12">
+
+              <div class="col m3"></div>
+          
+              <form class="col s12 m6 center" style="padding: 0px;margin: 0px;">
+    
+                <div class="row col s12 m12 center" style="margin-top: 10px;padding: 0px;margin: 0px;">
+                  <h5 class="center">Perfil {{tipoPerfil}}</h5>
+                </div>
+    
+                <div class="row col s12 m12" style="padding: 0px;margin: 0px; margin-top: 20px;">
+                  <div class="input-field col s12 m12"style="padding: 0px;margin: 0px;">
+                    <input type="text" name="perDni" readonly [(ngModel)]="frmEspejo.perdni" placeholder="DNI"
+                    maxlength="8" style="text-align: center;">
+                  </div>
+                </div>
+    
+                <div class="row col s12 m12"  style="padding: 0px;margin: 0px;margin-top: 20px;">
+                  <div class="input-field col s12 m12"  style="padding: 0px;margin: 0px;">
+                    <input type="text" name="perNom" readonly placeholder="Nombre" [(ngModel)]="frmEspejo.perNom"
+                      style="text-align: center;">
+                  </div>
+                </div>
+    
+                <div class="row col s12 m12"  style="padding: 0px;margin: 0px;margin-top: 20px;">
+                  <div class="input-field col s12 m12"  style="padding: 0px;margin: 0px;">
+                    <input type="text" name="perApe" readonly [(ngModel)]="frmEspejo.perApe" placeholder="Apellidos"
+                      style="text-align: center;">
+                  </div>
+                </div>
+    
+                <div class="row col s12 m12"  style="padding: 0px;margin: 0px;margin-top: 20px;">
+                  <div class="input-field col s12 m12"  style="padding: 0px;margin: 0px;">
+                    <input type="text" name="cargo" readonly [(ngModel)]="frmEspejo.cargo" placeholder="Cargo"
+                      style="text-align: center;">
+                  </div>
+                </div>
+      
+                <div class="row col s12 m12 center"  style="padding: 0px;margin: 0px;margin-top: 15px;"> <!--  Fila de botones-->
+  
+                    <div class="col s8 m6">
+                      <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearPerfil()" [disabled]="btnCrearActBool">Crear {{tipoPerfil}}</button>
+                    </div>
+        
+                    <div class="col s4 m6">
+                      <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233);" (click)="Limpiar()" >Nuevo</button>
+                    </div>
+                </div>
+        
+              </form>
+              <div class="col m3"></div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 10px; background-color: white;margin-bottom: 0px;padding: 2px !important;"> <!--  Fila de Filtro-->
+    
+        <div class="row card-panel col s12 m12" style="margin-top: 0px;height: 75px;">
+
+          <div class="col s6 m3 anulaPaddMarr">
+            <input type="text" name="listFilter" id="perDni" [(ngModel)]="listFilter" style="margin-top: 20px; text-align: center;"
+                      placeholder="Filtrar por DNI :">
+          </div>
+      
+
+        </div>
+        
+        <form class="col s12 m12 anulaPaddMarr" style="background-color: rgb(198, 229, 255); margin-bottom: 10px;">
+
+          <table class="centered responsive-table striped anulaPaddMarr">
+            <thead>
+              <tr>
+                <th id="persona">DNI</th>
+                <th id="persona">Nombres</th>
+                <th id="persona">Apellidos</th>
+                <th id="persona"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let persona of filteredPersona">
+                <td  id="persona">{{persona.perRepDni}}</td>
+                <td  id="persona">{{persona.perRepNom}}</td>
+                <td  id="persona">{{persona.perRepApe}}</td>
+                <td  id="persona" style="cursor: pointer;">
+                  <mat-icon aria-hidden="false" (click)="SeleccionarPersona(persona)" matTooltip="Seleccionar persona">
+                    add_task
+                  </mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="row col s12 m12" *ngIf="divListado" [ngStyle]="{'display':varStyleCrearCargo === 1 ? 'none' : '' }" style="min-height: 400px; margin-bottom: 20px; margin-top: 10px;"> <!-- Formulario Ver perfiles-->
+      <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 10px;padding: 0px !important;">
+       
+        <div class="col m2 modCelular" style="min-height: 500px; background-color: rgb(198, 229, 255);">
+          <ul class="menu" style="margin-top: 30px;">
+            <li><a style="cursor: pointer" (click)="ShowListado()">Lista de perfiles</a></li>
+            <li><a style="cursor: pointer">Gestion de Perfiles</a>
+              <ul>
+                <li><a style="cursor: pointer" *ngIf="li_Director" (click)="ShowCrearPflDir()">Director</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_SubDirector" (click)="ShowCrearPflSubDir()">Subdirector</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Coordinador" (click)="ShowCrearPflCdr()">Coordinador</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Secretaria" (click)="ShowCrearPflSec()">Secretaria</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Profesor" (click)="ShowCrearPflPfr()">Profesor</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Auxiliar" (click)="ShowCrearPflAux()">Auxiliar</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Apoderado" (click)="ShowCrearPflApo()">Apoderado</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Alumno" (click)="ShowCrearPflAlu()">Alumno</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row col s12 modPantalla">
+          <!-- Disparador Modal -->
+          <button  (click)="ModalOptions()"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+        </div>
+                     
+        <div class="col s12 m10 anulaPaddMarr" style="margin-top: 0px;">
+
+          <div class="row col s12 m12 ">
+
+            <div class="row card-panel col s12 m12" style="margin-top: 0px;">
+
+              <div class="col s6 m3 anulaPaddMarr">
+                <input class="anulaPaddMarr" type="text" name="listFilterPerfApe" id="perfilApe" [(ngModel)]="listFilterPerfApe" style="text-align: center;margin-top: 15px;"
+                  placeholder="-- Filtrar por apellidos --">
+              </div>
+            
+
+              <div class="col s6 m3 right anulaPaddMarr" style="margin-top: 15px;">
+                <div class="input-field col s12">
+                  <select class="browser-default anulaPaddMarr" style="text-align: center !important; padding-right: 29px; height: 30px;"
+                  (ngModelChange)='capturarCargo($event)' name="asc" [(ngModel)]="cargoSeleccionado">
+                    <option *ngFor="let asc of arraySelectCargos"   [value]="asc.idCargo">{{asc.nombreCargo}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <form class="col s12 m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+                <div class="col s12 anulaPaddMarr">
+                  <table class="centered responsive-table striped anulaPaddMarr" >
+                    <thead >
+                      
+                      <tr>
+                        <th style="text-align: center;">DNI</th>
+                        <th style="text-align: center;">Nombres</th>
+                        <th style="text-align: center;">Apellidos</th>
+                        <th style="text-align: center;">Cargo</th>
+                        <th style="text-align: center;">Opciones</th>
+                      </tr>
+                    </thead>
+    
+                    <tbody>
+                      <tr *ngFor="let perfil of pflArray">
+                        <td [ngStyle]="{'color':perfil.estCod.estNom === 'Habilitado' ? '#088A08' : '#BCA9F5' }">{{perfil.perRepCod.perRepDni}}</td>
+                        <td [ngStyle]="{'color':perfil.estCod.estNom === 'Habilitado' ? '#088A08' : '#BCA9F5' }">{{perfil.perRepCod.perRepNom}}</td>
+                        <td [ngStyle]="{'color':perfil.estCod.estNom === 'Habilitado' ? '#088A08' : '#BCA9F5' }">{{perfil.perRepCod.perRepApe}}</td>
+                        <td [ngStyle]="{'color':perfil.estCod.estNom === 'Habilitado' ? '#088A08' : '#BCA9F5' }">{{perfil.carCod.carNom}}</td>
+                        <td style="text-align: center; cursor: pointer; " [ngStyle]="{'color':perfil.estCod.estNom === 'Activo' ? 'green' : '#BCA9F5' }">
+                          <a class="btn"  (click)="Pre_DeshabilitarPerfil(perfil)" matTooltip = "Cambiar estado" style="height: 25px !important;width: 96px;;margin-bottom: 2px !important; font-size: 10px;padding: 0;margin: 1px;" >
+                            {{perfil.estCod.estNom}}  
+                          </a>
+                          <a class="btn" *ngIf="opcApo" (click)="ShowMiListaAlumnos(perfil)" matTooltip = "Asignar alumno" style="height: 25px !important;width: 40px;margin-bottom: 2px !important; font-size: 10px; padding: 0;">
+                            <mat-icon style="margin: auto; padding: auto;">add_to_photos</mat-icon>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row col s12 m12" *ngIf="divAsignarAlu" [ngStyle]="{'display':varStyleCrearCargo === 1 ? 'none' : '' }" style="min-height: 400px; margin-bottom: 20px; margin-top: 10px;"> <!-- Formulario Ver perfiles-->
+      <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 10px;padding: 0px !important;">
+       
+        <div class="col m2 modCelular" style="min-height: 500px; background-color: rgb(198, 229, 255);">
+          <ul class="menu" style="margin-top: 30px;">
+            <li><a style="cursor: pointer" (click)="ShowListado()">Lista de perfiles</a></li>
+            <li><a style="cursor: pointer">Gestion de Perfiles</a>
+              <ul>
+                <li><a style="cursor: pointer" *ngIf="li_Director" (click)="ShowCrearPflDir()">Director</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_SubDirector" (click)="ShowCrearPflSubDir()">Subdirector</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Coordinador" (click)="ShowCrearPflCdr()">Coordinador</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Secretaria" (click)="ShowCrearPflSec()">Secretaria</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Profesor" (click)="ShowCrearPflPfr()">Profesor</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Auxiliar" (click)="ShowCrearPflAux()">Auxiliar</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Apoderado" (click)="ShowCrearPflApo()">Apoderado</a></li>
+                <li><a style="cursor: pointer" *ngIf="li_Alumno" (click)="ShowCrearPflAlu()">Alumno</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row col s12 modPantalla">
+          <!-- Disparador Modal -->
+          <button  (click)="ModalOptions()"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+        </div>
+
+        <div class="col s12 m10 anulaPaddMarr" style="margin-top: 0px;">
+
+          <div class="row col s12 m12 ">
+
+            <div class="row card-panel col s12 m12" style="margin-top: 0px;">
+
+              <div *ngIf="divFrmListAlum" class="col s6 m3 anulaPaddMarr">
+                <input class="anulaPaddMarr" type="text" name="listFilterAluApe" id="perfilApe" [(ngModel)]="listFilterAluApe" style="text-align: center;margin-top: 15px;"
+                  placeholder="-- Filtrar por apellidos --">
+              </div>
+
+              <div *ngIf="divFrmListAlumApo"  class="col s12 m3 anulaPaddMarr right">
+                <div class="input-field col m12 s12" style="margin-top: 20px;">
+                  
+                  <button *ngIf="btnAsigAlum" class="waves-light btn btn-small col m12 s12" (click)="ShowAsignarAlu()" style="font-size: 10px;" matTooltip = "Asignar un alumno al apoderado">Asignar</button>
+                  <button *ngIf="btnVerAlumApo" class="waves-light btn btn-small col m12 s12" (click)="ShowVerAluApo()" style="font-size: 10px;" matTooltip = "Ver los alumnos del apoderado">Alumnos asoc.</button>
+                </div>
+              </div>
+
+              <div  *ngIf="divFrmListAlum" class="col s6 m3 anulaPaddMarr right">
+                <div class="input-field col m12 s12" style="margin-top: 20px;">
+                  
+                  <button *ngIf="btnAsigAlum" class="waves-light btn btn-small col m12 s12" (click)="ShowAsignarAlu()" style="font-size: 10px;" matTooltip = "Asignar un alumno al apoderado">Asignar</button>
+                  <button *ngIf="btnVerAlumApo" class="waves-light btn btn-small col m12 s12" (click)="ShowVerAluApo()" style="font-size: 10px;" matTooltip = "Ver los alumnos del apoderado">Alumnos asoc.</button>
+                </div>
+              </div>
+
+            </div>
+
+            <form *ngIf="divFrmListAlum" class="col s12 m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+                <div class="col m12 s12 anulaPaddMarr" style="margin-top: 20px; margin-bottom: 20px;">
+                  <h6>Lista de alumnos</h6>
+                </div>
+
+                <div class="col s12 anulaPaddMarr" style="max-height: 339px;">
+                  <table class="centered responsive-table striped anulaPaddMarr" style="max-height: 339px;">
+                    <thead>
+                      <tr>
+                        <th id="persona">DNI</th>
+                        <th id="persona">Nombres</th>
+                        <th id="persona">Apellidos</th>
+                        <th id="persona"></th>
+                      </tr>
+                    </thead>
+        
+                    <tbody>
+                      <tr *ngFor="let alumno of aluArray">
+                        <td  id="persona">{{alumno.perRepCod.perRepDni}}</td>
+                        <td  id="persona">{{alumno.perRepCod.perRepNom}}</td>
+                        <td  id="persona">{{alumno.perRepCod.perRepApe}}</td>
+                        <td  id="persona" style="cursor: pointer;">
+                          <a (click)="openDlgApoAlu(alumno)">
+                            <i class="material-icons" matTooltip="Asignar alumno">send</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </form>
+
+            <form *ngIf="divFrmListAlumApo" class="col s12 m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+              <div class="col m12 s12 anulaPaddMarr" style="margin-top: 20px; margin-bottom: 20px;">
+                <h6>Alumnos del apoderado</h6>
+              </div>
+
+              <div class="col s12 anulaPaddMarr" style="max-height: 339px;">
+                <table class="centered responsive-table striped anulaPaddMarr" style="max-height: 339px;">
+                  <thead>
+                    <tr>
+                      <th id="persona">DNI</th>
+                      <th id="persona">Nombres</th>
+                      <th id="persona">Apellidos</th>
+                      <th id="persona"></th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let alumno of arrayAlumApo">
+                      <td  id="persona">{{alumno.perRepCod.perRepDni}}</td>
+                      <td  id="persona">{{alumno.perRepCod.perRepNom}}</td>
+                      <td  id="persona">{{alumno.perRepCod.perRepApe}}</td>
+                      <td>
+                        <a (click)="DesvincularAlu(alumno._id)" >
+                          <i matTooltip = "Desvincular" class="material-icons">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </form>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---->

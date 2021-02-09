@@ -1,0 +1,365 @@
+<div class="container-fluid">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;">
+
+    <h5 class="col m12 s12"><strong>Curso</strong></h5>
+  </div>
+
+  <div class="row col  m12 anulaPaddMarr modPantalla" style="padding: 0px !important;margin-top: 20px;">
+
+    <div class="col m2 " style="min-height: 500px; background-color: rgb(198, 229, 255);"> 
+      <ul class="menu" style="margin-top: 30px;">
+        <li><a style="cursor: pointer" (click)="ShowDivCursoGrado()">Cursos Segun Grado</a></li>
+      </ul>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="divCursoGrado">
+
+      <div class="col m12">
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+  
+          <div class="col m12 anulaPaddMarr" style="height: 30px;">
+  
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 20px;">
+                
+                <button *ngIf="hideOpc"  class="waves-light btn  col m12 " (click)="ShowDivCrearCursoGrado()" matTooltip = "Asignar curso a grado">Asignar Curso</button>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr right">
+              <div class="input-field col m12" style="margin-top: 20px;">
+                
+                <button  class="waves-light btn  col m12 " (click)="BuscarMntCursoGrado()">Buscar </button>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr right">
+              <div class="input-field col m12">
+                <select class="browser-default" id="ModeloNcoCurso._id" name="ModeloNcoCurso._id"
+                        [(ngModel)]="ModeloNcoCurso._id" (ngModelChange)='getFltCurso($event)'  matTooltip = "Seleccione el curso">
+                          <option *ngFor="let curso of arrayFltSltNucleoCurso" [value]="curso._id">{{curso.ncoCurNom}}</option>
+                        </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr right">
+              <div class="input-field col m12">
+                <select class="browser-default" id="ModeloNcoArea._id" name="ModeloNcoArea._id"
+                        [(ngModel)]="ModeloNcoArea._id" (ngModelChange)='capturarFltArea_Curso($event)'  matTooltip = "Seleccione el curso">
+                          <option *ngFor="let area of arrayFltSltNucleoArea" [value]="area._id">{{area.ncoAreNom}}</option>
+                        </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr right" >
+              <div class="input-field col m12">
+                <select class="browser-default" id="ModeloGrado._id" name="ModeloGrado._id"
+                        [(ngModel)]="ModeloGrado._id" (ngModelChange)='getFltGrado($event)'  matTooltip = "Seleccione el grado">
+                          <option *ngFor="let grado of fltMntCurGra_Gra" [value]="grado._id">{{grado.graDes}}</option>
+                </select>
+              </div>
+           </div>
+
+            <div class="col m2 anulaPaddMarr right">
+              <div class="input-field col m12">
+                <select class="browser-default" id="ModelofltMntCurGra_Niv._id" name="ModelofltMntCurGra_Niv._id"
+                          [(ngModel)]="ModelofltMntCurGra_Niv._id" (ngModelChange)='getFltNivel($event)'  matTooltip = "Seleccione el grado">
+                            <option *ngFor="let nivel of fltMntCurGra_Niv" [value]="nivel._id">{{nivel.nivDes}}</option>
+                          </select>
+              </div>
+            </div>
+             
+          </div>
+        </div>
+      </div>
+
+      <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col m12 ">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th style="text-align: center;">Nivel</th>
+                <th style="text-align: center;">Grado</th>
+                <th style="text-align: center;">Area</th>
+                
+                <th style="text-align: center;">Curso</th>
+                <th *ngIf="hideOpc" style="text-align: center;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let cg of arrayCursoGrado">
+                <td style="text-align: center;">{{cg.nivCod.nivDes}}</td>
+                <td style="text-align: center;">{{cg.graCod.graDes}}</td>
+                <td style="text-align: center;">{{cg.areCod.ncoAreNom}}</td>
+                
+                <td style="text-align: center;">{{cg.curCod.ncoCurNom}}</td>
+                <td *ngIf="hideOpc" style="text-align: center;cursor: pointer;">
+                  <mat-icon svgIcon="editar" (click)="preEditarCursoGrado(cg)" matTooltip = "Editar"></mat-icon> 
+                  <mat-icon svgIcon="eliminar" (click)="openDialog(cg)" matTooltip = "Eliminar Curso"></mat-icon> 
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+      </form>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="crearCursoGrado">
+      <div class="row col m12 anulaPaddMarr">
+        <div class="col m1"></div>
+
+        <form class="col m10  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col m12">
+
+            <div class="row col m12 center anulaPaddMarr">
+              <div class="input-field col m12">
+                <h5 class="center">Asignar curso</h5>
+              </div>
+            </div>
+
+            <div class="row col m12">
+
+
+              <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+              
+
+                <div class="row col m12 anulaPaddMarr" style="margin-top: 5px; margin-bottom: 25px;">
+      
+                  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Nivel :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" style="text-align: center !important; padding-right: 29px;"
+                        id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+                        <option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col m1"></div>  
+                  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Grado :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" style="text-align: center !important; padding-right: 29px;"
+                        id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+                        <option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                </div>
+  
+                <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Area :</label>
+                  </div>
+                  
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" (ngModelChange)='capturarArea_Curso($event)'
+                        style="text-align: center !important; padding-right: 29px;" id="ModeloNcoArea._id"
+                        name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id">
+                        <option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  
+                  
+  
+                  <div class="col m1"></div>
+  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Curso :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" style="text-align: center !important; padding-right: 29px;"
+                        id="ModeloNcoCurso._id" name="ModeloNcoCurso._id" [(ngModel)]="ModeloNcoCurso._id">
+                        <option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+              <div class="col m6 ">
+                <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearCursoGrado()">{{btnEditarGuardar}}</button>
+              </div>
+
+              <div class="col m6 ">
+                <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="cancelar()">Cancelar</button>
+              </div>
+            </div>
+            
+          </div>
+  
+        </form>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="row col s12 anulaPaddMarr modCelular" style="margin-top: 10px;">
+
+    <!-- Div lista de aulas -->
+    <div class="col s12 anulaPaddMarr " *ngIf="divCursoGrado">
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+
+          <div class="col s12 anulaPaddMarr" style="height: 30px;">
+
+            <div *ngIf="hideOpc" class="col s6 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button   class="waves-light btn  col s12 " (click)="ShowDivCrearCursoGrado()" matTooltip = "Asignar curso a grado">Asignar Curso</button>
+              </div>
+            </div>
+
+            <div *ngIf="hideOpc" class="col s6 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="openModalOpt()" matTooltip = "Buscar Cursos">Filtros </button>
+              </div>
+            </div>
+
+            <div *ngIf="!hideOpc" class="col s12 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="openModalOpt()" matTooltip = "Buscar Cursos">Filtros </button>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col s12 ">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th colspan="2" style="text-align: left;">Nivel</th>
+                <th colspan="2" style="text-align: left;">Grado</th>
+                <th colspan="2" style="text-align: left;">Area</th>
+                <th colspan="2" style="text-align: left;">Curso</th>
+                <th colspan="2" *ngIf="hideOpc" style="text-align: left;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let cg of arrayCursoGrado">
+                <td colspan="2" style="text-align: center;">{{cg.nivCod.nivDes}}</td>
+                <td colspan="2" style="text-align: center;">{{cg.graCod.graDes}}</td>
+                <td colspan="2" style="text-align: center;">{{cg.areCod.ncoAreNom}}</td>
+                <td colspan="2" style="text-align: center;">{{cg.curCod.ncoCurNom}}</td>
+                <td colspan="2" *ngIf="hideOpc" style="text-align: center;cursor: pointer;">
+                  <mat-icon svgIcon="editar" (click)="preEditarCursoGrado(cg)" matTooltip = "Editar"></mat-icon> 
+                  <mat-icon svgIcon="eliminar" (click)="openDialog(cg)" matTooltip = "Eliminar Curso"></mat-icon> 
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </form>
+      
+    </div>
+
+
+    <!-- Div crear curso grado -->
+    <div class="row col s12 anulaPaddMarr" *ngIf="crearCursoGrado">
+
+
+      <form class="col s12" style="margin-top: 40px;">
+
+        <div class="row col s12 card-panel">
+
+          <div class="row col s12 center ">
+            <div class="input-field col s12">
+              <h5 class="center">Asignar curso a grado</h5>
+            </div>
+          </div>
+
+          <div class="row col s12 " style="margin-top: 25px;">
+              
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+                    <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+                  </mat-select>    
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+                    <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloNcoArea._id" name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id" (ngModelChange)='capturarArea_Curso($event)'>
+                    <mat-option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+         
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloNcoCurso._id" name="ModeloNcoCurso._id" [(ngModel)]="ModeloNcoCurso._id">
+                    <mat-option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+          </div>
+
+          <div class="row col s12" style="margin-top: 15px;padding-bottom: 5px;">
+            <div class="col s6">
+              <button class="btn waves-light btn-small right"
+              (click)="CrearCursoGrado()">{{btnEditarGuardar}}</button>
+            </div>
+
+            <div class="col s6">
+              <button type="button" class="btn waves-light btn-small left" (click)="cancelar()">Cancelar</button>
+            </div>
+          </div>  
+          
+          
+        </div>
+      </form>
+    </div>
+  
+  
+  </div>
+</div>
+
+

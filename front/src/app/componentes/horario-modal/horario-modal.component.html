@@ -1,0 +1,69 @@
+
+
+    <div class="col s12 m5 center anulaPaddMarr" style="z-index:99999999;margin: auto;">
+        <div class="col m5 s12 anulaPaddMarr center">
+
+
+              <form class="row col s12 m12  anulaPaddMarr">
+    
+                <div class="row col s12 m12 anulaPaddMarr" style="text-align: center;margin-top: 2px !important;">
+                    <h5 style="margin-top: 0px !important;padding-top: 0px !important;margin-bottom: 0px;">Crear Horario</h5>
+                </div>
+
+                <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 10px;">
+                     
+                  
+                    <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 10px;">
+                        <div class="row col m12 s12 center anulaPaddMarr" style="margin-top: 15px;">
+                            <label for="" style="color: black;font-size: 14px">Horario</label>  
+                        </div>
+                        
+                        <div class="row col m12 s12 center anulaPaddMarr" style="margin-top: 5px;">
+                            <label for="" style="color: black;font-size: 14px">{{modeloHorarioModal.dia}} &nbsp;&nbsp;&nbsp; {{modeloHorarioModal.intHraIni.substring(16,21)+' - '+modeloHorarioModal.intHraFin.substring(16,21)}}</label>  
+                        </div>
+                        
+                    </div>
+                          
+                  
+                      
+                    <div class="row col s12 m12 anulaPaddMarr" style="margin-top: 2px;">
+                            
+                        <div class="col s12 m12" style="margin-top: 5px;">
+                            <select class="browser-default" id="cursoHorario" name="cursoHorario"
+                            [(ngModel)]="cursoHorario" matTooltip = "Seleccione el curso"
+                              style="text-align: center !important; padding-right: 29px; height: 30px;">
+                              <option *ngFor="let curso of arrayCursoGrado" [value]="curso.curCod._id">{{curso.curCod.ncoCurNom}}</option>
+                            </select> 
+                        </div>
+                        
+                    </div>
+
+                      <div class="row col m12 s12 anulaPaddMarr" style="margin-top: 200px;">
+                        <div class="col s12 m12 anulaPaddMarr">
+
+                            <div class="col s4 m4 anulaPaddMarr">
+                                <button class="waves-light btnModal" (click)="EliminarHorario()" >
+                                    Eliminar
+                                </button>
+                            </div>
+                            <div class="col s4 m4 anulaPaddMarr">
+                                <button class="waves-light btnModal" (click)="CrearHorario()"  [mat-dialog-close]="true">
+                                    Guardar
+                                </button>
+                            </div>
+                            <div class="col s4 m4 anulaPaddMarr">
+                                <button class="waves-light btnModal" (click)="onClickNo()" >
+                                    Cancelar
+                                </button>
+                            </div>
+
+                        </div>
+                      </div>
+                </div>
+            </form>    
+    
+                  
+        </div>
+    </div>
+
+

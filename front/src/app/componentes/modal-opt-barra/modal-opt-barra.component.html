@@ -1,0 +1,23 @@
+<!--<div mat-dialog-content style="text-align: center;">{{message}}</div> -->
+
+<div class="row col s12" style="margin: auto; padding: auto;">
+
+    <div class="col s12" *ngIf="divColegios"> 
+        <div class="input-field col s12">
+            <button  class="btn btn-small col s12" style="background-color: rgb(10, 24, 44);" (click)="VerColegios()" >Colegios</button>
+        </div>
+    </div>
+
+    <div class="col s12" *ngIf="divMisPerfiles"> 
+        <div class="input-field col s12">
+            <button  class="btn btn-small col s12" style="background-color: rgb(10, 24, 44);" (click)="MisPerfiles()" >Mi perfil</button>
+        </div>
+    </div>
+
+    <div class="col s12" *ngIf="divCerrarSesion"> 
+        <div class="input-field col s12">
+            <button  class="btn btn-small col s12" style="background-color: rgb(10, 24, 44);" (click)="CerrarSesion()" >Cerrar sesion</button>
+        </div>
+    </div>
+
+</div>

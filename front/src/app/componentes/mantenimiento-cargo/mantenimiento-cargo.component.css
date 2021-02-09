@@ -1,0 +1,110 @@
+
+
+ /***************Menu Acordeon***************************/
+ .menu{
+  padding:0;
+  list-style:none;
+  width:100%;
+  font-size:14px;
+  margin: auto;
+  background:#c1c1c1;
+  border: 1px solid rgba(0,0,0,0.8);
+}
+
+.menu li a{
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0, 0.2);
+  border-top: 1px solid rgba(255,255,255, 0.2);
+  background:rgb(29, 51, 85);
+  text-decoration:none;
+  color:#FFF;
+  text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+  filter: dropshadow(color=#000, offx=1, offy=0);
+  text-align: center;
+}
+
+.menu li ul li a{
+  font-size:14px;
+  color:#47689d;
+  text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
+  text-align: center;
+}
+
+.menu li a:hover{
+  background:#4a6ba2;
+  transition: background 0.3s ease-in;
+  -webkit-transition: background 0.3s ease-in;
+  -o-transition: background 0.3s ease-in;
+  text-align: center;
+}
+
+.menu ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+  height:0;
+  overflow: hidden;
+  transition:0.3s;
+  -moz-transition:1s;
+  -webkit-transition:1s;
+  text-align: center;
+}
+
+.menu li:hover ul{
+  height:auto;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  text-align: center;
+}
+
+.menu ul li a{
+  background:#fafafa;
+}
+
+.menu ul li a:hover {
+  background: none repeat scroll 0 0 #ccc;
+  color: #fff;
+  transition: color 0.4s ease;
+  -webkit-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  text-align: center;
+}
+
+@media (min-width:600px) {
+  table {
+    display:block;
+    overflow:auto;
+    height: 400px !important;
+    width: 100%;
+  }
+  
+  thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+  }
+  
+  .modPantalla{
+    display: none;
+  }
+}
+
+@media (max-width:600px) {
+  *::-webkit-input-placeholder {
+    /* Google Chrome y Safari */
+    color: rgb(4, 4, 66);
+    font-size: 12px;
+  }
+  .menu{
+    display: none;
+  }
+  .modCelular{
+    display: none;
+  }
+
+}
+
+.anulaPaddMarr{
+  padding: 0;
+  margin: 0;
+}

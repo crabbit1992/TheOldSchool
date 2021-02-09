@@ -1,0 +1,42 @@
+<div class="row col s12 anulaPaddMarr" style="margin-top: 5px;">
+
+    <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+            <mat-select id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+            <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+            </mat-select>
+        </div>
+    </div>
+        
+
+    <div class="col s12 anulaPaddMarr" >
+    <div class="input-field col s12 anulaPaddMarr">
+        <mat-select id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+        <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+        </mat-select>      
+    </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+            <mat-select id="ModeloNcoArea._id" name="ModeloNcoArea._id" (ngModelChange)='capturarArea_Curso($event)' [(ngModel)]="ModeloNcoArea._id">
+            <mat-option *ngFor="let area of arrayFltSltNucleoArea" [value]="area._id">{{area.ncoAreNom}}</mat-option>
+            </mat-select>
+        </div>
+    </div>
+
+    <div class="col s12 anulaPaddMarr">
+        <div class="input-field col s12 anulaPaddMarr">
+            <mat-select id="ModeloNcoCurso._id" name="ModeloNcoCurso._id" [(ngModel)]="ModeloNcoCurso._id">
+            <mat-option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</mat-option>
+            </mat-select>
+        </div>
+    </div>
+
+    
+
+    <div class="row col s12">
+    <button class="waves-light btn  col s12 " (click)="EnviarDatos()">Buscar</button>
+    </div>
+
+</div>   

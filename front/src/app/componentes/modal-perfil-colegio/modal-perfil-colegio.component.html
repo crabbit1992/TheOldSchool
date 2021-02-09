@@ -1,0 +1,100 @@
+<div class="row col m12 s12 anulaPaddMarr" style="min-height: 200px; width: 100%; padding: 0;">  
+
+      <div class="col m12 s12 anulaPaddMarr" *ngIf="divMostrarImg">
+        <div class="contenedor-galeria col m12 s12" >
+
+          <input type="file" *ngIf="false" #photoInput style="display: none;">
+            <img class="imagenClass" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image">
+  
+        </div>
+  
+        <div class="col s12 center anulaPaddMarr" style="max-height: 250px; margin-top: 10px;" *ngIf="divMostrarImg">
+
+          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                    <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{tituloImg}} </span>
+              </div>
+          </div>
+          
+          <div class="col m12 s12 anulaPaddMarr" style="margin-top: 10px;">
+
+            <div class="col s6 anulaPaddMarr">
+              <button class="waves-effect btn left anulaPaddMarr col s12 m12" (click)="sendOption('editar')" matTooltip = "Editar imagen"> Editar</button>
+            </div>
+
+            <div class="col s6">
+              <button class="waves-effect btn right anulaPaddMarr col s12 m12" (click)="openDialogEliminarImg()" matTooltip = "Eliminar imagen">Eliminar</button>
+            </div>
+            
+          </div>
+
+          <div class="col s12" style="height: 10px;"></div>
+        </div>
+      </div>
+
+
+      <div class="col m12 s12 anulaPaddMarr" *ngIf="divReadOnlyImg">
+        <div class="contenedor-galeria col m12 s12" >
+          <input type="file" *ngIf="false"  #photoInput style="display: none;">
+            <img class="imagenClass" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image">
+        </div>
+  
+        <div class="col s12 center anulaPaddMarr" style="max-height: 250px; margin-top: 10px;" >
+          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+                    <span id="myTextarea"  style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{tituloImg}} </span>
+              </div>
+          </div>
+        </div>
+      </div>
+ 
+
+
+
+      <div class="col m12 s12 anulaPaddMarr" *ngIf="divMostrarImgs" style="max-height: 500px;">
+       
+        <div class="col m4 s12 anulaPaddMarr" style="padding: 1px;" *ngFor="let imagen of arrayImgs">
+          <div class="col s12 anulaPaddMarr"style="max-height: 130px; min-height: 130px;margin: 1px" >
+            <div class="col s12 anulaPaddMarr" style="margin: 1px;">
+              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="max-height: 130px; width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col m12 s12 anulaPaddMarr" *ngIf="divMostrarNcoImgs" style="max-height: 500px;">
+       
+        <div class="col m4 s12 anulaPaddMarr" style="padding: 1px;" *ngFor="let imagen of arrayNcoImgs">
+          <div class="col s12 anulaPaddMarr"style="max-height: 130px; min-height: 130px;margin: 1px" >
+            <div class="col s12 anulaPaddMarr" style="margin: 1px;">
+              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.ncoImgRta" style="max-height: 130px; width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12" *ngIf="divOptions">
+        <ul class="menu" style="margin-top: 30px;">
+          <li><a (click)="sendOption('li')" style="cursor: pointer">Galeria de imagenes</a></li>
+          <li><a style="cursor: pointer">Biografia</a>
+            <ul>
+  
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('qs')"  >Quienes somos</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('ac')" >Actividades</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('ta')" >Talleres</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('ni')">Niveles</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('in')"  >Infraestructura</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('an')">Anuncios</a></li>
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('po')">Portada</a></li>
+         <!-- <li><a style="text-align: left; cursor: pointer;" (click)="ShowDivEmblema()">Emblema</a></li>-->
+              <li><a style="text-align: center; cursor: pointer;" (click)="sendOption('ip')">Imagen de perfil</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+ 
+ </div>

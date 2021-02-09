@@ -1,0 +1,950 @@
+<div class="container-fluid" style="padding: 0px !important;">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+    <h5 class="col m12 s12"><strong>Control de Matricula</strong></h5>
+  </div>
+
+  <div class="row col m12 anulaPaddMarr modPantalla" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;"> <!--Modo pantalla-->
+
+    <div class="col m2" style="min-height: 500px; background-color: rgb(198, 229, 255);"> 
+      <ul class="menu" style="margin-top: 30px;">
+        <li><a style="cursor: pointer" (click)="ShowDivListaMatricula()">Lista de Matricula</a></li>
+        <li><a style="cursor: pointer" (click)="ShowDivListAulas()">Matricula</a></li>
+      </ul>
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="divlistaMatriculas">
+
+      <div class="col m12">      
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+
+          <div class="col m12 anulaPaddMarr" style="height: 30px;">
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 15px;">
+                <input type="text" name="listFilterMat" id="listFilterMat" [(ngModel)]="listFilterMat"
+                    style="text-align: center;color: black;" placeholder="- Filtrar por apellidos -" matTooltip = "Ingrese los apellidos del alumno">
+              </div>
+            </div>
+            
+            <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12">
+                  <select class="browser-default" id="fltSelectGraCod" name="fltSelectGraCod"
+                      [(ngModel)]="fltSelectGraCod" (ngModelChange)='GetSltGrado($event)' matTooltip = "Seleccione el grado">
+                      <option *ngFor="let grado of fltArrayGrado" [value]="grado._id">{{grado.graDes}}</option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default" id="fltSelectSecCod" name="fltSelectSecCod"
+                      [(ngModel)]="fltSelectSecCod" (ngModelChange)='GetSltSeccion($event)' matTooltip = "Seleccione la seccion"
+                        >
+                        <option *ngFor="let seccion of fltArraySeccion" [value]="seccion._id">{{seccion.secDes}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default"  id="fltSelectNivCod" name="fltSelectNivCod"
+                      [(ngModel)]="fltSelectNivCod" (ngModelChange)='GetSltNivel($event)'  matTooltip = "Seleccione el nivel"
+                        >
+                        <option *ngFor="let nivel of fltArrayNivel" [value]="nivel._id"> {{nivel.nivDes}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default" id="fltSelectPrdCod" name="fltSelectPrdCod"
+                      [(ngModel)]="fltSelectPrdCod" (ngModelChange)='GetSltPeriodo($event)' matTooltip = "Seleccione el periodo"
+                        >
+                        <option *ngFor="let periodo of fltArrayPeriodo" [value]="periodo._id">{{periodo.prdAnio}}</option>
+                 </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 20px;">
+                
+          
+                <button  class="waves-light btn  col s12 "  (click)="BuscarMatricula()" matTooltip = "Buscar Matricula">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col m12 ">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th style="text-align: center;">DNI</th>
+                <th style="text-align: center;">Nombres y Apellidos</th>
+                <th style="text-align: center;">Grado y Seccion</th>
+                <th style="text-align: center;">Nivel</th>
+                <th style="text-align: center;">Turno</th>
+                <th style="text-align: center;">Periodo</th>
+                <th style="text-align: center;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let matricula of arrayMatricula">
+                <td style="text-align: center;">{{matricula.perRepCod.perRepDni}}</td>
+                <td style="text-align: center;">{{matricula.perRepCod.perRepNom +', '+  matricula.perRepCod.perRepApe }}</td>
+                <td style="text-align: center;">{{matricula.graCod.graDes +' '+ '"'+matricula.secCod.secNom+'"'}}</td>
+                <td style="text-align: center;">{{matricula.nivCod.nivDes}}</td>
+                <td style="text-align: center;">{{matricula.turCod.turNom}}</td>
+                <td style="text-align: center;">{{matricula.prdCod.prdAnio}}</td>
+                <td style="text-align: center;">
+                  <a (click)="EditarMatricula(matricula)">
+                    <i class="material-icons" matTooltip = "Editar Matricula" style="cursor: pointer;">edit</i>
+                  </a>
+                </td>
+            </tbody>
+          </table>
+        </div>
+    </form>
+
+
+    </div>
+
+    <div class="col m10 anulaPaddMarr" *ngIf="divListAulas">
+
+      <div class="col m12">
+        <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+
+          <div class="col m12 anulaPaddMarr" style="height: 30px;">
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 20px;">
+                
+                
+              </div>
+            </div>
+            
+            <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12">
+                  <select class="browser-default" id="fltSelectGraCod" name="fltSelectGraCod"
+                  [(ngModel)]="fltSelectGraCod" (ngModelChange)='GetSltGrado($event)' matTooltip = "Seleccione el grado">
+                    <option *ngFor="let grado of fltArrayGrado" [value]="grado._id">{{grado.graDes}}</option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default" id="fltSelectSecCod" name="fltSelectSecCod"
+                [(ngModel)]="fltSelectSecCod" (ngModelChange)='GetSltSeccion($event)' matTooltip = "Seleccione la seccion">
+                  <option *ngFor="let seccion of fltArraySeccion" [value]="seccion._id">{{seccion.secDes}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default"  id="fltSelectNivCod" name="fltSelectNivCod"
+                [(ngModel)]="fltSelectNivCod" (ngModelChange)='GetSltNivel($event)'  matTooltip = "Seleccione el nivel">
+                  <option *ngFor="let nivel of fltArrayNivel" [value]="nivel._id"> {{nivel.nivDes}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12">
+                <select class="browser-default" id="fltSelectTurCod" name="fltSelectTurCod"
+                [(ngModel)]="fltSelectTurCod" (ngModelChange)='GetSltTurno($event)' matTooltip = "Seleccione el Turno">
+                  <option *ngFor="let turno of fltArrayTurno" [value]="turno._id">{{turno.turNom}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col m2 anulaPaddMarr">
+              <div class="input-field col m12" style="margin-top: 20px;">
+                
+                <button  class="waves-light btn  col m12 " (click)="BuscarAulas()" matTooltip = "Buscar Matricula">Buscar </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col m12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th colspan="2" style="text-align: center;">Grado</th>
+                  <th colspan="2" style="text-align: center;">Seccion</th>
+                  <th colspan="2" style="text-align: center;">Nivel</th>
+                  <th colspan="2" style="text-align: center;">Turno</th>
+                  <th colspan="2" style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let aula of arrayAulaVirtual">
+                  <td colspan="2" style="text-align: center;">{{aula.graCod.graDes}}</td>
+                  <td colspan="2" style="text-align: center;">{{aula.secCod.secDes}}</td>
+                  <td colspan="2" style="text-align: center;">{{aula.nivCod.nivDes}}</td>
+                  <td colspan="2" style="text-align: center;">{{aula.turCod.turNom}}</td>
+                  <td colspan="2" style="text-align: center;">
+                  <a>
+                      <a class="waves-light btn-small" (click)="ShowDivCrearMatricula(aula)" style="height: 25px !important;width: auto;;margin-bottom: 7px !important; font-size: 11px;">Matricular !</a>
+                  </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+
+
+    </div>
+
+
+    <!-- div crear matricula -->
+    <div class="col m10 anulaPaddMarr" *ngIf="divCrearMatricula">
+
+      <div class="row col m12 anulaPaddMarr">
+        <div class="col m2"></div>
+
+        <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col m12">
+
+            <div class="row col m12 center anulaPaddMarr">
+              <div class="input-field col m12">
+                <h5 class="center">{{ttlMatricula}} {{anioTitulo}}</h5>
+              </div>
+            </div>
+
+            <div class="row col m12">
+              <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+              
+
+                <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+      
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Grado :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" id="ModeloGrado._id" [disabled]="disabledSelect" name="ModeloGrado._id"
+                        [(ngModel)]="ModeloGrado._id">
+                        <option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+  
+                  <div class="col m1"></div>
+  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Seccion :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" id="ModeloSeccion._id" [disabled]="disabledSelect" name="ModeloSeccion._id"
+                        [(ngModel)]="ModeloSeccion._id" >
+                        <option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+                  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Nivel :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" id="ModeloNivel._id" [disabled]="disabledSelect" name="ModeloNivel._id"
+                        [(ngModel)]="ModeloNivel._id">
+                        <option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+  
+                  <div class="col m1"></div>
+  
+                  <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                    <label for="" style="font-size: 16px;">Turno :</label>
+                  </div>
+                  <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12 anulaPaddMarr">
+                      <select class="browser-default" id="ModeloTurno._id" [disabled]="disabledSelect" name="ModeloTurno._id"
+                        [(ngModel)]="ModeloTurno._id">
+                        <option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row col m12 anulaPaddMarr"  style="margin-top: 15px;">
+                  <div class="input-field col m12">
+                    <input type="text" name="alu" id="alu" readonly [(ngModel)]="alumnoNomApe" placeholder="Alumno"
+                      style="text-align: center;">
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+
+
+
+            <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+              <div class="col m6 ">
+                <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearMatricula()">{{nomBoton}} </button>
+              </div>
+
+              <div class="col m6 ">
+                <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar()">Cancelar</button>
+              </div>
+            </div>
+            
+
+          </div>
+  
+        </form>
+        <div class="col m1"></div>
+      </div>
+
+    </div>
+
+    <div class="col m12 anulaPaddMarr" *ngIf="divCrearMatricula">
+
+      <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col m12 anulaPaddMarr">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+              <div class="input-field col offset-s2 m2"
+                    style="margin-top: 20px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                    <input type="text" style="text-align: center;" name="listFilter" id="perDni" [(ngModel)]="listFilter" placeholder="Buscar por DNI">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col m12 anulaPaddMarr">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th scope="col" header="alumnos" colspan="3" style="text-align: center;">DNI</th>
+                <th scope="col" header="alumnos" colspan="4" style="text-align: center;">Nombres y Apellidos</th>
+                <th scope="col" header="alumnos" colspan="3" style="text-align: center;">Sexo</th>
+                <th scope="col" header="alumnos" colspan="2" style="text-align: center;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let al of alumnosArray">
+                <td scope="col" header="alumnos" colspan="3" style="text-align: center;">{{al.perRepCod.perRepDni}}</td>
+                <td scope="col" header="alumnos" colspan="4" style="text-align: center;">{{al.perRepCod.perRepNom + ', ' + al.perRepCod.perRepApe}}</td>
+                <td scope="col" header="alumnos" colspan="3" style="text-align: center;">{{al.perRepCod.perRepSex}}</td>
+                <td scope="col" header="alumnos" colspan="2" style="text-align: center;">
+                  <a  [ngClass]="{'disabledIcon': disableSltAlum==true, 'enabledIcon':disableSltAlum==false }" (click)="SeleccionarAlumno(al)" >
+                    <i  class="material-icons" style="cursor: pointer;">send</i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+      </form>
+    </div>
+    <!---------------------->
+  </div>
+
+
+
+
+
+
+  <div class="row col s12 anulaPaddMarr modCelular" style="margin-top: 10px;"> <!--Modo celular-->
+
+    <div class="row col s12" style="margin-top: 10px;">
+      <!-- Disparador Modal -->
+      <button  (click)="openModalOptMatricula('Opciones')"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+    </div>
+
+    <!-- Div Lista de Matricula -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divlistaMatriculas">
+
+      <div class="row col s12" style="margin-top: 10px;">
+        <!-- Disparador Modal -->
+        <div class="col s6">
+          <input type="text" name="listFilterMat" id="listFilterMat" [(ngModel)]="listFilterMat"
+                    style="text-align: center;color: black;" placeholder="- Filtrar por apellidos -" matTooltip = "Ingrese los apellidos del alumno">
+        </div>
+        <button  class="waves-light btn col s6" (click)="openModalOptMatricula('Filtros')" matTooltip = "Buscar aula"> Buscar Matricula</button>
+      </div>
+
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">DNI</th>
+                  <th style="text-align: left;">Nombres</th>
+                  <th style="text-align: left;">Apellidos</th>
+                  <th style="text-align: left;">Grado</th>
+                  <th style="text-align: left;">Seccion</th>
+                  <th style="text-align: left;">Nivel</th>
+                  <th style="text-align: left;">Turno</th>
+                  <th style="text-align: left;">Periodo</th>
+                  <th style="text-align: left;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let matricula of arrayMatricula">
+                  <td style="text-align: center;">{{matricula.perRepCod.perRepDni}}</td>
+                  <td style="text-align: center;">{{matricula.perRepCod.perRepNom}}</td>
+                  <td style="text-align: center;">{{matricula.perRepCod.perRepApe}}</td>
+                  <td style="text-align: center;">{{matricula.graCod.graDes}}</td>
+                  <td style="text-align: center;">"{{matricula.secCod.secNom}}"</td>
+                  <td style="text-align: center;">{{matricula.nivCod.nivDes}}</td>
+                  <td style="text-align: center;">{{matricula.turCod.turNom}}</td>
+                  <td style="text-align: center;">{{matricula.prdCod.prdAnio}}</td>
+                  <td style="text-align: center;">
+                    <a (click)="EditarMatricula(matricula)">
+                      <i class="material-icons" matTooltip = "Editar Matricula" style="cursor: pointer;">edit</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+      
+    </div>
+
+
+    <!-- Div Lista aulas -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divListAulas">
+
+      <div class="row col s12" style="margin-top: 10px;">
+        <!-- Disparador Modal -->
+        <div class="col s3"></div>
+        <button  class="waves-light btn col s6" (click)="openModalOptMatricula('FiltrosListAula')" matTooltip = "Buscar aula"> Buscar Aula</button>
+        <div class="col s3"></div>
+      </div>
+
+  
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Grado</th>
+                  <th style="text-align: left;">Seccion</th>
+                  <th style="text-align: left;">Nivel</th>
+                  <th style="text-align: left;">Turno</th>
+                  <th style="text-align: left;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let aula of arrayAulaVirtual">
+                  <td style="text-align: center;">{{aula.graCod.graDes}}</td>
+                  <td style="text-align: center;">{{aula.secCod.secDes}}</td>
+                  <td style="text-align: center;">{{aula.nivCod.nivDes}}</td>
+                  <td style="text-align: center;">{{aula.turCod.turNom}}</td>
+                  <td style="text-align: center;">
+                  <a>
+                      <a class="waves-light btn-small" (click)="ShowDivCrearMatricula(aula)" style="height: 25px !important;width: auto;;margin-bottom: 7px !important; font-size: 11px;">Matricular !</a>
+                  </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+
+
+    </div>
+
+
+
+
+    <!-- div crear matricula -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divCrearMatricula">
+
+      <div class="row col s12 anulaPaddMarr">
+ 
+        <form class="col s12" style="margin-top: 40px;">
+
+          <div class="row col s12 card-panel">
+  
+            <div class="row col s12 center ">
+              <div class="input-field col s12">
+                <h5 class="center">{{ttlMatricula}} {{anioTitulo}}</h5>
+              </div>
+            </div>
+  
+            <div class="row col s12 " style="margin-top: 25px;">
+                
+                <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                  <div class="col s2"></div>
+                  <div class="input-field col s8 anulaPaddMarr">
+                    <mat-select id="ModeloGrado._id" [disabled]="disabledSelect" name="ModeloGrado._id"  [(ngModel)]="ModeloGrado._id">
+                      <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+                    </mat-select>    
+                  </div>
+                  <div class="col s2"></div>
+                </div>
+  
+  
+                <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                  <div class="col s2"></div>
+                  <div class="input-field col s8 anulaPaddMarr">
+                    <mat-select id="ModeloSeccion._id" [disabled]="disabledSelect" name="ModeloSeccion._id" [(ngModel)]="ModeloSeccion._id">
+                      <mat-option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col s2"></div>
+                </div>
+  
+                <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                  <div class="col s2"></div>
+                  <div class="input-field col s8 anulaPaddMarr">
+                    <mat-select id="ModeloNivel._id" [disabled]="disabledSelect" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+                      <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col s2"></div>
+                </div>
+  
+           
+  
+                <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                  <div class="col s2"></div>
+                  <div class="input-field col s8 anulaPaddMarr">
+                    <mat-select id="ModeloTurno._id" [disabled]="disabledSelect" name="ModeloTurno._id" [(ngModel)]="ModeloTurno._id">
+                      <mat-option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col s2"></div>
+                </div>
+
+                <div class="row col s12 anulaPaddMarr"  style="margin-top: 15px;">
+                  <div class="input-field col s12">
+                    <input type="text" name="alu" id="alum" readonly [(ngModel)]="alumnoNomApe" placeholder="Alumno"
+                      style="text-align: center;">
+                  </div>
+                </div>
+
+
+  
+            </div>
+  
+            <div class="row col s12" style="margin-top: 15px;padding-bottom: 5px;">
+              <div class="col s6 ">
+                <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearMatricula()">{{nomBoton}} </button>
+              </div>
+
+              <div class="col s6 ">
+                <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar()">Cancelar</button>
+              </div>
+            </div>  
+            
+            
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="divCrearMatricula">
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col s12">
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col s12 anulaPaddMarr" style="height: 30px;">
+              <div class="input-field col offset-s2 m2"
+                    style="margin-top: 20px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                    <input type="text" name="listFilter" style="text-align: center;" id="perRepDni" [(ngModel)]="listFilter" placeholder="Buscar por DNI">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th style="text-align: left;">DNI</th>
+                <th style="text-align: left;">Nombres</th>
+                <th style="text-align: left;">Apellidos</th>
+                <th style="text-align: left;">Sexo</th>
+                <th style="text-align: left;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let al of alumnosArray">
+                <td style="text-align: center;">{{al.perRepCod.perRepDni}}</td>
+                <td style="text-align: center;">{{al.perRepCod.perRepNom}}</td>
+                <td style="text-align: center;">{{al.perRepCod.perRepApe}}</td>
+                <td style="text-align: center;">{{al.perRepCod.perRepSex}}</td>
+                <td style="text-align: center;">
+                  <a  [ngClass]="{'disabledIcon': disableSltAlum==true, 'enabledIcon':disableSltAlum==false }" (click)="SeleccionarAlumno(al)" >
+                    <i  class="material-icons" style="cursor: pointer;">send</i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+      </form>
+    </div>
+    <!---------------------->
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div style="width: 100%;margin: auto;margin-bottom: 2px;padding: 0px 0px 0px 0px;">
+  <div class="section container" style="width: 100%;margin: auto;padding: 0px 0px 0px 0px;">
+    <div class="row col s12" style="background: rgb(148, 163, 190);margin-top:20px;">
+      <div
+        style="text-align: center;margin:auto;background: #504188;width: 100%; font-family: Cambria;border-radius: 5px;">
+        <h3 style="color: cornsilk;">Matricula</h3>
+      </div>
+    </div>
+
+    <div class="col s12" style="margin-right: 0px !important;margin-left: 0px !important;padding-right:0px !important;">
+      <div class="row" style="margin-bottom: 2px;">
+        <div class="col s12" style="background-color: rgb(148, 163, 190); height: 50px;">
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+      <div class="col s2"
+        style="background: #504188;padding-left: 0px;margin-top: 18px;margin-left: 0px;height: 437px;width: 210px; margin-right: 0px;">
+        <div class="row card-panel col s12" style="background: #504188; margin: 5px 5px 5px 5px;min-height: 427px;">
+          <div style="margin: 0px 0px 0px 0px !important;">
+            <div class="row" style="background: rgb(93, 93, 150);margin:  4px 4px 4px 4px;border-radius: 2  px;">
+              <div class="row" style="border-radius: 5px;">
+                <ul class="menu">
+                  <li><a style="cursor: pointer" (click)="ShowDivCrearMatricula()">Matricula</a></li>
+                  <li><a style="cursor: pointer" (click)="ShowDivListaMatricula()">Lista de Matricula</a></li>
+
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       Div Crear Matricula
+      <div class="row" *ngIf="divCrearMatricula"
+        style="margin-left: 0px;margin-right: 0px;background:  rgb(148, 163, 190);width: 100%;margin-top: 0px;">
+        <div class="col s5" style="margin-right: 0px;margin-top: 10px;">
+          <h4 style="text-align: center;"> </h4>
+          <form class="col s12" style="margin-top: 7px;margin-bottom: 0px; margin-right: 0px;height: 589px;">
+            <div class="row card-panel">
+
+              <div class="col s11" style="margin-left: 2%;height: 436px; width: 470px;">
+                <div class="row" style="margin-top: 10px;margin-bottom: 0px; text-align: center">
+                  <div class="input-field col offset-s2 s4"
+                    style="margin-top: 0px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                    <input type="text" name="listFilter" id="perDni" [(ngModel)]="listFilter" placeholder="DNI">
+                  </div>
+                </div>
+                <div class="row card-panel" style="width: 470px;">
+                  <table class="highlight responsive-table" style="max-width: 470px !important;">
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="11" id="alumnos" style="text-align: center;"></th>
+                      </tr>
+                      <tr>
+                        <th scope="col" header="alumnos" colspan="2" style="text-align: center;">DNI</th>
+                        <th scope="col" header="alumnos" colspan="8" style="text-align: center;">Nombres y Apellidos</th>
+                        <th scope="col" header="alumnos" colspan="1" style="text-align: center;"></th>
+                      </tr>
+                    </thead>
+
+                    <tbody style="padding-top: 20px;width: 470px;">
+                      <tr *ngFor="let al of alumnosArray">
+                        <td scope="col" header="alumnos" colspan="2" style="text-align: center;">{{al.perRepCod.perRepDni}}</td>
+                        <td scope="col" header="alumnos" colspan="8" style="text-align: center;">{{al.perRepCod.perRepNom + ', ' + al.perRepCod.perRepApe}}</td>
+                        <td scope="col" header="alumnos" colspan="1" style="text-align: center;">
+                          <a  [ngClass]="{'disabledIcon': disableSltAlum==true, 'enabledIcon':disableSltAlum==false }" (click)="SeleccionarAlumno(al)" >
+                            <i  class="material-icons" style="cursor: pointer;">send</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col s4" style="margin-right: 0px;margin-top: 10px;">
+          <h4 style="text-align: center;"> </h4>
+          <form class="col s12" style="margin-top: 7px;margin-bottom: 0px; margin-right: 0px;height: 589px;">
+            <div class="row card-panel" style="margin-right: 0px;">
+              <div style="margin-left: 2%;height: 436px;margin-right: 0px; ">
+                <div class="row" style="margin-top: 0px;margin-bottom: 0px;margin-right: 0px;">
+                  <div class="input-field col offset-s2 s8"
+                    style="margin-top: 35px;margin-bottom: 20px;margin-right: 0px;">
+                    <h5 class="center">Matricula {{anioTitulo}}</h5>
+                  </div>
+                </div>
+
+                <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                  <div class="col s4" style="padding-top: 15px;">
+                    <label for="" style="font-size: 16px;">Grado </label>
+                  </div>
+                  <div class="col s8">
+                    <div class="input-field col s11">
+                      <select class="browser-default" id="ModeloGrado._id" name="ModeloGrado._id"
+                        [(ngModel)]="ModeloGrado._id">
+                        <option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                  <div class="col s4" style="padding-top: 15px;">
+                    <label for="" style="font-size: 16px;">Seccion </label>
+                  </div>
+                  <div class="col s8">
+                    <div class="input-field col s11">
+                      <select class="browser-default" id="ModeloSeccion._id" name="ModeloSeccion._id"
+                        [(ngModel)]="ModeloSeccion._id">
+                        <option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                  <div class="col s4" style="padding-top: 15px;">
+                    <label for="" style="font-size: 16px;">Nivel </label>
+                  </div>
+                  <div class="col s8">
+                    <div class="input-field col s11">
+                      <select class="browser-default" id="ModeloNivel._id" name="ModeloNivel._id"
+                        [(ngModel)]="ModeloNivel._id">
+                        <option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;">
+                  <div class="col s4" style="padding-top: 15px;">
+                    <label for="" style="font-size: 16px;">Turno </label>
+                  </div>
+                  <div class="col s8">
+                    <div class="input-field col s11">
+                      <select class="browser-default" id="ModeloTurno._id" name="ModeloTurno._id"
+                        [(ngModel)]="ModeloTurno._id">
+                        <option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="row " style="margin-top: 5px;margin-bottom: 0px; margin-left: 10px;text-align: center;">
+                  <div class="col s12">
+                    <div class="input-field col s11">
+                      <input type="text" name="alu" id="alu" readonly [(ngModel)]="alumnoNomApe" placeholder="Alumno"
+                        style="text-align: center;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="row" style="margin-top: 20px;margin-bottom: 0px; text-align: center;">
+                        <button class="btn center green darken-2"
+                          style="display: inline-block;padding: 2px 2px;background: #504188 !important;"
+                          (click)="CrearMatricula()">{{nomBoton}} </button>
+                        <button class="btn center green darken-2" 
+                          style="display: inline-block;padding: 2px 2px;background: #504188 !important;"
+                          (click)="LimpiarMatricula()">Nuevo</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+     
+      <div class="" style="margin-right: 0px;margin-top: 13px;" *ngIf="divlistaMatriculas">
+        <form class="col s9" style="margin-top: 7px;margin-bottom: 0px; margin-right: 1%;height: 520px;background:rgb(148, 163, 190);">
+          <div class="row card-panel" style="padding-top: 2px;margin-left: 1px;height: 435px;background:#504188;">
+            <div class="" style="margin-left: 2%;">
+
+              <div class="col s12" style="height: 436px; max-width: 868px;">
+
+                <div class="row card-panel" style="margin-top: 0px;margin-bottom: 0px; text-align: center;background: #504188;">
+
+                  <div class="col s2" style="margin-right: 60px;" >
+                    <input type="text" name="listFilterMat" id="listFilterMat" [(ngModel)]="listFilterMat" spellcheck="false"
+                      style="text-align: center;color: white;" placeholder="-- Filtrar --" matTooltip = "Ingrese los apellidos del alumno">
+                  </div>
+
+                  <div class="col s2"
+                    style="margin-top: 15px;margin-right: 0px !important;padding-right: 0px !important;">
+                    <div class="input-field col s10"
+                      style="margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                      <select class="browser-default" id="fltSelectGraCod" name="fltSelectGraCod"
+                      [(ngModel)]="fltSelectGraCod" (ngModelChange)='GetSltGrado($event)' matTooltip = "Seleccione el grado"
+                        style="text-align: center !important; padding-right: 29px; height: 30px;">
+                        <option *ngFor="let grado of fltArrayGrado" [value]="grado._id">{{grado.graDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col s2"
+                    style="margin-top: 15px;margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                    <div class="input-field col s10"
+                      style="margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                      <select class="browser-default" id="fltSelectSecCod" name="fltSelectSecCod"
+                      [(ngModel)]="fltSelectSecCod" (ngModelChange)='GetSltSeccion($event)' matTooltip = "Seleccione la seccion"
+                        style="text-align: center !important; padding-right: 29px; height: 30px;">
+                        <option *ngFor="let seccion of fltArraySeccion" [value]="seccion._id">{{seccion.secDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col s2"
+                    style="margin-top: 15px;margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                    <div class="input-field col s10"
+                      style="margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                      <select class="browser-default"  id="fltSelectNivCod" name="fltSelectNivCod"
+                      [(ngModel)]="fltSelectNivCod" (ngModelChange)='GetSltNivel($event)'  matTooltip = "Seleccione el nivel"
+                        style="text-align: center !important; padding-right: 29px; height: 30px;">
+                        <option *ngFor="let nivel of fltArrayNivel" [value]="nivel._id"> {{nivel.nivDes}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col s2"
+                    style="margin-top: 15px;margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                    <div class="input-field col s10"
+                      style="margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                      <select class="browser-default" id="fltSelectPrdCod" name="fltSelectPrdCod"
+                      [(ngModel)]="fltSelectPrdCod" (ngModelChange)='GetSltPeriodo($event)' matTooltip = "Seleccione el periodo"
+                        style="text-align: center !important; padding-right: 29px; height: 30px;">
+                        <option *ngFor="let periodo of fltArrayPeriodo" [value]="periodo._id">{{periodo.prdAnio}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col s1" style="margin-top: 15px;margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                    <div style="margin-left: 0px !important;margin-right: 0px !important;padding-right: 0px !important;padding-left: 0px !important;">
+                      <button class="btn" style="text-align: center !important; height: 30px; background: #504188;" (click)="BuscarMatricula()" matTooltip = "Buscar Matricula">
+                        Buscar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row card-panel">
+                  <table class="highlight responsive-table" >
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="17" id="matriculas" style="text-align: center;">Matriculas </th>
+                      </tr>
+                      <tr>
+
+                        <th scope="col" header="matriculas" colspan="2" style="text-align: center;">DNI</th>
+                        <th scope="col" header="matriculas" colspan="4" style="text-align: center;">Nombres y Apellidos
+                        </th>
+                        <th scope="col" header="matriculas" colspan="3" style="text-align: center;">Grado y Seccion</th>
+                        <th scope="col" header="matriculas" colspan="2" style="text-align: center;">Nivel</th>
+                        <th scope="col" header="matriculas" colspan="2" style="text-align: center;">Turno</th>
+                        <th scope="col" header="matriculas" colspan="2" style="text-align: center;">Periodo</th>
+                        <th scope="col" header="matriculas" colspan="2" style="text-align: center;">Opciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody >
+                      <tr *ngFor="let matricula of arrayMatricula">
+                        <td scope="col" header="matriculas" colspan="2" style="text-align: center;">
+                          {{matricula.perRepCod.perRepDni}}</td>
+                        <td scope="col" header="matriculas" colspan="4" style="text-align: center;">
+                          {{matricula.perRepCod.perRepNom +', '+  matricula.perRepCod.perRepApe }}</td>
+                        <td scope="col" header="matriculas" colspan="3" style="text-align: center;">
+                          {{matricula.graCod.graDes +' '+ '"'+matricula.secCod.secNom+'"'}}</td>
+                        <td scope="col" header="matriculas" colspan="2" style="text-align: center;">
+                          {{matricula.nivCod.nivDes}}</td>
+                        <td scope="col" header="matriculas" colspan="2" style="text-align: center;">
+                          {{matricula.turCod.turNom}}</td>
+                        <td scope="col" header="matriculas" colspan="2" style="text-align: center;">
+                          {{matricula.prdCod.prdAnio}}</td>
+                        <td scope="col" header="matriculas" colspan="2" style="text-align: center;">
+                          <a (click)="EditarMatricula(matricula)">
+                            <i class="material-icons" matTooltip = "Editar Matricula" style="cursor: pointer;">edit</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+-->

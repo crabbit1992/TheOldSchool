@@ -1,0 +1,15 @@
+
+.btnModal{
+    font-size: 12px;
+    color:  white;
+    width: 70px;
+    height: 35px;
+    border-radius: 10%;
+    background-color: rgb(29, 51, 85);;
+    cursor: pointer;
+}
+
+.anulaPaddMarr{
+    padding: 0;
+    margin: 0;
+  }

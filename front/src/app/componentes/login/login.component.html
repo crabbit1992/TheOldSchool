@@ -1,0 +1,52 @@
+<div class="container-fluid">
+
+  <div class="row col m12 s12">
+
+    <form class="col m4 s12 right" style="margin-top: 0px;margin-bottom: 0px;">
+      <div class="row  center" style="text-align: center;">
+
+        <div class="row col m12 s12" style="margin-top: 60px;">
+          <span style="color: rgb(1, 0, 36);font-size: 20px;"><strong style="font-size: 20px;"> Logo School </strong><span></span> <i class="small material-icons">school</i></span>
+        </div>
+          
+        <div class="row col m12 s12" style="margin-top: 40px;">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mail_outline</i>
+            <input  id="email" type="email" name="perCorreo" [(ngModel)]="ModeloLogin.perCorreo">
+            <label for="email" data-error="wrong" data-success="right">Email</label>
+          </div>
+        </div>
+
+        <div class="row col m12 s12" style="margin-top: 20px;">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock_outline</i>
+            <input id="password" type="password" name="perPas" [(ngModel)]="ModeloLogin.perPas">
+            <label for="password">Password</label>
+          </div>
+        </div>
+
+        <div class="row col m12 s12 center" style="margin-top: 20px;">
+          <div class="col m2 s0"></div>
+          <div class="input-field col m8 s12">
+            <a class="btn waves-effect waves-light col m12 s12" (click)="Login()">Iniciar sesion</a>
+          </div>
+          <div class="col m2 s0"></div>
+        </div>
+
+
+      </div>
+  </form>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+<div class="col s12 " style="height: auto; background-color: rgb(198, 229, 255);"> 
+    <ul class="menu" style="margin:auto">
+        <li><a style="cursor: pointer" (click)="ShowDivListar()" >Lista de Periodos</a></li>
+        <li><a style="cursor: pointer" (click)="ShowDivCrear()"  >Configurar periodo</a></li>
+        <li><a style="cursor: pointer" (click)="ShowDivConfDet()" *ngIf="optionsDetalle">Crear detalle</a></li>
+        <li><a style="cursor: pointer" (click)="ShowDivListarDet()" *ngIf="optionsDetalle">Lista de detalles</a></li>    
+    </ul>
+</div>

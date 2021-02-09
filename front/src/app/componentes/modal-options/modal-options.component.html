@@ -1,0 +1,13 @@
+<ul class="menu" style="margin-top: 30px;">
+    <li><a style="cursor: pointer" (click)="ShowListado()">Lista de perfiles</a></li>
+    <li><a style="cursor: pointer">Gestion de Perfiles</a>
+      <ul>
+        <li><a style="cursor: pointer" *ngIf="li_Director" (click)="Seleccionar('director')">Director</a></li>
+        <li><a style="cursor: pointer" *ngIf="li_SubDirector" (click)="Seleccionar('subdirector')">Subdirector</a></li>
+        <li><a style="cursor: pointer" *ngIf="li_Coordinador" (click)="Seleccionar('coordinador')">Coordinador</a></li>
+        <li><a style="cursor: pointer" *ngIf="li_Profesor" (click)="Seleccionar('profesor')">Profesor</a></li>
+        <li><a style="cursor: pointer" *ngIf="li_Auxiliar" (click)="Seleccionar('auxiliar')">Auxiliar</a></li>
+        <li><a style="cursor: pointer" *ngIf="li_Alumno" (click)="Seleccionar('alumno')">Alumno</a></li>
+      </ul>
+    </li>
+</ul>

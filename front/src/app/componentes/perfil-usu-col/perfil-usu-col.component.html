@@ -1,0 +1,320 @@
+
+
+    <div class="container-fluid modPantalla">
+
+        <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="CallModalOptBarra()"
+              *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+            <span class="spacer"></span>
+            
+            <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
+            <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(7, 18, 34); margin-top: 12px;" (click)="CallModalOptBarra()"><mat-icon aria-label="Side nav toggle icon">menu</mat-icon></a>
+            
+          
+        </mat-toolbar>
+
+
+        <div class="row col m12 s12 anulaPaddMarr  blue-grey" style="background-color: rgb(2, 2, 27);">
+            
+            <!-- Portadas de la empresa Crab-->
+            <div class="row col m12 s12 anulaPaddMarr" style="background-color: rgb(10, 24, 44);">
+                <div class="col m12 s12 anulaPaddMarr">
+                    <div class="carousel  center-align" >
+                        <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+                            <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                        </div>
+                    </div>
+                </div>  
+            </div>
+          
+            <div class="row col s12 center  blue-grey"  style="text-align: center; position: relative;margin: auto;margin-top: 0px;padding: 0px;">
+
+                <ul class="menu yellow" *ngIf="divNavBar">
+
+                    
+                    <li><a (click)="clickShowMenu()" style="cursor: pointer; z-index: 0;">Menu</a> 
+
+                        <ul [ngStyle]="{'display':var_Menu == 0 ? 'none' : '' }">
+
+                            <li (click)="clickUl_Perfil()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" (click)=ShowDivPerfil()>Perfil</a></li>
+                            <li (click)="clickUl_Miem()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnMiembros">Miembros</a>
+                                <ul [ngStyle]="{'display':var_clickUl_Miem == 0 ? 'none' : '' }">
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpRepPersonas()" *ngIf="btnRepositorioPers">Repositorio personas</a></li>
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntCargo()"  *ngIf="btngestionPerfiles">Gestion de perfiles</a></li>
+                                </ul>
+                            </li>
+                            <li (click)="clickUl_Cole()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnColegio">Colegio</a>
+                                <ul [ngStyle]="{'display':var_clickUl_Cole == 0 ? 'none' : '' }">
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
+                                    <!-- <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntColegio" >Mant. Colegio</a></li>-->
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li (click)="clickUl_CtoAlu()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnCentroAlum">Centro del alumnado</a>
+                                <ul [ngStyle]="{'display':var_clickUl_CtoAlu == 0 ? 'none' : '' }">
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpCurso()" *ngIf="btnCursosAlu" >Cursos</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnlistAlum" >Listado de alumnos</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCronoAlu" >Cronogramas</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMisNotas" >Mis notas</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiRank" >Mi ranking</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiHorar" >Mi horario</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiCrono" >Mi cronograma</a></li>
+                                </ul>
+                            </li>
+                            <li (click)="clickUl_CtoDct()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnCentroDocen">Centro del docente</a>
+                                <ul [ngStyle]="{'display':var_clickUl_CtoDct == 0 ? 'none' : '' }">
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCursosDoc">Cursos</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnlistDoc">Listado de Docentes</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPlanillaNotas()" *ngIf="btnPnaNta">Planilla de  Notas</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCronoDoc">Cronograma</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHorarioDoc">Horario</a></li>
+                                </ul>
+                            </li>
+                            <li (click)="clickUl_Ach()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnArchivo">Archivo</a>
+                                <ul [ngStyle]="{'display':var_clickUl_Ach == 0 ? 'none' : '' }">
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHistReg">Historial de registros</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHistNot">Historial de Notas</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </li>
+
+                </ul>
+            
+            </div>
+        </div>
+
+        <div class="row col m12 s12 anulaPaddMarr blue-grey" style="margin-top: 0px; padding-top: 0px;">
+
+            <div class="col panelIzquierdo m2 s12" *ngIf="divPfl" style="min-height: 400px; margin-top: 0px; padding-top: 0px;">
+        
+                <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+                <span class="card-title" style="font-size: 15px;text-align: center;">Privilegio
+                </span>
+                </div>
+        
+                <div class="card blue-grey darken-1 green">
+                    <div class="card-content white-text" style="padding: 8px 0px 0px 8px;"
+                        *ngFor="let perfil of perfilArray">
+                        <span class="card-title" style="font-size: 15px;text-align: center;cursor: pointer"
+                            (click)="HideDivPerfil(perfil)">{{perfil.carCod.carNom}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col s12"  style="z-index: -10; padding: 0px;margin-top: 80px;">
+
+        
+            <div class="col s12 m12" *ngIf="divPflBody" style="padding: 0px;">
+                <app-persona-repositorio *ngIf="repositorioPersonas" class="col s12" style="padding: 0px;"></app-persona-repositorio>
+                <app-mantenimiento-cargo *ngIf="mantenimientoCargo" [inputPflActual]="perfilActual" style="padding: 0px;" [inputColCod]="colegioActual" class="col s12"></app-mantenimiento-cargo>
+                <app-periodo *ngIf="periodo"  class="col s12" [inputColCod]="colegioActual"  style="padding: 0px;"></app-periodo>
+                <app-aula-virtual *ngIf="aulaVirtual" [inputColCod]="colegioActual"  class="col s12" style="padding: 0px;"></app-aula-virtual>
+                <app-matricula *ngIf="matricula" [inputColCod]="colegioActual"  class="col s12" style="padding: 0px;"></app-matricula>
+                <app-curso *ngIf="curso" [inputColCod]="colegioActual" class="col s12" style="padding: 0px;"></app-curso>
+                <app-planilla-notas *ngIf="planillaNotas" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-planilla-notas>
+                <app-perfil-colegio *ngIf="perfilColegio" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12"></app-perfil-colegio>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid modCelular" style="background-color: rgb(241, 251, 253);">  
+
+        <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="CallModalOptBarra()"
+              *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+            <span class="spacer"></span>
+            
+            <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
+            <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(7, 18, 34); margin-top: 12px;" (click)="CallModalOptBarra()"><mat-icon aria-label="Side nav toggle icon">menu</mat-icon></a>
+            
+          
+        </mat-toolbar>
+
+        <div class="row col m12 anulaPaddMarr" style="background-color: rgb(0, 4, 20);">
+
+            <div class="col m12 anulaPaddMarr">
+         
+                 <!-- Portadas de la empresa Crab-->
+                <div class="row col m12 s12 anulaPaddMarr" style="background-color: rgb(10, 24, 44);">
+                    <div class="col m12 s12 anulaPaddMarr" style="height: 550px;">
+                        <div class="carousel  center-align" >
+                            <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+                                <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+    
+                <div class="row col m12 center" style="text-align: center; position: absolute;margin: auto;margin-top: 570px;padding: 0px;">
+                            
+                    <div id="header center" *ngIf="divNavBar">
+                        <ul class="navBar">
+                            <li><a style="cursor: pointer;z-index: 10000;" (click)=ShowDivPerfil()>Perfil</a></li>
+                            <li><a style="cursor: pointer;" *ngIf="btnMiembros">Miembros</a>
+                                <ul>
+                                    <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpRepPersonas()" *ngIf="btnRepositorioPers">Repositorio personas</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpMntCargo()"  *ngIf="btngestionPerfiles">Gestion de perfiles</a></li>
+                                </ul>
+                            </li>
+                            <li><a style="cursor: pointer" *ngIf="btnColegio">Colegio</a>
+                                <ul>
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
+                                    <!--<li><a style="text-align: left;font-size: 14px;cursor: pointer;" *ngIf="btnMntColegio" >Mant. Colegio</a></li>-->
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>
+                                </ul>
+                            </li>
+                            <li><a style="cursor: pointer" *ngIf="btnCentroAlum">Centro del alumnado</a>
+                                <ul>
+                                    <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpCurso()" *ngIf="btnCursosAlu" >Cursos</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnlistAlum" >Listado de alumnos</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnCronoAlu" >Cronogramas</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnMisNotas" >Mis notas</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnMiRank" >Mi ranking</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnMiHorar" >Mi horario</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnMiCrono" >Mi cronograma</a></li>
+                                </ul>
+                            </li>
+                            <li><a style="cursor: pointer" *ngIf="btnCentroDocen">Centro del docente</a>
+                                <ul>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnCursosDoc">Cursos</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnlistDoc">Listado de Docentes</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpMntPlanillaNotas()" *ngIf="btnPnaNta">Planilla de  Notas</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnCronoDoc">Cronograma</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnHorarioDoc">Horario</a></li>
+                                </ul>
+                            </li>
+                            <li><a style="cursor: pointer" *ngIf="btnArchivo">Archivo</a>
+                                <ul>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnHistReg">Historial de registros</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" *ngIf="btnHistNot">Historial de Notas</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+    
+    
+                    <ul class="menu" *ngIf="divNavBar">
+    
+                        
+                        <li><a (click)="clickShowMenu()" style="cursor: pointer;">Menu</a> 
+    
+                            <ul [ngStyle]="{'display':var_Menu == 0 ? 'none' : '' }">
+    
+                                <li (click)="clickUl_Perfil()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" (click)=ShowDivPerfil()>Perfil</a></li>
+                                <li (click)="clickUl_Miem()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnMiembros">Miembros</a>
+                                    <ul [ngStyle]="{'display':var_clickUl_Miem == 0 ? 'none' : '' }">
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpRepPersonas()" *ngIf="btnRepositorioPers">Repositorio personas</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntCargo()"  *ngIf="btngestionPerfiles">Gestion de perfiles</a></li>
+                                    </ul>
+                                </li>
+                                <li (click)="clickUl_Cole()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnColegio">Colegio</a>
+                                    <ul [ngStyle]="{'display':var_clickUl_Cole == 0 ? 'none' : '' }">
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntColegio" >Mant. Colegio</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li (click)="clickUl_CtoAlu()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnCentroAlum">Centro del alumnado</a>
+                                    <ul [ngStyle]="{'display':var_clickUl_CtoAlu == 0 ? 'none' : '' }">
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpCurso()" *ngIf="btnCursosAlu" >Cursos</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnlistAlum" >Listado de alumnos</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCronoAlu" >Cronogramas</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMisNotas" >Mis notas</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiRank" >Mi ranking</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiHorar" >Mi horario</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMiCrono" >Mi cronograma</a></li>
+                                    </ul>
+                                </li>
+                                <li (click)="clickUl_CtoDct()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnCentroDocen">Centro del docente</a>
+                                    <ul [ngStyle]="{'display':var_clickUl_CtoDct == 0 ? 'none' : '' }">
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCursosDoc">Cursos</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnlistDoc">Listado de Docentes</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPlanillaNotas()" *ngIf="btnPnaNta">Planilla de  Notas</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCronoDoc">Cronograma</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHorarioDoc">Horario</a></li>
+                                    </ul>
+                                </li>
+                                <li (click)="clickUl_Ach()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnArchivo">Archivo</a>
+                                    <ul [ngStyle]="{'display':var_clickUl_Ach == 0 ? 'none' : '' }">
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHistReg">Historial de registros</a></li>
+                                        <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnHistNot">Historial de Notas</a></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
+    
+                    </ul>
+                
+                </div>
+    
+            </div>
+
+        </div>
+
+        <div class="row col m12 modCelular anulaPaddMarr" >
+
+            <div class="col m2 s12 blue-grey" *ngIf="divPfl" style="min-height: 500px; margin: 2px;">
+        
+                <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+                <span class="card-title" style="font-size: 15px;text-align: center;">Privilegio
+                </span>
+                </div>
+        
+                <div class="card blue-grey darken-1 green">
+                    <div class="card-content white-text" style="padding: 8px 0px 0px 8px;"
+                        *ngFor="let perfil of perfilArray">
+                        <span class="card-title" style="font-size: 15px;text-align: center;cursor: pointer"
+                            (click)="HideDivPerfil(perfil)">{{perfil.carCod.carNom}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="divAuxiliar" style="z-index: -10; padding: 0px;margin-top: 190px; background-color: rgb(241, 251, 253);min-height: 500px;">
+
+        
+            <div class="col s12 m12" *ngIf="divPflBody" style="padding: 0px;">
+
+                        <app-persona-repositorio *ngIf="repositorioPersonas" class="col s12" style="padding: 0px;"></app-persona-repositorio>
+                        <app-mantenimiento-cargo *ngIf="mantenimientoCargo" [inputPflActual]="perfilActual" style="padding: 0px;" [inputColCod]="colegioActual" class="col s12"></app-mantenimiento-cargo>
+                        <app-periodo *ngIf="periodo"  class="col s12" [inputColCod]="colegioActual"  style="padding: 0px;"></app-periodo>
+                        <app-aula-virtual *ngIf="aulaVirtual" [inputColCod]="colegioActual"  class="col s12" style="padding: 0px;"></app-aula-virtual>
+                        <app-matricula *ngIf="matricula" [inputColCod]="colegioActual"  class="col s12" style="padding: 0px;"></app-matricula>
+                        <app-curso *ngIf="curso" [inputColCod]="colegioActual" class="col s12" style="padding: 0px;"></app-curso>
+                        <app-planilla-notas *ngIf="planillaNotas" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-planilla-notas>
+                        <app-perfil-colegio *ngIf="perfilColegio" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-perfil-colegio>
+        
+            </div>
+        </div>
+
+    </div>

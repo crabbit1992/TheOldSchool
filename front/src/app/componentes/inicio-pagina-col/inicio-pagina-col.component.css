@@ -1,0 +1,377 @@
+.sidenav-container{
+    height: 100%;
+  }
+  
+  .sidenav{
+    width:200px;
+    box-shadow:3px 0 6px rgba(0, 0, 0, .24)
+  }
+  
+  .hidden{
+    display:none;
+  }
+  
+  .spacer{
+    flex: 1 1 auto;
+  } 
+  
+/*********** Menu Header *************/
+#header {
+    
+  font-family:Arial, Helvetica, sans-serif;
+  text-align: center;
+ }
+ 
+ ul, ol {
+  list-style:none;
+  z-index: 99999999;
+ }
+ 
+ .navBar > li {
+  background-color: #504188;
+  border-radius: 3px;
+  display:inline-block;
+  position: relative;
+  
+ }
+ 
+ .navBar li a {
+  background-color: rgb(52, 83, 129);
+  color:#fff;
+  text-decoration:none;
+  padding:10px 15px;
+  display:block;
+
+ }
+ 
+ .navBar li a:hover {
+  background-color: rgb(7, 27, 56);
+ }
+ 
+ .navBar li ul {
+  display:none;
+  position:absolute;
+  min-width:170px;
+  z-index: 99999999;
+ }
+ 
+ .navBar li:hover > ul {
+  display:block;
+ }
+ 
+ .navBar li ul li {
+  position:relative;
+ }
+ 
+ .navBar li ul li ul {
+  right:-140px;
+  top:0px;
+ }
+
+ /***************Menu Acordeon******************************/
+.menu{
+  padding:0;
+  list-style:none;
+  width:auto;
+  height: 50px;
+  font-size:14px;
+  margin: auto;
+  background-color: rgb(17, 31, 53);
+  border: 1px solid rgba(0,0,0,0.8);
+  text-align: center;
+  z-index: 99999999;
+}
+
+.menu li a{
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0, 0.2);
+  border-top: 1px solid rgba(255,255,255, 0.2);
+  background-color: rgb(29, 51, 85);
+  text-decoration:none;
+  color:#FFF;
+  font-size: 18px;
+  text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+  filter: dropshadow(color=#000, offx=1, offy=0);
+  padding-top: 8px;
+  text-align: center;
+  height: 50px;
+  position: relative;
+  z-index: 99999999;
+
+
+}
+
+.menu li ul li a{
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0, 0.2);
+  border-top: 1px solid rgba(255,255,255, 0.2);
+  background-color: rgb(29, 51, 85);
+  text-decoration:none;
+  color:#FFF;
+  font-size: 18px;
+  text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+  filter: dropshadow(color=#000, offx=1, offy=0);
+  padding-top: 8px;
+  text-align: center;
+  height: 40px;
+  z-index: 99999999;
+}
+
+.menu li ul li a{
+  font-size:14px;
+  color:#47689d;
+  text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
+  text-align: center;
+  z-index: 99999999;
+}
+
+.menu li a:hover{
+  background:#4a6ba2;
+  transition: background 0.3s ease-in;
+  -webkit-transition: background 0.3s ease-in;
+  -o-transition: background 0.3s ease-in;
+  text-align: center;
+}
+
+.menu ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+  height:0;
+  overflow: hidden;
+  transition:0.3s;
+  -moz-transition:1s;
+  -webkit-transition:1s;
+  text-align: center;
+  z-index: 99999999;
+}
+
+.menu ul li ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+  height:0;
+  overflow: hidden;
+  transition:0.3s;
+  -moz-transition:1s;
+  -webkit-transition:1s;
+  text-align: center;
+  z-index: 99999999;
+}
+
+.menu li:hover ul{
+  height:auto;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  text-align: center;
+}
+
+.menu li ul li ul{
+  height:auto;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  text-align: center;
+  z-index: 99999999;
+}
+
+.menu ul li a{
+  background:#fafafa;
+  text-align: center;
+  z-index: 99999999;
+}
+
+
+
+/*********************************/
+
+  mat-toolbar a{
+   display:inline-block;
+   margin: 0 10px;
+   color: white;
+   text-decoration: none;   
+  }
+  
+  
+  @media(max-width: 700px){
+    mat-toolbar a{
+        display:none; 
+     }
+  }
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #000;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}  
+
+
+.anulaPaddMarr{
+  padding: 0;
+  margin: 0;
+}
+
+
+/*Carousel*/
+.carousel{
+  height: 750px;
+  background-color: rgb(239, 249, 252);
+}
+
+.carousel .carousel-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  width: 1000px;
+  height: 550px;
+  background-color: rgb(239, 252, 255);
+}
+
+.carousel .carousel-item img{
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: -1;
+  border-radius: 10px;
+
+}
+
+.Imagenes{
+  width: 400px;
+  height: 205px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  object-fit: cover;
+  filter: brightness(70%);
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+
+.ui-state-default {
+  cursor: pointer
+}
+.ui-state-default:hover {
+  text-decoration: none;
+  background: #f99;
+  color: #fff;
+}
+
+.emblema{
+  height: 250px;
+}
+
+#myTextarea{
+  font-size: 14px; 
+  white-space: pre-line;
+}
+
+.content {
+  border: 1px dashed gray;
+padding: .5em;
+
+white-space: pre-wrap;
+height: 5em;
+overflow-y: scroll; /* se habilita el scroll vertical */
+}
+
+.content::-webkit-scrollbar { 
+/* solo oculta su visualizacion */
+display: none;
+}
+
+.PuntosSuspensivos{
+  width:100%;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+@media (max-width:700px) {
+
+  .modPantalla{
+    display: none;
+  }
+
+  .carousel{
+    height: 220px;
+
+  }
+  
+  .carousel .carousel-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    width: 380px;
+    height: 220px;
+    z-index: -1;
+  }
+  
+  .carousel .carousel-item img{
+  
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: -1;
+  
+  }
+  
+}
+  
+@media (min-width:700px) {
+
+.modCelular{
+  display: none;
+} 
+
+.menu{
+  display: none;
+}
+
+/* Estilos carousel*/
+
+.carousel{
+  height: 550px;
+}
+
+.carousel .carousel-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  width: 900px;
+  height: 500px;
+}
+
+.carousel .carousel-item img{
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: -1;
+  border-radius: 10px;
+
+}
+
+}

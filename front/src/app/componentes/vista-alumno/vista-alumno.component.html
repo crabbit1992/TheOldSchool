@@ -1,0 +1,1330 @@
+
+    <div class="container-fluid modPantalla" style="background-color: rgb(227, 231, 250);min-height: 1200px;">
+        
+      <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="CallModalOptBarra()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+        <span class="spacer"></span>
+        
+        <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
+        <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(7, 18, 34); margin-top: 12px;" (click)="CallModalOptBarra()"><mat-icon aria-label="Side nav toggle icon">menu</mat-icon></a>
+        
+      
+    </mat-toolbar>
+      
+      <div class="row col m12 s12 anulaPaddMarr ">
+            <!-- Portadas de la empresa Crab-->
+            <div class="row col s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53);">
+                <div class="col s12 anulaPaddMarr">
+                <div class="carousel  center-align" >
+                    <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+                        <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                    </div>
+                </div>
+                </div>  
+            </div>
+
+            <div class="row col m12 center" style="text-align: center; position: relative;margin: auto;margin-top: 20px;padding: 0px;">
+        
+                <div id="header center" *ngIf="divNavBar">
+                    <ul class="navBar">
+                        <li><a *ngIf="opcMnuVarMisAlu" (click)="ShowMisAlumnos()" style="cursor: pointer">Alumnos</a></li>
+                        <li><a (click)="ShowMiHorario()" style="cursor: pointer">Mi horario</a></li>
+                        <li><a (click)="ShowMisCursos()" style="cursor: pointer;">Mis cursos</a></li>
+                        <li><a (click)="ShowPromediosArea()" style="cursor: pointer;z-index: 10000;">Mis notas</a></li>
+                        <li><a (click)="ShowMiLibreta()" style="cursor: pointer;z-index: 10000;">Mi Libreta</a></li>
+                        <li><a style="cursor: pointer">Cronograma</a></li>
+                    </ul>
+                </div>
+            
+            </div>
+        </div>
+   
+     <div class="row col m12 s12">
+   
+        <div *ngIf="divSelectAlum" class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 500px;">
+    
+          <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+            <span class="card-title" style="font-size: 15px;text-align: center;">Alumno(a)</span>
+          </div>
+    
+          <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;" *ngFor="let alumno of arrayAlumApo">
+            <span class="card-title" (click)="SeleccionarAlumno(alumno)"
+              style="font-size: 15px;text-align: center;cursor: pointer;">{{alumno.perRepCod.perRepNom}}
+            </span>
+          </div>
+          
+        </div>
+ 
+        <!-- Div Lista Cursos-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mis cursos </strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m3 anulaPaddMarr right" style="margin-top: 15px;">
+                  <div class="input-field col m12">
+                   
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+
+                <div  *ngIf="divSinRegistros" style="height: 70px;">
+                  <h6 style="text-align: center; margin-top: 60px;">Aun no tienes cursos asignados</h6>
+                </div>
+
+                <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                  <thead>
+                    <tr scope="col" colspan="12" id="aula">
+                      <th scope="col" header="aula" colspan="5" style="text-align: center;">Area</th>
+                      <th scope="col" header="aula" colspan="6" style="text-align: center;">Curso</th>
+                      <th scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let curso of arrayAulaCurso">
+                      <td scope="col" header="aula" colspan="5" style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
+                      <td scope="col" header="aula" colspan="6" style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>
+                      <td scope="col" header="aula" colspan="1" style="text-align: center;">
+                        <a >
+                            <a class="waves-light btn-small btnDetalle" >Detalle</a>
+                        </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+            
+          </div>
+   
+          
+        </div>
+
+        <!-- Div Lista Horario-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divHorario" style="min-height: 500px;">
+
+          <div class="col m12 anulaPaddMarr" >
+
+          
+              <div class="col m12">
+
+                <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                  <h5> <strong> Mi horario</strong> </h5>
+                </div>
+  
+                <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                  <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+    
+                    <div class="col m3 right" style="margin-top: 8px;">
+                      <label for="" style="font-size: 18px;"></label>
+                    </div>
+    
+                  </div>
+                </div>
+    
+                <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin-top: 30px;">
+                    <div class="col m12">
+
+                      <div  *ngIf="divSinRegistros" style="height: 70px;">
+                        <h6 style="text-align: center; margin-top: 60px;">Aun no tienes un horario asignado</h6>
+                      </div>
+
+                      <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                        <thead>
+                            <tr>
+                              <th class="horarioTbl" style="text-align: center;">Hora</th>
+                              <th class="horarioTbl" style="text-align: center;">Lunes</th>
+                              <th class="horarioTbl" style="text-align: center;">Martes</th>
+                              <th class="horarioTbl" style="text-align: center;">Miercoles</th>
+                              <th class="horarioTbl" style="text-align: center;">Jueves</th>
+                              <th class="horarioTbl" style="text-align: center;">Viernes</th>
+                              <th class="horarioTbl" [ngStyle]="{'display':sabadoDisable === true ? 'none' : '' }" style="text-align: center;">Sabado</th>  
+                              
+                            </tr>  
+                        </thead>
+            
+                        <tbody>
+                          <tr *ngFor="let h of arrayHorario" style="margin-top: 10px;">
+                            <td  style="text-align: center;" class="horarioTbl">{{h.itvHroCod.intHraIni.substring(16,21)+' - '+h.itvHroCod.intHraFin.substring(16,21)}}</td>       
+                            <td  style="text-align: center;" class="horarioTbl" >{{h.lunes.ncoCurNom}} </td>
+                            <td  style="text-align: center;" class="horarioTbl" >{{h.martes.ncoCurNom }}</td>       
+                            <td  style="text-align: center;" class="horarioTbl" >{{h.miercoles.ncoCurNom}}</td>
+                            <td  style="text-align: center;" class="horarioTbl" >{{h.jueves.ncoCurNom}}</td>
+                            <td  style="text-align: center;" class="horarioTbl" >{{h.viernes.ncoCurNom}}</td>
+                            <td [ngStyle]="{'display':sabadoDisable === true ? 'none' : '' }"  style="text-align: center;" class="horarioTbl">{{h.sabado.ncoCurNom}}</td>
+        
+                          </tr> 
+                          
+                      
+                        </tbody>
+                      </table>
+                    </div>
+                </form>
+              </div>
+
+    
+            </div>
+
+        </div>
+
+        <!-- Div Promedio por areas-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divPromArea" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr">
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mi promedio actual</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col m3 right" style="margin-top: 8px;">
+                    <label for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <form class="col m12 center anulaPaddMarr" style="margin-top: 40px;background-color: rgb(217, 224, 255);padding: 0px;"> 
+                
+                <div class="col m12 center">
+                  <table class="centered responsive-table striped ">
+                    <thead>
+                      <tr scope="col" colspan="12" id="aula" style="text-align: center;">
+                        <th class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center;">Area</th>
+                        <th class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center;">Promedio</th>
+                        <th class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                  
+                      </tr>
+                    </thead>
+        
+                    <div *ngIf="divSinRegistros" style="margin-top: 70px;">
+                      <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+                    </div>
+
+                    <tbody>
+                      <tr *ngFor="let promArea of arrayPromArea">
+                        <td class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center;"> {{promArea.areCod.ncoAreNom}}</td>
+                        <td class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center;"> {{FormatearPromedio(promArea.promedio)}}</td>
+                        <td class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">
+                          <a >
+                              <a class="waves-light btn-small btnDetalle" (click)="ShowPromedioCursos(promArea)">Detalle</a>
+                          </a>
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Promedio por cursos-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divPromedioCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mis Promedios</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                 
+  
+                  <div class="col m3 right" style="margin-top: 8px;">
+                    <label for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr scope="col" colspan="12" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center;">Curso</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center;">Promedio</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let promCurso of arrayPromCursos">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center;">{{promCurso.curCod.ncoCurNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center;">{{ FormatearPromedio(promCurso.promedio)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">
+                        <a >
+                            <a class="waves-light btn-small btnDetalle" (click)="ShowDetallePromNta(promCurso.curCod._id)">Detalle</a>
+                        </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Detalle Promedios segun tipos de nota-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Detalle de notas</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    
+                  </div>
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+
+                <div *ngIf="divSinRegistros" style="margin-top: 70px;">
+                  <h6>No existe ningun promedio aun</h6>
+                </div>
+
+                <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                  <thead>
+                    <tr scope="col" colspan="7" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Tipo de nota</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Cantidad de notas</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Promedio actual</th>  
+                      <th class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let detalleCurso of arrayDetallePromNta">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{detalleCurso.tpoNta.tpoNtaNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{FormatearPromedio(detalleCurso.cantNota)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{FormatearPromedio(detalleCurso.prmCur)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">
+                        <a >
+                            <a class="waves-light btn-small btnDetalle" (click)="ShowDivDetalleSgnTpoNta(detalleCurso)">Detalle</a>
+                        </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Detalle de Notas segun promedio de tipo de nota-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divDetalleSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Historial de notas</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                   
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr scope="col" colspan="7" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Tipo de nota</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Calificacion</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Fecha</th> 
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let nta of arrayNotasFiltradas">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{nta.tpoNtaCod.tpoNtaNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{FormatearPromedio(nta.notCal)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{nta.fecha}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Mi libreta-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divLibreta" style="min-height: 500px; margin-top: 70px;">
+        
+          <div class="col m3"></div>
+          <div class="col m9 anulaPaddMarr">
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mi libreta</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m3 anulaPaddMarr right" style="margin-top: 15px;">
+                  <div class="input-field col m12">
+                    <mat-select class="browser-default" name="gradoSelected"
+                    (ngModelChange)='GetSltGrado($event)' [(ngModel)]="gradoSelected" matTooltip = "Seleccione el grado">
+                      <mat-option *ngFor="let matricula of arrayMisMatriculas" [value]="matricula.prdCod">{{matricula.graCod.graDes + " - " + matricula.nivCod.nivDes}}</mat-option>
+                    </mat-select>   
+                  </div>
+                </div>
+              </div>
+
+              <div class="col m12 right" *ngIf="!libTriBi" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                
+                <div *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+                  <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+                </div>
+                
+                <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                  <thead>
+                    <tr scope="col" colspan="12" id="libreta">
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="4" style="text-align: center;">Area</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Primer Trimestre</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Segundo Trimestre</th>  
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Tercer Trimestre</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Promedio Final</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let libreta of arrayLibreta">
+                      <td class="horarioTbl" scope="col" header="libreta" colspan="4" style="text-align: center;">{{libreta.area.ncoAreNom}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,1)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.primerTrimestre.promedio)}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,2)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.segundoTrimestre.promedio)}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,3)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.tercerTrimestre.promedio)}}</td>
+                      <td class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">{{FormatearPromedio(libreta.promedioFinal)}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col m12 right" *ngIf="libTriBi" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                
+                <div *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+                  <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+                </div>
+                
+                <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                  <thead>
+                    <tr scope="col" colspan="12" id="libreta">
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="4" style="text-align: center;">Area</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Primer Bimestre</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Segundo Bimestre</th>  
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Tercer Bimestre</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Cuarto Bimestre</th>
+                      <th class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">Promedio Final</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let libreta of arrayLibretaBi">
+                      <td class="horarioTbl" scope="col" header="libreta" colspan="4" style="text-align: center;">{{libreta.area.ncoAreNom}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,1)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{libreta.primerBimestre.promedio}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,2)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{libreta.segundoBimestre.promedio}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,3)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{libreta.tercerBimestre.promedio}}</td>
+                      <td class="horarioTbl" (click)="ShowDetalleCiclo_Prd(libreta,4)" matTooltip = "Ver detalle" scope="col" header="libreta" colspan="2" style="text-align: center;cursor: pointer;">{{libreta.cuartoBimestre.promedio}}</td>  
+                      <td class="horarioTbl" scope="col" header="libreta" colspan="2" style="text-align: center;">{{libreta.promedioFinal}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        
+        
+
+            </div>
+          </div>
+        
+        </div>
+
+        <!-- Div Promedio por cursos-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divlibPromedioCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mis Promedios</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblAreaLibreta}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr scope="col" colspan="12" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center;">Curso</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center;">Promedio</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let promCurso of arrayPromCursos">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="5" style="text-align: center; cursor: pointer;">{{promCurso.curCod.ncoCurNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="6" style="text-align: center; cursor: pointer;">{{FormatearPromedio(promCurso.promedio)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center; cursor: pointer;">
+                        <a >
+                            <a class="waves-light btn-small btnDetalle" (click)="ShowLibDetalleTpoNtas(promCurso)">Detalle</a>
+                        </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Detalle Promedios segun tipos de nota-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divlibDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Detalle de notas</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                 
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr scope="col" colspan="7" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Tipo de nota</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Cantidad de notas</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Promedio actual</th>  
+                      <th class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let detalleCurso of arrayDetallePromNta">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center; cursor: pointer;">{{detalleCurso.tpoNta.tpoNtaNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center; cursor: pointer;">{{FormatearPromedio(detalleCurso.cantNota)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center; cursor: pointer;">{{FormatearPromedio(detalleCurso.prmCur)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="1" style="text-align: center;">
+                        <a >
+                            <a class="waves-light btn-small btnDetalle" (click)="ShowDivLibDetalleSgnTpoNta(detalleCurso)">Detalle</a>
+                        </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+        <!-- Div Detalle de Notas segun promedio de tipo de nota-->
+        <div class="row col m12 anulaPaddMarr" *ngIf="divlibHstSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="col m3 anulaPaddMarr"></div>
+          <div class="col m9 anulaPaddMarr" >
+
+            
+
+            <div class="row col m12">
+
+              <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Historial de notas</strong> </h5>
+              </div>
+
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+                  </div>
+
+                  <div class="col m4 anulaPaddMarr center" style="margin-top: 8px;">
+                    <label class="col m12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+                  </div>
+  
+                </div>
+              </div>
+      
+              <div class="col m12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr scope="col" colspan="7" id="aula">
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Tipo de nota</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Calificacion</th>
+                      <th class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">Fecha</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let nta of arrayNotasFiltradas">
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{nta.tpoNtaCod.tpoNtaNom}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{FormatearPromedio(nta.notCal)}}</td>
+                      <td class="horarioTbl" scope="col" header="aula" colspan="2" style="text-align: center;">{{nta.fecha}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>   
+          </div> 
+        </div>
+
+     </div>
+    </div>
+
+
+    <div class="container-fluid modCelular">
+
+      <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="CallModalOptBarra()"
+            *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+          <span class="spacer"></span>
+          
+          <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
+          <a #divReg class="btn ui-state-default" mat-list-item style="background-color: rgb(7, 18, 34); margin-top: 12px;" (click)="CallModalOptBarra()"><mat-icon aria-label="Side nav toggle icon">menu</mat-icon></a>
+          
+        
+      </mat-toolbar>
+
+      <div class="row col m12 s12 anulaPaddMarr ">
+  
+        <!-- Portadas de la empresa Crab-->
+       <div class="row col s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53);">
+         <div class="col s12 anulaPaddMarr">
+           <div class="carousel  center-align" >
+             <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
+                 <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+             </div>
+           </div>
+         </div>  
+       </div>
+     </div>
+   
+     <div class="row col s12 center" style="text-align: center; position: relative;margin: auto;margin-top: 0px;padding: 0px;">
+
+      <div *ngIf="divSelectAlum" class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 500px;">
+    
+        <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
+          <span class="card-title" style="font-size: 15px;text-align: center;">Alumno(a)</span>
+        </div>
+  
+        <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;" *ngFor="let alumno of arrayAlumApo">
+          <span class="card-title" (click)="SeleccionarAlumno(alumno)"
+            style="font-size: 15px;text-align: center;cursor: pointer;">{{alumno.perRepCod.perRepNom}}
+          </span>
+        </div>
+        
+      </div>
+
+      <ul class="menu" *ngIf="divNavBar">
+        <li><a (click)="clickShowMenu()" style="cursor: pointer; z-index: 0;">Menu</a> 
+
+            <ul [ngStyle]="{'display':var_Menu == 0 ? 'none' : '' }">
+
+              <li><a *ngIf="opcMnuVarMisAlu" (click)="ShowMisAlumnos()" style="cursor: pointer">Alumnos</a></li>
+              <li><a (click)="ShowMiHorario()" style="cursor: pointer">Mi horario</a></li>
+              <li><a (click)="ShowMisCursos()" style="cursor: pointer;">Mis cursos</a></li>
+              <li><a (click)="ShowPromediosArea()" style="cursor: pointer;z-index: 10000;">Mis notas</a></li>
+              <li><a (click)="ShowMiLibreta()" style="cursor: pointer;z-index: 10000;">Mi Libreta</a></li>
+              <li><a style="cursor: pointer">Cronograma</a></li>
+                
+            </ul>
+        </li>
+      </ul>
+
+      <!-- Div Lista Cursos-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divCursos" style="min-height: 500px; margin-top: 70px;">
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Mis cursos </strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col m3 anulaPaddMarr right" style="margin-top: 15px;">
+              <div class="input-field col s12">
+                
+              </div>
+            </div>
+          </div>
+
+          
+
+  
+          <div class="col s12"  style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+            
+            <div  *ngIf="divSinRegistros" style="height: 70px;">
+              <h6 style="text-align: center; margin-top: 60px;">Aun no tienes cursos asignados</h6>
+            </div>
+            
+            <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Area</th>
+                  <th style="text-align: center;">Curso</th>
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let curso of arrayAulaCurso">
+                  <td scope="col" header="aula" colspan="5" style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
+                  <td scope="col" header="aula" colspan="6" style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>
+                  <td scope="col" header="aula" colspan="1" style="text-align: center;">
+                    <a >
+                        <a class="waves-light btn-small" style="background-color: rgb(29, 51, 85);border-radius: 10px;">Detalle</a>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row col s12 anulaPaddMarr" *ngIf="divHorario" style="min-height: 500px;">
+
+        <div class="col s12 anulaPaddMarr" >
+
+        
+            <div class="col s12">
+
+              <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+                <h5> <strong> Mi horario</strong> </h5>
+              </div>
+
+              <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+                <div class="col s12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+  
+                  <div class="col s3 right" style="margin-top: 8px;">
+                    <label for="" style="font-size: 18px;"></label>
+                  </div>
+  
+                </div>
+              </div>
+  
+              <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin-top: 30px;">
+
+                
+
+                  <div class="col s12">
+
+                    <div *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+                      <h6 style="text-align: center;">No cuentas con un horario aun</h6>
+                    </div>
+
+                    <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+                      <thead>
+                          <tr>
+                            <th style="text-align: left;">Hora</th>
+                            <th style="text-align: left;">Lunes</th>
+                            <th style="text-align: left;">Martes</th>
+                            <th style="text-align: left;">Miercoles</th>
+                            <th style="text-align: left;">Jueves</th>
+                            <th style="text-align: left;">Viernes</th>
+                            <th [ngStyle]="{'display':sabadoDisable === true ? 'none' : '' }" style="text-align: left;">Sabado</th>  
+                            
+                          </tr>  
+                      </thead>
+          
+                      <tbody>
+                        <tr *ngFor="let h of arrayHorario">
+                          <td  style="text-align: center;">{{h.itvHroCod.intHraIni.substring(16,21)+' - '+h.itvHroCod.intHraFin.substring(16,21)}}</td>       
+                          <td  style="text-align: center;">{{h.lunes.ncoCurNom}} </td>
+                          <td  style="text-align: center;">{{h.martes.ncoCurNom }}</td>       
+                          <td  style="text-align: center;">{{h.miercoles.ncoCurNom}}</td>
+                          <td  style="text-align: center;">{{h.jueves.ncoCurNom}}</td>
+                          <td  style="text-align: center;">{{h.viernes.ncoCurNom}}</td>
+                          <td  [ngStyle]="{'display':sabadoDisable === true ? 'none' : '' }"  style="text-align: center;">{{h.sabado.ncoCurNom}}</td>
+       
+                        </tr> 
+                      </tbody>
+                    </table>
+                  </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+      <!-- Div Promedio por areas-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divPromArea" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="row col s12">
+
+            <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+              <h5> <strong> Mi promedio actual</strong> </h5>
+            </div>
+
+            <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+              <div class="col s12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+
+               
+
+                <div class="col s12" style="margin-top: 8px;">
+                  <label for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                </div>
+
+              </div>
+            </div>
+    
+            <form class="col s12 center anulaPaddMarr" style="margin-top: 40px;background-color: rgb(217, 224, 255);padding: 0px;"> 
+              
+              <div  *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+                <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+              </div>
+
+              <div class="col s12 center" *ngIf="!divSinRegistros">
+                <table class="centered responsive-table striped">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;">Area</th>
+                      <th style="text-align: center;">Promedio</th>
+                      <th style="text-align: center;">Opciones</th>
+                
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let promArea of arrayPromArea">
+                      <td style="text-align: center;">{{promArea.areCod.ncoAreNom}}</td>
+                      <td style="text-align: center;">{{FormatearPromedio(promArea.promedio)}}</td>
+                      <td style="text-align: center;">
+                        
+                        <mat-icon svgIcon="detalle" (click)="ShowPromedioCursos(promArea)" matTooltip = "detalle"></mat-icon> 
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+
+          </div>  
+      </div>
+
+      <!-- Div Promedio por cursos-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divPromedioCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="row col s12">
+
+            <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+              <h5> <strong> Mis Promedios</strong> </h5>
+            </div>
+
+            <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+              <div class="col s12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+
+               
+
+                <div class="col s12" style="margin-top: 8px;">
+                  <label for="" style="font-size: 18px;">{{lblCiclo}}</label>
+                </div>
+
+              </div>
+            </div>
+    
+            <div class="col s12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Curso</th>
+                    <th style="text-align: center;">Promedio</th>
+                    <th style="text-align: center;">Opciones</th>
+              
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let promCurso of arrayPromCursos">
+                    <td style="text-align: center;">{{promCurso.curCod.ncoCurNom}}</td>
+                    <td style="text-align: center;">{{FormatearPromedio(promCurso.promedio)}}</td>
+                    <td style="text-align: center;">
+                      <mat-icon svgIcon="detalle" (click)="ShowDetallePromNta(promCurso.curCod._id)" matTooltip = "detalle"></mat-icon> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>   
+      </div>
+
+      <!-- Div Detalle Promedios segun tipos de nota-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
+
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Detalle de notas</strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 100px;">
+            <div class="col s12 anulaPaddMarr" style="margin-top: 20px;">
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 8px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 8px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblCiclo}}</label>
+              </div>
+
+            </div>
+          </div>
+  
+          <div class="col s12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Tipo de nota</th>
+                  <th style="text-align: center;">Cantidad de notas</th>
+                  <th style="text-align: center;">Promedio actual</th>  
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let detalleCurso of arrayDetallePromNta">
+                  <td style="text-align: center;">{{detalleCurso.tpoNta.tpoNtaNom}}</td>
+                  <td style="text-align: center;">{{FormatearPromedio(detalleCurso.cantNota)}}</td>
+                  <td style="text-align: center;">{{FormatearPromedio(detalleCurso.prmCur)}}</td>
+                  <td style="text-align: center;">
+                    <a >
+                        <a class="waves-light btn-small" (click)="ShowDivDetalleSgnTpoNta(detalleCurso)" style="background-color: rgb(29, 51, 85); border-radius: 10px;">Detalle</a>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>   
+       
+      </div>
+
+      <!-- Div Detalle de Notas segun promedio de tipo de nota-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divDetalleSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
+
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Historial de notas</strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 100px;">
+            <div class="col s12 anulaPaddMarr" style="margin-top: 20px;">
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 8px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 8px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblCiclo}}</label>
+              </div>
+
+            </div>
+          </div>
+  
+          <div class="col s12" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Tipo de nota</th>
+                  <th style="text-align: center;">Calificacion</th>
+                  <th style="text-align: center;">Fecha</th> 
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let nta of arrayNotasFiltradas">
+                  <td style="text-align: center;">{{nta.tpoNtaCod.tpoNtaNom}}</td>
+                  <td style="text-align: center;">{{FormatearPromedio(nta.notCal)}}</td>
+                  <td style="text-align: center;">{{nta.fecha}}</td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Div Mi libreta-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divLibreta" style="min-height: 500px; margin-top: 70px;">
+        
+       
+
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Mi libreta</strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col s12 anulaPaddMarr right" style="margin-top: 15px;">
+              <div class="input-field col s12">
+                <mat-select class="browser-default" name="gradoSelected"
+                    (ngModelChange)='GetSltGrado($event)' [(ngModel)]="gradoSelected" matTooltip = "Seleccione el grado">
+                      <mat-option *ngFor="let matricula of arrayMisMatriculas" [value]="matricula.prdCod">{{matricula.graCod.graDes + " - " + matricula.nivCod.nivDes}}</mat-option>
+                    </mat-select>   
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12" *ngIf="!libTriBi" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+
+            <div  *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+              <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+            </div>
+
+            <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Area</th>
+                  <th style="text-align: left;">Primer Trimestre</th>
+                  <th style="text-align: left;">Segundo Trimestre</th>  
+                  <th style="text-align: left;">Tercer Trimestre</th>
+                  <th style="text-align: left;">Promedio Final</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let libreta of arrayLibreta">
+                  <td style="text-align: center;">{{libreta.area.ncoAreNom}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,1)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.primerTrimestre.promedio)}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,2)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.segundoTrimestre.promedio)}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,3)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.tercerTrimestre.promedio)}}</td>
+                  <td style="text-align: center;">{{FormatearPromedio(libreta.promedioFinal)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col s12" *ngIf="libTriBi" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+
+            <div  *ngIf="divSinRegistros" style="margin-top: 45px; height: 70px;">
+              <h6 style="text-align: center;">No existe ningun promedio aun</h6>
+            </div>
+
+            <table class="centered responsive-table striped" *ngIf="!divSinRegistros">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Area</th>
+                  <th style="text-align: left;">Primer Bimestre</th>
+                  <th style="text-align: left;">Segundo Bimestre</th>  
+                  <th style="text-align: left;">Tercer Bimestre</th>
+                  <th style="text-align: left;">Cuarto Bimestre</th>
+                  <th style="text-align: left;">Promedio Final</th>
+                </tr>
+              </thead>
+
+  
+              <tbody>
+                <tr *ngFor="let libreta of arrayLibretaBi">
+                  <td style="text-align: center;">{{libreta.area.ncoAreNom}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,1)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.primerBimestre.promedio)}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,2)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.segundoBimestre.promedio)}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,3)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.tercerBimestre.promedio)}}</td>
+                  <td (click)="ShowDetalleCiclo_Prd(libreta,4)" matTooltip = "Ver detalle" style="text-align: center;cursor: pointer;">{{FormatearPromedio(libreta.cuartoBimestre.promedio)}}</td>  
+                  <td style="text-align: center;">{{FormatearPromedio(libreta.promedioFinal)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    
+    
+
+        </div>
+       
+      
+      </div>
+
+      <!-- Div Promedio por cursos-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divlibPromedioCursos" style="min-height: 500px; margin-top: 70px;">
+
+          <div class="row col s12">
+
+            <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+              <h5> <strong> Mis Promedios</strong> </h5>
+            </div>
+
+            <div class="row card-panel col s12" style="margin-top: 0px; height: 120px;">
+              <div class="col s12 anulaPaddMarr" style="margin-top: 20px;">
+
+                <div class="col s12 anulaPaddMarr center">
+                  <label class="col s12" for="" style="font-size: 18px;">{{lblAreaLibreta}}</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                  <label class="col s12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                  <label class="col s12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+                </div>
+
+              </div>
+            </div>
+    
+            <div class="col s12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Curso</th>
+                    <th style="text-align: center;">Promedio</th>
+                    <th style="text-align: center;">Opciones</th>
+              
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let promCurso of arrayPromCursos">
+                    <td style="text-align: center; cursor: pointer;">{{promCurso.curCod.ncoCurNom}}</td>
+                    <td style="text-align: center; cursor: pointer;">{{FormatearPromedio(promCurso.promedio)}}</td>
+                    <td style="text-align: center; cursor: pointer;">
+                      <a >
+                          <a class="waves-light btn-small" (click)="ShowLibDetalleTpoNtas(promCurso)" style="background-color: rgb(29, 51, 85); border-radius: 10px;">Detalle</a>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>   
+      
+      </div>
+
+      <!-- Div Detalle Promedios segun tipos de nota-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divlibDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
+
+
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Detalle de notas</strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 120px;">
+            <div class="col s12 anulaPaddMarr" style="margin-top: 20px;">
+
+              <div class="col s12 anulaPaddMarr center">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblAreaLibreta}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+              </div>
+
+            </div>
+          </div>
+  
+          <div class="col s12" style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Tipo de nota</th>
+                  <th style="text-align: center;">Cantidad de notas</th>
+                  <th style="text-align: center;">Promedio actual</th>  
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let detalleCurso of arrayDetallePromNta">
+                  <td style="text-align: center; cursor: pointer;">{{detalleCurso.tpoNta.tpoNtaNom}}</td>
+                  <td style="text-align: center; cursor: pointer;">{{FormatearPromedio(detalleCurso.cantNota)}}</td>
+                  <td style="text-align: center; cursor: pointer;">{{FormatearPromedio(detalleCurso.prmCur)}}</td>
+                  <td style="text-align: center;">
+                    <a >
+                        <a class="waves-light btn-small" (click)="ShowDivLibDetalleSgnTpoNta(detalleCurso)" style="background-color: rgb(29, 51, 85); border-radius: 10px;">Detalle</a>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>   
+       
+      </div>
+
+      <!-- Div Detalle de Notas segun promedio de tipo de nota-->
+      <div class="row col s12 anulaPaddMarr" *ngIf="divlibHstSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
+
+        <div class="row col s12">
+
+          <div class="col s12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
+            <h5> <strong> Historial de notas</strong> </h5>
+          </div>
+
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 120px;">
+            <div class="col s12 anulaPaddMarr" style="margin-top: 20px;">
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblCurso}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblLibCiclo}}</label>
+              </div>
+
+              <div class="col s12 anulaPaddMarr center" style="margin-top: 3px;">
+                <label class="col s12" for="" style="font-size: 18px;">{{lblGradoNivel}}</label>
+              </div>
+
+            </div>
+          </div>
+  
+          <div class="col s12 " style="margin-top: 40px;background-color: rgb(217, 224, 255);"> 
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Tipo de nota</th>
+                  <th style="text-align: center;">Calificacion</th>
+                  <th style="text-align: center;">Fecha</th>  
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let nta of arrayNotasFiltradas">
+                  <td style="text-align: center;">{{nta.tpoNtaCod.tpoNtaNom}}</td>
+                  <td style="text-align: center;">{{FormatearPromedio(nta.notCal)}}</td>
+                  <td style="text-align: center;">{{nta.fecha}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>   
+        
+      </div>
+
+
+  </div>
+</div>
+    

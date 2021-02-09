@@ -1,0 +1,1242 @@
+<div class="container-fluid">
+
+  <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+    <h5 class="col m12 s12"><strong>Aula Virtual</strong></h5>
+  </div>
+
+  <div class="row col m12 anulaPaddMarr modPantalla"  style="min-height: 400px; margin-bottom: 20px; margin-top: 10px;"> <!-- Modo Pantalla -->
+   
+    <div class="row col  m12 anulaPaddMarr" style="margin-top: 10px;padding: 0px !important;">
+     
+      <div class="col m2 " style="min-height: 500px; background-color: rgb(198, 229, 255);"> 
+        <ul class="menu" style="margin-top: 30px;">
+          <li><a style="cursor: pointer" (click)="ShowDivListaAulas()">Lista de Aulas</a></li>
+          <li><a style="cursor: pointer" (click)="ShowDivListaAlumnos()" *ngIf="itemAlumnos">Alumnos del Aula</a></li>
+          <li><a style="cursor: pointer" (click)="ShowDivListaCursos()" *ngIf="itemCursos">Cursos del Aula</a></li>
+          <li><a style="cursor: pointer" (click)="ShowDivListaDocentes()" *ngIf="itemDocentes">Docentes y Cursos</a></li>  
+          <li><a style="cursor: pointer" (click)="ShowDivHorario()" *ngIf="itemHorario">Horario</a></li> 
+        </ul>
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divlistaAulas">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12" style="margin-top: 20px;">
+                  
+                  <button  class="waves-light btn  col m12 " (click)="ShowDivRegAula()" matTooltip = "Crear Aula">Crear Aula</button>
+                </div>
+              </div>
+              
+              <div class="col m2 anulaPaddMarr">
+                  <div class="input-field col m12">
+                    <select class="browser-default" id="fltSelectGraCod" name="fltSelectGraCod"
+                    [(ngModel)]="fltSelectGraCod" (ngModelChange)='GetSltGrado($event)' matTooltip = "Seleccione el grado">
+                      <option *ngFor="let grado of fltArrayGrado" [value]="grado._id">{{grado.graDes}}</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12">
+                  <select class="browser-default" id="fltSelectSecCod" name="fltSelectSecCod"
+                  [(ngModel)]="fltSelectSecCod" (ngModelChange)='GetSltSeccion($event)' matTooltip = "Seleccione la seccion">
+                    <option *ngFor="let seccion of fltArraySeccion" [value]="seccion._id">{{seccion.secDes}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12">
+                  <select class="browser-default"  id="fltSelectNivCod" name="fltSelectNivCod"
+                  [(ngModel)]="fltSelectNivCod" (ngModelChange)='GetSltNivel($event)'  matTooltip = "Seleccione el nivel">
+                    <option *ngFor="let nivel of fltArrayNivel" [value]="nivel._id"> {{nivel.nivDes}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12">
+                  <select class="browser-default" id="fltSelectTurCod" name="fltSelectTurCod"
+                  [(ngModel)]="fltSelectTurCod" (ngModelChange)='GetSltTurno($event)' matTooltip = "Seleccione el Turno">
+                    <option *ngFor="let turno of fltArrayTurno" [value]="turno._id">{{turno.turNom}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col m2 anulaPaddMarr">
+                <div class="input-field col m12" style="margin-top: 20px;">
+                  
+                  <button  class="waves-light btn  col m12 " (click)="BuscarAulas()" matTooltip = "Buscar Matricula">Buscar </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Nivel</th>
+                    <th style="text-align: center;">Grado</th>
+                    <th style="text-align: center;">Seccion</th>
+                    
+                    <th style="text-align: center;">Turno</th>
+                    <th style="text-align: center;">Opciones</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let aula of arrayAulaVirtual">
+                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.nivCod.nivDes}}</td>
+                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.graCod.graDes}}</td>
+                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.secCod.secDes}}</td>
+                    
+                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.turCod.turNom}}</td>
+                    <td style="text-align: center;">
+
+                    <mat-icon svgIcon="informacion" (click)="SeleccionarAula(aula)" style="cursor: pointer; margin-right: 5px;" matTooltip = "Detalles"></mat-icon> 
+                    <mat-icon svgIcon="editar" (click)="preEditar(aula)" style="cursor: pointer; margin-right: 5px;" matTooltip = "Editar aula"></mat-icon> 
+                    <mat-icon svgIcon="disable" [ngStyle]="{'display':aula.estCod === '5e0a8a479644411040ebf293' ? 'none' : '' }"  (click)="habilitarDeshabilitar(aula)" style="cursor: pointer;" matTooltip = "Deshabilitar"></mat-icon> 
+                    <mat-icon svgIcon="enable"  [ngStyle]="{'display':aula.estCod === '5e0a8a3b9644411040ebf292' ? 'none' : '' }" (click)="habilitarDeshabilitar(aula)" style="cursor: pointer;" matTooltip = "Habilitar"></mat-icon> 
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+        </form>
+        
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divlistaCursos">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+
+            <div class="col m12 anulaPaddMarr center" style="margin-top: 15px;">
+              <h6><strong>{{lblNomAula}}</strong></h6>
+            </div>
+
+          </div>
+        </div>
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Area</th>
+                    <th style="text-align: center;">Curso</th>
+                    
+                    <th style="text-align: center;" *ngIf="itemDetCurAul">Opciones</th>       
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let curso of arrayCursoGrado">
+                    <td style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
+                    <td style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>   
+                    <td style="text-align: center;" *ngIf="itemDetCurAul">
+                    <a >
+                        <a class="waves-light btn-small" (click)="ShowDivDetalleCursos(curso)" style="height: 25px !important;width: auto;;margin-bottom: 7px !important; font-size: 11px;">Detalles</a>
+                    </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+        </form>
+      </div>
+
+      <div class="col m10 anulaPaddMarr" *ngIf="divDetalleCursos">
+        
+        <div class="col m2"></div>
+
+        <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col m12">
+
+            <div class="row col m12 center anulaPaddMarr">
+              <div class="input-field col m11">
+                <h5 class="center">Detalles del Curso</h5>
+              </div>
+            </div>
+
+            <div class="row col m12">
+              <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+                <div class="input-field col m2 center">
+                  <label for="docente" style="height: 25px !important;width: 95px;margin-top: 13px !important; font-size: 14px;color: black;">Docente :</label>
+                </div>
+
+                <div class="input-field col m7 center" style="margin-right: 0px !important;">
+                  <input type="text" style="text-align: center;" name="Docente" readonly [(ngModel)]="Docente" id="docente">
+                </div>
+
+                <div class="input-field col m2">
+                  <button  type="button"  (click)="ShowDivAsignarDocente()"  style="height: 25px !important;width: 95px;margin-top: 19px !important; font-size: 14px;background: #504188; color: white;">{{btnAsignarDoc}}</button>
+                </div>
+              </div>
+            </div>
+            
+
+          </div>
+ 
+        </form>
+        <div class="col m1"></div>
+
+      </div>
+
+      <!-- divAsignarDocente -->
+      <div class="col m10 anulaPaddMarr" *ngIf="divAsignarDocente">
+
+        <div class="row col m12 anulaPaddMarr">
+          <div class="col m2"></div>
+
+          <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+  
+            <div class="row col m12">
+  
+              <div class="row col m12 center anulaPaddMarr">
+                <div class="input-field col m12">
+                  <h5 class="center">Docente</h5>
+                </div>
+              </div>
+  
+              <div class="row col m12">
+                <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+                
+  
+                  <div class="input-field col m12 center" style="margin-right: 0px !important;">
+                    <input type="text" name="nomDoc" id="nomDoc" [(ngModel)]="nomDocente" readonly placeholder="Nombre Docente" style="text-align: center;">
+                  </div>
+  
+               
+  
+                  <div class="input-field col m12 center" style="margin-right: 0px !important;">
+                    <input type="text" name="apeDoc" id="apeDoc" [(ngModel)]="apeDocente" readonly placeholder="Apellido Docente" style="text-align: center;">
+                  </div>
+  
+                  
+                </div>
+              </div>
+  
+              <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+                <div class="col m6 ">
+                  <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="AsignarProfesor()" [disabled]="btnCrearActlzDocBoolean">{{btnCrearActlzDoc}} </button>
+                </div>
+  
+                <div class="col m6 ">
+                  <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarFormAsignarDocente()">Cancelar</button>
+                </div>
+              </div>
+              
+            </div>
+   
+          </form>
+          <div class="col m1"></div>
+        </div>
+
+      </div>
+
+      <div class="col m12 anulaPaddMarr" *ngIf="divAsignarDocente">
+
+
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col m12 anulaPaddMarr">
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                <div class="input-field col offset-s2 m2"
+                      style="margin-top: 0px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                      <input type="text" name="listFilter" id="perDni" [(ngModel)]="listFilter" style="margin-top: 20px;"
+                        placeholder="Filtrar por DNI :">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col m12 anulaPaddMarr">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">DNI</th>
+                  <th style="text-align: center;">Nombres</th>
+                  <th style="text-align: center;">Apellidos</th>
+                  <th style="text-align: center;"></th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let profesor of filteredProfesor">
+                  <td style="text-align: center;">{{profesor.perRepCod.perRepDni}}</td>
+                  <td style="text-align: center;">{{profesor.perRepCod.perRepNom}}</td>
+                  <td style="text-align: center;">{{profesor.perRepCod.perRepApe}}</td>
+                  <td style="text-align: center; cursor: pointer;">
+                    <a (click)="SeleccionarProfesor(profesor)">
+                      <i class="material-icons">send</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+        </form>
+      </div>
+      <!-- ----------------- -->
+
+
+      <!-- Div Docentes del Aula-->
+      <div class="col m10 anulaPaddMarr" *ngIf="divlistaDocentes">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+              <div class="col m12 anulaPaddMarr center" style="margin-top: 15px;">
+                <h6><strong>{{lblNomAula}}</strong></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr scope="col" colspan="12" id="aulCur">
+                    <th scope="col" colspan="2" id="aulCur" style="text-align: center;">DNI</th>
+                    <th scope="col" colspan="5" id="aulCur" style="text-align: center;">Docente</th>
+                    <th scope="col" colspan="5" id="aulCur" style="text-align: center;">Curso</th>   
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let aula of arrayAulaCurso">
+                    <td scope="col" colspan="2" id="aulCur" *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.perRepCod.perRepDni}}</td>
+                    <td scope="col" colspan="5" id="aulCur" *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.perRepCod.perRepNom + ", " + aula.perRepCod.perRepApe }}</td>       
+                    <td scope="col" colspan="5" id="aulCur" *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.curCod.ncoCurNom}} </td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+        </form>
+      </div>
+
+      <!-- Div Alumnos del Aula-->
+      <div class="col m10 anulaPaddMarr" *ngIf="divlistaAlumnos">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+              <div class="col m12 anulaPaddMarr center" style="margin-top: 15px;">
+                <h6><strong>{{lblNomAula}}</strong></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                    <tr>
+                      <th style="text-align: center;">DNI</th>
+                      <th style="text-align: center;">Nombres</th>
+                      <th style="text-align: center;">Apellidos</th>     
+                    </tr>  
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let alu of arrayAlumnosAula">
+                    <td style="text-align: center;">{{alu.perRepCod.perRepDni}}</td>
+                    <td style="text-align: center;">{{alu.perRepCod.perRepNom}}</td>       
+                    <td style="text-align: center;">{{alu.perRepCod.perRepApe}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </div>
+
+      <!-- Div Lista Horario-->
+      <div class="col m10 anulaPaddMarr" *ngIf="divHorario">
+
+        <div class="col m12">
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr right" style="height: 30px;margin-top: 20px;">
+
+              <div class="col m9">
+                <div class="col m12 anulaPaddMarr center" >
+                  <h6><strong>{{lblNomAula}}</strong></h6>
+                </div>
+              </div>
+
+              <div class="col m3" *ngIf="itemIntervalo">
+                <button  class="waves-light btn  col s12 " (click)="ShowDivIntervalo()" matTooltip = "Configurar intervalo">Configurar intervalo </button>
+              </div>
+
+          </div>
+        </div>
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                    <tr>
+                      <th style="text-align: center;">Hora</th>
+                      <th style="text-align: center;">Lunes</th>
+                      <th style="text-align: center;">Martes</th>
+                      <th style="text-align: center;">Miercoles</th>
+                      <th style="text-align: center;">Jueves</th>
+                      <th style="text-align: center;">Viernes</th>
+                      <th style="text-align: center;">Sabado</th>  
+                      
+                    </tr>  
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let h of arrayHorario">
+                    <td  style="text-align: center;" class="horarioTbl">{{h.itvHroCod.intHraIni.substring(16,21)+' - '+h.itvHroCod.intHraFin.substring(16,21)}}</td>       
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.lunes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Lunes')"         >{{h.lunes.ncoCurNom}} </td>
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.martes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Martes')"       >{{h.martes.ncoCurNom }}</td>       
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.miercoles,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Miercoles')">{{h.miercoles.ncoCurNom}}</td>
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.jueves,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Jueves')"       >{{h.jueves.ncoCurNom}}</td>
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.viernes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Viernes')"    >{{h.viernes.ncoCurNom}}</td>
+                    <td  style="text-align: center;" class="horarioTbl" (click)="LlamarModalHorario(h.itvHroCod._id,h.sabado,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Sabado')"      >{{h.sabado.ncoCurNom}}</td>
+ 
+                  </tr> 
+                  
+               
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </div>
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+   
+
+
+     
+     </div>
+
+      <!-- Div Lista Intervalo hora-->
+      <div class="col m10 anulaPaddMarr" *ngIf="divIntervalo">
+
+        <div class="row col m12 anulaPaddMarr" style="border-radius: 50px;">
+          <div class="col m2"></div>
+
+          <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+  
+            <div class="row col m12">
+  
+              <div class="row col m12 center anulaPaddMarr">
+                <div class="input-field col m12">
+                  <h5 class="center">Intervalo Horario</h5>
+                </div>
+              </div>
+  
+              <div class="row col m12">
+                <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+                
+  
+                  <div class="row col m12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                    <div class="col m2"></div>
+
+                    <div class="col m4" style="margin-top: 15px;">
+                      <label for="" style="color: black;font-size: 14px;">Hora inicio :</label>  
+                    </div>
+
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                      <input [(ngModel)]="horaInicio" value="horaInicio" name="horaInicio" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese la hora" >
+                    </div>
+
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 15px !important; height: 42px !important; margin-right: 5px;"> 
+                      <label for="" style="font-size: 30px;margin-top: 0px !important;margin-bottom: 10px !important;">:</label>
+                    </div>
+                    
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                      <input [(ngModel)]="minutoInicio" value="minutoInicio" name="minutoInicio" name="notCal" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese los Minutos" >
+                    </div>
+                  </div>
+
+                  <div class="row col m12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                    <div class="col m2"></div>
+
+                    <div class="col m4" style="margin-top: 15px;">
+                      <label for="" style="color: black;font-size: 14px;text-align: left;">Hora fin :</label>  
+                    </div>
+
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                      <input [(ngModel)]="horaFin" value="horaFin" name="horaFin" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese la hora" >
+                    </div>
+
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 15px !important; height: 42px !important; margin-right: 5px;"> 
+                      <label for="" style="font-size: 30px;margin-top: 0px !important;margin-bottom: 10px !important;">:</label>
+                    </div>
+                    
+                    <div class="col m2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                      <input [(ngModel)]="minutoFin" maxlength="2"  name="minutoFin" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese los Minutos" >
+                    </div>
+                  </div>
+  
+                  
+                </div>
+              </div>
+  
+              <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+                <div class="col m6 ">
+                  <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearIntervaloHorario()">{{btnCrearActlzIntervalo}}</button>
+                </div>
+  
+                <div class="col m6 ">
+                  <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarFrmIntervalo()">Nuevo</button>
+                </div>
+              </div>
+              
+            </div>
+   
+          </form>
+          <div class="col m1"></div>
+        </div>
+
+      </div>
+
+      <div class="col m12 anulaPaddMarr" *ngIf="divIntervalo">
+
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col m12 anulaPaddMarr">
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col m12 anulaPaddMarr">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Hora de inicio</th>
+                  <th style="text-align: center;">Hora de fin</th>
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let intervalo of arrayIntervalo">
+                  <td style="text-align: center;">{{intervalo.intHraIni.substring(16,21)}}</td>
+                  <td style="text-align: center;">{{intervalo.intHraFin.substring(16,21)}}</td>
+                  <td style="text-align: center;cursor: pointer;">
+                    <a (click)="PreEditarIntervalo(intervalo)" >
+                      <i matTooltip = "Editar Intervalo" class="material-icons">edit</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+
+      </div>
+      <!-----------------------------> 
+
+
+      <!-- Div Registrar aula-->
+      <div class="col m10 anulaPaddMarr" *ngIf="divRegAula">
+        <div class="col m2"></div>
+
+        <form class="col m9  anulaPaddMarr" style="margin-top: 40px;">
+          <div class="row col m12">
+
+            <div class="row col m11 center anulaPaddMarr">
+              <div class="input-field col m12">
+                <h5 class="center">Registrar Aula</h5>
+              </div>
+            </div>
+
+            <form class="col m12 anulaPaddMarr" style="margin-top: 7px;">
+              
+              
+              <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+          
+                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                  <label for="" style="font-size: 16px;">Grado :</label>
+                </div>
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12 anulaPaddMarr">
+                    <select class="browser-default" id="ModeloGrado._id" name="ModeloGrado._id"
+                      [(ngModel)]="ModeloGrado._id">
+                      <option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col m1"></div>
+
+                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                  <label for="" style="font-size: 16px;">Seccion :</label>
+                </div>
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12 anulaPaddMarr">
+                    <select class="browser-default" id="ModeloSeccion._id" name="ModeloSeccion._id"
+                      [(ngModel)]="ModeloSeccion._id" >
+                      <option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+                
+                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                  <label for="" style="font-size: 16px;">Nivel :</label>
+                </div>
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12 anulaPaddMarr">
+                    <select class="browser-default" id="ModeloNivel._id" name="ModeloNivel._id"
+                      [(ngModel)]="ModeloNivel._id">
+                      <option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col m1"></div>
+
+                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                  <label for="" style="font-size: 16px;">Turno :</label>
+                </div>
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12 anulaPaddMarr">
+                    <select class="browser-default" id="ModeloTurno._id" name="ModeloTurno._id"
+                      [(ngModel)]="ModeloTurno._id">
+                      <option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row col m11" style="margin-top: 25px;">
+
+                <div class="col m6">
+                  <button class="btn waves-light btn-small right"
+                  (click)="CrearAula()">{{btnRegistrar}} </button>
+                </div>
+
+                <div class="col m6">
+                  <button class="btn waves-light btn-small left" 
+                  (click)="ShowDivListaAulas()">Cancelar</button>
+                </div>
+
+
+              </div>
+
+            </form>
+            
+          </div>
+        </form> 
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+  <div class="row col s12 anulaPaddMarr modCelular" style="margin-top: 10px;">
+
+    <div class="row col s12" style="margin-top: 10px;">
+      <!-- Disparador Modal -->
+      <button  (click)="openModalOpt('Opciones')"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+    </div>
+
+    <!-- Div Lista de aulas -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divlistaAulas">
+
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+
+          <div class="col s12 anulaPaddMarr" style="height: 30px;">
+
+            <div class="col s6 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="ShowDivRegAula()" matTooltip = "Crear Aula">Crear Aula </button>
+              </div>
+            </div>
+
+
+            <div class="col s6 anulaPaddMarr">
+              <div class="input-field col s12" style="margin-top: 20px;"> 
+                <button  class="waves-light btn  col s12 " (click)="openModalOpt('Filtros')" matTooltip = "Buscar Matricula">Filtros </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th  style="text-align: left;">Grado</th>
+                  <th  style="text-align: left;">Seccion</th>
+                  <th  style="text-align: left;">Nivel</th>
+                  <th  style="text-align: left;">Turno</th>
+                  <th  style="text-align: left;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let aula of arrayAulaVirtual">
+                  <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.graCod.graDes}}</td>
+                  <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.secCod.secDes}}</td>
+                  <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.nivCod.nivDes}}</td>
+                  <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.turCod.turNom}}</td>
+                  <td colspan="2" style="text-align: center;">
+                    <mat-icon svgIcon="informacion" (click)="SeleccionarAula(aula)" style="cursor: pointer; margin-right: 5px;" matTooltip = "Detalles"></mat-icon> 
+                    <mat-icon svgIcon="editar" (click)="preEditar(aula)" style="cursor: pointer; margin-right: 5px;" matTooltip = "Editar aula"></mat-icon> 
+                    <mat-icon svgIcon="disable" [ngStyle]="{'display':aula.estCod === '5e0a8a479644411040ebf293' ? 'none' : '' }"  (click)="habilitarDeshabilitar(aula)" style="cursor: pointer;" matTooltip = "Deshabilitar"></mat-icon> 
+                    <mat-icon svgIcon="enable"  [ngStyle]="{'display':aula.estCod === '5e0a8a3b9644411040ebf292' ? 'none' : '' }" (click)="habilitarDeshabilitar(aula)" style="cursor: pointer;" matTooltip = "Habilitar"></mat-icon> 
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+      
+    </div>
+
+    <!-- Div Lista de cursos -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divlistaCursos">
+
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12 anulaPaddMarr" style="height: 30px;">
+           
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Area</th>
+                  <th style="text-align: left;">Ciencia</th>
+                  <th style="text-align: left;" *ngIf="itemDetCurAul">Opciones</th>       
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let curso of arrayCursoGrado">
+                  <td style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
+                  <td style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>   
+                  <td style="text-align: center;" *ngIf="itemDetCurAul">
+                  <a >
+                      <a class="waves-light btn-small" (click)="ShowDivDetalleCursos(curso)" style="height: 25px !important;width: auto;;margin-bottom: 7px !important; font-size: 11px;">Detalles</a>
+                  </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+    </div>
+
+    <!-- Div detalle de cursos -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divDetalleCursos">
+        
+      <form class="col s12  anulaPaddMarr" style="margin-top: 40px;">
+
+        <div class="row col s12">
+
+          <div class="row col s12 center anulaPaddMarr">
+            <div class="input-field col s12">
+              <h5 class="center">Detalles del Curso</h5>
+            </div>
+          </div>
+
+          <div class="row col s12 anulaPaddMarr">
+            <div class="row col s12 anulaPaddMarr" style="margin-top: 50px;text-align: center !important;">
+              <div class="input-field col s2 center">
+                <label for="docente" style="height: 25px !important;width: 95px; font-size: 14px;color: black;">Docente :</label>
+              </div>
+
+              <div class="input-field col s10 center" style="margin-right: 0px !important;">
+                <input type="text" style="text-align: center; font-size: 12px;" name="Docente" readonly [(ngModel)]="Docente" id="docente">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row col s12 center">
+            <div class="input-field col s12">
+              <button  type="button" class="waves-light btn  col s12 "  (click)="ShowDivAsignarDocente()" >{{btnAsignarDoc}}</button>
+            </div>
+          </div>
+          
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- divAsignarDocente -->
+    <div class="col s12 anulaPaddMarr" *ngIf="divAsignarDocente">
+
+      <div class="row col s12 anulaPaddMarr">
+
+
+        <form class="col s12  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col s12">
+
+            <div class="row col s12 center anulaPaddMarr">
+              <div class="input-field col s12">
+                <h5 class="center">Docente</h5>
+              </div>
+            </div>
+
+            <div class="row col s12">
+              <div class="row col s12" style="margin-top: 50px;text-align: center !important;">
+              
+
+                <div class="input-field col s12 center" style="margin-right: 0px !important;">
+                  <input type="text" name="nomDoc" id="nomDoc" [(ngModel)]="nomDocente" readonly placeholder="Nombre Docente" style="text-align: center;">
+                </div>
+
+              
+
+                <div class="input-field col s12 center" style="margin-right: 0px !important;">
+                  <input type="text" name="apeDoc" id="apeDoc" [(ngModel)]="apeDocente" readonly placeholder="Apellido Docente" style="text-align: center;">
+                </div>
+
+                
+              </div>
+            </div>
+
+            <div class="row col s12" style="margin-top: 10px;padding-bottom: 9px;">
+              <div class="col s6 ">
+                <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="AsignarProfesor()" [disabled]="btnCrearActlzDocBoolean">{{btnCrearActlzDoc}} </button>
+              </div>
+
+              <div class="col s6 ">
+                <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarFormAsignarDocente()">Cancelar</button>
+              </div>
+            </div>
+            
+          </div>
+  
+        </form>
+  
+      </div>
+
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="divAsignarDocente">
+
+
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col s12 anulaPaddMarr">
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col s12 anulaPaddMarr" style="height: 30px;">
+              <div class="input-field col offset-s2 s5"
+                      style="margin-top: 0px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                      <input type="text" name="listFilter" id="perDni" [(ngModel)]="listFilter" style="margin-top: 20px;"
+                      placeholder="Filtrar por DNI :">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th style="text-align: left;">DNI</th>
+                <th style="text-align: left;">Nombres</th>
+                <th style="text-align: left;">Apellidos</th>
+                <th style="text-align: left;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let profesor of filteredProfesor">
+                <td style="text-align: center;">{{profesor.perRepCod.perRepDni}}</td>
+                <td style="text-align: center;">{{profesor.perRepCod.perRepNom}}</td>
+                <td style="text-align: center;">{{profesor.perRepCod.perRepApe}}</td>
+                <td style="text-align: center; cursor: pointer;">
+                  <a (click)="SeleccionarProfesor(profesor)">
+                    <i class="material-icons">send</i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+    </form>
+    </div>
+    <!-- ----------------- -->
+
+    <!-- Div Docentes del Aula-->
+    <div class="col s12 anulaPaddMarr" *ngIf="divlistaDocentes">
+
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col m12 anulaPaddMarr" style="height: 30px;">
+            
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">DNI</th>
+                  <th style="text-align: left;">Docente</th>
+                  <th style="text-align: left;">Curso</th>   
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let aula of arrayAulaCurso">
+                  <td *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.perRepCod.perRepDni}}</td>
+                  <td *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.perRepCod.perRepNom + ", " + aula.perRepCod.perRepApe }}</td>       
+                  <td *ngIf="aula.prfCod != null" style="text-align: center;">{{aula.curCod.ncoCurNom}} </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+      </form>
+    </div>
+
+    <!-- Div Alumnos del Aula-->
+    <div class="col s12 anulaPaddMarr" *ngIf="divlistaAlumnos">
+
+      <div class="col s12">
+        <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+          <div class="col s12 anulaPaddMarr" style="height: 30px;">
+            
+          </div>
+        </div>
+      </div>
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+          <div class="col s12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                  <tr>
+                    <th style="text-align: left;">DNI</th>
+                    <th style="text-align: left;">Nombres</th>
+                    <th style="text-align: left;">Apellidos</th>     
+                  </tr>  
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let alu of arrayAlumnosAula">
+                  <td style="text-align: center;">{{alu.perRepCod.perRepDni}}</td>
+                  <td style="text-align: center;">{{alu.perRepCod.perRepNom}}</td>       
+                  <td style="text-align: center;">{{alu.perRepCod.perRepApe}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </form>
+    </div>
+
+    <!-- Div Lista Horario-->
+    <div class="col s12 anulaPaddMarr" *ngIf="divHorario">
+
+        <div class="col s12">
+          <div class="row card-panel col s12 anulaPaddMarr" style="margin-top: 0px; height: 75px;">
+            <div class="col s12 anulaPaddMarr center" style="height: 30px;margin-top: 20px;">
+
+              <div class="center" style="margin: auto;">
+                <button  class="waves-light btn-small" *ngIf="itemIntervalo" (click)="ShowDivIntervalo()" matTooltip = "Configurar intervalo">Configurar intervalo </button>
+              </div>
+
+          </div>
+        </div>
+
+        <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+            <div class="col s12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                    <tr>
+                      <th style="text-align: left;">Hora</th>
+                      <th style="text-align: left;">Lunes</th>
+                      <th style="text-align: left;">Martes</th>
+                      <th style="text-align: left;">Miercoles</th>
+                      <th style="text-align: left;">Jueves</th>
+                      <th style="text-align: left;">Viernes</th>
+                      <th style="text-align: left;">Sabado</th>  
+                      
+                    </tr>  
+                </thead>
+    
+                <tbody>
+                  
+
+                  <tr *ngFor="let h of arrayHorario">
+                    <td  style="text-align: center;" >{{h.itvHroCod.intHraIni.substring(16,21)+' - '+h.itvHroCod.intHraFin.substring(16,21)}}</td>       
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.lunes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Lunes')"         >{{h.lunes.ncoCurNom}} </td>
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.martes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Martes')"       >{{h.martes.ncoCurNom }}</td>       
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.miercoles,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Miercoles')">{{h.miercoles.ncoCurNom}}</td>
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.jueves,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin,'Jueves')"       >{{h.jueves.ncoCurNom}}</td>
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.viernes,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Viernes')"    >{{h.viernes.ncoCurNom}}</td>
+                    <td  style="text-align: center;"  (click)="LlamarModalHorario(h.itvHroCod._id,h.sabado,h.itvHroCod.intHraIni,h.itvHroCod.intHraFin, 'Sabado')"      >{{h.sabado.ncoCurNom}}</td>
+ 
+                  </tr> 
+                  
+                
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Div Lista Intervalo hora-->
+    <div class="col s12 anulaPaddMarr" *ngIf="divIntervalo">
+
+      <div class="row col s12 anulaPaddMarr" style="border-radius: 50px;">
+
+
+        <form class="col s12  anulaPaddMarr" style="margin-top: 40px;">
+
+          <div class="row col s12">
+
+            <div class="row col s12 center anulaPaddMarr">
+              <div class="input-field col s12">
+                <h5 class="center">Intervalo Horario</h5>
+              </div>
+            </div>
+
+            <div class="row col s12">
+              <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+              
+
+                <div class="row col s12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                  <div class="col s6" style="margin-top: 15px;">
+                    <label for="" style="color: black;font-size: 14px;">Hora inicio :</label>  
+                  </div>
+
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                    <input [(ngModel)]="horaInicio" value="horaInicio" name="horaInicio" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese la hora" >
+                  </div>
+
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 15px !important; height: 42px !important; margin-right: 5px;"> 
+                    <label for="" style="font-size: 30px;margin-top: 0px !important;margin-bottom: 10px !important;">:</label>
+                  </div>
+                  
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                    <input [(ngModel)]="minutoInicio" value="minutoInicio" name="minutoInicio" name="notCal" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese los Minutos" >
+                  </div>
+                </div>
+
+                <div class="row col s12 anulaPaddMarr" style="margin-top: 20px;margin-bottom: 0px;">
+
+                  <div class="col s6" style="margin-top: 15px;">
+                    <label for="" style="color: black;font-size: 14px;text-align: left;">Hora fin :</label>  
+                  </div>
+
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                    <input [(ngModel)]="horaFin" value="horaFin" name="horaFin" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese la hora" >
+                  </div>
+
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 15px !important; height: 42px !important; margin-right: 5px;"> 
+                    <label for="" style="font-size: 30px;margin-top: 0px !important;margin-bottom: 10px !important;">:</label>
+                  </div>
+                  
+                  <div class="col s2" style="margin-top: 5px;margin-bottom: 10px;width: 47px !important;border: solid #717172;border-radius: 40%;">
+                    <input [(ngModel)]="minutoFin" maxlength="2"  name="minutoFin" type="text" style="height: 17px;width: 20px;margin-top: 10px;" placeholder="00" matTooltip = "Ingrese los Minutos" >
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+
+            <div class="row col s12" style="margin-top: 10px;padding-bottom: 9px;">
+              <div class="col s6 ">
+                <button class="waves-light btn-small right col s12" style="background-color: rgb(110, 178, 233)" (click)="CrearIntervaloHorario()">{{btnCrearActlzIntervalo}}</button>
+              </div>
+
+              <div class="col s6 ">
+                <button class="waves-light btn-small left col s12" style="background-color: rgb(110, 178, 233)"  (click)="LimpiarFrmIntervalo()">Nuevos</button>
+              </div>
+            </div>
+            
+          </div>
+  
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="col s12 anulaPaddMarr" *ngIf="divIntervalo">
+
+      <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+        <div class="col s12 ">
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 ">
+          <table class="centered responsive-table striped ">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Hora de inicio</th>
+                <th style="text-align: left;">Hora de fin</th>
+                <th style="text-align: left;">Opciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let intervalo of arrayIntervalo">
+                <td style="text-align: center;">{{intervalo.intHraIni.substring(16,21)}}</td>
+                <td style="text-align: center;">{{intervalo.intHraFin.substring(16,21)}}</td>
+                <td style="text-align: center;cursor: pointer;">
+                  <a (click)="PreEditarIntervalo(intervalo)" >
+                    <i matTooltip = "Editar Intervalo" class="material-icons">edit</i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+    </div>
+    <!-----------------------------> 
+
+
+    <div class="row col s12 anulaPaddMarr" *ngIf="divRegAula">
+
+
+      <form class="col s12" style="margin-top: 40px;">
+
+        <div class="row col s12 card-panel">
+
+          <div class="row col s12 center ">
+            <div class="input-field col s12">
+              <h5 class="center">Registrar Aula</h5>
+            </div>
+          </div>
+
+          <div class="row col s12 " style="margin-top: 25px;">
+              
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloGrado._id" name="ModeloGrado._id" [(ngModel)]="ModeloGrado._id">
+                    <mat-option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</mat-option>
+                  </mat-select>    
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloSeccion._id" name="ModeloSeccion._id" [(ngModel)]="ModeloSeccion._id">
+                    <mat-option *ngFor="let s of arraySeccion" [value]="s._id">{{s.secDes}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloNivel._id" name="ModeloNivel._id" [(ngModel)]="ModeloNivel._id">
+                    <mat-option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+         
+
+              <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                <div class="col s2"></div>
+                <div class="input-field col s8 anulaPaddMarr">
+                  <mat-select id="ModeloTurno._id" name="ModeloTurno._id" [(ngModel)]="ModeloTurno._id">
+                    <mat-option *ngFor="let t of arrayTurno" [value]="t._id">{{t.turDes}}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col s2"></div>
+              </div>
+
+          </div>
+
+          <div class="row col s12" style="margin-top: 15px;padding-bottom: 5px;">
+            <div class="col s6">
+              <div class="col s12">
+                <button type="button" class="btn waves-light btn-small right col s12"
+                (click)="CrearAula()">{{btnRegistrar}} </button>
+              </div>
+            </div>
+
+            <div class="col s6">
+              <div class="col s12">
+                <button type="button" class="btn waves-light btn-small left col s12" 
+                (click)="ShowDivListaAulas()">Cancelar</button>
+              </div>
+            </div>
+          </div>  
+          
+          
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
