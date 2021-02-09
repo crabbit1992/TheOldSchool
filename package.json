@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "engines": { 
-    "node": "12.14.0" 
- },
+  "engines": {
+    "node": "12.14.0"
+  },
   "scripts": {
     "start": "node app",
     "dev": "nodemon app.js"
@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
