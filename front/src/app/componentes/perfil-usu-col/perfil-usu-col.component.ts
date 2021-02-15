@@ -404,21 +404,22 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.btnPeriodo=true;               //Botones Secundarios     (btnColegio)  
       this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
-      this.btnCronoActi=true;             //Botones Secundarios     (btnColegio)
+      this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
-      this.btnlistAlum=true;              //Botones Secundarios     (btnCentroAlum)
+      this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
 
-      this.btnCursosDoc=true;             //Botones Secundarios     (btnCentroDocen)
-      this.btnlistDoc=true;               //Botones Secundarios     (btnCentroDocen)
-      this.btnCronoDoc=true;              //Botones Secundarios     (btnCentroDocen)
-      this.btnHorarioDoc=true;            //Botones Secundarios     (btnCentroDocen)
+      this.btnCursosDoc=false;             //Botones Secundarios     (btnCentroDocen)
+      this.btnlistDoc=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnPnaNta=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnCronoDoc=false;              //Botones Secundarios     (btnCentroDocen)
+      this.btnHorarioDoc=false;            //Botones Secundarios     (btnCentroDocen)
 
-      this.btnHistReg=true;               //Botones Secundarios     (btnArchivo)
-      this.btnHistNot=true;               //Botones Secundarios     (btnArchivo)
 
-      console.log("esta en admin!!!!!");
+      this.btnHistReg=false;               //Botones Secundarios     (btnArchivo)
+      this.btnHistNot=false;               //Botones Secundarios     (btnArchivo)
+
     }
 
     if(this.perfilActual=="5e0a916dc2a58d0b8872b2b9"){                //Director
@@ -430,24 +431,26 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
 
-      this.btnRepositorioPers=true;       //Botones Secundarios  (btnMiembros)
-      this.btngestionPerfiles=true;       //Botones Secundarios  (btnMiembros)
+      this.btnRepositorioPers=true;       //Botones Secundarios     (btnMiembros)
+      this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
 
-      this.btnPeriodo=true;               //Botones Secundarios  (btnColegio)  
-      this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
-      this.btnCronoActi=true;             //Botones Secundarios  (btnColegio)
-      this.btnPerfilCol=true;             //Botones Secundarios  (btnColegio)
+      this.btnPeriodo=true;               //Botones Secundarios     (btnColegio)  
+      this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
+      this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
+      this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
 
-      this.btnCursosAlu=true;             //Botones Secundarios  (btnCentroAlum)
-      this.btnlistAlum=true;              //Botones Secundarios  (btnCentroAlum)
+      this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
+      this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
 
-      this.btnCursosDoc=true;             //Botones Secundarios  (btnCentroDocen)
-      this.btnlistDoc=true;               //Botones Secundarios  (btnCentroDocen)
-      this.btnCronoDoc=true;              //Botones Secundarios  (btnCentroDocen)
-      this.btnHorarioDoc=true;            //Botones Secundarios  (btnCentroDocen)
+      this.btnCursosDoc=false;             //Botones Secundarios     (btnCentroDocen)
+      this.btnlistDoc=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnPnaNta=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnCronoDoc=false;              //Botones Secundarios     (btnCentroDocen)
+      this.btnHorarioDoc=false;            //Botones Secundarios     (btnCentroDocen)
 
-      this.btnHistReg=true;               //Botones Secundarios  (btnArchivo)
-      this.btnHistNot=true;               //Botones Secundarios  (btnArchivo)
+
+      this.btnHistReg=false;               //Botones Secundarios     (btnArchivo)
+      this.btnHistNot=false;               //Botones Secundarios     (btnArchivo)
 
     }
 
@@ -465,99 +468,103 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
       this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
-      this.btnCronoActi=true;             //Botones Secundarios  (btnColegio)
-      this.btnPerfilCol=true;             //Botones Secundarios  (btnColegio)
+      this.btnCronoActi=false;             //Botones Secundarios  (btnColegio)
+      this.btnPerfilCol=false;             //Botones Secundarios  (btnColegio)
 
-      this.btnCursosAlu=true;             //Botones Secundarios  (btnCentroAlum)
-      this.btnlistAlum=true;              //Botones Secundarios  (btnCentroAlum)
+      this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
+      this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
 
-      this.btnCursosDoc=true;             //Botones Secundarios  (btnCentroDocen)
-      this.btnlistDoc=true;               //Botones Secundarios  (btnCentroDocen)
-      this.btnCronoDoc=true;              //Botones Secundarios  (btnCentroDocen)
-      this.btnHorarioDoc=true;            //Botones Secundarios  (btnCentroDocen)
+      this.btnCursosDoc=false;             //Botones Secundarios     (btnCentroDocen)
+      this.btnlistDoc=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnPnaNta=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnCronoDoc=false;              //Botones Secundarios     (btnCentroDocen)
+      this.btnHorarioDoc=false;            //Botones Secundarios     (btnCentroDocen)
 
-      this.btnHistReg=true;               //Botones Secundarios  (btnArchivo)
-      this.btnHistNot=true;               //Botones Secundarios  (btnArchivo)         
+
+      this.btnHistReg=false;               //Botones Secundarios     (btnArchivo)
+      this.btnHistNot=false;               //Botones Secundarios     (btnArchivo)       
     }           
             
     if(this.perfilActual=="5e0a917ec2a58d0b8872b2bb"){            //Coordinador
-      this.btnMiembros=true;              //Botones principales
+      this.btnMiembros=true;              //Botones principales   
       this.btnColegio=true;               //Botones principales
       this.btnCentroAlum=true;            //Botones principales
       this.btnCentroDocen=true;           //Botones principales
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
 
-      this.btnRepositorioPers=true;       //Botones Secundarios     (btnMiembros)
-      this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
+      this.btnRepositorioPers=true;       //Botones Secundarios  (btnMiembros)
+      this.btngestionPerfiles=true;       //Botones Secundarios  (btnMiembros)
 
-      this.btnCronoActi=true;             //Botones Secundarios     (btnColegio)
-      this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
+
       this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
+      this.btnCronoActi=false;             //Botones Secundarios  (btnColegio)
+      this.btnPerfilCol=false;             //Botones Secundarios  (btnColegio)
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
-      this.btnlistAlum=true;              //Botones Secundarios     (btnCentroAlum)
+      this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
 
-      this.btnCursosDoc=true;             //Botones Secundarios     (btnCentroDocen)
-      this.btnlistDoc=true;               //Botones Secundarios     (btnCentroDocen)
-      this.btnCronoDoc=true;              //Botones Secundarios     (btnCentroDocen)
-      this.btnHorarioDoc=true;            //Botones Secundarios     (btnCentroDocen)
+      this.btnCursosDoc=false;             //Botones Secundarios     (btnCentroDocen)
+      this.btnlistDoc=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnPnaNta=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnCronoDoc=false;              //Botones Secundarios     (btnCentroDocen)
+      this.btnHorarioDoc=false;            //Botones Secundarios     (btnCentroDocen)
 
-      this.btnHistReg=true;               //Botones Secundarios     (btnArchivo)
-      this.btnHistNot=true;               //Botones Secundarios     (btnArchivo) 
+      this.btnHistReg=false;               //Botones Secundarios     (btnArchivo)
+      this.btnHistNot=false;               //Botones Secundarios     (btnArchivo)   
     }     
     
     if(this.perfilActual=="5e0a918cc2a58d0b8872b2bc"){            //Secretaria
       this.btnMiembros=true;              //Botones principales
       this.btnColegio=true;               //Botones principales
       this.btnCentroAlum=true;            //Botones principales
-      this.btnCentroDocen=true;           //Botones principales
+      this.btnCentroDocen=false;           //Botones principales
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
 
       this.btnRepositorioPers=true;       //Botones Secundarios     (btnMiembros)
       this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
 
-      this.btnCronoActi=true;             //Botones Secundarios     (btnColegio)
+      this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios     (btnColegio)
       this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
-      this.btnlistAlum=true;              //Botones Secundarios     (btnCentroAlum)
+      this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
 
       this.btnCursosDoc=true;             //Botones Secundarios     (btnCentroDocen)
-      this.btnlistDoc=true;               //Botones Secundarios     (btnCentroDocen)
-      this.btnCronoDoc=true;              //Botones Secundarios     (btnCentroDocen)
-      this.btnHorarioDoc=true;            //Botones Secundarios     (btnCentroDocen)
+      this.btnlistDoc=false;               //Botones Secundarios     (btnCentroDocen)
+      this.btnCronoDoc=false;              //Botones Secundarios     (btnCentroDocen)
+      this.btnHorarioDoc=false;            //Botones Secundarios     (btnCentroDocen)
 
-      this.btnHistReg=true;               //Botones Secundarios     (btnArchivo)
-      this.btnHistNot=true;               //Botones Secundarios     (btnArchivo) 
+      this.btnHistReg=false;               //Botones Secundarios     (btnArchivo)
+      this.btnHistNot=false;               //Botones Secundarios     (btnArchivo) 
     } 
             
     if(this.perfilActual=="5e0a9197c2a58d0b8872b2be"){            //Profesor
-      this.btnMiembros=true;              //Botones principales
-      this.btnColegio=true;               //Botones principales
+      this.btnMiembros=false;              //Botones principales
+      this.btnColegio=false;               //Botones principales
       this.btnCentroAlum=true;            //Botones principales
       this.btnCentroDocen=true;           //Botones principales
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
 
-      this.btngestionPerfiles=true;       //Botones Secundarios
+      this.btngestionPerfiles=false;       //Botones Secundarios
 
-      this.btnCronoActi=true;             //Botones Secundarios
-      this.btnPerfilCol=true;             //Botones Secundarios
+      this.btnCronoActi=false;             //Botones Secundarios
+      this.btnPerfilCol=false;             //Botones Secundarios
 
       this.btnCursosAlu=true;             //Botones Secundarios
-      this.btnlistAlum=true;              //Botones Secundarios
+      this.btnlistAlum=false;              //Botones Secundarios
 
-      this.btnCursosDoc=true;             //Botones Secundarios
-      this.btnlistDoc=true;               //Botones Secundarios
+      this.btnCursosDoc=false;             //Botones Secundarios
+      this.btnlistDoc=false;               //Botones Secundarios
       this.btnPnaNta=true;
-      this.btnCronoDoc=true;              //Botones Secundarios
-      this.btnHorarioDoc=true;            //Botones Secundarios
+      this.btnCronoDoc=false;              //Botones Secundarios
+      this.btnHorarioDoc=false;            //Botones Secundarios
 
-      this.btnHistReg=true;               //Botones Secundarios
-      this.btnHistNot=true;               //Botones Secundarios  
+      this.btnHistReg=false;               //Botones Secundarios
+      this.btnHistNot=false;               //Botones Secundarios  
       console.log("esta en Profesor!!!!!");
 
     } 

@@ -54,6 +54,7 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
   autoplay:any;
   elems: any;
   instances:any;
+  instance:any;
   varCambio:number=0;
 
   show = false; // add one more property
@@ -125,7 +126,7 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
   /** */
 
   /**Referente al carousel */
-  options = { fullWidth: false,pressed:true, duration:300, indicators: false };
+  options = { fullWidth: false,pressed:true, duration:300, indicators: true };
 
   mntRegistro: boolean=false;
   mntLogin: boolean=false;
@@ -155,10 +156,6 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
   ) { }
 
   hideDivs(){
-    this.mntRegistro=false;
-    this.mntLogin=false;
-    this.DivregLog=false;
-    this.listCols=false;
 
     this.divQs=false;
     this.divActividades=false;
@@ -166,6 +163,8 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
     this.divNiveles=false;
     this.divTalleres=false;
     this.divInfraestructura=false;
+    this.mntLogin=false;
+    this.mntRegistro=false;
   }
 
   BtnFlotante(){
@@ -241,20 +240,45 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
     this.getAnuncios();
   }
 
+  getColegio(colUrl: string){
+    this.colegioService.getColegio(colUrl)
+    .pipe(delay(700)).subscribe(res=>{
+      
+      if(res==undefined){
+        console.log("No existe la ruta");
+      }
+      else{
+       
+        this.colActual=res["_id"];
+        this.getPortadas();
+        this.getAnuncios();
+        
+        this.colegio=res as Colegio;
+        let emblema=this.colegio.colImgPfl.colImgRta;
+        this.emblemaRta= 'http://localhost:3000'+emblema.toString() +'';
+        this.getNivelesSlt();
+        this.varCambio=1;
+        
+
+      }
+    });
+    
+  }
+  
+
   getAnuncios(){
+    
     this.biografiaService.getAnuncios(this.colActual)
     .subscribe(res=>{
       this.hideDivs();
       this.arrayAnuncios=res as GetBioAnuncio[];
-
-      if(this.arrayAnuncios.length>0){
-        this.divInicio=true;
-      }
+      this.divInicio=true;
       setTimeout(() => {
-        let elems = document.querySelectorAll('.carousel');
-        let instances = M.Carousel.init(elems, this.options);
-        
-      }, 100);
+        this.elems = document.querySelectorAll('.carousel');
+        this.instances = M.Carousel.init(this.elems, this.options);
+
+      }, 10);
+      
     })
   }
 
@@ -471,43 +495,13 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
 
   Inicio(){
     this.colegioService.UrlOrRedirect=0;
+  
+    this.hideDivs();
     this.rutas.navigate(["/inicio"])
   }
 
 
 
-  getColegio(colUrl: string){
-    this.colegioService.getColegio(colUrl)
-    .pipe(delay(700)).subscribe(res=>{
-      
-      if(res==undefined){
-        console.log("No existe la ruta");
-      }
-      else{
-       
-        this.colActual=res["_id"];
-        this.getPortadas();
-        this.getAnuncios();
-        
-        this.colegio=res as Colegio;
-        let emblema=this.colegio.colImgPfl.colImgRta;
-        this.emblemaRta= 'http://localhost:3000'+emblema.toString() +'';
-        this.getNivelesSlt();
-        this.varCambio=1;
-        setTimeout(() => {
-          this.elems = document.querySelectorAll('.carousel');
-          this.instances = M.Carousel.init(this.elems, this.options);
-    
-          this.autoplay= setInterval(function() {
-            $('.carousel').carousel('next');
-          }, 5000); 
-          
-        }, 1000);
-
-      }
-    });
-    
-  }
 
   getPortadas(){
     this.biografiaService.getPortadasUrl(this.colUrl)
@@ -525,10 +519,10 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
 
     this.route.paramMap.subscribe(params=>{
       this.colUrl=params.get("colUrl")
-     
       this.getColegio(this.colUrl);
-      
     });
+    
+
 
     $(function(){
       $('.ui-state-default').click(function () {
@@ -541,9 +535,14 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
   }
 
 
-  ngAfterViewInit(){
-    
-    
+  ngAfterViewInit() {
+
+    setTimeout(() => {
+      this.elems = document.querySelectorAll('.carousel');
+      this.instances = M.Carousel.init(this.elems, this.options);
+      
+    }, 10);
+
   }
 
 

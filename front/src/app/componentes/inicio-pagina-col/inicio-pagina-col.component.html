@@ -20,7 +20,7 @@
   </mat-toolbar>
   
   
-  <div class="row col m12 s12 anulaPaddMarr"  style="min-height: 550px;z-index: -10; padding: 0px; background-color: rgb(241, 251, 253);">
+  <div class="row col m12 s12 anulaPaddMarr"  style="min-height: 550px;z-index: -10; padding: 0px; background-color: rgb(255, 255, 255);">
         
     <!-- Imagen de perfil del colegio-->
     <div class="row col m12 s12 anulaPaddMarr" style="background-color: rgb(17, 31, 53); margin-bottom: 0px !important;padding-bottom: 0px !important;">
@@ -64,8 +64,8 @@
     <div class="row col m12 s12 anulaPaddMarr" style="margin-top: 30px;" *ngIf="divInicio">
       <div class="col m12 s12 anulaPaddMarr" style="height: 550px;">
         <div class="carousel  center-align">
-          <div class="carousel-item" *ngFor="let item of arrayAnuncios;let i = index">
-              <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+          <div class="carousel-item" *ngFor="let item of arrayAnuncios;let i = index" style="height: 150px; width: 270px;">
+              <img  (click)="openModalImg('ac',item)" [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
           </div>
         </div>
       </div>  
@@ -89,8 +89,8 @@
           </div>
 
           <div class="col s12 center" style="max-height: 280px;">
-              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
                   
                       <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{objMision.qsDes}} </span>
                   </div>
@@ -111,8 +111,8 @@
           </div>
 
           <div class="col s12 center" style="max-height: 280px;">
-              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+              <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+                  <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
                   
                       <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{objVision.qsDes}} </span>
                   </div>
@@ -120,7 +120,7 @@
           </div>
       </div>
 
-      <div class="row col s12 center"  *ngIf="divValores" style="margin-top: 20px;margin-bottom: 20px; background-color: rgb(241, 251, 253);"> 
+      <div class="row col s12 center"  *ngIf="divValores" style="margin-top: 20px;margin-bottom: 20px; background-color: rgb(255, 255, 255);"> 
 
         <span style="font-size: 20px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objValores.qsTtl}}</strong></span>
         <div class="col s12">
@@ -132,10 +132,10 @@
         </div>
 
         <div class="col s12 center" style="max-height: 280px;">
-            <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-                <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+            <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;max-height: 350px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+                <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
                 
-                    <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;background-color: rgb(241, 251, 253);">{{objValores.qsDes}} </span>
+                    <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;background-color: rgb(255, 255, 255);">{{objValores.qsDes}} </span>
                 </div>
             </div>
         </div>
@@ -179,7 +179,7 @@
                   <img class="Imagenes" (click)="openModalImg('ac',actividad)" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                 </div>
 
-                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(241, 251, 253);max-height: 150px; border-radius: 10px; padding-top: 0px;">
+                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(255, 255, 255);max-height: 150px; border-radius: 10px; padding-top: 0px;">
                   <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center; margin-top: 0px;"><strong>{{actividad.actTtl}}</strong></span>
                   <span id="myTextarea" style="color: black; text-align: center;font-style: italic;">{{actividad.actDes}} </span>
                 </div>
@@ -229,7 +229,7 @@
                   <img class="Imagenes" (click)="openModalImg('ni',nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                 </div>
 
-                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(241, 251, 253);max-height: 150px; border-radius: 10px; padding-top: 0px;">
+                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(255, 255, 255);max-height: 150px; border-radius: 10px; padding-top: 0px;">
                   <span id="myTextarea" style="color: black; text-align: center;font-style: italic;">{{nivel.nivDes}} </span>
                 </div>
 
@@ -277,7 +277,7 @@
                     <img class="Imagenes" (click)="openModalImg('ta',taller)" [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                   </div>
   
-                  <div class="card-content white-text PuntosSuspensivos center" style="max-height: 150px; border-radius: 10px; padding-top: 0px;background-color: rgb(241, 251, 253);">
+                  <div class="card-content white-text PuntosSuspensivos center" style="max-height: 150px; border-radius: 10px; padding-top: 0px;background-color: rgb(255, 255, 255);">
                     <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center; margin-top: 0px;"><strong>{{taller.talTtl}}</strong></span>
                     <span id="myTextarea" style="color: black; text-align: center;font-style: italic;">{{taller.talDes}} </span>
                   </div>
@@ -326,7 +326,7 @@
                   <img class="Imagenes" (click)="openModalImg('in',infraestructura)" [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                 </div>
 
-                <div class="card-content white-text PuntosSuspensivos center" style="max-height: 150px; border-radius: 10px; padding-top: 0px;background-color: rgb(241, 251, 253);">
+                <div class="card-content white-text PuntosSuspensivos center" style="max-height: 150px; border-radius: 10px; padding-top: 0px;background-color: rgb(255, 255, 255);">
                   <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center; margin-top: 0px;"><strong>{{infraestructura.infTtl}}</strong></span>
                   <span id="myTextarea" style="color: black; text-align: center;font-style: italic;">{{infraestructura.infDes}} </span>
                 </div>
@@ -347,7 +347,7 @@
 
 </div>
 
-<div class="container-fluid modPantalla" style="min-height: 1000px;">
+<div class="container-fluid modPantalla" style="min-height: 1500px;">
 
   <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
     <button
@@ -367,7 +367,7 @@
   
   </mat-toolbar>
 
-  <div class="row col m12 s12 anulaPaddMarr"  style="min-height: 550px;z-index: -10; padding: 0px; background-color: rgb(241, 251, 253);">
+  <div class="row col m12 s12 anulaPaddMarr"  style="min-height: 550px;z-index: -10; padding: 0px; background-color: rgb(255, 255, 255);">
         
     <!-- Emblema y nombre del colegio-->
     <div class="row col m12 anulaPaddMarr" style="background-color: rgb(52, 83, 129); margin-bottom: 0px !important;padding-bottom: 0px !important;">
@@ -405,7 +405,7 @@
 
     <!-- Anuncios del colegio-->
     <div class="row col m12 s12 anulaPaddMarr" *ngIf="divInicio">
-      <div class="col m12 s12 anulaPaddMarr" style="height: 550px;">
+      <div class="col m12 s12 anulaPaddMarr" style="min-height: 550px;">
         <div class="carousel  center-align" >
           <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayAnuncios;let i = index">
               <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
@@ -430,13 +430,13 @@
               </div>
           </div>
 
-          <div class="col m7 center" style="height: 280px;background-color: rgb(241, 251, 253);">
+          <div class="col m7 center" style="height: 280px;background-color: rgb(255, 255, 255);">
 
               <span style="font-size: 30px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objMision.qsTtl}}</strong></span>
           
-              <div class="card anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253) !important;">
-                  <div class="card-content white-text anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-                      <textarea [value]="objMision.qsDes" class="content" disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center;background-color: rgb(241, 251, 253);">              
+              <div class="card anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+                  <div class="card-content white-text anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+                      <textarea [value]="objMision.qsDes" class="content" disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center;background-color: rgb(255, 255, 255);">              
                       </textarea>
                   </div>
               </div>
@@ -444,13 +444,13 @@
       </div>
 
       <div class="row col m12"  *ngIf="divVision" style="margin-top: 50px;">
-          <div class="col m7 center" style="height: 280px;background-color: rgb(241, 251, 253);">
+          <div class="col m7 center" style="height: 280px;background-color: rgb(255, 255, 255);">
 
               <span style="font-size: 30px;margin-top: 10px; margin-bottom: 0px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objVision.qsTtl}}</strong></span>
 
-              <div class="card  anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important;background-color: rgb(241, 251, 253);">
-                <div class="card-content white-text anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">                
-                  <textarea [value]="objVision.qsDes" class="content"  disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center; background-color: rgb(241, 251, 253);">              
+              <div class="card  anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important;background-color: rgb(255, 255, 255);">
+                <div class="card-content white-text anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">                
+                  <textarea [value]="objVision.qsDes" class="content"  disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center; background-color: rgb(255, 255, 255);">              
                   </textarea>
                 </div>
   
@@ -479,9 +479,9 @@
       <div class="col m7 center" style="height: 280px;">
         <span style="font-size: 30px;margin-top: 10px; color: rgb(1, 1, 39); font-style: normal;"><strong>{{objValores.qsTtl}}</strong></span>
     
-        <div class="card anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+        <div class="card anulaPaddMarr" style="margin-top: 20px;height: 280px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
             <div class="card-content white-text anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important;">
-                <textarea [value]="objValores.qsDes" class="content" disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center; background-color: rgb(241, 251, 253);">              
+                <textarea [value]="objValores.qsDes" class="content" disabled readonly name="" id="myTextarea" cols="30" rows="10" style="max-height: 219px;min-height: 219px;resize: none;border: none !important; font-style: italic; text-align: center; background-color: rgb(255, 255, 255);">              
                 </textarea>
             </div>
         </div>        
@@ -527,13 +527,13 @@
       <div class="row col m12 anulaPaddMarr" style="margin-top: 90px;"> 
 
         <div class="col m12">
-          <div class="col m4" *ngFor="let actividad of arrayActividades">
-              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+          <div class="col m4" *ngFor="let actividad of arrayActividades" >
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important; height: 450px;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
                   <img class="Imagenes" (click)="openModalImg('ac',actividad)" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 290px;border-radius: 7px;">
                 </div>
 
-                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(241, 251, 253);max-height: 150px; border-radius: 10px; padding-top: 0px;">
+                <div class="card-content white-text PuntosSuspensivos center" style="background-color: rgb(255, 255, 255);max-height: 150px; border-radius: 10px; padding-top: 0px;">
                   <span class="card-title" style="color: rgb(44, 171, 221);font-size: 16px; text-align: center; margin-top: 0px;"><strong>{{actividad.actTtl}}</strong></span>
                   <span id="myTextarea" style="color: black; text-align: center;font-style: italic;">{{actividad.actDes}} </span>
                 </div>
@@ -586,7 +586,7 @@
 
         <div class="col m12">
           <div class="col m4" *ngFor="let nivel of arrayNiv">
-              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important; height: 450px;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
                   <img class="Imagenes" (click)="openModalImg('ni',nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 290px;border-radius: 7px;">
                 </div>
@@ -640,7 +640,7 @@
 
         <div class="col m12">
           <div class="col m4" *ngFor="let taller of arrayTalleres">
-              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;height: 450px;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
                   <img class="Imagenes" (click)="openModalImg('ta',taller)" [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 290px;border-radius: 7px;">
                 </div>
@@ -696,7 +696,7 @@
 
         <div class="col m12">
           <div class="col m4" *ngFor="let infraestructura of arrayInfraestructura">
-              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
+              <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important; height: 450px;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
                   <img class="Imagenes" (click)="openModalImg('in',infraestructura)" [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 290px;border-radius: 7px;">
                 </div>

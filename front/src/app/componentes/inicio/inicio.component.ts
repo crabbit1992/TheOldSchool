@@ -161,12 +161,9 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
  
 
   verColegio(colegio: GetColegio){
-    this.hideDivs();
-
-    setTimeout(() => {
+    this.colegioService.UrlOrRedirect=1;
+   
       this.rutas.navigate(["/inicio",colegio.colUrl])
-    }, 1000);
-
    
   }
 
@@ -175,12 +172,6 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
     this.mntAdminCrabbService.getPortadas()
     .pipe(delay(700)).subscribe(res=>{
       this.arrayPortadas=res as GetNucleoPortada[];
-      console.log("Estas son las portadas de la empresa");
-      console.log(this.arrayPortadas);
-      console.log(this.arrayPortadas.length);
-
-      console.log(this.arrayPortadas[0].imgCod.ncoImgRta);
-      console.log(this.arrayPortadas[1].imgCod.ncoImgRta);
 
       setTimeout(() => {
         this.elems = document.querySelectorAll('.carousel');
@@ -223,6 +214,8 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
 
 
   ngOnInit() {
+
+    
     this.getPortadas()
     this.getColegios();
     

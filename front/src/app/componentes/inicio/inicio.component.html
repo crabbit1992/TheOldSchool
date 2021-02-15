@@ -1,4 +1,4 @@
-<div class="container-fluid modPantalla" style="min-height: 1000px; background-color: rgb(241, 251, 253);">
+<div class="container-fluid modPantalla" style="min-height: 1000px; background-color: rgb(255, 255, 255);">
 
 
   <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
@@ -26,7 +26,7 @@
 
         <div class="carousel  center-align" >
           <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-              <img  [src]="'/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+              <img  [src]="'http://localhost:3000/' +  item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
           </div>
         </div>        
       </div>  
@@ -52,17 +52,16 @@
     </div>
 
     <div class="row col m12 s12 anulaPaddMarr" *ngIf="listCols">
-      <div class="col m1 s2 anulaPaddMarr" style="margin-top: 20px; width: 12%;height: 600px; background-color: rgb(14, 32, 66);"></div>
-    
-      <div class="col m6 s6 anulaPaddMarr center" style="margin-top: 20px;width: 76%;">
 
-        <div class="row col m12">
-          <div class="col m3"></div>
-          <div class="col m6">
-            <input type="text" class="input-field center" [(ngModel)]="listFilter" placeholder=" Busqueda de colegio" spellcheck="true" style="background-color: rgb(0, 18, 51); height: 40px;border-radius: 20px;color: white;">
-          </div>
-          <div class="col m3"></div>
+      <div class="row col m12" style="margin-top: 30px;">
+        <div class="col m3"></div>
+        <div class="col m6">
+          <input type="text" class="input-field center" [(ngModel)]="listFilter" placeholder=" Busqueda de colegio" spellcheck="true" style="background-color: rgb(0, 18, 51); height: 40px;border-radius: 20px;color: white;">
         </div>
+        <div class="col m3"></div>
+      </div>
+     
+      <div class="col m10 s6 anulaPaddMarr center" style="margin-top: 20px;">
 
         <div class="row col m12 s12 anulaPaddMarr">
 
@@ -80,7 +79,9 @@
 
 
       </div>
-      <div class="col m1 s2 anulaPaddMarr" style="margin-top: 20px; width: 12%;height: 600px;background-color: rgb(14, 32, 66);"></div>
+
+      <div class="col m2 s2 anulaPaddMarr" style="margin-top: 25px; height: 600px; background-color: rgb(14, 32, 66);"></div>
+
     </div>
 
     <div class="col m12 anulaPaddMarr" *ngIf="DivregLog">
