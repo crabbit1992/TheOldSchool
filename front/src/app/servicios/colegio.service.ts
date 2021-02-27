@@ -10,7 +10,7 @@ export class ColegioService {
 
   UrlOrRedirect:number=0;
 
-  readonly URL_API='http://localhost:3000/Inicio/Colegio';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Colegio';
 
   constructor(private http: HttpClient) { }
 

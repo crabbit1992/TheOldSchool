@@ -19,6 +19,8 @@ declare var M: any;
 })
 export class ModalPerfilColegioComponent implements OnInit {
 
+  readonly URL='http://209.145.52.133:3000';
+
   photoSelected: string | ArrayBuffer;
   tituloImg:string;
   arrayImgs: GaleriaCol[];
@@ -50,14 +52,14 @@ export class ModalPerfilColegioComponent implements OnInit {
         var ruta=this.message["ncoImgRta"];
         this.tituloImg=this.message["ncoImgTtl"];
   
-        this.photoSelected='http://localhost:3000/'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
 
       }
       else{
         var ruta=this.message["colImgRta"];
         this.tituloImg=this.message["colImgTtl"];
   
-        this.photoSelected='http://localhost:3000/'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
     }
 
@@ -68,37 +70,37 @@ export class ModalPerfilColegioComponent implements OnInit {
         console.log(image)
         console.log(ruta)
         this.tituloImg= image["qsDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='vs'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["qsDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='va'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["qsDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='ac'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["actDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='ni'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["nivDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='ta'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["talDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
       else if(opt=='in'){
         var ruta= image["imgCod"].colImgRta;
         this.tituloImg= image["infDes"];
-        this.photoSelected='http://localhost:3000'+ruta.toString();
+        this.photoSelected=this.URL+ruta.toString();
       }
 
    

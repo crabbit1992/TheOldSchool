@@ -1,6 +1,6 @@
 
 
-    <div class="container-fluid modPantalla">
+    <div class="container-fluid modPantalla anulaPaddMarr" style="height: 100%;"> <!--  Contenedor del modo pantalla celular ( ordenar el nombre pendiente )-->
 
         <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
             <button
@@ -11,7 +11,7 @@
               *ngIf="isHandset$ | async">
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+            <span style="color: white; font-size: 15px;"><strong>{{lnSchoolTtl}}</strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
             <span class="spacer"></span>
             
             <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
@@ -20,7 +20,6 @@
           
         </mat-toolbar>
 
-
         <div class="row col m12 s12 anulaPaddMarr  blue-grey" style="background-color: rgb(2, 2, 27);">
             
             <!-- Portadas de la empresa Crab-->
@@ -28,7 +27,7 @@
                 <div class="col m12 s12 anulaPaddMarr">
                     <div class="carousel  center-align" >
                         <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-                            <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                            <img  [src]="URL + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
                         </div>
                     </div>
                 </div>  
@@ -98,7 +97,7 @@
 
         <div class="row col m12 s12 anulaPaddMarr blue-grey" style="margin-top: 0px; padding-top: 0px;">
 
-            <div class="col panelIzquierdo m2 s12" *ngIf="divPfl" style="min-height: 400px; margin-top: 0px; padding-top: 0px;">
+            <div class="col panelIzquierdo m2 s12" *ngIf="divPfl" style="min-height: 500px; margin-top: 0px; padding-top: 0px;">
         
                 <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
                 <span class="card-title" style="font-size: 15px;text-align: center;">Privilegio
@@ -131,6 +130,9 @@
         </div>
     </div>
 
+
+
+
     <div class="container-fluid modCelular" style="background-color: rgb(241, 251, 253);">  
 
         <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
@@ -142,7 +144,7 @@
               *ngIf="isHandset$ | async">
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+            <span style="color: white; font-size: 20px;"><strong>{{lnSchoolTtl}}</strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
             <span class="spacer"></span>
             
             <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
@@ -160,7 +162,7 @@
                     <div class="col m12 s12 anulaPaddMarr" style="height: 550px;">
                         <div class="carousel  center-align" >
                             <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-                                <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                                <img  [src]="URL + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
                             </div>
                         </div>
                     </div>  

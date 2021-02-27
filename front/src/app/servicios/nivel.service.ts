@@ -8,7 +8,7 @@ import {HttpClient }from '@angular/common/http'
 export class NivelService {
   selectedNivel: Nivel;
   nivel:Nivel[];
-  readonly URL_API='http://localhost:3000/Inicio/Nivel';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Nivel';
 
   constructor(private http: HttpClient) {
     this.selectedNivel=new Nivel();

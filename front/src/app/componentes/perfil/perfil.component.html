@@ -1,4 +1,4 @@
-<div class="container-fluid modCelular" style="min-height: 500px; background-color: rgb(241, 251, 253);">
+<div class="container-fluid modCelular" style="height: 100%; background-color: rgb(241, 251, 253);">
   <mat-toolbar color="primary" style="background-color: rgb(7, 18, 34);">
     <button
       type="button"
@@ -8,7 +8,7 @@
       *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span style="color: white; font-size: 15px;"><strong> {{lnSchoolTtl}} </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
     <span class="spacer"></span>
     
     <a class="btn" mat-list-item style="background-color: rgb(86, 161, 247);" matTooltip = "Lista de colegios"><i class="material-icons">list</i></a>
@@ -24,7 +24,7 @@
       <div class="col s12 anulaPaddMarr">
         <div class="carousel  center-align" >
           <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-              <img  [src]="'http://localhost:3000/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+              <img  [src]="URL + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
           </div>
         </div>
       </div>  
@@ -33,7 +33,7 @@
 
   <div class="row col m12 s12">
 
-    <div class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 500px;">
+    <div class="col panelIzquierdo m3 s12 blue-grey" style="min-height: 700px;">
 
       <div class="card-content white-text green center" style="padding: 8px 8px 8px 8px;margin-top: 8px;">
         <span class="card-title" style="font-size: 15px;text-align: center;">Colegio
@@ -68,7 +68,7 @@
       *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span style="color: white;"><strong> Logo School </strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
+    <span style="color: white; font-size: 20px;"><strong>{{lnSchoolTtl}}</strong><span></span><mat-icon aria-hidden="false" aria-label="Example home icon">school</mat-icon></span>
     <span class="spacer"></span>
     
     <a mat-list-item style="background-color: rgb(7, 18, 34);font-size: 14px !important;"> <em>{{lblNomUser}}</em></a>
@@ -82,7 +82,7 @@
       <div class="col s12 anulaPaddMarr">
         <div class="carousel  center-align">
           <div  class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-              <img  [src]="'http://localhost:3000/' + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
+              <img  [src]="URL + item.imgCod.ncoImgRta || 'assets/no-image-icon-11.png'">
           </div>
         </div>
       </div>  

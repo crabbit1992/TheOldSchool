@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 import {Login}  from '../../modelos/login';
+import {Perfil}  from '../../modelos/perfil';
 import {ResToken}  from '../../modelos/res-token';
 import { LoginService } from '../../servicios/login.service';
 import { MntAdminCrabbService } from '../../servicios/mnt-admin-crabb.service';
+
+import { PerfilService } from '../../servicios/perfil.service';
 import {Router} from '@angular/router';
 
 import { MatDialog } from '@angular/material';
@@ -19,11 +22,13 @@ declare const M;
 })
 export class LoginComponent implements OnInit {
 
+  perfiles:Perfil[];
   
   readonly URL_API='http://localhost:3000/Inicio/Login';
   constructor(
               private loginService: LoginService,
               private mntAdminCrabbService: MntAdminCrabbService,
+              private perfilService: PerfilService,
               private rutas:Router,
               public dialog       : MatDialog
             ){ }
@@ -39,6 +44,7 @@ export class LoginComponent implements OnInit {
   ModeloResToken: ResToken=new ResToken();
 
   errorMessage: string;
+  admCeo:boolean=false;
 
 
   Login(){
@@ -62,11 +68,12 @@ export class LoginComponent implements OnInit {
       else{
         this.ModeloResToken=res["dataUser"];
         localStorage.setItem('token',JSON.stringify(this.ModeloResToken.accessToken));
-        
-        const idPerRep= this.mntAdminCrabbService.encript(this.ModeloResToken.idPerRep)
+        const idPerRep= this.mntAdminCrabbService.encript(this.ModeloResToken.idPerRep);
+
         localStorage.setItem('idPerRep',JSON.stringify(idPerRep));
         console.log(localStorage.getItem('token'));
         this.rutas.navigateByUrl("perfil");
+      
       }
     });
   }

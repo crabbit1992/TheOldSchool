@@ -9,7 +9,7 @@ import { HttpClient }from '@angular/common/http';
 
 export class TipoPeriodoService {
 
-  readonly URL_API='http://localhost:3000/Inicio/TipoPeriodo';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/TipoPeriodo';
 
   constructor(private http: HttpClient) { }
 

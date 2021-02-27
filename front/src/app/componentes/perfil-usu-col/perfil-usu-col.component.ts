@@ -46,6 +46,8 @@ declare var $:any;
 })
 export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  readonly URL='http://209.145.52.133:3000';
+
   perRepCod:string
   colCod: string;
 
@@ -153,6 +155,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
   persona: PersonaRepositorio=new PersonaRepositorio();
   lblNomUser:string="";
 
+  lnSchoolTtl: string="LnSchool";
 
    
 
@@ -674,7 +677,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
   getPortadas(){
 
       this.biografiaService.getPortadas(this.colCod)
-      .pipe(delay(700)).subscribe(res=>{
+      .subscribe(res=>{
       this.arrayPortadas=res as GetBioPortada[];
       console.log(this.arrayPortadas);
 
@@ -683,7 +686,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
         this.elems = document.querySelectorAll('.carousel');
         this.instances = M.Carousel.init(this.elems, this.options);
 
-      }, 1000);
+      }, 100);
     });
    
   }
@@ -746,7 +749,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.elems = document.querySelectorAll('.carousel');
       this.instances = M.Carousel.init(this.elems, this.options);
       
-    }, 1000);
+    }, 200);
 
   }
 

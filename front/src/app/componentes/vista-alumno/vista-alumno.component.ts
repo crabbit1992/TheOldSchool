@@ -56,6 +56,9 @@ declare var $:any;
 })
 export class VistaAlumnoComponent implements OnInit {
 
+
+  readonly URL='http://209.145.52.133:3000';
+
   autoplay:any;
   elems: any;
   instances:any;

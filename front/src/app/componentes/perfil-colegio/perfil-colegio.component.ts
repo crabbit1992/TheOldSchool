@@ -41,6 +41,8 @@ declare var M: any;
 })
 export class PerfilColegioComponent implements OnInit {
 
+  readonly URL='http://209.145.52.133:3000';
+
   btnGuardarEditar:string="Guardar"; 
   imgCodSelected:string;
 
@@ -690,7 +692,7 @@ export class PerfilColegioComponent implements OnInit {
       this.imgCodSelected=imgSelected["_id"];
       console.log(imgSelected);
 
-      this.photoSelected='http://localhost:3000/'+ruta.toString();
+      this.photoSelected=this.URL+ruta.toString();
 
     });
   }
@@ -850,7 +852,7 @@ export class PerfilColegioComponent implements OnInit {
     this.ModeloGaleriaCol.colImgTtl=imagen.colImgTtl;
     this.ModeloGaleriaCol.colImgDes=imagen.colImgDes;
     this.ModeloGaleriaCol._id=imagen._id;
-    this.photoSelected='http://localhost:3000/'+imagen.colImgRta.toString();
+    this.photoSelected=this.URL+imagen.colImgRta.toString();
     console.log(this.photoSelected);
     this.HideDivs();
     this.divSubirImg=true;
@@ -1062,7 +1064,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=obj["imgCod"]._id;
     const ruta=obj["imgCod"].colImgRta;
     
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
     this.HideDivs();
     this.matSelectTpoApart=true;
 
@@ -1157,7 +1159,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=actividad.imgCod._id;
     const ruta=actividad.imgCod.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
     this.ModeloActividad.colCod=actividad.colCod;
     this.crearActividades=true;
   }
@@ -1307,7 +1309,7 @@ export class PerfilColegioComponent implements OnInit {
     const ruta=Nivel.imgCod.colImgRta;
     this.matSelectNivTpo=true;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   
   
   }
@@ -1329,7 +1331,7 @@ export class PerfilColegioComponent implements OnInit {
     const ruta=Nivel.imgCod.colImgRta;
     this.matSelectNivTpo=true;
  
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   
   
   }
@@ -1547,7 +1549,7 @@ export class PerfilColegioComponent implements OnInit {
     const ruta=taller.imgCod.colImgRta;
     this.matSelectNivTpo=true;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
   eliminarBioTaller(_id:string){
@@ -1690,7 +1692,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=infraestructura.imgCod._id;
     const ruta=infraestructura.imgCod.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
   eliminarBioInfraestructura(_id:string){
@@ -1795,7 +1797,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=getBioAnuncio.imgCod._id;
     const ruta=getBioAnuncio.imgCod.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
   eliminarBioAnuncio(_id:string){
@@ -1898,7 +1900,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=getBioPortada.imgCod._id;
     const ruta=getBioPortada.imgCod.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
   eliminarBioPortada(_id:string){
@@ -1990,7 +1992,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=getObjEmblema.colImgEmb._id;
     const ruta=getObjEmblema.colImgEmb.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
   /** Imagen de perfil del colegio */
@@ -2064,7 +2066,7 @@ export class PerfilColegioComponent implements OnInit {
     this.imgCodSelected=getObjImgPfl.colImgPfl._id;
     const ruta=getObjImgPfl.colImgPfl.colImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected=this.URL+ruta.toString();
   }
 
    

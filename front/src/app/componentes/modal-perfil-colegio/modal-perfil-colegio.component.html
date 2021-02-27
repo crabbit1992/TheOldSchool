@@ -10,8 +10,8 @@
   
         <div class="col s12 center anulaPaddMarr" style="max-height: 250px; margin-top: 10px;" *ngIf="divMostrarImg">
 
-          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
                     <span id="myTextarea" style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{tituloImg}} </span>
               </div>
           </div>
@@ -40,8 +40,8 @@
         </div>
   
         <div class="col s12 center anulaPaddMarr" style="max-height: 250px; margin-top: 10px;" >
-          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
-              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
+          <div class="card white darken-1 PuntosSuspensivos anulaPaddMarr" style="margin-top: 0px;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
+              <div class="card-content white-text PuntosSuspensivos anulaPaddMarr" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(255, 255, 255);">
                     <span id="myTextarea"  style="color: black; text-align: center;font-style: italic; font-size: 13px;">{{tituloImg}} </span>
               </div>
           </div>
@@ -56,7 +56,7 @@
         <div class="col m4 s12 anulaPaddMarr" style="padding: 1px;" *ngFor="let imagen of arrayImgs">
           <div class="col s12 anulaPaddMarr"style="max-height: 130px; min-height: 130px;margin: 1px" >
             <div class="col s12 anulaPaddMarr" style="margin: 1px;">
-              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="max-height: 130px; width: 100%;">
+              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="URL + imagen.colImgRta" style="max-height: 130px; width: 100%;">
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="col m4 s12 anulaPaddMarr" style="padding: 1px;" *ngFor="let imagen of arrayNcoImgs">
           <div class="col s12 anulaPaddMarr"style="max-height: 130px; min-height: 130px;margin: 1px" >
             <div class="col s12 anulaPaddMarr" style="margin: 1px;">
-              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.ncoImgRta" style="max-height: 130px; width: 100%;">
+              <img (click)="EnviarImgs(imagen)" class="Imagenes" [src]="URL + imagen.ncoImgRta" style="max-height: 130px; width: 100%;">
             </div>
           </div>
         </div>

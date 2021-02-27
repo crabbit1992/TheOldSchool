@@ -16,11 +16,11 @@ import {
 })
 export class MntAdminCrabbService {
 
-  readonly URL_API_NucleoImagen='http://localhost:3000/MntAdmin_crabb/NucleoImagen';
-  readonly URL_API_NucleoPortada='http://localhost:3000/MntAdmin_crabb/NucleoPortada';
-  readonly URL_API_NucleoArea='http://localhost:3000/MntAdmin_crabb/NucleoArea';
-  readonly URL_API_NucleoCurso='http://localhost:3000/MntAdmin_crabb/NucleoCurso';
-  readonly URL_API_NucleoCurricula='http://localhost:3000/MntAdmin_crabb/NucleoCurricula';
+  readonly URL_API_NucleoImagen='http://209.145.52.133:3000/MntAdmin_crabb/NucleoImagen';
+  readonly URL_API_NucleoPortada='http://209.145.52.133:3000/MntAdmin_crabb/NucleoPortada';
+  readonly URL_API_NucleoArea='http://209.145.52.133:3000/MntAdmin_crabb/NucleoArea';
+  readonly URL_API_NucleoCurso='http://209.145.52.133:3000/MntAdmin_crabb/NucleoCurso';
+  readonly URL_API_NucleoCurricula='http://209.145.52.133:3000/MntAdmin_crabb/NucleoCurricula';
 
   readonly pass= "siddharta53";
 

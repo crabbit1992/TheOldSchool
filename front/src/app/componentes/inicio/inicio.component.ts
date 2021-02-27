@@ -34,6 +34,8 @@ declare var $:any;
 })
 export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  readonly URL='http://209.145.52.133:3000';
+
   autoplay:any;
   elems: any;
   instances:any;
@@ -73,6 +75,7 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
     map(result => result.matches),
   );
 
+  lnSchoolTtl: string="LnSchool";
 
   constructor(
     private mntAdminCrabbService:MntAdminCrabbService,
@@ -101,8 +104,12 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
 
 
   buscarCol(filter : string){
+    console.log("esta es el cole");
     this.listFilter=filter;
       console.log(filter  );
+
+
+
   }
 
   hideDivs(){

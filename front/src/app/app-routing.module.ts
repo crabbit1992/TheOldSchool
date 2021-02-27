@@ -36,7 +36,7 @@ import { ConfirmDialogComponent } from './componentes/confirm-dialog/confirm-dia
 
 
 const routes: Routes = [
-  {path:'',component:LoginComponent},
+  {path:'',component:InicioComponent},
   {path:'inicio',component:InicioComponent},
   {path:'inicio/:colUrl',component:InicioPaginaColComponent},
   {path:'perfilInicio',component:PerfilInicioComponent, },
@@ -45,7 +45,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent,},
   {path:'perfil',component:PerfilComponent, canActivate: [AuthGuard]},
   {path:'persona',component:PersonaComponent,},
-  {path:'admPersona',component:AdmPersonaComponent, canActivate: [AuthGuard]},
+  //{path:'admPersona',component:AdmPersonaComponent, canActivate: [AuthGuard]},
   {path:'mantenimientoCargo',component:MantenimientoCargoComponent, canActivate: [AuthGuard]},
   {path:'perfil/colegio',component:PerfilUsuColComponent, canActivate: [AuthGuard]},
   {path:'navBar',component:NavBarComponent, canActivate: [AuthGuard]},
@@ -65,13 +65,13 @@ const routes: Routes = [
   {path:'perfilColegio',component:PerfilColegioComponent, canActivate: [AuthGuard]},
   {path:'galeriaColegio',component:GaleriaColComponent, canActivate: [AuthGuard]},
   {path:'intranet',component:VistaAlumnoComponent, canActivate: [AuthGuard]},
-  {path:'MntAdmin_crabb',component:MantenimientoAdministrativoComponent},
+  //{path:'MntAdmin_crabb',component:MantenimientoAdministrativoComponent},
 
   
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

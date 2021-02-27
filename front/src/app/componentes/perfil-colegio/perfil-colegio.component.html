@@ -108,7 +108,7 @@
         <div class="col m4"  *ngFor="let imagen of arrayImagenes">
             <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
               <div class="card-image">
-                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="URL + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
               </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
         <div class="col m4"  *ngFor="let imagen of arrayImagenes">
           <div class="card"style="max-height: 300px; min-height: 200px;background-color: black;margin-top: 5px" >
             <div class="card-image">
-              <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;width: 400px;height: auto;">
+              <img (click)="openModalImg(imagen)" class="Imagenes" [src]="URL + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;width: 400px;height: auto;">
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
           <div class="col m4">
               <div class="card"style="background-color: black;" >
                 <div class="card-image">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" [src]="URL + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
                 <div class="card-content white-text">
                   <span class="card-title">{{objMision.qsTtl}}</span>
@@ -202,7 +202,7 @@
           <div class="col m4">
             <div class="card"style="background-color: black;" >
               <div class="card-image">
-                <img (click)="openModalImg(objVision.imgCod)" class="Imagenes" [src]="'http://localhost:3000/' + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                <img (click)="openModalImg(objVision.imgCod)" class="Imagenes" [src]="URL + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
               </div>
               <div class="card-content white-text">
                 <span class="card-title">{{objVision.qsTtl}}</span>
@@ -217,7 +217,7 @@
           <div class="col m4">
               <div class="card"style="background-color: black;" >
                 <div class="card-image">
-                  <img (click)="openModalImg(objValores.imgCod)" class="Imagenes" [src]="'http://localhost:3000/' + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img (click)="openModalImg(objValores.imgCod)" class="Imagenes" [src]="URL + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
                 <div class="card-content white-text">
                   <span class="card-title">{{objValores.qsTtl}}</span>
@@ -335,7 +335,7 @@
   
               <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
                 <div class="card-image" *ngIf="encabezadoActividadTf">
-                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  [src]="URL + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
               </div>  
   
@@ -373,11 +373,11 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image" *ngIf="!encabezadoActividadTf">
-                  <img class="Imagenes" (click)="ListarActividades()"  [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" (click)="ListarActividades()"  [src]="URL + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-image" *ngIf="encabezadoActividadTf">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" [src]="URL + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
@@ -488,7 +488,7 @@
               <div class="card" >
 
                 <div class="card-image">
-                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="URL + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
@@ -535,7 +535,7 @@
   
               <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
                 <div class="card-image">
-                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  [src]="URL + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
               </div>  
 
@@ -569,7 +569,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" [src]="URL + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-content white-text PuntosSuspensivos" style="background-color: rgb(241, 251, 253);height: 220px;">
@@ -742,7 +742,7 @@
   
               <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
                 <div class="card-image">
-                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  [src]="URL + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
               </div>  
 
@@ -777,11 +777,11 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image" *ngIf="!encabezadoTallerTf">
-                  <img class="Imagenes" (click)="ListarTalleres()" matTooltip = "Ver talleres"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" (click)="ListarTalleres()" matTooltip = "Ver talleres"  [src]="URL + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-image" *ngIf="encabezadoTallerTf">
-                  <img class="Imagenes"  matTooltip = "Ver talleres"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  matTooltip = "Ver talleres"  [src]="URL + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
 
@@ -891,7 +891,7 @@
   
               <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
                 <div class="card-image">
-                  <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  [src]="URL + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
               </div>  
 
@@ -927,11 +927,11 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image" *ngIf="!encabezadoInfraestructuraTf">
-                  <img class="Imagenes" (click)="ListarInfraestructura()" matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" (click)="ListarInfraestructura()" matTooltip = "Ver Infraestructuras"  [src]="URL + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
-                  <img class="Imagenes"  matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  matTooltip = "Ver Infraestructuras"  [src]="URL + Infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
 
@@ -1047,7 +1047,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes" (click)="ShowDivAnuncio()" matTooltip = "Ver Infraestructuras"  [src]="'http://localhost:3000/' + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" (click)="ShowDivAnuncio()" matTooltip = "Ver Infraestructuras"  [src]="URL + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
@@ -1129,7 +1129,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes" [src]="URL + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
@@ -1211,7 +1211,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes"  matTooltip = "Ver Emblema"  [src]="'http://localhost:3000/' + emblema.colImgEmb.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  matTooltip = "Ver Emblema"  [src]="URL + emblema.colImgEmb.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
@@ -1295,7 +1295,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes"  matTooltip = "Ver Imagen"  [src]="'http://localhost:3000/' + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                  <img class="Imagenes"  matTooltip = "Ver Imagen"  [src]="URL + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                 </div>
 
                 <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">
@@ -1385,7 +1385,7 @@
         <div class="col s6"  *ngFor="let imagen of arrayImagenes">
             <div class="card"style="max-height: 100px; min-height: 50px;background-color: black;margin-top: 5px" >
               <div class="card-image">
-                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                <img (click)="openModalImg(imagen)" class="Imagenes" [src]="URL + imagen.colImgRta" style="margin-top: 0px;margin-bottom: 0px;">
               </div>
             </div>
         </div>
@@ -1479,7 +1479,7 @@
           <div class="col s12">
               <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                  <img class="Imagenes" [src]="URL + objMision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                 </div>
               </div>
           </div>
@@ -1503,7 +1503,7 @@
             <div class="col s12">
                 <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
                   <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
-                    <img class="Imagenes" [src]="'http://localhost:3000/' + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                    <img class="Imagenes" [src]="URL + objVision.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                   </div>
                 </div>
             </div>
@@ -1526,7 +1526,7 @@
           <div class="col s12">
               <div class="card" style="background-color: rgb(255, 255, 255); border-radius: 10px; border: 0!important;box-shadow: none!important;" >
                 <div class="card-image" style="border-radius: 10px; border: 0!important;box-shadow: none!important;">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
+                  <img class="Imagenes" [src]="URL + objValores.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px;height: 190px; border-radius: 10px;">
                 </div>
               </div>
           </div>
@@ -1635,7 +1635,7 @@
             <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="encabezadoActividadTf">
-                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes"  [src]="URL + encabezadoActividadArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
   
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1655,11 +1655,11 @@
             <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="!encabezadoActividadTf">
-                <img class="Imagenes" (click)="ListarActividades()"  [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" (click)="ListarActividades()"  [src]="URL + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card-image" *ngIf="encabezadoActividadTf">
-                <img class="Imagenes" [src]="'http://localhost:3000/' + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" [src]="URL + actividad.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1770,7 +1770,7 @@
             <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="encabezadoTallerTf">
-                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes"  [src]="URL + encabezadoTallerArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
   
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1791,11 +1791,11 @@
             <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="!encabezadoTallerTf">
-                <img class="Imagenes" (click)="ListarTalleres()"  [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" (click)="ListarTalleres()"  [src]="URL + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card-image" *ngIf="encabezadoTallerTf">
-                <img class="Imagenes" [src]="'http://localhost:3000/' + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" [src]="URL + taller.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1899,7 +1899,7 @@
               <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
                 <div class="card-image">
-                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                  <img class="Imagenes" (click)="getNivelImgs(nivel)" [src]="URL + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
                 </div>
 
                 <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1945,7 +1945,7 @@
             <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image">
-                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes"  [src]="URL + encabezadoNivelArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
   
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -1966,7 +1966,7 @@
           <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
             <div class="card-image">
-              <img class="Imagenes" [src]="'http://localhost:3000/' + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+              <img class="Imagenes" [src]="URL + nivel.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
             </div>
 
             <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -2132,7 +2132,7 @@
             <div class="card anulaPaddMarr" style="height: 100%;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
-                <img class="Imagenes"  [src]="'http://localhost:3000/' + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes"  [src]="URL + encabezadoInfraestructuraArreglo.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -2154,11 +2154,11 @@
             <div class="card anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
               <div class="card-image" *ngIf="!encabezadoInfraestructuraTf">
-                <img class="Imagenes" (click)="ListarInfraestructura()"  [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" (click)="ListarInfraestructura()"  [src]="URL + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card-image" *ngIf="encabezadoInfraestructuraTf">
-                <img class="Imagenes" [src]="'http://localhost:3000/' + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" [src]="URL + infraestructura.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card white darken-1 PuntosSuspensivos" style="margin-top: 0px;height: auto;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -2260,7 +2260,7 @@
               <div class="card white anulaPaddMarr" style="height: 100%; border: none; background-color: rgb(241, 251, 253);" >
 
                 <div class="card-image">
-                  <img class="Imagenes" (click)="ShowDivAnuncio()"  [src]="'http://localhost:3000/' + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                  <img class="Imagenes" (click)="ShowDivAnuncio()"  [src]="URL + anuncio.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
                 </div>
 
                 <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -2339,7 +2339,7 @@
               <div class="card"style="background-color: black;" >
 
                 <div class="card-image">
-                  <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                  <img class="Imagenes" [src]="URL + portada.imgCod.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
                 </div>
 
                 <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">
@@ -2417,7 +2417,7 @@
             <div class="card"style="background-color: black;" >
 
               <div class="card-image">
-                <img class="Imagenes" [src]="'http://localhost:3000/' + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
+                <img class="Imagenes" [src]="URL + imagen.colImgPfl.colImgRta" style="margin-top: 0px;margin-bottom: 0px; height: 160px;">
               </div>
 
               <div class="card-content white-text PuntosSuspensivos" style="margin-bottom: 0;padding-bottom: 0;border: 0!important;box-shadow: none!important; background-color: rgb(241, 251, 253);">

@@ -13,10 +13,11 @@ export class PerfilService {
 
   sendCargo:string;
 
-  readonly URL_API='http://localhost:3000/Inicio/Perfil';
-  readonly URL_API_DeshabilitarPerfil='http://localhost:3000/Inicio/Perfil/DeshabilitarPerfil';
-  readonly URL_API_HabilitarPerfil='http://localhost:3000/Inicio/Perfil/HabilitarPerfil';
-  readonly URL_API_getPlfSegunCargo='http://localhost:3000/Inicio/Perfil/getPlfSegunCargo';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Perfil';
+  readonly URL_API_DeshabilitarPerfil='http://209.145.52.133:3000/Inicio/Perfil/DeshabilitarPerfil';
+  readonly URL_API_HabilitarPerfil='http://209.145.52.133:3000/Inicio/Perfil/HabilitarPerfil';
+  readonly URL_API_getPlfSegunCargo='http://209.145.52.133:3000/Inicio/Perfil/getPlfSegunCargo';
+  readonly URL_API_listPfl='http://209.145.52.133:3000/Inicio/Perfil/listPfl';
   
   objeto:string;
 
@@ -40,9 +41,13 @@ export class PerfilService {
     console.log(perRepCod + colCod);
     return this.http.get(this.URL_API + `/${perRepCod}-${colCod}`)
   }
+
+  getListaPerfiles(perRepCod:String) {
+    return this.http.get(this.URL_API_listPfl + `/${perRepCod}`)
+  }
  
   getPerfilesColegio(colCod:string){
-    return this.http.get('http://localhost:3000/Inicio/Perfil/perCol' + `/${colCod}`)
+    return this.http.get('http://209.145.52.133:3000/Inicio/Perfil/perCol' + `/${colCod}`)
   }
 
   DeshabilitarPerfil(objetoDeshabilitar:object){

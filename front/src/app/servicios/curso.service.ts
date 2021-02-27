@@ -7,8 +7,8 @@ import {HttpClient }from '@angular/common/http';
 })
 export class CursoService {
 
-  readonly URL_API='http://localhost:3000/Inicio/Curso';
-  readonly URL_API_GetCurso='http://localhost:3000/Inicio/Curso/GetCurso';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Curso';
+  readonly URL_API_GetCurso='http://209.145.52.133:3000/Inicio/Curso/GetCurso';
   
   constructor(private http: HttpClient) { }
 

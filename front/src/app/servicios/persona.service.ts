@@ -13,12 +13,14 @@ export class PersonaService {
 
   selectedPersona: Persona;
   personas:Persona[];
-  readonly URL_API='http://localhost:3000/Inicio/Persona';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Persona';
   
   constructor(private http: HttpClient) { 
     this.selectedPersona=new Persona();
-   // this.headers.append("Content-Type","application/json");
-   // this.headers.append("Authorization","Bearer: "+localStorage.getItem("token"));
+  }
+
+  postPersona(persona:Persona){
+    return this.http.post(this.URL_API,persona)
   }
 
   
@@ -37,9 +39,7 @@ export class PersonaService {
       ));
   }
 
-  postPersona(persona:Persona){
-    return this.http.post(this.URL_API,persona)
-  }
+  
 
   putPersona(persona:Persona){
     return this.http.put(this.URL_API + `/${persona._id}`,persona)

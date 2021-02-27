@@ -13,8 +13,8 @@ export class PersonaRepositorioService {
   selectedPersona: PersonaRepositorio;
   personas:PersonaRepositorio[];
   status: string;
-  readonly URL_API='http://localhost:3000/Inicio/RepositorioPersonas';
-  readonly URL_API_ById='http://localhost:3000/Inicio/RepositorioPersonas/ById';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/RepositorioPersonas';
+  readonly URL_API_ById='http://209.145.52.133:3000/Inicio/RepositorioPersonas/ById';
   
   constructor(private http: HttpClient) { 
     this.selectedPersona=new PersonaRepositorio();

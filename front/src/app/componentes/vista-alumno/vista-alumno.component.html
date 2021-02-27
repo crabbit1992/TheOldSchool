@@ -25,7 +25,7 @@
                 <div class="col s12 anulaPaddMarr">
                 <div class="carousel  center-align" >
                     <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-                        <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                        <img  [src]="URL + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
                     </div>
                 </div>
                 </div>  
@@ -66,8 +66,7 @@
         <!-- Div Lista Cursos-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divCursos" style="min-height: 500px; margin-top: 70px;">
 
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
+          <div class="col m10 anulaPaddMarr" >
 
             <div class="row col m12">
 
@@ -117,7 +116,6 @@
 
             
           </div>
-   
           
         </div>
 
@@ -191,8 +189,7 @@
         <!-- Div Promedio por areas-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divPromArea" style="min-height: 500px; margin-top: 70px;">
 
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr">
+          <div class="col m10 anulaPaddMarr">
             <div class="row col m12">
 
               <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
@@ -247,10 +244,7 @@
         <!-- Div Promedio por cursos-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divPromedioCursos" style="min-height: 500px; margin-top: 70px;">
 
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
-
-            
+          <div class="col m10 anulaPaddMarr" >
 
             <div class="row col m12">
 
@@ -301,11 +295,7 @@
         <!-- Div Detalle Promedios segun tipos de nota-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
 
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
-
-            
-
+          <div class="col m10 anulaPaddMarr" >
             <div class="row col m12">
 
               <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
@@ -367,12 +357,7 @@
 
         <!-- Div Detalle de Notas segun promedio de tipo de nota-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divDetalleSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
-
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
-
-            
-
+          <div class="col m10 anulaPaddMarr" >
             <div class="row col m12">
 
               <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
@@ -423,8 +408,7 @@
         <!-- Div Mi libreta-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divLibreta" style="min-height: 500px; margin-top: 70px;">
         
-          <div class="col m3"></div>
-          <div class="col m9 anulaPaddMarr">
+          <div class="col m10 anulaPaddMarr">
 
             <div class="row col m12">
 
@@ -513,8 +497,7 @@
         <!-- Div Promedio por cursos-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divlibPromedioCursos" style="min-height: 500px; margin-top: 70px;">
 
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
+          <div class="col m10 anulaPaddMarr" >
 
             <div class="row col m12">
 
@@ -570,12 +553,7 @@
 
         <!-- Div Detalle Promedios segun tipos de nota-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divlibDetallePromCursos" style="min-height: 500px; margin-top: 70px;">
-
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
-
-            
-
+          <div class="col m10 anulaPaddMarr" >
             <div class="row col m12">
 
               <div class="col m12 center anulaPaddMarr" style="margin-top: 70px; margin-bottom: 40px;">
@@ -634,11 +612,7 @@
 
         <!-- Div Detalle de Notas segun promedio de tipo de nota-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divlibHstSgnTpoNta" style="min-height: 500px; margin-top: 70px;">
-
-          <div class="col m3 anulaPaddMarr"></div>
-          <div class="col m9 anulaPaddMarr" >
-
-            
+          <div class="col m10 anulaPaddMarr" >
 
             <div class="row col m12">
 
@@ -718,7 +692,7 @@
          <div class="col s12 anulaPaddMarr">
            <div class="carousel  center-align" >
              <div class="carousel-item" style="z-index: 9999;" *ngFor="let item of arrayPortadas;let i = index">
-                 <img  [src]="'http://localhost:3000/' + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
+                 <img  [src]="URL + item.imgCod.colImgRta || 'assets/no-image-icon-11.png'">
              </div>
            </div>
          </div>  

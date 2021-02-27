@@ -39,6 +39,7 @@ app.use(express.json()); // Reconocer el formato JSON
 app.use(cors({origin:'http://localhost:4200'}));
 
 
+
 /************** Referente al caso de Cuentas y accesos **************************************************************/
 app.use('/Inicio/RepositorioPersonas',require('./route/personaRepositorio.route')); //Ruta de repositorio de personas
 app.use('/Inicio/Persona',require('./route/persona.route')); //Ruta de personas

@@ -7,9 +7,9 @@ import {HttpClient }from '@angular/common/http'
 })
 export class HorarioService {
 
-  readonly URL_API='http://localhost:3000/Inicio/Horario';
-  readonly URL_API_putHorario='http://localhost:3000/Inicio/Horario/putHorario';
-  readonly URL_API_deleteHorario='http://localhost:3000/Inicio/Horario/deleteHorario';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Horario';
+  readonly URL_API_putHorario='http://209.145.52.133:3000/Inicio/Horario/putHorario';
+  readonly URL_API_deleteHorario='http://209.145.52.133:3000/Inicio/Horario/deleteHorario';
   
   
   constructor(private http: HttpClient) { }

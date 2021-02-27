@@ -46,6 +46,8 @@ declare var $:any;
 })
 export class PerfilComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  readonly URL='http://209.145.52.133:3000';
+
   autoplay:any;
   elems: any;
   instances:any;
@@ -71,6 +73,8 @@ export class PerfilComponent implements OnInit,AfterViewInit,OnDestroy {
   .pipe(
     map(result => result.matches),
   );
+
+  lnSchoolTtl: string="LnSchool";
 
   constructor(
       private mntAdminCrabbService:MntAdminCrabbService,

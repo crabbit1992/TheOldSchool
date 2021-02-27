@@ -11,8 +11,8 @@ export class PeriodoService {
 
   optSelectedModal:string;
 
-  readonly URL_API='http://localhost:3000/Inicio/Periodo';
-  readonly URL_API_ultimoPrd='http://localhost:3000/Inicio/Periodo/ultimoPrd';
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Periodo';
+  readonly URL_API_ultimoPrd='http://209.145.52.133:3000/Inicio/Periodo/ultimoPrd';
 
   constructor(private http: HttpClient) {
     this.selectedPeriodo=new Periodo();

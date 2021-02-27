@@ -21,21 +21,21 @@ import {HttpClient }from '@angular/common/http';
 })
 export class BiografiaService {
 
-  readonly URL_API_addEmblema='http://localhost:3000/Inicio/Colegio/Emblema';
-  readonly URL_API_imgPfl='http://localhost:3000/Inicio/Colegio/imgPfl';
+  readonly URL_API_addEmblema='http://209.145.52.133:3000/Inicio/Colegio/Emblema';
+  readonly URL_API_imgPfl='http://209.145.52.133:3000/Inicio/Colegio/imgPfl';
 
-  readonly URL_API_QuienesSomos='http://localhost:3000/Inicio/BioQuienesSomos';
-  readonly URL_API_Actividad='http://localhost:3000/Inicio/BioActividad';
-  readonly URL_API_BioNivel='http://localhost:3000/Inicio/BioNivel';
-  readonly URL_API_getBioNivelSgnNiv='http://localhost:3000/Inicio/BioNivel/getBioNivelSgnNiv';
+  readonly URL_API_QuienesSomos='http://209.145.52.133:3000/Inicio/BioQuienesSomos';
+  readonly URL_API_Actividad='http://209.145.52.133:3000/Inicio/BioActividad';
+  readonly URL_API_BioNivel='http://209.145.52.133:3000/Inicio/BioNivel';
+  readonly URL_API_getBioNivelSgnNiv='http://209.145.52.133:3000/Inicio/BioNivel/getBioNivelSgnNiv';
 
-  readonly URL_API_BioTaller='http://localhost:3000/Inicio/BioTaller';
-  readonly URL_API_getBioTallerSgnNiv='http://localhost:3000/Inicio/BioTaller/getBioTallerSgnNiv';
+  readonly URL_API_BioTaller='http://209.145.52.133:3000/Inicio/BioTaller';
+  readonly URL_API_getBioTallerSgnNiv='http://209.145.52.133:3000/Inicio/BioTaller/getBioTallerSgnNiv';
 
-  readonly URL_API_BioInfraestructura='http://localhost:3000/Inicio/BioInfraestructura';
+  readonly URL_API_BioInfraestructura='http://209.145.52.133:3000/Inicio/BioInfraestructura';
 
-  readonly URL_API_BioAnuncio='http://localhost:3000/Inicio/BioAnuncio';
-  readonly URL_API_BioPortada='http://localhost:3000/Inicio/BioPortada';
+  readonly URL_API_BioAnuncio='http://209.145.52.133:3000/Inicio/BioAnuncio';
+  readonly URL_API_BioPortada='http://209.145.52.133:3000/Inicio/BioPortada';
   
   varRes_modalInicio:number=0;
 
