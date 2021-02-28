@@ -29,11 +29,21 @@ export class GaleriaColService {
 
   createFoto(titulo: string, descripcion: string,tpoImgCod: string ,image: File, colCod: string) {
     const fd = new FormData();
+
     fd.append('colImgTtl', titulo);
     fd.append('colImgDes', descripcion);
     fd.append('tpoImgCod', tpoImgCod);
     fd.append('image', image);
     fd.append('colCod', colCod);
+
+    const objImage={
+      colImgTtl:titulo,
+      colImgDes:descripcion,
+      tpoImgCod:tpoImgCod,
+      image:image,
+      colCod:colCod
+    }
+    console.log(objImage);
     return this.http.post(this.URL_API, fd);
   }
 

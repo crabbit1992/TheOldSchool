@@ -69,9 +69,16 @@ export class MntAdminCrabbService {
 
   createFoto(titulo: string, descripcion: string,image: File) {
     const fd = new FormData();
+
+    console.log("Lado de el servicio")
+    console.log(titulo);
+    console.log(descripcion);
+    console.log(image);
+
     fd.append('ncoImgTtl', titulo);
     fd.append('ncoImgDes', descripcion);
     fd.append('image', image);
+    console.log(fd);
     return this.http.post(this.URL_API_NucleoImagen, fd);
   }
 

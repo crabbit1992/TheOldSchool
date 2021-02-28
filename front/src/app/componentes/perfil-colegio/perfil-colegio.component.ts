@@ -768,6 +768,7 @@ export class PerfilColegioComponent implements OnInit {
     console.log(trueOrFalse);
     if(trueOrFalse==false){
       if(this.btnEditarGuardar=="Guardar Imagen"){
+        
         const titulo= ""+this.ModeloGaleriaCol.colImgTtl;
         const descripcion= ""+this.ModeloGaleriaCol.colImgDes;
         const tpoImgCod= ""+this.ModeloTipoImagen._id;

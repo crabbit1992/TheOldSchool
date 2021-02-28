@@ -45,7 +45,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent,},
   {path:'perfil',component:PerfilComponent, canActivate: [AuthGuard]},
   {path:'persona',component:PersonaComponent,},
-  //{path:'admPersona',component:AdmPersonaComponent, canActivate: [AuthGuard]},
+  {path:'admPersona',component:AdmPersonaComponent, canActivate: [AuthGuard]},
   {path:'mantenimientoCargo',component:MantenimientoCargoComponent, canActivate: [AuthGuard]},
   {path:'perfil/colegio',component:PerfilUsuColComponent, canActivate: [AuthGuard]},
   {path:'navBar',component:NavBarComponent, canActivate: [AuthGuard]},
@@ -65,7 +65,7 @@ const routes: Routes = [
   {path:'perfilColegio',component:PerfilColegioComponent, canActivate: [AuthGuard]},
   {path:'galeriaColegio',component:GaleriaColComponent, canActivate: [AuthGuard]},
   {path:'intranet',component:VistaAlumnoComponent, canActivate: [AuthGuard]},
-  //{path:'MntAdmin_crabb',component:MantenimientoAdministrativoComponent},
+  {path:'MntAdmin_crabb',component:MantenimientoAdministrativoComponent},
 
   
 ];

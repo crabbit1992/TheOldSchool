@@ -499,7 +499,7 @@
                 <div class="col m4"  *ngFor="let imagen of arrayImagenes">
                     <div class="card"style="max-height: 200px; min-height: 200px;background-color: black;margin-top: 5px" >
                       <div class="card-image">
-                        <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://localhost:3000' + imagen.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                        <img (click)="openModalImg(imagen)" class="Imagenes" [src]="'http://209.145.52.133:3000' + imagen.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                       </div>
                     </div>
                 </div>
@@ -521,7 +521,7 @@
                   </div> 
               </div>
             </div>
-            
+             
             <div class="col m12 center" style="margin-top: 20px;">        
                 <h5><strong>Apartado Portadas</strong></h5>  
             </div>
@@ -532,7 +532,7 @@
                   <div class="card"style="background-color: black;" >
 
                     <div class="card-image">
-                      <img class="Imagenes" [src]="'http://localhost:3000/' + portada.imgCod.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
+                      <img class="Imagenes" [src]="'http://209.145.52.133:3000' + portada.imgCod.ncoImgRta" style="margin-top: 0px;margin-bottom: 0px;">
                     </div>
 
                     <div class="card-action center col m12" style="background-color: rgb(221, 249, 253);">

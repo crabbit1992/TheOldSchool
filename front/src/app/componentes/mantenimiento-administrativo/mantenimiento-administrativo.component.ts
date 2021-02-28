@@ -356,14 +356,14 @@ export class MantenimientoAdministrativoComponent implements OnInit {
         this.imgCodSelected=imgSelected["_id"];
         console.log(imgSelected);
   
-        this.photoSelected='http://localhost:3000/'+ruta.toString();
+        this.photoSelected='http://209.145.52.133:3000/'+ruta.toString();
       }
       else{
         let ruta=imgSelected["colImgRta"];
         this.imgCodSelected=imgSelected["_id"];
         console.log(imgSelected);
   
-        this.photoSelected='http://localhost:3000/'+ruta.toString();
+        this.photoSelected='http://209.145.52.133:3000/'+ruta.toString();
 
       }
 
@@ -374,9 +374,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
 
   openModalImg(imagen: NucleoImg){
 
-      
-    console.log(imagen);
-
+  
     const dialogRef =this.dialog.open(ModalPerfilColegioComponent,{
       width: '500px',
       data: imagen,
@@ -401,6 +399,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
 
   validarFrm():boolean{
     var trueOrFalse=false;
+    console.log(this.photoSelected);
 
     if(this.ModeloNcoImagen.ncoImgTtl==null||this.ModeloNcoImagen.ncoImgTtl==undefined){
       trueOrFalse=true;
@@ -410,7 +409,8 @@ export class MantenimientoAdministrativoComponent implements OnInit {
       trueOrFalse=true;
       M.toast({ html: 'Seleccione la imagen' });
     }
-
+  
+    console.log(trueOrFalse);
     return trueOrFalse;
   }
 
@@ -421,18 +421,20 @@ export class MantenimientoAdministrativoComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = e => this.photoSelected = reader.result;
       reader.readAsDataURL(this.file);
-      console.log(this.file);
+      console.log(this.photoSelected);
     }
   }
 
   uploadPhoto() {
-    
-    var trueOrFalse=this.validarFrm();
-    console.log(trueOrFalse);
-    if(trueOrFalse==false){
+
+    console.log(this.file);
+  
+    if(this.validarFrm()==false){
       if(this.btnEditarGuardar=="Guardar Imagen"){
+        console.log("entro a guardar imagen");
         const titulo= ""+this.ModeloNcoImagen.ncoImgTtl;
-        const descripcion= ""+this.ModeloNcoImagen.ncoImgDes;
+        const descripcion= "...";
+
         this.mntAdminCrabbService.createFoto(titulo, descripcion, this.file)
         .subscribe(
           res => {
@@ -443,7 +445,9 @@ export class MantenimientoAdministrativoComponent implements OnInit {
           if(status===200){
             this.HideDivs();
           
+            this.getImagenes();
             this.showListarImagenes();
+
             M.toast({ html: ' Se guargo la imagen ' });
           }
         });
@@ -472,7 +476,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
     this.ModeloNcoImagen.ncoImgTtl=imagen.ncoImgTtl;
     this.ModeloNcoImagen.ncoImgDes=imagen.ncoImgDes;
     this.ModeloNcoImagen._id=imagen._id;
-    this.photoSelected='http://localhost:3000/'+imagen.ncoImgRta.toString();
+    this.photoSelected='http://209.145.52.133:3000/'+imagen.ncoImgRta.toString();
     console.log(this.photoSelected);
     //this.HideDivs();
     this.divCrearImg=true;
@@ -509,6 +513,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
       if(status===200){
         M.toast({ html: "Se elimino la imagen correctamente"});
         this.getImagenes();
+        this.showListarImagenes();
       }
       else if(status===410){
 
@@ -774,6 +779,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
         })
       }
       else{
+        console.log("Entro a post portada");
         this.mntAdminCrabbService.postPortada(this.ModeloNcoPortada)
         .subscribe(res=>{
     
@@ -813,7 +819,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
     this.imgCodSelected=nucleoPortada.imgCod._id;
     const ruta=nucleoPortada.imgCod.ncoImgRta;
   
-    this.photoSelected='http://localhost:3000/'+ruta.toString();
+    this.photoSelected='http://209.145.52.133:3000/'+ruta.toString();
   }
 
   eliminarPortada(_id:string){

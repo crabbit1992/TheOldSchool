@@ -47,7 +47,10 @@ export class ModalPerfilColegioComponent implements OnInit {
     
     verImagen(){
 
-      if(this.message["colImgRta"]==undefined){
+     // console.log(this.message["imagen"])
+
+
+      if(this.message["ncoImgRta"]==undefined){
         console.log("No existe");
         var ruta=this.message["ncoImgRta"];
         this.tituloImg=this.message["ncoImgTtl"];
@@ -56,8 +59,8 @@ export class ModalPerfilColegioComponent implements OnInit {
 
       }
       else{
-        var ruta=this.message["colImgRta"];
-        this.tituloImg=this.message["colImgTtl"];
+        var ruta=this.message["ncoImgRta"];
+        this.tituloImg=this.message["ncoImgTtl"];
   
         this.photoSelected=this.URL+ruta.toString();
       }
@@ -169,7 +172,7 @@ export class ModalPerfilColegioComponent implements OnInit {
   ngOnInit() {
 
     this.option=this.message["option"];
-    console.log(this.message);
+    //console.log(this.message);
 
 
     if(this.option=="3"){
