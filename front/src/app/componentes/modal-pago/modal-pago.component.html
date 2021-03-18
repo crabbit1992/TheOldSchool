@@ -1,0 +1,21 @@
+<div class="col s12" *ngIf="divOpciones"  style="height: auto; background-color: rgb(198, 229, 255);"> 
+    <ul class="menu" style="margin-top: 30px;">
+        <li><a style="cursor: pointer" (click)="enviarDatos('regPago')">Registrar Pago</a></li>
+        <li><a style="cursor: pointer" (click)="enviarDatos('lisPago')">Lista de Pagos</a></li>
+        <li><a style="cursor: pointer" (click)="enviarDatos('regTpoPago')">Registrar tipo de pago</a></li>
+        <li><a style="cursor: pointer" (click)="enviarDatos('lisTpoPago')">Lista de tipo de pagos</a></li>
+    </ul>
+</div>
+
+<div class="col s12" *ngIf="divFiltros"> 
+    
+    <div class="col s12 anulaPaddMarr" style="margin-top: 15px;">
+        <div class="input-field col s12 anulaPaddMarr">
+            <mat-select lass="browser-default" id="ModeloTipoPago._id" name="ModeloTipoPago._id"
+            [(ngModel)]="ModeloTipoPago._id" (ngModelChange)='capturarTipoPago($event)'>
+              <mat-option *ngFor="let tipoPago of selectTipoPago" [value]="tipoPago._id">{{tipoPago.tpoPgoNom}}</mat-option>
+            </mat-select>    
+        </div>
+    </div>
+
+</div>

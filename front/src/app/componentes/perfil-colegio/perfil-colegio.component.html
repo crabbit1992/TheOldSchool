@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="col m8" *ngIf="modCreartImg" style="text-align: center;max-height: 230px !important;">
-                  <input type="file" (change)="onPhotoSelected($event)" #photoInput style="display: none;">
+                  <input type="file" accept="image/jpeg" (change)="onPhotoSelected($event)" #photoInput style="display: none;">
                     <img class="responsive-img" [src]="photoSelected || 'assets/no-image-icon-11.png'" alt="No image"
                     (click)="photoInput.click()" style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 400px; max-height: 200px !important;padding: 0 0 0 0;">
                 </div>

@@ -12,7 +12,7 @@
         <div class="row col m12 s12" style="margin-top: 10px;margin-bottom: 10px;">
           <div class="col s1 m0"></div>
           <div class="input-field col m6 s6" style="margin-top: 0px;margin-bottom: 0px;">
-            <input type="text" name="perDni" id="perDni" [(ngModel)]="frmPersona.perDni"
+            <input type="text" name="perDn" id="perDni" [(ngModel)]="frmPersona.perDni" style="text-align: center;"
               placeholder="Ingrese su DNI" maxlength="8" [readonly]="DniInputEnable">
           </div>
           <div class="col m4 s4" style="margin-top: 12px;">
@@ -40,6 +40,14 @@
               box-shadow: 0 1px 0 0 #0E9C16 !important;" [readonly]="pasRedOn" placeholder="Contraseña"
               >
           </div>
+
+          <div class="input-field col m12 s12" style="margin-top: 0px;margin-bottom: 0px;">
+            <i class="material-icons prefix">lock_outline</i>
+            <input type="password" name="perPasCon" id="perContraseñaConfir" [(ngModel)]="frmPersona.perPasConfirm"
+              required style="border-bottom: 1px solid #0E9C16 !important;
+              box-shadow: 0 1px 0 0 #0E9C16 !important;" [readonly]="pasRedOn" placeholder="Confirmar contraseña"
+              >
+          </div>
         </div>
 
         <div class="row col m12 s12" style="margin-top: 0px;margin-bottom: 0px;">
@@ -47,7 +55,7 @@
             <input type="text" style="text-align: center;" name="perNom" id="perNom" readonly [(ngModel)]="frmPersona.perNom" placeholder="Nombre">
           </div>
           <div class="input-field col m6 s12" style="margin-top: 0px;margin-bottom: 0px;">
-            <input type="text" style="text-align: center;" name="perApe" id="perApe" readonly [(ngModel)]="frmPersona.perApe" placeholder="Apellidos">
+            <input type="text" style="text-align: center;" name="perApe" id="perApellido" readonly [(ngModel)]="frmPersona.perApe" placeholder="Apellidos">
           </div>
         </div>
 
@@ -109,10 +117,3 @@
     </form>
   </div>
 </div>
-
-
-
-
-
-
-

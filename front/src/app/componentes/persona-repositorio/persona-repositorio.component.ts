@@ -293,7 +293,8 @@ export class PersonaRepositorioComponent implements OnInit {
     ];
 
     this.arrayAnio = [
-      { idAnio: 0, nomAnio: "Año" }, { idAnio: 2019, nomAnio: "2020" }, { idAnio: 2019, nomAnio: "2019" }, { idAnio: 2018, nomAnio: "2018" }, { idAnio: 2017, nomAnio: "2017" },
+      { idAnio: 0, nomAnio: "Año" }, { idAnio: 2021, nomAnio: "2021" }, { idAnio: 2020, nomAnio: "2020" }, { idAnio: 2019, nomAnio: "2019" },
+      { idAnio: 2018, nomAnio: "2018" }, { idAnio: 2017, nomAnio: "2017" },
       { idAnio: 2016, nomAnio: "2016" }, { idAnio: 2015, nomAnio: "2015" }, { idAnio: 2014, nomAnio: "2014" }, { idAnio: 2013, nomAnio: "2013" },
       { idAnio: 2012, nomAnio: "2012" }, { idAnio: 2011, nomAnio: "2011" }, { idAnio: 2010, nomAnio: "2010" }, { idAnio: 2009, nomAnio: "2009" },
       { idAnio: 2008, nomAnio: "2008" }, { idAnio: 2007, nomAnio: "2007" }, { idAnio: 2006, nomAnio: "2006" }, { idAnio: 2005, nomAnio: "2005" },
@@ -303,7 +304,15 @@ export class PersonaRepositorioComponent implements OnInit {
       { idAnio: 1992, nomAnio: "1992" }, { idAnio: 1991, nomAnio: "1991" }, { idAnio: 1990, nomAnio: "1990" }, { idAnio: 1989, nomAnio: "1989" },
       { idAnio: 1988, nomAnio: "1988" }, { idAnio: 1987, nomAnio: "1987" }, { idAnio: 1986, nomAnio: "1986" }, { idAnio: 1985, nomAnio: "1985" },
       { idAnio: 1984, nomAnio: "1984" }, { idAnio: 1983, nomAnio: "1983" }, { idAnio: 1982, nomAnio: "1982" }, { idAnio: 1981, nomAnio: "1981" },
-      { idAnio: 1980, nomAnio: "1980" }, { idAnio: 1979, nomAnio: "1979" }, { idAnio: 1978, nomAnio: "1978" }, { idAnio: 1976, nomAnio: "1976" },
+      { idAnio: 1980, nomAnio: "1980" }, { idAnio: 1979, nomAnio: "1979" }, { idAnio: 1978, nomAnio: "1978" }, { idAnio: 1977, nomAnio: "1977" },
+      { idAnio: 1976, nomAnio: "1976" }, { idAnio: 1975, nomAnio: "1975" }, { idAnio: 1974, nomAnio: "1974" }, { idAnio: 1973, nomAnio: "1973" },
+      { idAnio: 1972, nomAnio: "1972" }, { idAnio: 1971, nomAnio: "1971" }, { idAnio: 1970, nomAnio: "1970" }, { idAnio: 1969, nomAnio: "1969" },
+      { idAnio: 1968, nomAnio: "1968" }, { idAnio: 1967, nomAnio: "1967" }, { idAnio: 1966, nomAnio: "1966" }, { idAnio: 1965, nomAnio: "1965" },
+      { idAnio: 1964, nomAnio: "1964" }, { idAnio: 1963, nomAnio: "1963" }, { idAnio: 1962, nomAnio: "1962" }, { idAnio: 1961, nomAnio: "1961" },
+      { idAnio: 1960, nomAnio: "1960" }, { idAnio: 1959, nomAnio: "1959" }, { idAnio: 1958, nomAnio: "1958" }, { idAnio: 1957, nomAnio: "1957" },
+      { idAnio: 1956, nomAnio: "1956" }, { idAnio: 1955, nomAnio: "1955" }, { idAnio: 1954, nomAnio: "1954" }, { idAnio: 1953, nomAnio: "1953" },
+      { idAnio: 1952, nomAnio: "1952" }, { idAnio: 1951, nomAnio: "1951" }, { idAnio: 1950, nomAnio: "1950" }, { idAnio: 1949, nomAnio: "1949" },
+      { idAnio: 1948, nomAnio: "1948" }, { idAnio: 1947, nomAnio: "1947" }, { idAnio: 1946, nomAnio: "1946" }, { idAnio: 1945, nomAnio: "1945" },
     ];
     this.anioSeleccionado = "Año";
     this.mesSeleccionado = "Mes";

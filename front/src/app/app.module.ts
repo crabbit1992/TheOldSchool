@@ -41,6 +41,7 @@ import { InicioPaginaColComponent } from './componentes/inicio-pagina-col/inicio
 import { MantenimientoAdministrativoComponent } from './componentes/mantenimiento-administrativo/mantenimiento-administrativo.component';
 import { VistaAlumnoComponent } from './componentes/vista-alumno/vista-alumno.component';
 import { ColegioComponent } from './componentes/colegio/colegio.component';
+import { PagoComponent } from './componentes/pago/pago.component';
 
 /** Cuadro de dialogo (Modales) */
 import { ConfirmDialogComponent } from './componentes/confirm-dialog/confirm-dialog.component';
@@ -55,6 +56,7 @@ import { ModalOptInicioComponent } from './componentes/modal-opt-inicio/modal-op
 import { ModalOptBarraComponent } from './componentes/modal-opt-barra/modal-opt-barra.component';
 import { ModalOptPlanillaNotasComponent } from './componentes/modal-opt-planilla-notas/modal-opt-planilla-notas.component';
 import { ModalOptCursoComponent } from './componentes/modal-opt-curso/modal-opt-curso.component';
+import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
 
 //Servicios
 import {PersonaService} from './servicios/persona.service';
@@ -102,12 +104,13 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     ModalOptBarraComponent,
     ModalOptPlanillaNotasComponent,
     ModalOptCursoComponent,
+    ModalPagoComponent,
     InicioComponent,
     InicioPaginaColComponent,
     MantenimientoAdministrativoComponent,
     VistaAlumnoComponent,
-    ColegioComponent
-   
+    ColegioComponent,
+    PagoComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +134,8 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     ModalOptPlanillaNotasComponent,
     ModalOptInicioComponent,
     ModalOptBarraComponent,
-    ModalOptCursoComponent
+    ModalOptCursoComponent,
+    ModalPagoComponent,
   ]
   ,
   providers: [

@@ -19,6 +19,7 @@ import { MantenimientoCargoComponent } from '../mantenimiento-cargo/mantenimient
 import { PeriodoComponent } from '../periodo/periodo.component';
 import { GradoComponent } from '../grado/grado.component';
 import { MatriculaComponent } from '../matricula/matricula.component';
+import { PagoComponent } from '../pago/pago.component';
 
 // Importacion de modelos
 import { GaleriaCol }  from '../../modelos/galeria-col';
@@ -108,6 +109,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
    btnMntMatricula:boolean=false;
    btnCronoActi:boolean=false;
    btnPerfilCol:boolean=false;
+   btnPagos:boolean=false;
 
    btnCursosAlu:boolean=false;
    btnlistAlum:boolean=false;
@@ -137,6 +139,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
    curso:boolean=false;
    planillaNotas:boolean=false;
    perfilColegio:boolean=false;
+   pagos:boolean=false;
 
    /**Div auxiliar */
    divAuxiliar:boolean=false;
@@ -282,8 +285,14 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
     this.curso=false;
     this.planillaNotas=false;
     this.perfilColegio=false;
+    this.pagos=false;
     this.clickShowMenu();
  }
+
+ LlamarCpMntPagos(){
+  this.DeshabilitarComponentes();
+  this.pagos=true;
+}
 
  LlamarCpMntPerfilColegio(){
     this.DeshabilitarComponentes();
@@ -358,7 +367,6 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
     this.btnArchivo=false;
     this.btnPerfil=false;
 
-
     this.btnRepositorioPers=false;
     this.btngestionPerfiles=false;
 
@@ -366,6 +374,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
     this.btnMntColegio=false;
     this.btnCronoActi=false;
     this.btnPerfilCol=false;
+    this.pagos=false;
 
     this.btnCursosAlu=false;
     this.btnlistAlum=false;
@@ -401,6 +410,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnCentroDocen=true;           //Botones principales
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
+      
 
       this.btnRepositorioPers=true;       //Botones Secundarios     (btnMiembros)
       this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
@@ -409,6 +419,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
+      this.btnPagos=true;
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
       this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
@@ -441,6 +452,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
+      this.btnPagos=true;
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
       this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
@@ -473,6 +485,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
       this.btnCronoActi=false;             //Botones Secundarios  (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios  (btnColegio)
+      this.btnPagos=true;
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
       this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)
@@ -531,6 +544,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios     (btnColegio)
       this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
+      this.btnPagos=true;
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
       this.btnlistAlum=false;              //Botones Secundarios     (btnCentroAlum)

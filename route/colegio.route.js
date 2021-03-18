@@ -17,5 +17,8 @@ router.post('/imgPfl',colegio.addImgPfl);
 router.get('/imgPfl/:colCod',colegio.getImgPfl);
 router.put('/imgPfl/:colCod',colegio.editImgPfl);
 
+router.put('/deshabilitar/:id',colegio.DeshabilitarColegio);
+
+
 
 module.exports=router;  

@@ -110,3 +110,6 @@ app.use('/MntAdmin_crabb/NucleoArea',require('./route/nucleoArea.route'));
 app.use('/MntAdmin_crabb/NucleoCurso',require('./route/nucleoCurso.route')); 
 app.use('/MntAdmin_crabb/NucleoCurricula',require('./route/nucleoCurricula.route')); 
 app.use('/MntAdmin_crabb/NucleoCurricula',require('./route/secretaria.route')); 
+
+app.use('/Inicio/TipoPago',require('./route/tipoPago.route')); 
+app.use('/Inicio/Pago',require('./route/pago.route')); 

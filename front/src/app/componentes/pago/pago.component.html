@@ -1,0 +1,650 @@
+<div class="container-fluid" style="padding: 0px !important;">
+
+    <div class="row col s12 m12 center anulaPaddMarr" style="margin-top: 20px;padding: 0px !important;">
+        <h5 class="col m12 s12"><strong>Control de Pagos</strong></h5>
+    </div>
+
+    <div class="row col m12 anulaPaddMarr modPantalla" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;">
+
+      <div class="col m2" style="min-height: 500px; background-color: rgb(198, 229, 255);"> 
+          <ul class="menu" style="margin-top: 30px;">
+            <li><a style="cursor: pointer" (click)="showListarPago()">Lista de Pagos</a></li>
+            <li><a style="cursor: pointer" (click)="showCrearPago()">Registrar Pago</a></li>
+            <li><a style="cursor: pointer" *ngIf="itemTpoPago" (click)="showListarTipoPago()">Lista de Tipo de pagos</a></li>
+            <li><a style="cursor: pointer" *ngIf="itemTpoPago" (click)="showCrearTipoPago()">Registrar Tipo de pagos</a></li>
+          </ul>
+      </div>
+
+      <!-- div listar pago -->
+      <div class="col m10 anulaPaddMarr" *ngIf="divListarPago">
+
+          <div class="col m12">      
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+    
+              <div class="col m12 anulaPaddMarr" style="height: 30px;">
+
+                <div class="col m2 anulaPaddMarr">
+                  <div class="input-field col m12" style="margin-top: 15px;">
+                    <input type="text" style="text-align: center;" name="listFilter" id="perDni" [(ngModel)]="listFilter" placeholder="Buscar por DNI">
+                  </div>
+                </div>
+
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12">
+                    <select class="browser-default" id="ModeloTipoPago._id" name="ModeloTipoPago._id"
+                           (ngModelChange)='BuscarSgnConcepto($event)' [(ngModel)]="ModeloTipoPago._id">
+                            <option *ngFor="let tipoPago of selectTipoPago" [value]="tipoPago._id">{{tipoPago.tpoPgoNom}}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+    
+          <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+    
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Alumno</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Concepto</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Descripción</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Mes de pago</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Fecha</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Monto</th>
+                    <th style="text-align: center; color: rgb(16, 16, 94);">Cajero(a)</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let pago of arrayPago">
+                    <td style="text-align: center;">{{pago.pgoPerAso.perRepNom +', '+  pago.pgoPerAso.perRepApe }}</td>
+                    <td style="text-align: center;">{{pago.tpoPgoCod.tpoPgoNom}}</td>
+                    <td style="text-align: center;">{{pago.pgoDes}}</td>
+                    <th style="text-align: center; font-weight: normal;">{{pago.pgoMes}}</th>
+                    <td style="text-align: center;">{{formatearFecha(pago.pgoFch)}}</td>
+                    <td style="text-align: center;">{{'S/'+ pago.pgoMto + '.00'}}</td>
+                    <td style="text-align: center;">{{pago.pgoPerReg.perRepNom +', '+  pago.pgoPerReg.perRepApe}}</td>
+                </tbody>
+              </table>
+            </div>
+        </form>
+    
+    
+      </div>
+
+      <!-- div crear pago -->
+      <div class="col m10 anulaPaddMarr" *ngIf="divCrearPago">
+
+          <div class="row col m12 anulaPaddMarr">
+            <div class="col m2"></div>
+    
+            <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+    
+              <div class="row col m12">
+    
+                <div class="row col m12 center anulaPaddMarr">
+                  <div class="input-field col m12">
+                    <h5 class="center">Registrar Pago</h5>
+                  </div>
+                </div>
+    
+                <div class="row col m12">
+                  <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+                  
+    
+                    <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+          
+                      <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                        <label for="" style="font-size: 16px;">Concepto :</label>
+                      </div>
+                      <div class="col m3 anulaPaddMarr">
+                        <div class="input-field col m12 anulaPaddMarr">
+                          <select class="browser-default" id="ModeloTipoPago._id" name="ModeloTipoPago._id"
+                            [(ngModel)]="ModeloTipoPago._id" (ngModelChange)='capturarTipoPago($event)'>
+                            <option *ngFor="let tipoPago of selectTipoPago" [value]="tipoPago._id">{{tipoPago.tpoPgoNom}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                      </div>
+
+                      <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                          <label for="" style="font-size: 16px;">Mes a pagar :</label>
+                        </div>
+                        <div class="col m3 anulaPaddMarr">
+                          <div class="input-field col m12 anulaPaddMarr">
+                            <select class="browser-default" name="perMes" [disabled]="selectMesEnabled" [(ngModel)]="mesSeleccionado"
+                            (ngModelChange)='capturarMes($event)'>
+                            <option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</option>
+                          </select>
+                          </div>
+                        </div>
+      
+                      <div class="col m12 anulaPaddMarr" style="margin-top: 10px;">
+                          <div class="input-field col m12">
+                              <input type="text" name="pgoDes" id="pgoDes"  [(ngModel)]="ModeloPago.pgoDes" placeholder="Descripcion del pago"
+                                style="text-align: center;">
+                          </div>
+                      </div>
+                    </div>
+    
+                    <div class="row col m8 anulaPaddMarr"  style="margin-top: 15px;">
+                      <div class="input-field col m12">
+                        <input type="text" name="pgoPerAso" id="pgoPerAso" readonly [(ngModel)]="alumnoNomApe" placeholder="Alumno"
+                          style="text-align: center;">
+                      </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr" style="padding-top: 45px;">
+                      <label style="padding-top: 20px;" for="" style="font-size: 16px;">Monto S/ :</label>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr" style="padding-top: 30px;">
+                      <input type="text" name="pgoMto" id="pgoMto" [(ngModel)]="ModeloPago.pgoMto" style="text-align: center; border: solid 1px; border-radius: 10px;">
+                    </div>
+    
+                    
+                  </div>
+                </div>
+    
+    
+    
+                <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+                  <div class="col m6 ">
+                    <button class="waves-light btn-small right col m12" style="background-color: rgb(110, 178, 233)" (click)="CrearPago()">Registrar</button>
+                  </div>
+    
+                  <div class="col m6 ">
+                    <button class="waves-light btn-small left col m12" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar('pa')">Cancelar</button>
+                  </div>
+                </div>
+                
+    
+              </div>
+      
+            </form>
+            <div class="col m1"></div>
+          </div>
+    
+      </div>
+    
+      <div class="col m12 anulaPaddMarr" *ngIf="divCrearPago">
+    
+          <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+    
+            <div class="col m12 anulaPaddMarr">
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                  <div class="input-field col offset-s2 m2"
+                        style="margin-top: 20px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                        <input type="text" style="text-align: center;" name="listFiltera"  [(ngModel)]="listFiltera" placeholder="Buscar por DNI">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col m12 anulaPaddMarr">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th scope="col" header="alumnos" colspan="3" style="text-align: center;">DNI</th>
+                    <th scope="col" header="alumnos" colspan="4" style="text-align: center;">Nombres y Apellidos</th>
+                    <th scope="col" header="alumnos" colspan="3" style="text-align: center;">Sexo</th>
+                    <th scope="col" header="alumnos" colspan="2" style="text-align: center;">Opciones</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let al of alumnosArray">
+                    <td scope="col" header="alumnos" colspan="3" style="text-align: center;">{{al.perRepCod.perRepDni}}</td>
+                    <td scope="col" header="alumnos" colspan="4" style="text-align: center;">{{al.perRepCod.perRepNom + ', ' + al.perRepCod.perRepApe}}</td>
+                    <td scope="col" header="alumnos" colspan="3" style="text-align: center;">{{al.perRepCod.perRepSex}}</td>
+                    <td scope="col" header="alumnos" colspan="2" style="text-align: center;">
+                      <a (click)="SeleccionarAlumno(al)" >
+                        <i  class="material-icons" style="cursor: pointer;">send</i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+          </form>
+      </div>
+
+      <!-- div crear tipo de pago -->
+      <div class="col m10 anulaPaddMarr" *ngIf="divCrearTipoPago">
+        <div class="row col m12 anulaPaddMarr">
+          <div class="col m2"></div>
+          <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+  
+            <div class="row col m12">
+  
+              <div class="row col m12 center anulaPaddMarr">
+                <div class="input-field col m12">
+                  <h5 class="center">Registrar Tipo de Pago</h5>
+                </div>
+              </div>
+  
+              <div class="row col m12">
+                <div class="row col m12" style="margin-top: 50px;text-align: center !important;">
+  
+                  <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+        
+                    <div class="col m3" style="padding-top: 45px;">
+                      <label style="padding-top: 20px;" for="" style="font-size: 16px;">Concepto :</label>
+                    </div>
+
+                    <div class="col m9 anulaPaddMarr" style="padding-top: 30px;">
+                      <input type="text" name="tpoPgoNom" id="tpoPgoNom" placeholder="Ingrese el nombre del concepto" [(ngModel)]="ModeloTipoPago.tpoPgoNom" style="text-align: center; ">
+                    </div>
+
+                    <div class="col m3" style="padding-top: 45px;">
+                      <label style="padding-top: 20px;" for="" style="font-size: 16px;">Descripción :</label>
+                    </div>
+
+                    <div class="col m9 anulaPaddMarr" style="padding-top: 30px;">
+                      <input type="text" name="tpoPgoDes" id="tpoPgoDes" placeholder="Descripcion Predeterminada" [(ngModel)]="ModeloTipoPago.tpoPgoDes" style="text-align: center; ">
+                    </div>
+
+                    <div class="col m4" style="padding-top: 45px;">
+                      <label style="padding-top: 20px;" for="" style="font-size: 16px;">Monto predeterminado S/:</label>
+                    </div>
+
+                    <div class="col m1 anulaPaddMarr" style="padding-top: 30px;">
+                      <input type="text" name="tpoPgoMon" id="tpoPgoMon" placeholder="00" [(ngModel)]="ModeloTipoPago.tpoPgoMon" style="text-align: center; border: solid 1px; ">
+                    </div>
+
+                    <div class="col m3 anulaPaddMarr" style="padding-top: 40px;margin-right: 0px;">
+                      <label for="" style="font-size: 15px;"> ¿Requerir mes? :</label>
+                    </div>
+
+                    <div class="col m4 anulaPaddMarr left" style="padding-top: 40px;">
+                      <label style="margin: 8px;" style="padding-left: 0px; margin-left: 0px; float: left;">
+                        <input name="group1" type="radio" [(ngModel)]="ModeloTipoPago.tpoPgoReqMes"  value="1" />
+                        <span style="color: rgb(5, 5, 90);"><strong>Si</strong></span>
+                      </label>
+  
+                      <label>
+                        <input name="group1" type="radio" [(ngModel)]="ModeloTipoPago.tpoPgoReqMes"  value="0" />
+                        <span style="color: rgb(230, 4, 154);"><strong>No</strong></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row col m12" style="margin-top: 10px;padding-bottom: 9px;">
+                <div class="col m6 ">
+                  <button class="waves-light btn-small right col m12" style="background-color: rgb(110, 178, 233)" (click)="CrearTipoPago()">{{btnNom}}</button>
+                </div>
+  
+                <div class="col m6 ">
+                  <button class="waves-light btn-small left col m12" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar('tpoPgo')">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col m1"></div>
+        </div>
+      </div>
+
+      <!-- div listar pago -->
+      <div class="col m10 anulaPaddMarr" *ngIf="divListarTipoPago">
+
+        <div class="col m12">      
+          <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+            <div class="col m12 anulaPaddMarr" style="height: 30px;">
+            </div>
+          </div>
+        </div>
+  
+        <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+  
+          <div class="col m12 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Concepto</th>
+                  <th style="text-align: center;">Descripción</th>
+                  <th style="text-align: center;">Monto Predeterminado</th>
+                  <th style="text-align: center;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let tipoPago of ArrayTipoPago">
+                  <td style="text-align: center;">{{tipoPago.tpoPgoNom}}</td>
+                  <td style="text-align: center;">{{tipoPago.tpoPgoDes}}</td>
+                  <td style="text-align: center;">{{tipoPago.tpoPgoMon}}</td>
+                  <td style="text-align: center;">
+                    <a class="btn" (click)="PreEditarTipoPago(tipoPago)" matTooltip = "Editar registro" style="height: 25px !important;width: 96px;;margin-bottom: 2px !important; font-size: 10px;padding: 0;margin: 1px;" >
+                      Editar 
+                    </a>
+                  </td>
+              </tbody>
+            </table>
+          </div>
+        </form>
+  
+      </div>
+    </div>
+
+    <div class="row col s12 anulaPaddMarr modCelular" style="margin-top: 10px;">
+      <div class="row col s12" style="margin-top: 10px;">
+        <!-- Disparador Modal -->
+        <button  (click)="openModalOptPago('Opc')"  class="waves-light btn  col s12 "  style="position: relative;float: left;">Opciones <i class="large material-icons">view_list</i>  </button>
+      </div>
+
+      <!-- Div Lista de pagos -->
+      <div class="col s12 anulaPaddMarr" *ngIf="divListarPago">
+
+        <div class="col s12">
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+
+            <div class="col s12 anulaPaddMarr" style="height: 30px;">
+
+              <div class="col s6 anulaPaddMarr">
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                
+                    <input type="text" style="text-align: center;font-size: 12px;" name="listFilter" id="perDni" [(ngModel)]="listFilter" placeholder="Buscar por DNI">
+               
+                </div>
+              </div>
+
+
+              <div class="col s6 anulaPaddMarr">
+                <div class="input-field col s12" style="margin-top: 20px;"> 
+                  <button  class="waves-light btn col s12"  matTooltip = "Buscar Pago" (click)="openModalOptPago('Filtros')">Filtros</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+            <div class="col s12">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Alumno</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Concepto</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Descripción</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Mes de pago</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Fecha</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Monto</th>
+                    <th style="text-align: left; color: rgb(16, 16, 94);">Cajero(a)</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let pago of arrayPago">
+                    <td style="text-align: center;">{{pago.pgoPerAso.perRepNom +', '+  pago.pgoPerAso.perRepApe }}</td>
+                    <td style="text-align: center;">{{pago.tpoPgoCod.tpoPgoNom}}</td>
+                    <td style="text-align: center;">{{pago.pgoDes}}</td>
+                    <th style="text-align: center; font-weight: normal;">{{pago.pgoMes}}</th>
+                    <td style="text-align: center;">{{formatearFecha(pago.pgoFch)}}</td>
+                    <td style="text-align: center;">{{'S/'+ pago.pgoMto + '.00'}}</td>
+                    <td style="text-align: center;">{{pago.pgoPerReg.perRepNom +', '+  pago.pgoPerReg.perRepApe}}</td>
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </div>
+
+      <!-- div crear Pago -->
+      <div class="col s12 anulaPaddMarr" *ngIf="divCrearPago">
+
+        <div class="row col s12 anulaPaddMarr">
+   
+          <form class="col s12" style="margin-top: 40px;">
+  
+            <div class="row col s12 card-panel">
+    
+              <div class="row col s12 center ">
+                <div class="input-field col s12">
+                  <h5 class="center">{{ttlFrmPago}}</h5>
+                </div>
+              </div>
+    
+              <div class="row col s12 " style="margin-top: 25px;">
+                  
+                  <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                    <div class="col s2"></div>
+                    <div class="input-field col s8 anulaPaddMarr">
+                      <mat-select lass="browser-default" id="ModeloTipoPago._id" name="ModeloTipoPago._id"
+                      [(ngModel)]="ModeloTipoPago._id" (ngModelChange)='capturarTipoPago($event)'>
+                        <mat-option *ngFor="let tipoPago of selectTipoPago" [value]="tipoPago._id">{{tipoPago.tpoPgoNom}}</mat-option>
+                      </mat-select>    
+                    </div>
+                    <div class="col s2"></div>
+                  </div>
+    
+                  <div class="col s12 anulaPaddMarr" style="margin-bottom: 10px;">
+                    <div class="col s2"></div>
+                    <div class="input-field col s8 anulaPaddMarr">
+                      <mat-select name="mesSeleccionado" [disabled]="selectMesEnabled" [(ngModel)]="mesSeleccionado"
+                      (ngModelChange)='capturarMes($event)'>
+                        <mat-option *ngFor="let m of arrayMes" [value]="m.nomMes">{{m.nomMes}}</mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col s2"></div>
+                  </div>
+    
+                  <div class="col s12 anulaPaddMarr" style="margin-top: 10px;">
+                    <div class="input-field col s12">
+                        <input type="text" name="pgoDes" [(ngModel)]="ModeloPago.pgoDes" placeholder="Descripcion del pago"
+                          style="text-align: center;">
+                    </div>
+                  </div>
+
+                  <div class="row col s12 anulaPaddMarr"  style="margin-top: 15px;">
+                    <div class="input-field col s12">
+                      <input type="text" name="pgoPerAso" readonly [(ngModel)]="alumnoNomApe" placeholder="Alumno"
+                        style="text-align: center;">
+                    </div>
+                  </div>
+
+                  <div class="row col s12 anulaPaddMarr">
+
+                    <div class="col s2"></div>
+                    <div class="col s4 anulaPaddMarr" style="padding-top: 45px;">
+                      <label style="padding-top: 20px;" for="" style="font-size: 16px;">Monto S/ :</label>
+                    </div>
+  
+                    <div class="col s4 anulaPaddMarr" style="padding-top: 30px;">
+                      <input type="text" name="pgoMto" [(ngModel)]="ModeloPago.pgoMto" style="text-align: center; border: solid 1px; border-radius: 10px;">
+                    </div>
+
+                  </div>
+              </div>
+    
+              <div class="row col s12" style="margin-top: 15px;padding-bottom: 5px;">
+                <div class="col s6 ">
+                  <button class="waves-light btn-small col s12 right" style="background-color: rgb(110, 178, 233)" (click)="CrearPago()">Registrar</button>
+                </div>
+  
+                <div class="col s6 ">
+                  <button class="waves-light btn-small col s12 left" style="background-color: rgb(110, 178, 233)" (click)="Cancelar('pa')">Cancelar</button>
+                </div>
+              </div>  
+              
+              
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col s12 anulaPaddMarr" *ngIf="divCrearPago">
+
+        <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+  
+          <div class="col s12 center">
+            <div class="row card-panel col s12 center" style="margin-top: 0px; height: 75px;">
+              <div class="col s12 anulaPaddMarr center" style="height: 30px;">
+                <div class="input-field col offset-s2 s12 center"
+                      style="margin-top: 20px;margin-bottom: 10px; text-align: center;margin-left: 0px;">
+                      <input type="text" style="text-align: center;" name="listFiltera"  [(ngModel)]="listFiltera" placeholder="Buscar por DNI">
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col s12">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">DNI</th>
+                  <th style="text-align: left;">Nombres</th>
+                  <th style="text-align: left;">Apellidos</th>
+                  <th style="text-align: left;">Sexo</th>
+                  <th style="text-align: left;">Opciones</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let al of alumnosArray">
+                  <td style="text-align: center;">{{al.perRepCod.perRepDni}}</td>
+                  <td style="text-align: center;">{{al.perRepCod.perRepNom}}</td>
+                  <td style="text-align: center;">{{al.perRepCod.perRepApe}}</td>
+                  <td style="text-align: center;">{{al.perRepCod.perRepSex}}</td>
+                  <td style="text-align: center;">
+                    <a (click)="SeleccionarAlumno(al)" >
+                      <i  class="material-icons" style="cursor: pointer;">send</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          </div>
+        </form>
+      </div>
+
+      <!-- Div Lista de tipo pagos -->
+      <div class="col s12 anulaPaddMarr" *ngIf="divListarTipoPago">
+
+        <div class="col s12">
+          <div class="row card-panel col s12" style="margin-top: 0px; height: 75px;">
+            <div class="col s12 anulaPaddMarr" style="height: 30px;">
+            </div>
+          </div>
+        </div>
+
+
+        <form class="col s12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+
+            <div class="col s12">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: left;">Concepto</th>
+                    <th style="text-align: left;">Descripción</th>
+                    <th style="text-align: left;">Monto</th>
+                    <th style="text-align: left;">Opciones</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let tipoPago of ArrayTipoPago">
+                    <td style="text-align: center;">{{tipoPago.tpoPgoNom}}</td>
+                    <td style="text-align: center;">{{tipoPago.tpoPgoDes}}</td>
+                    <td style="text-align: center;">{{tipoPago.tpoPgoMon}}</td>
+                    <td style="text-align: center;" class="anulaPaddMarr">
+                      <a class="btn" (click)="PreEditarTipoPago(tipoPago)" matTooltip = "Editar registro" style="height: 25px !important;width: 75px;;margin-bottom: 2px !important; font-size: 10px;padding: 0;margin: 1px;" >
+                        Editar 
+                      </a>
+                      <a class="btn" (click)="eliminarTipoPago(tipoPago)" matTooltip = "Eliminar registro" style="height: 25px !important;width: 75px;;margin-bottom: 2px !important; font-size: 10px;padding: 0;margin: 1px;" >
+                        Eliminar 
+                      </a>
+                    </td>
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </div>
+
+      <!-- Div Lista de pagos -->
+      <div class="col s12 anulaPaddMarr" *ngIf="divCrearTipoPago">
+
+        <div class="row col s12 anulaPaddMarr">
+   
+          <form class="col s12" style="margin-top: 40px;">
+  
+            <div class="row col s12 card-panel">
+    
+              <div class="row col s12 center ">
+                <div class="input-field col s12">
+                  <h5 class="center">{{ttlFrmTipoPago}}</h5>
+                </div>
+              </div>
+    
+              <div class="row col s12 center" style="margin-top: 25px;">
+                  
+                <div class="col s12 center" style="padding-top: 45px;">
+                  <label class="col s12" style="padding-top: 20px;" for="" style="font-size: 16px;">Concepto :</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr" style="padding-top: 30px;">
+                  <input type="text" name="tpoPgoNom" id="tpoPgoNom" placeholder="Ingrese el nombre del concepto" [(ngModel)]="ModeloTipoPago.tpoPgoNom" style="text-align: center; ">
+                </div>
+
+                <div class="col s12" style="padding-top: 45px;">
+                  <label style="padding-top: 20px;" for="" style="font-size: 16px;">Descripción :</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr" style="padding-top: 30px;">
+                  <input class="col s12" type="text" name="tpoPgoDes" id="tpoPgoDes" placeholder="Descripcion Predeterminada" [(ngModel)]="ModeloTipoPago.tpoPgoDes" style="text-align: center; ">
+                </div>
+
+                <div class="col s12" style="padding-top: 45px;">
+                  <label style="padding-top: 20px;" for="" style="font-size: 16px;">Monto predeterminado</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr" style="padding-top: 30px;">
+                  <input type="text" name="tpoPgoMon" id="tpoPgoMon" placeholder=" S/0.00" [(ngModel)]="ModeloTipoPago.tpoPgoMon" style="text-align: center; border: solid 1px; ">
+                </div>
+
+                <div class="col s12 anulaPaddMarr" style="padding-top: 40px;margin-right: 0px;">
+                  <label for="" style="font-size: 15px;"> ¿Requerir mes? :</label>
+                </div>
+
+                <div class="col s12 anulaPaddMarr left" style="padding-top: 40px;">
+                  <label style="margin: 8px;" style="padding-left: 0px; margin-right: 15px;">
+                    <input name="group1" type="radio" [(ngModel)]="ModeloTipoPago.tpoPgoReqMes"  value="1" />
+                    <span style="color: rgb(5, 5, 90);"><strong>Si</strong></span>
+                  </label>
+
+                  <label>
+                    <input name="group1" type="radio" [(ngModel)]="ModeloTipoPago.tpoPgoReqMes"  value="0" />
+                    <span style="color: rgb(230, 4, 154);"><strong>No</strong></span>
+                  </label>
+                </div>
+              </div>
+    
+              <div class="row col s12" style="margin-top: 15px;padding-bottom: 5px;">
+                <div class="col s6 ">
+                  <button type="button" class="waves-light btn-small col s12 right" style="background-color: rgb(110, 178, 233)" (click)="CrearTipoPago()">{{btnNom}}</button>
+                </div>
+  
+                <div class="col s6 ">
+                  <button type="button" class="waves-light btn-small col s12 left" style="background-color: rgb(110, 178, 233)" (click)="Cancelar('tpoPgo')">Cancelar</button>
+                </div>
+              </div>  
+              
+              
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+

@@ -447,6 +447,7 @@ export class MantenimientoAdministrativoComponent implements OnInit {
           
             this.getImagenes();
             this.showListarImagenes();
+           
 
             M.toast({ html: ' Se guargo la imagen ' });
           }
@@ -456,7 +457,8 @@ export class MantenimientoAdministrativoComponent implements OnInit {
   
  
         this.editarFoto(this.ModeloNcoImagen);
-
+        this.photoSelected="";
+        this.file=undefined;
       }
     }
     else{

@@ -107,6 +107,7 @@ export class PersonaComponent implements OnInit {
       this.anioSeleccionado="Año";
       this.frmPersona.perCorreo="";
       this.frmPersona.perPas="";
+      this.frmPersona.perPasConfirm="";
       this.corRedOn=true;
       this.pasRedOn=true
     }
@@ -198,6 +199,16 @@ export class PersonaComponent implements OnInit {
       M.toast({ html: 'Evita espacios al inicio (Contraseña)' });
       this.ok = false;
     }
+
+    if(this.frmPersona.perPasConfirm === null||this.frmPersona.perPasConfirm === ""||this.frmPersona.perPasConfirm === undefined ){
+      M.toast({ html: 'Debe confirmar la contraseña' });
+      this.ok = false;
+    }
+    else if(this.frmPersona.perPas!=this.frmPersona.perPasConfirm){
+      M.toast({ html: 'Las contraseñas no coinciden' });
+      this.ok = false ;
+    }
+
     return this.ok; 
   }
   

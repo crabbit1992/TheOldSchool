@@ -3,10 +3,23 @@ const BioPortada = require('../model/BioPortada');
 const ColegioCtrl = {};
 
 ColegioCtrl.getColegios = async (req, res) => {
-    const colegio = await Colegio.find()
+    const colegio = await Colegio.find() 
     .populate("colImgPfl");
-    console.log(colegio);
-    res.json(colegio);
+
+    var arrayColegio=[]
+
+    for(let i = 0; i<colegio.length; i++){
+
+        if(colegio[i].estCod=="5e0a8a479644411040ebf293"){
+            console.log(colegio[i].estCod);
+            console.log("****************************************");
+            arrayColegio.push(colegio)
+        }
+
+    }
+
+    console.log(arrayColegio);
+    res.json(arrayColegio);
 };
 
 /** Referente a la imagen de emblema del colegio */
@@ -143,4 +156,16 @@ ColegioCtrl.editColegio = async (req,res)=> {
     await Colegio.findByIdAndUpdate(id,{$set:colegio});
     res.json({status: 200}); 
 };
+
+ColegioCtrl.DeshabilitarColegio = async (req,res)=> {
+    const {id}=req.params;
+    var colegio={
+        estCod: "5e0a8a479644411040ebf293",
+    }   
+
+    await Colegio.findByIdAndUpdate(id,{$set:colegio});
+    res.json({status: 200}); 
+};
+
+
 module.exports = ColegioCtrl;

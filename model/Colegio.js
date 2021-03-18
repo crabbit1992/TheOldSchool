@@ -12,6 +12,7 @@ const ColegioSchema= new Schema({
     colBioInf:{type:Boolean, required:false,default:true},
     colImgEmb:{type: Schema.Types.ObjectId,ref: "ColegioImg", required:false}, //Emblema del colegio (Imagen)
     colImgPfl:{type: Schema.Types.ObjectId,ref: "ColegioImg", required:false}, //Imagen que se mostrara en el perfil de busquedas
+    estCod:{type: Schema.Types.ObjectId,ref: "Estado",default:"5e0a8a3b9644411040ebf292"},  
     timestamp:{type: Date, default:Date.now},
 });
 

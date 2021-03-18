@@ -126,7 +126,21 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
       console.log(res);
       this.arrayColegio=res as GetColegio[];
       this.filteredCol= this.arrayColegio;
+      for(let i=0;i<this.arrayColegio.length;i++){
+        
+        if(this.arrayColegio[i].colImgPfl==null|| this.arrayColegio[i].colImgPfl==undefined){
+          console.log("no hay nada");
+          this.filteredCol.splice(i,1)
+        }
+        else{
+       
+        }
+      }
+
+      this.arrayColegio=this.filteredCol;
       this.arrayColFil=this.filteredCol;
+      console.log(this.arrayColegio);
+      console.log(this.arrayColFil);
     })
   }
 

@@ -24,6 +24,7 @@ export class FrmPersona{
     perDni: string;
     perCorreo: string;
     perPas:string;
+    perPasConfirm:string="";
     perSex: string;
     perDia: string;
     perMes: string;

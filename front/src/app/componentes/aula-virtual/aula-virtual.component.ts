@@ -264,10 +264,10 @@ export class AulaVirtualComponent implements OnInit {
         dialogRef.afterClosed().subscribe(res=>{
           if(res===true){   
             this.deshabilitarAula(aulaVirtual);//----------> En caso el cuadro de dialogo devuelva true llamara al metodo DeshabilitarPerfil()
-            console.log("Deshabilitar Aula");
+          
           }
           else{
-            console.log("Operacion Cancelada");
+         
           }
         });   
       }
@@ -282,10 +282,10 @@ export class AulaVirtualComponent implements OnInit {
           if(res===true){       
 
             this.habilitarAula(aulaVirtual);//----------> En caso el cuadro de dialogo devuelva true llamara al metodo DeshabilitarPerfil()
-            console.log("Habilitar Aula");
+          
           }
           else{
-            console.log("Operacion Cancelada");
+        
           }
         });  
       }
@@ -310,8 +310,6 @@ export class AulaVirtualComponent implements OnInit {
   
   habilitarAula(aulaVirtual: GetAulaVirtual){
     this.aulaVirtualService.habilitarAula(aulaVirtual).subscribe(res=>{
-      console.log(res);
-
       let status=res["status"];
 
       if(status==200){
@@ -326,8 +324,7 @@ export class AulaVirtualComponent implements OnInit {
 
   deshabilitarAula(aulaVirtual: GetAulaVirtual){
     this.aulaVirtualService.deshabilitarAula(aulaVirtual).subscribe(res=>{
-      console.log(res);
-
+     
         let status=res["status"];
 
         if(status==200){
@@ -372,7 +369,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.arrayGrado);
     });
   }
 
@@ -403,7 +399,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.arraySeccion);
     });
   }
 
@@ -434,7 +429,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.arrayTurno);
     });
   }
 
@@ -465,7 +459,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.arrayTurno);
     });
   }
 
@@ -498,11 +491,6 @@ export class AulaVirtualComponent implements OnInit {
   }
 
   CrearAula(){
-    console.log(this.ModeloGrado._id    );
-    console.log(this.ModeloSeccion._id  );
-    console.log(this.ModeloNivel._id  );
-    console.log(this.ModeloTurno._id  );
-
     this.ModeloAulaVirtual.graCod=this.ModeloGrado._id;
     this.ModeloAulaVirtual.secCod=this.ModeloSeccion._id;
     this.ModeloAulaVirtual.nivCod=this.ModeloNivel._id;
@@ -514,7 +502,6 @@ export class AulaVirtualComponent implements OnInit {
 
     }
     else{
-      console.log(this.ModeloAulaVirtual);
 
       if(this.ModeloAulaVirtual._id){
         return this.aulaVirtualService.putAula(this.ModeloAulaVirtual)
@@ -619,8 +606,6 @@ export class AulaVirtualComponent implements OnInit {
     this.divDetalleCursos=true;
     this.id_curso=curso.curCod._id;  //Id del Curso seleccionado  
     this.id_area=curso.areCod._id; 
-    console.log("Esto es el id del aula : " + this.id_Alv);
-    console.log("Esto es el id del curso: " + this.id_curso);
     this.objDocenteCurso= new DocenteCurso();
     this.aulaCursoService.getDocenteCurso(this.id_Alv,this.id_curso)
     .subscribe(res => {
@@ -639,14 +624,10 @@ export class AulaVirtualComponent implements OnInit {
           this.docDeleted=true;
           this.id_aulaCurso=this.objDocenteCurso._id;
         }else{
-          console.log(this.objDocenteCurso);
           this.Docente=this.objDocenteCurso.perRepCod.perRepNom+ ', '+ this.objDocenteCurso.perRepCod.perRepApe;
           this.id_DocCurSelec=this.objDocenteCurso.prfCod;
           this.id_aulaCurso=this.objDocenteCurso._id;
           this.btnAsignarDoc="Editar";
-  
-          console.log(this.Docente);
-          console.log('id del docente actual : '+this.id_DocCurSelec);
         }
       }
     });
@@ -662,12 +643,9 @@ export class AulaVirtualComponent implements OnInit {
     this.ModeloAulaCurso.perRepCod=this.id_perRepCod;
     this.ModeloAulaCurso.prfCod=this.id_prf;
 
-    console.log(this.ModeloAulaCurso);
-
     if(this.btnAsignarDoc==="Asignar" && this.docDeleted===false){
       return this.aulaCursoService.postCurso(this.ModeloAulaCurso)
         .subscribe(res => { 
-          console.log("entro a agregar");
           var status=res["status"];
 
           if(status===200){
@@ -685,9 +663,7 @@ export class AulaVirtualComponent implements OnInit {
         });  
 
     }else if(this.btnAsignarDoc==="Editar"||this.docDeleted===true){
-      console.log("entro a editar");
       this.ModeloAulaCurso._id=this.id_aulaCurso;
-      console.log("este es el id del aula curso"+this.ModeloAulaCurso._id);
       return this.aulaCursoService.putCurso(this.ModeloAulaCurso)
         .subscribe(res => { 
 
@@ -768,7 +744,6 @@ export class AulaVirtualComponent implements OnInit {
     this.cursoGradoService.getCursosGrado(this.inputColCod,this.id_graAlv,this.id_nivAlv)
       .subscribe(res => {
         this.arrayCursoGrado=res as GetCursoGrado[];
-        console.log(this.arrayCursoGrado);
       });
 
   }
@@ -778,7 +753,6 @@ export class AulaVirtualComponent implements OnInit {
     this.matriculaService.getAlumnosPorAula(this.inputColCod,this.id_graAlv,this.id_nivAlv,this.id_secAlv,this.id_turAlv)
       .subscribe(res => {
         this.arrayAlumnosAula=res as GetMatricula[];
-        console.log(this.arrayAlumnosAula);
       });
   }
 
@@ -787,7 +761,6 @@ export class AulaVirtualComponent implements OnInit {
     .subscribe(res => {
       this.arrayProfesor=res as GetProfesor[];
       this.filteredProfesor=res as GetProfesor[];
-      console.log(this.arrayProfesor);
     });
   }
 
@@ -796,8 +769,6 @@ export class AulaVirtualComponent implements OnInit {
 
     this.id_prf=profesor._id;
     this.id_perRepCod= profesor.perRepCod._id;
-    console.log(this.id_prf);
-    console.log(profesor.perRepCod.perRepNom);
 
     this.nomDocente=profesor.perRepCod.perRepNom;
     this.apeDocente=profesor.perRepCod.perRepApe;
@@ -806,12 +777,10 @@ export class AulaVirtualComponent implements OnInit {
   }
 
   CargarTablaMatricula(){
-    console.log(this.inputColCod);
     this.aulaVirtualService.getAulasVirtCol(this.inputColCod)
       .subscribe(res => {
         this.arrayAulaVirtual = res as GetAulaVirtual[];
         this.filterAulaVirtual=this.arrayAulaVirtual;
-        console.log(this.arrayAulaVirtual);
       });
   }
 
@@ -820,23 +789,19 @@ export class AulaVirtualComponent implements OnInit {
 
   CargarTablaDocentesGrado(){ 
 
-    console.log("Este el el id del aula virtual" + this.id_Alv);
     return this.aulaCursoService.getDocentesPorAula(this.id_Alv,this.periodoActual)
       .subscribe(res => {  
         this.arrayAulaCurso=res as GetAulaCurso[];
-        console.log(this.arrayAulaCurso);
       });
   }
 
   CapturarPeriodoActual(){
     let fechaActual = new Date();
         var anioActual=fechaActual.getFullYear().toString();
-        console.log(anioActual);
         return this.periodoService.getPeriodoActual(anioActual,this.inputColCod)
         .subscribe(res => {  
           this.arrayPeriodo = res as Periodo[];
           this.periodoActual=this.arrayPeriodo[0]._id;
-          console.log('El periodo actual : '+this.periodoActual);
         });
   }
 
@@ -869,7 +834,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.fltArrayGrado);
     });
   }
 
@@ -901,7 +865,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.fltArraySeccion);
     });
   }
 
@@ -933,7 +896,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.fltArrayNivel);
     });
   }
 
@@ -965,7 +927,6 @@ export class AulaVirtualComponent implements OnInit {
       timestamp: "..",
       __v: 1
       });
-      console.log(this.fltArrayTurno);
     });
   }
 
@@ -1032,11 +993,9 @@ export class AulaVirtualComponent implements OnInit {
       this.ModeloIntervalo.colCod=this.inputColCod;
 
       if(this.btnCrearActlzIntervalo=="Registrar"){
-        console.log(this.ModeloIntervalo);
     
         return this.intervaloHorarioService.postIntervaloHorario(this.ModeloIntervalo)
         .subscribe(res=>{
-          console.log(res);
 
           var status=res["status"];
           if(status==200){
@@ -1085,7 +1044,6 @@ export class AulaVirtualComponent implements OnInit {
   GetIntervalo(){
     return this.intervaloHorarioService.getIntervaloHorario(this.inputColCod)
     .subscribe(res=>{
-      console.log(res);
       this.arrayIntervalo= res as IntervaloHorario[];
     });
   }
@@ -1094,19 +1052,12 @@ export class AulaVirtualComponent implements OnInit {
     return this.horarioService.getHorario(this.inputColCod,this.id_Alv)
     .subscribe(res=>{
       this.arrayHorario=res as GetHorario[];
-      console.log(res);
-    })
+    });
   }
 
   LlamarModalHorario(codIntv:string,curCod:string,hraIni:string,hraFin:string,dia){
     this.openDialog(codIntv,curCod,dia,hraIni,hraFin);
-    console.log(curCod);
-
-    
-
-    console.log("Este es el codigo del intervalo : "+codIntv);
-    console.log("Este es el dia : "+ dia);
-  }
+  };
   
   openDialog(codIntv:string,curCod:string,dia:string,hraIni:string,hraFin:string){
 
@@ -1136,8 +1087,7 @@ export class AulaVirtualComponent implements OnInit {
       }
       else{
         this.GetHorario();
-        console.log("Actualizar Tabla");
-      }
+      };
     });   
   }
 
@@ -1160,9 +1110,7 @@ export class AulaVirtualComponent implements OnInit {
 
 
       if(fltOrOpt=="Filtros"){
-        console.log("Entrooo");
-
-        var obj=this.aulaVirtualService.ObjFltSeleccionados
+        var obj=this.aulaVirtualService.ObjFltSeleccionados;
 
         const objParametros={
           graCod: obj["grado"],
@@ -1177,18 +1125,15 @@ export class AulaVirtualComponent implements OnInit {
         if(objParametros.turCod==="string"){objParametros.turCod=undefined;}
     
         
-        console.log(objParametros);
         return this.aulaVirtualService.postObtenerAulas(objParametros)
         .subscribe(res =>{
           this.arrayAulaVirtual=res as GetAulaVirtual[];
-          console.log("res");
         });
 
       }
       else{
 
         var getOptModal=this.aulaVirtualService.OptSelected;
-        console.log(getOptModal);
   
         if(getOptModal=="ShowDivListaAulas"){
           this.ShowDivListaAulas();
@@ -1223,71 +1168,57 @@ export class AulaVirtualComponent implements OnInit {
       turCod: this.fltSelectTurCod,
       colCod: this.inputColCod,
     }
-    console.log(objParametros);
-
     if(objParametros.graCod==="..."){objParametros.graCod=undefined;}
     if(objParametros.secCod==="..."){objParametros.secCod=undefined;}
     if(objParametros.nivCod==="..."){objParametros.nivCod=undefined;}
     if(objParametros.turCod==="..."){objParametros.turCod=undefined;}
 
-    console.log(objParametros);
     return this.aulaVirtualService.postObtenerAulas(objParametros)
     .subscribe(res =>{
       this.arrayAulaVirtual=res as GetAulaVirtual[];
-      console.log(res);
     });
 
   }
 
   GetSltGrado(val: any){
     this.fltSelectGraCod=val;
-    console.log(this.fltSelectGraCod);
   }
 
   GetSltSeccion(val: any){
     this.fltSelectSecCod=val;
-    console.log(this.fltSelectSecCod);
   }
 
   GetSltNivel(val: any){
     this.fltSelectNivCod=val;
-    console.log(this.fltSelectNivCod);
   }
 
   GetSltTurno(val: any){
     this.fltSelectTurCod=val;
-    console.log(this.fltSelectTurCod);
   }
 
   /** Capturar dia del horario */
   GetLunes(val: any){
     this.dia="Lunes";
-    console.log(this.dia);
   }
 
   GetMartes(val: any){
     this.dia="Martes";
-    console.log(this.dia);
   }
 
   GetMiercoles(val: any){
     this.dia="Miercoles";
-    console.log(this.dia);
   }
 
   GetJueves(val: any){
     this.dia="Jueves";
-    console.log(this.dia);
   }
 
   GetViernes(val: any){
     this.dia="Viernes";
-    console.log(this.dia);
   }
   
   GetSabado(val: any){
     this.dia="Sabado";
-    console.log(this.dia);
   }
 
   LimpiarFormAsignarDocente(){
@@ -1323,10 +1254,6 @@ export class AulaVirtualComponent implements OnInit {
     function comparar(a, b) {
       return a - b;
     }
-
-    console.log('original:', arr.join());
-    console.log('ordenado sin función:', arr.sort());
-    console.log('ordenado con función:', arr.sort(comparar));
 
   }
 
