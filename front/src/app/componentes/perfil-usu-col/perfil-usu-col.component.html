@@ -52,9 +52,9 @@
                             <li (click)="clickUl_Cole()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnColegio">Colegio</a>
                                 <ul [ngStyle]="{'display':var_clickUl_Cole == 0 ? 'none' : '' }">
                                     <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
-                                    <!-- <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntColegio" >Mant. Colegio</a></li>-->
-                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
-                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                    <!-- <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntAulaVir" >Mant. Colegio</a></li>-->
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntAulaVir" >Aula Virtual</a></li>
+                                    <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntMatricula" >Matricula</a></li>
                                     <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPagos()" *ngIf="btnPagos" >Pagos</a></li>
                                     <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
                                     <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>
@@ -185,9 +185,9 @@
                             <li><a style="cursor: pointer" *ngIf="btnColegio">Colegio</a>
                                 <ul>
                                     <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
-                                    <!--<li><a style="text-align: left;font-size: 14px;cursor: pointer;" *ngIf="btnMntColegio" >Mant. Colegio</a></li>-->
-                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
-                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                    <!--<li><a style="text-align: left;font-size: 14px;cursor: pointer;" *ngIf="btnMntAulaVir" >Mant. Colegio</a></li>-->
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntAulaVir" >Aula Virtual</a></li>
+                                    <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntMatricula()" *ngIf="btnMntMatricula" >Matricula</a></li>
                                     <li><a style="text-align: left;font-size: 14px;cursor: pointer;" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
                                     <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntPagos()" *ngIf="btnPagos" >Pagos</a></li>
                                     <li><a style="text-align: left;font-size: 14px;cursor: pointer;" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>
@@ -240,9 +240,9 @@
                                 <li (click)="clickUl_Cole()"><a style="cursor: pointer;background-color: rgb(48, 76, 119);" *ngIf="btnColegio">Colegio</a>
                                     <ul [ngStyle]="{'display':var_clickUl_Cole == 0 ? 'none' : '' }">
                                         <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpPeriodo()" *ngIf="btnPeriodo" >Mant. Periodo</a></li>
-                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntColegio" >Mant. Colegio</a></li>
-                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntColegio" >Aula Virtual</a></li>
-                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntColegio" >Matricula</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnMntAulaVir" >Mant. Colegio</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntAuVirtual()" *ngIf="btnMntAulaVir" >Aula Virtual</a></li>
+                                        <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntMatricula()" *ngIf="btnMntMatricula" >Matricula</a></li>
                                         <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPagos()" *ngIf="btnPagos" >Pagos</a></li>
                                         <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" *ngIf="btnCronoActi" >Cronograma de Actividades</a></li>
                                         <li><a style="text-align: center;cursor: pointer;background-color: rgb(71, 96, 133);" (click)="LlamarCpMntPerfilColegio()" *ngIf="btnPerfilCol" >Perfil del Colegio</a></li>

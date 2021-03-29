@@ -104,7 +104,7 @@
                       <td scope="col" header="aula" colspan="6" style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>
                       <td scope="col" header="aula" colspan="1" style="text-align: center;">
                         <a >
-                            <a class="waves-light btn-small btnDetalle" >Detalle</a>
+                            <a class="waves-light btn-small btnDetalle" (click)="ShowMiAgenda(curso.curCod._id)" >Detalle</a>
                         </a>
                         </td>
                     </tr>
@@ -119,6 +119,82 @@
           
         </div>
 
+        <div class="row col m12  anulaPaddMarr" *ngIf="divListarAgenda" style="height: 400px; margin-top: 70px;">
+
+    
+          <div class="col m12 center" style="margin-top: 20px;">
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+      
+                <div class="col m12 anulaPaddMarr" style="height: 30px;">
+      
+                  <div class="col m2 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 20px;">
+                      
+                     
+                    </div>
+                  </div>
+    
+                </div>
+    
+              </div>
+          </div>
+    
+          <div class="col m12 center" style="margin-top: 25px; padding: 4px">
+              <table class="centered responsive-table striped">
+                  <thead>
+                    <tr  scope="col" colspan="12" id="agenda">
+                      <th scope="col" colspan="2" id="agenda" style="text-align: center;">Fecha de creacion</th>
+                      <th scope="col" colspan="4" id="agenda" style="text-align: center;">Titulo</th>
+                      <th scope="col" colspan="3" id="agenda" style="text-align: center;">Curso</th>
+                      <th scope="col" colspan="2" id="agenda" style="text-align: center;">Estado</th>
+                      <th scope="col" colspan="1" id="agenda" style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let agenda of arrayAgenda">
+                      <td scope="col" colspan="2" id="agenda" style="text-align: center;">{{formatearFecha(agenda.timestamp)}}</td>
+                      <td scope="col" colspan="4" id="agenda" style="text-align: center;">{{agenda.ageTtl}}</td>
+                      <td scope="col" colspan="3" id="agenda" style="text-align: center;">{{agenda.ageCur.ncoCurNom}}</td>
+                      <td scope="col" colspan="2" id="agenda" style="text-align: center;">{{agenda.estCod.estNom}}</td>
+                      <td scope="col" colspan="1" id="agenda" >
+                          <a>
+                              <a class="waves-effect waves-light btn-small col m12" (click)="showDetalleAgenda(agenda)" style="height: 25px !important;margin-bottom: 2px !important; font-size: 10px; padding: 0;">Detalles</a>
+                          </a>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+    
+          
+    
+      
+        </div>
+
+        <div class="row col m12 anulaPaddMarr center" *ngIf="divDetalleAgenda" style="margin-top: 70px; margin-bottom: 80px;">
+          <div class="col m12 center">
+    
+            <div class="col m12 center">
+              <span style="font-size: 25px; color: rgb(14, 62, 117);"><strong>{{modeloGetAgenda.ageTtl}}</strong></span>
+            </div>
+           
+          </div>
+      
+          <div class="col m12 center" style="margin-top: 20px;"> 
+            <div class="col m2"></div>
+            <div class="col m8">
+              <span style="color: rgb(11, 46, 87);"><strong>{{modeloGetAgenda.ageDes}}</strong></span>
+            </div>
+            <div class="col m2"></div>
+            
+          </div>
+        </div>
+
+        <div class="col m12" *ngIf="divDetalleAgenda" style="padding: 8px;">
+          <app-chat *ngIf="divDetalleAgenda" [inputColCod]="colCod" [idSala]="id_agenda" class="col s12" style="padding: 0px;"></app-chat>
+        </div>
+        
         <!-- Div Lista Horario-->
         <div class="row col m12 anulaPaddMarr" *ngIf="divHorario" style="min-height: 500px;">
 
@@ -662,6 +738,8 @@
         </div>
 
      </div>
+
+     <div style="background-color: rgb(227, 231, 250);height: 100px;"></div>
     </div>
 
 

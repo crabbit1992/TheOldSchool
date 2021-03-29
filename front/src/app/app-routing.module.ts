@@ -28,6 +28,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { InicioPaginaColComponent } from './componentes/inicio-pagina-col/inicio-pagina-col.component';
 import { MantenimientoAdministrativoComponent } from './componentes/mantenimiento-administrativo/mantenimiento-administrativo.component';
 import { VistaAlumnoComponent } from './componentes/vista-alumno/vista-alumno.component';
+import { ChatComponent } from './componentes/chat/chat.component';
 
 import {AuthGuard} from './auth.guard'
 
@@ -66,6 +67,7 @@ const routes: Routes = [
   {path:'galeriaColegio',component:GaleriaColComponent, canActivate: [AuthGuard]},
   {path:'intranet',component:VistaAlumnoComponent, canActivate: [AuthGuard]},
   {path:'MntAdmin_crabb',component:MantenimientoAdministrativoComponent},
+  {path:'chat',component:ChatComponent},
 
   
 ];

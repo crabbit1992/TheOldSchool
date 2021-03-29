@@ -1,8 +1,11 @@
 const express=require('express');
+const mongoose=require('mongoose'); 
+const {database} =require('./keys');
 const config=require('./config');
 const app =config(express()); 
 const morgan=require('morgan');
 const cors=require('cors');
+var socket = require('socket.io');
 
 
 const multer = require('multer');
@@ -25,12 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Iniciando el servidor
-app.listen(app.get('port'),()=>{
+const server = app.listen(app.get('port'),()=>{
     console.log('Server on port',app.get('port')); 
 });
 
+
+
 //Llamar a la base de datos
-require('./database');
+
 
 //Funciones
 
@@ -38,6 +43,106 @@ app.use(morgan('dev'));
 app.use(express.json()); // Reconocer el formato JSON 
 app.use(cors({origin:'http://localhost:4200'}));
 
+
+email = []; 
+dsv = [];
+creative = [];
+
+
+
+mongoose.connect(database.uri, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(db=>{
+    console.log('DB is connected');
+})
+.catch(err=>console.error(err));
+
+var io = socket(server);
+
+
+io.on('connection', function(socket) {
+    console.log('New connection made!!', socket.id);
+    // new user online
+   socket.on('new user', function(data) {
+   socket.join(data.room);
+    if (data.room == 'Email Marketing') {
+        socket.nickname1 = data;
+        email.push(socket.nickname1);
+        console.log('Email', email);
+        io.in(data.room).emit('usernames', email);
+    } else if (data.room == 'Dsv & Preview') {
+        socket.nickname2 = data;
+        dsv.push(socket.nickname2);
+        console.log('Dsv', dsv);
+    io.in(data.room).emit('usernames', dsv);
+    } else {
+        socket.nickname3 = data;
+        creative.push(socket.nickname3);
+        console.log('Creative', creative);
+    io.in(data.room).emit('usernames', creative);
+    }
+});
+
+socket.on('disconnect', function(data) {
+    console.log('disconnected', socket.id);
+    var forEmail = email.indexOf(socket.nickname1);
+    var forDsv = dsv.indexOf(socket.nickname2);
+    var forCreative = creative.indexOf(socket.nickname3);
+    if(forEmail !== -1) {
+        email.splice( forEmail, 1);
+        io.in('Email Marketing').emit('usernames', email);
+    } else if (forDsv !== -1) {
+        dsv.splice( forDsv, 1);
+        io.in('Dsv & Preview').emit('usernames', dsv); 
+    } else if (forCreative !== 1) {
+        creative.splice(forCreative, 1);
+        io.in('Creative').emit('usernames', creative);   
+    }
+})
+ 
+socket.on('join', function(data) {
+    socket.join(data.room);
+
+    console.log(data.user + ' Joined the room :- ' + data.room);
+    socket.broadcast.to(data.room).emit('new user joined', {user: data.user, message:'Se unio a la sala !!'});
+});
+
+socket.on('leave', function(data) {
+    console.log(data.user + ' left the room :- ' + data.room);
+    socket.broadcast.to(data.room).emit('left room', {user: data.user, message:'Salio de la sala !!'});
+    socket.leave(data.room);
+    if (data.room == 'Email Marketing') {
+        socket.nickname1 = data;
+        email.pop(socket.nickname1);
+        console.log('Email', email);
+        io.in(data.room).emit('usernames', email);
+    } else if (data.room == 'Dsv & Preview') {
+        socket.nickname2 = data;
+        dsv.pop(socket.nickname2);
+        console.log('Dsv', dsv);
+    io.in(data.room).emit('usernames', dsv);
+    } else {
+        socket.nickname3 = data;
+        creative.pop(socket.nickname3);
+        console.log('Creative', creative);
+    io.in(data.room).emit('usernames', creative);
+    }
+});
+
+socket.on('message', function(data) {
+    var d = new Date();
+   // chat.insertOne(data, function(err, res) {
+     //   console.log('Wooo...New message Inserted in database!!')
+   // })
+    io.in(data.room).emit('new message', {user: data.user, message: data.message, time: data.Time}); 
+});
+
+socket.on('typing', function(data) {
+    console.log(data.user + ' typing in room :- ' + data.room);
+    socket.broadcast.to(data.room).emit('user typing', {user: data.user, message:'is typing ...!!'});
+
+});
+
+}); 
 
 
 /************** Referente al caso de Cuentas y accesos **************************************************************/
@@ -113,3 +218,5 @@ app.use('/MntAdmin_crabb/NucleoCurricula',require('./route/secretaria.route'));
 
 app.use('/Inicio/TipoPago',require('./route/tipoPago.route')); 
 app.use('/Inicio/Pago',require('./route/pago.route')); 
+app.use('/Inicio/Agenda',require('./route/agenda.route')); 
+app.use('/Inicio/Chat',require('./route/chat.route')); 

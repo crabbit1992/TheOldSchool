@@ -43,7 +43,10 @@ import { GetHorario,HorarioModal }  from '../../modelos/horario';
 import { Nota, GetNotaSegunTipo, GetNotasFiltradas } from 'src/app/modelos/nota';
 import { PersonaRepositorio } from 'src/app/modelos/persona-repositorio';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { Agenda, getAgenda }  from '../../modelos/agenda'; 
+/******* Importacion de Servicios******** */
+import { AgendaService } from '../../servicios/agenda.service';
+import { DatasocketService } from '../../servicios/datasocket.service';
 declare const M
 
 declare var jQuery:any;
@@ -63,9 +66,14 @@ export class VistaAlumnoComponent implements OnInit {
   elems: any;
   instances:any;
 
+  id_agenda:string;
+
   cargoActual:string;
   perfil: Perfil=new Perfil();
   errorMessage: string;
+
+  arrayAgenda:getAgenda[];
+
 
   colegios:Perfil[];
   arrayColegio: Perfil[];
@@ -78,6 +86,8 @@ export class VistaAlumnoComponent implements OnInit {
   arrayNotasFiltradas:  GetNotasFiltradas[];
 
   arrayAlumApo: GetAlumApo[];
+
+  modeloGetAgenda:getAgenda= new getAgenda();
 
 
 
@@ -132,6 +142,8 @@ export class VistaAlumnoComponent implements OnInit {
   var_Menu:number=0;
   varHro:boolean=false;
   
+  divListarAgenda:boolean=false;
+  divDetalleAgenda:boolean=false;
 
   /**Referente al carousel */
   options = { fullWidth: false,pressed:true, duration:300, indicators: false };
@@ -153,6 +165,8 @@ export class VistaAlumnoComponent implements OnInit {
     private mntAdminCrabbService:MntAdminCrabbService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private agendaService:AgendaService,
+    private datasocketService:DatasocketService,
   ) {
     this.matIconRegistry.addSvgIcon(
       "detalle",
@@ -186,6 +200,8 @@ export class VistaAlumnoComponent implements OnInit {
     this.divlibDetallePromCursos=false;
     this.divlibHstSgnTpoNta=false;
     this.divSelectAlum=false;
+    this.divListarAgenda=false;
+    this.divDetalleAgenda=false;
   }
 
   clickShowMenu(){
@@ -195,9 +211,6 @@ export class VistaAlumnoComponent implements OnInit {
       this.var_Menu=0;
     }
   }
-
- 
-
 
   CallModalOptBarra(){
 
@@ -326,6 +339,76 @@ export class VistaAlumnoComponent implements OnInit {
 
     this.CargarCursos();
     //Capturar el codigo del alumno y almacenarlo en una variable 
+  }
+
+  /** Metodos referente a agenda */
+  ShowMiAgenda(curCod:string){
+
+    return  this.agendaService.getAgendas(this.alvCod, curCod)
+    .subscribe(res=>{
+      
+      this.HideDivs();
+      this.arrayAgenda = res as getAgenda[];
+      console.log(this.arrayAgenda);
+      this.divListarAgenda=true;
+    });
+    
+
+  }
+
+  showDetalleAgenda(agenda){
+
+    this.HideDivs();
+
+    this.agendaService.getAgenda(agenda._id)
+    .subscribe(res=>{
+      this.modeloGetAgenda= res as getAgenda;
+    })
+
+    console.log(agenda);
+    this.id_agenda=agenda._id;
+    this.divDetalleAgenda=true;
+
+  }
+
+  formatearFecha(fecha: string):string{
+    var fch = new Date(fecha);
+    var dia = fch.getDate();
+    var mes = fch.getMonth()+1;
+    var anio = fch.getFullYear();
+
+    var d="";
+    var m="";
+    var a="";
+
+    if(dia<10){
+        d="0"+dia;
+    }
+    else{
+      d=""+dia;
+    }
+    if(mes<10){
+        m="0"+mes;
+    }
+    else{
+      m=""+mes;
+    }
+
+    if (M == "01") { m = "Ene"; }
+    else if (m == "02") { m = "Feb"; }
+    else if (m == "03") { m = "Mar"; }
+    else if (m == "04") { m = "Abr"; }
+    else if (m == "05") { m = "May"; }
+    else if (m == "06") { m = "Jun"; }
+    else if (m == "07") { m = "Jul"; }
+    else if (m == "08") { m = "Ago"; }
+    else if (m == "09") { m = "Set"; }
+    else if (m == "10") { m = "Oct"; }
+    else if (m == "11") { m = "Nov"; }
+    else if (m == "12") { m = "Dic"; }
+
+    var resFch= d+" - "+m+" - "+anio;
+    return resFch;
   }
 
 

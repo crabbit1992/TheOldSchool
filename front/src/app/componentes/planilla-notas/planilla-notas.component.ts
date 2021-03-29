@@ -86,6 +86,7 @@ export class PlanillaNotasComponent implements OnInit {
     divPromSgnNta   :boolean=false;
     divHstSgnTpoNta :boolean=false;
     divSinRegistros :boolean=false;
+    divAgenda       :boolean=false;
 
     /** Barra lateral de opciones */
     opcAlumnos    :boolean=false;
@@ -126,6 +127,8 @@ export class PlanillaNotasComponent implements OnInit {
     nroClo    :  string;
     _idCurso  :  string;
 
+    outPutCurCod: string;
+
     sabadoDisable  :boolean=true;
     
 
@@ -153,6 +156,7 @@ export class PlanillaNotasComponent implements OnInit {
       this.divPromSgnNta=false;
       this.divHstSgnTpoNta=false;
       this.divSinRegistros=false;
+      this.divAgenda=false;
     }
 
     HideOpciones(){
@@ -241,6 +245,11 @@ export class PlanillaNotasComponent implements OnInit {
      
           
         });   
+    }
+
+    ShowDivAgenda(){
+      this.HideDivs();
+      this.divAgenda=true;
     }
 
     ShowOpciones(aulaVirtual: GetAulaVirtual){

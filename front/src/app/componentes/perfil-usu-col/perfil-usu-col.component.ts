@@ -105,7 +105,7 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
    btngestionPerfiles:boolean=false;
 
    btnPeriodo:boolean=false;
-   btnMntColegio:boolean=false;
+   btnMntAulaVir:boolean=false;
    btnMntMatricula:boolean=false;
    btnCronoActi:boolean=false;
    btnPerfilCol:boolean=false;
@@ -371,7 +371,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
     this.btngestionPerfiles=false;
 
     this.btnPeriodo=false;
-    this.btnMntColegio=false;
+    this.btnMntAulaVir=false;
+    this.btnMntMatricula=false;
     this.btnCronoActi=false;
     this.btnPerfilCol=false;
     this.pagos=false;
@@ -416,7 +417,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
 
       this.btnPeriodo=true;               //Botones Secundarios     (btnColegio)  
-      this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
+      this.btnMntAulaVir=true;            //Botones Secundarios     (btnColegio)
+      this.btnMntMatricula=true;
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
       this.btnPagos=true;
@@ -449,7 +451,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btngestionPerfiles=true;       //Botones Secundarios     (btnMiembros)
 
       this.btnPeriodo=true;               //Botones Secundarios     (btnColegio)  
-      this.btnMntColegio=true;            //Botones Secundarios     (btnColegio)
+      this.btnMntAulaVir=true;            //Botones Secundarios     (btnColegio)
+      this.btnMntMatricula=true;
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=true;             //Botones Secundarios     (btnColegio)
       this.btnPagos=true;
@@ -482,7 +485,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btngestionPerfiles=true;       //Botones Secundarios  (btnMiembros)
 
 
-      this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntAulaVir=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntMatricula=true;
       this.btnCronoActi=false;             //Botones Secundarios  (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios  (btnColegio)
       this.btnPagos=true;
@@ -513,7 +517,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
       this.btngestionPerfiles=true;       //Botones Secundarios  (btnMiembros)
 
 
-      this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntAulaVir=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntMatricula=true;
       this.btnCronoActi=false;             //Botones Secundarios  (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios  (btnColegio)
 
@@ -543,7 +548,8 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.btnCronoActi=false;             //Botones Secundarios     (btnColegio)
       this.btnPerfilCol=false;             //Botones Secundarios     (btnColegio)
-      this.btnMntColegio=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntAulaVir=true;            //Botones Secundarios  (btnColegio)
+      this.btnMntMatricula=true;
       this.btnPagos=true;
 
       this.btnCursosAlu=true;             //Botones Secundarios     (btnCentroAlum)
@@ -560,13 +566,17 @@ export class PerfilUsuColComponent implements OnInit, AfterViewInit, OnDestroy {
             
     if(this.perfilActual=="5e0a9197c2a58d0b8872b2be"){            //Profesor
       this.btnMiembros=false;              //Botones principales
-      this.btnColegio=false;               //Botones principales
+      this.btnColegio=true;               //Botones principales
       this.btnCentroAlum=true;            //Botones principales
       this.btnCentroDocen=true;           //Botones principales
       this.btnArchivo=true;               //Botones principales
       this.btnPerfil=true;                //Botones principales
 
       this.btngestionPerfiles=false;       //Botones Secundarios
+
+      this.btnPagos=false                  //Botones Secundarios
+      this.btnMntAulaVir=true;
+      
 
       this.btnCronoActi=false;             //Botones Secundarios
       this.btnPerfilCol=false;             //Botones Secundarios

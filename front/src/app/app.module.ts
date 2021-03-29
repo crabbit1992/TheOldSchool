@@ -42,6 +42,7 @@ import { MantenimientoAdministrativoComponent } from './componentes/mantenimient
 import { VistaAlumnoComponent } from './componentes/vista-alumno/vista-alumno.component';
 import { ColegioComponent } from './componentes/colegio/colegio.component';
 import { PagoComponent } from './componentes/pago/pago.component';
+import { AgendaComponent } from './componentes/agenda/agenda.component';
 
 /** Cuadro de dialogo (Modales) */
 import { ConfirmDialogComponent } from './componentes/confirm-dialog/confirm-dialog.component';
@@ -57,11 +58,16 @@ import { ModalOptBarraComponent } from './componentes/modal-opt-barra/modal-opt-
 import { ModalOptPlanillaNotasComponent } from './componentes/modal-opt-planilla-notas/modal-opt-planilla-notas.component';
 import { ModalOptCursoComponent } from './componentes/modal-opt-curso/modal-opt-curso.component';
 import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
+import { ChatComponent } from './componentes/chat/chat.component';
 
 //Servicios
 import {PersonaService} from './servicios/persona.service';
 import {PersonaRepositorioService} from './servicios/persona-repositorio.service';
 import {LoginService} from './servicios/login.service';
+import {DatasocketService} from './servicios/datasocket.service';
+import {ChatService} from './servicios/chat.service';
+import {DataService} from './servicios/data.service';
+
 
 import {AuthGuard} from './auth.guard'
 import {TokenInterceptorService} from './servicios/token-interceptor.service';
@@ -111,6 +117,8 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     VistaAlumnoComponent,
     ColegioComponent,
     PagoComponent,
+    AgendaComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -143,6 +151,10 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     PersonaRepositorioService,
     LoginService,
     AuthGuard,
+    DatasocketService,
+    ChatService,
+    DataService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

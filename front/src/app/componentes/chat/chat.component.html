@@ -1,0 +1,62 @@
+
+
+<div class="container-fluid  col m12 anulaPaddMarr" style="background-color: rgb(241, 251, 253); padding: 15px;">
+
+  <div class="col m9 anulaPaddMarr scroll2" style="overflow: hidden; outline: none; height: 684px;background-color: rgb(241, 251, 253);" tabindex="5001">
+    <div class="col m12 decor-default scroll2" style="min-height: 800px;background-color: rgb(241, 251, 253);">
+      <div class="chat-body scroll2" style="min-height: 710px;">
+
+      <div #list class="list  anulaPaddMarr scroll2" [scrollTop]="list.scrollHeight" style="height: 600px;">
+        <div [ngClass]="(chat.Name === Name)? 'left' : 'right'" class="answer " *ngFor="let chat of historyMessages" style="margin-bottom: 8px;">
+          <div class="avatar">
+            <div class="status offline"></div>
+          </div>
+          <div class="name">{{chat.Name}}</div>
+          <div class="text" >
+                {{chat.message}}
+          </div>
+          <div class="time">{{chat.date | date: 'mediumDate'}} {{chat.time}}</div>
+        </div>
+        <div [ngClass]="(item.user === Name)? 'left' : 'right'"  class="answer" *ngFor="let item of messageArray" style="margin-bottom: 8px;">
+                <div class="avatar">
+                  <div class="status offline"></div>
+                </div>
+                <div class="name">{{item.user}}</div>
+                <div class="text">
+                        {{item.message}}
+                </div>
+                <div class="time">{{item.time}}</div>
+        </div>
+        </div>
+        <p *ngIf="false"><strong>{{typingShow.user}}</strong> {{typingShow.message}}</p>
+        <div class="col m12 degradado" style="padding: 5px;height: 74px;">
+        
+        <div class="col m8">
+          <textarea style="color: white; resize: none;height: 40px;" type="text" class="form-control" [(ngModel)]="messageText"  (keyup)="showTyping($event)" placeholder="Escriba un mensaje, presione enter para enviar..."></textarea> 
+        </div>
+        <div class="col m4">
+          dsd
+        </div>
+        
+      </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="col m3 anulaPaddMarr degradado" style="min-height: 673px;">
+
+    <div class="col m12 anulaPaddMarr" style="padding: 2px;">
+ 
+
+          <h6 style="padding-left: 8px;"><strong style="font-style: oblique;color: #add7ff;">En linea :</strong></h6>
+                                
+          <div class="class m12" *ngFor="let online of AllUsersOnline">
+              <div class="col m12" style="color: rgb(209, 224, 236); font-size: 15px;">{{online.user}}</div>
+          </div>
+
+    </div>
+  </div>
+</div>
+          
+          

@@ -717,7 +717,7 @@ export class AulaVirtualComponent implements OnInit {
       this.itemIntervalo=true;
       this.itemDetCurAul=true;
     }
-    if(this.pflAct=="5e0a917ec2a58d0b8872b2bb"){
+    if(this.pflAct=="5e0a917ec2a58d0b8872b2bb" || this.pflAct=="5e0a9197c2a58d0b8872b2be"){
       this.itemDetCurAul=true;
     }
 
