@@ -28,19 +28,19 @@ export class MantenimientoCargoService {
 
   opcionSelected:string;
 
-  readonly URL_API_ADMIN='http://209.145.52.133:3000/Inicio/Administrador';
-  readonly URL_API_DIREC='http://209.145.52.133:3000/Inicio/Director';
-  readonly URL_API_COORD='http://209.145.52.133:3000/Inicio/Coordinador';
-  readonly URL_API_SUBDIREC='http://209.145.52.133:3000/Inicio/SubDirector';
-  readonly URL_API_PROFESOR='http://209.145.52.133:3000/Inicio/Profesor';
-  readonly URL_API_AUXI='http://209.145.52.133:3000/Inicio/Auxiliar';
-  readonly URL_API_ALUM='http://209.145.52.133:3000/Inicio/Alumno';
-  readonly URL_API_SECRE='http://209.145.52.133:3000/Inicio/Secretaria';
+  readonly URL_API_ADMIN='http://localhost:3000/Inicio/Administrador';
+  readonly URL_API_DIREC='http://localhost:3000/Inicio/Director';
+  readonly URL_API_COORD='http://localhost:3000/Inicio/Coordinador';
+  readonly URL_API_SUBDIREC='http://localhost:3000/Inicio/SubDirector';
+  readonly URL_API_PROFESOR='http://localhost:3000/Inicio/Profesor';
+  readonly URL_API_AUXI='http://localhost:3000/Inicio/Auxiliar';
+  readonly URL_API_ALUM='http://localhost:3000/Inicio/Alumno';
+  readonly URL_API_SECRE='http://localhost:3000/Inicio/Secretaria';
 
-  readonly URL_API_APOD='http://209.145.52.133:3000/Inicio/Apoderado';
-  readonly URL_API_asignarAprdo='http://209.145.52.133:3000/Inicio/Alumno/asignarAprdo';
-  readonly URL_API_dltApo='http://209.145.52.133:3000/Inicio/Alumno/dltApo';
-  readonly URL_API_getAlumnosApoderado='http://209.145.52.133:3000/Inicio/Alumno/getAlumnosApoderado';
+  readonly URL_API_APOD='http://localhost:3000/Inicio/Apoderado';
+  readonly URL_API_asignarAprdo='http://localhost:3000/Inicio/Alumno/asignarAprdo';
+  readonly URL_API_dltApo='http://localhost:3000/Inicio/Alumno/dltApo';
+  readonly URL_API_getAlumnosApoderado='http://localhost:3000/Inicio/Alumno/getAlumnosApoderado';
   
   constructor(private http: HttpClient) { 
     this.selectedAdmin=new Administrador();

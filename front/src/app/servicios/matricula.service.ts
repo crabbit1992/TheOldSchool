@@ -13,10 +13,10 @@ export class MatriculaService {
   ObjFltSeleccionados:object;
 
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Matricula';
-  readonly URL_API_MatriculasAlu='http://209.145.52.133:3000/Inicio/Matricula/AluPorAula';
-  readonly URL_API_GetMatriculas='http://209.145.52.133:3000/Inicio/Matricula/GetMatriculas'; 
-  readonly URL_API_MisMatriculas='http://209.145.52.133:3000/Inicio/Matricula/MisMatriculas'; 
+  readonly URL_API='http://localhost:3000/Inicio/Matricula';
+  readonly URL_API_MatriculasAlu='http://localhost:3000/Inicio/Matricula/AluPorAula';
+  readonly URL_API_GetMatriculas='http://localhost:3000/Inicio/Matricula/GetMatriculas'; 
+  readonly URL_API_MisMatriculas='http://localhost:3000/Inicio/Matricula/MisMatriculas'; 
 
 
   constructor(private http: HttpClient) { 

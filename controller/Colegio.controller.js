@@ -6,20 +6,9 @@ ColegioCtrl.getColegios = async (req, res) => {
     const colegio = await Colegio.find() 
     .populate("colImgPfl");
 
-    var arrayColegio=[]
 
-    for(let i = 0; i<colegio.length; i++){
-
-        if(colegio[i].estCod=="5e0a8a479644411040ebf293"){
-            console.log(colegio[i].estCod);
-            console.log("****************************************");
-            arrayColegio.push(colegio)
-        }
-
-    }
-
-    console.log(arrayColegio);
-    res.json(arrayColegio);
+    console.log(colegio);
+    res.json(colegio);
 };
 
 /** Referente a la imagen de emblema del colegio */

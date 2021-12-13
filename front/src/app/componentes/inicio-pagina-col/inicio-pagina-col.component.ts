@@ -51,7 +51,7 @@ declare var $:any;
 })
 export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy {
 
-  readonly URL='http://209.145.52.133:3000';
+  readonly URL='http://localhost:3000';
 
   autoplay:any;
   elems: any;
@@ -259,7 +259,7 @@ export class InicioPaginaColComponent implements OnInit,AfterViewInit,OnDestroy 
         
         this.colegio=res as Colegio;
         let emblema=this.colegio.colImgPfl.colImgRta;
-        this.emblemaRta= 'http://209.145.52.133:3000'+emblema.toString() +'';
+        this.emblemaRta= 'http://localhost:3000'+emblema.toString() +'';
         this.getNivelesSlt();
         this.varCambio=1;
         

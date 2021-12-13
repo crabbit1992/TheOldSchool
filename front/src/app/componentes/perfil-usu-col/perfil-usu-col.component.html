@@ -64,6 +64,7 @@
                             <li (click)="clickUl_CtoAlu()"><a style="cursor: pointer; background-color: rgb(48, 76, 119);" *ngIf="btnCentroAlum">Centro del alumnado</a>
                                 <ul [ngStyle]="{'display':var_clickUl_CtoAlu == 0 ? 'none' : '' }">
                                     <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpCurso()" *ngIf="btnCursosAlu" >Cursos</a></li>
+                                    <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" (click)="LlamarCpLibro()" *ngIf="btnLibro" >Libros</a></li>
                                     <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnlistAlum" >Listado de alumnos</a></li>
                                     <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnCronoAlu" >Cronogramas</a></li>
                                     <li><a style="text-align: center;cursor: pointer; background-color: rgb(71, 96, 133);" *ngIf="btnMisNotas" >Mis notas</a></li>
@@ -128,6 +129,7 @@
                 <app-planilla-notas *ngIf="planillaNotas" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-planilla-notas>
                 <app-perfil-colegio *ngIf="perfilColegio" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12"></app-perfil-colegio>
                 <app-pago *ngIf="pagos" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-pago>
+                <app-libro *ngIf="libro" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-libro>
             </div>
         </div>
     </div>
@@ -196,6 +198,7 @@
                             <li><a style="cursor: pointer" *ngIf="btnCentroAlum">Centro del alumnado</a>
                                 <ul>
                                     <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpCurso()" *ngIf="btnCursosAlu" >Cursos</a></li>
+                                    <li><a style="text-align: left;cursor: pointer;" (click)="LlamarCpLibro()" *ngIf="btnLibros" >Libros</a></li>
                                     <li><a style="text-align: left;cursor: pointer;" *ngIf="btnlistAlum" >Listado de alumnos</a></li>
                                     <li><a style="text-align: left;cursor: pointer;" *ngIf="btnCronoAlu" >Cronogramas</a></li>
                                     <li><a style="text-align: left;cursor: pointer;" *ngIf="btnMisNotas" >Mis notas</a></li>
@@ -320,7 +323,7 @@
                         <app-planilla-notas *ngIf="planillaNotas" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-planilla-notas>
                         <app-perfil-colegio *ngIf="perfilColegio" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-perfil-colegio>
                         <app-pago *ngIf="pagos" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-pago>
-        
+                        <app-libro *ngIf="libro" [inputColCod]="colegioActual"  [codMbr]="codMbr"class="col s12" style="padding: 0px;"></app-libro>
             </div>
         </div>
 

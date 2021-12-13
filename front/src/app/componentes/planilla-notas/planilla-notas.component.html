@@ -36,9 +36,9 @@
           <table class="centered responsive-table striped ">
             <thead>
               <tr>
-                <th  style="text-align: center;">Grado</th>
-                <th  style="text-align: center;">Seccion</th>
                 <th  style="text-align: center;">Nivel</th>
+                <th  style="text-align: center;">Grado</th>
+                <th  style="text-align: center;">Sección</th>
                 <th  style="text-align: center;">Turno</th>
                 <th  style="text-align: center;">Opciones</th>
               </tr>
@@ -46,9 +46,9 @@
 
             <tbody>
               <tr *ngFor="let aula of arrayAulaVirtual">
-                <td style="text-align: center;">{{aula.graCod.graDes}}</td>
-                <td style="text-align: center;">{{aula.secCod.secDes}}</td>
                 <td style="text-align: center;">{{aula.nivCod.nivDes}}</td>
+                <td style="text-align: center;">{{evaluarNivel(aula)}}</td>
+                <td style="text-align: center;">{{aula.secCod.secDes}}</td>
                 <td style="text-align: center;">{{aula.turCod.turNom}}</td>
                 <td style="text-align: center;">
                 <a>
@@ -77,7 +77,7 @@
               </div>
             </div>
 
-            <div class="col m5 anulaPaddMarr" style="margin-top: 10px;padding-bottom: 9px;">
+            <div class="col m4 anulaPaddMarr" style="margin-top: 10px;padding-bottom: 9px;">
               <div class="col m12">
                 <div class="col m2"></div>
                 <div class="col m8">
@@ -87,6 +87,12 @@
                 <div class="col m2"></div>
               </div>
               
+            </div>
+
+            <div class="col m1 anulaPaddMarr" style="margin-top: 10px;padding-bottom: 9px;">
+              <div class="input-field col m12">
+                <mat-icon svgIcon="libro-abierto" style="cursor: pointer;" (click)="ShowLibros()" matTooltip = "Ver notas de libro"></mat-icon> 
+              </div>
             </div>
 
             <div class="col m1 anulaPaddMarr" style="margin-top: 10px;padding-bottom: 9px;">
@@ -699,6 +705,107 @@
     </div>
 
     </div>
+
+    <!-- Div Libro-->
+    <div class="col m10 anulaPaddMarr" *ngIf="divLibro" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;">
+      <div class="col m12 anulaPaddMarr">
+          <div class="col m12">      
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                  
+                  
+
+              </div>
+            </div>
+          </div>
+    
+          <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+    
+            <div class="col m12 ">
+              <table class="centered responsive-table striped ">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Area</th>
+                    <th style="text-align: center;">Curso</th>
+                    <th style="text-align: center;">Titulo</th>
+                    <th style="text-align: center;">Nivel</th>
+                    <th style="text-align: center;">Grado</th>
+                    <th style="text-align: center;">Opciones</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <tr *ngFor="let libro of arrayLibro">
+                    <td style="text-align: center;">{{libro.areCod.ncoAreNom}}</td>
+                    <td style="text-align: center;">{{libro.curCod.ncoCurNom}}</td>
+                    <td style="text-align: center;">{{libro.libTtl}}</td>
+                    <td style="text-align: center;">{{libro.nivCod.nivDes}}</td>
+                    <td style="text-align: center;">{{libro.graCod.graDes}}</td>
+                    <td style="text-align: center;">
+                      <mat-icon svgIcon="libro-abierto" style="cursor: pointer;" (click)="ShowTemas(libro)" matTooltip = "Ver Libro"></mat-icon> 
+                  </td>
+                </tbody>
+              </table>
+            </div>
+          </form>
+      </div>
+    </div>
+
+    <!-- Div Temas-->
+    <div class="row col m10 anulaPaddMarr" *ngIf="divTema">
+
+      <div class="col m12 anulaPaddMarr" style="margin-top: 50px;">
+        <div class="col m2"></div>
+          <div class="col m8 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Tema</th>
+                  <th style="text-align: center;">Lista de notas</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr  *ngFor="let tema of arrayTema">
+                  <td style="text-align: center;">{{tema.temTtl}}</td>
+                  <td style="text-align: center;">
+                    <mat-icon svgIcon="examen" style="cursor: pointer;" (click)="ShowTemaNota(tema)" matTooltip = "Ver notas"></mat-icon> 
+                </td>
+              </tbody>
+            </table>
+          </div>
+        <div class="col m2"></div>
+      </div>
+    </div>
+
+    <!-- Div Nota Tema-->
+
+    <div class="row col m10 anulaPaddMarr" *ngIf="divEvaTema">
+
+      <div class="col m12 anulaPaddMarr" style="margin-top: 50px;">
+        <div class="col m2"></div>
+          <div class="col m8 ">
+            <table class="centered responsive-table striped ">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Apellidos</th>
+                  <th style="text-align: center;">Nombres</th>
+                  <th style="text-align: center;">Nota</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr  *ngFor="let eva of arrayEva">
+                  <td style="text-align: center;">{{eva.perRepCod.perRepApe}}</td>
+                  <td style="text-align: center;">{{eva.perRepCod.perRepNom}}</td>
+                  <td style="text-align: center;">{{eva.evaTemNta}}</td>
+              </tbody>
+            </table>
+          </div>
+        <div class="col m2"></div>
+      </div>
+    </div>
+
 
   </div>
 

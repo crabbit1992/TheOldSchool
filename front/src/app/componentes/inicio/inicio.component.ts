@@ -34,7 +34,7 @@ declare var $:any;
 })
 export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
 
-  readonly URL='http://209.145.52.133:3000';
+  readonly URL='http://localhost:3000';
 
   autoplay:any;
   elems: any;
@@ -126,17 +126,7 @@ export class InicioComponent implements OnInit,AfterViewInit,OnDestroy {
       console.log(res);
       this.arrayColegio=res as GetColegio[];
       this.filteredCol= this.arrayColegio;
-      for(let i=0;i<this.arrayColegio.length;i++){
-        
-        if(this.arrayColegio[i].colImgPfl==null|| this.arrayColegio[i].colImgPfl==undefined){
-          console.log("no hay nada");
-          this.filteredCol.splice(i,1)
-        }
-        else{
-       
-        }
-      }
-
+     
       this.arrayColegio=this.filteredCol;
       this.arrayColFil=this.filteredCol;
       console.log(this.arrayColegio);

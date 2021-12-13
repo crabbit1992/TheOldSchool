@@ -1,0 +1,587 @@
+<div class="col m12 container-fluid anulaPaddMarr">
+
+    <!--  Listar Libro -->
+    <div class="row col m12 anulaPaddMarr" *ngIf="divlistaLibros" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;">
+        <div class="col m12 anulaPaddMarr">
+            <div class="col m12">      
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                    
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12" style="margin-top: 20px;">
+                        <button  class="waves-light btn col m12"  (click)="ShowCrearLibro()" matTooltip = "Buscar Libro">Crear Libro</button>
+                        </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12">
+                            <select class="browser-default" id="ModelofltMntCurGra_Niv._id" name="ModelofltMntCurGra_Niv._id"
+                                    [(ngModel)]="ModeloNivel._id" matTooltip = "Seleccione el grado">
+                                    <option *ngFor="let nivel of arrayNivel" [value]="nivel._id">{{nivel.nivDes}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12">
+                            <select class="browser-default" id="ModeloGrado._id" name="ModeloGrado._id"
+                                [(ngModel)]="ModeloGrado._id" matTooltip = "Seleccione el grado">
+                                    <option *ngFor="let grado of arrayGrado" [value]="grado._id">{{grado.graDes}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12">
+                            <select class="browser-default" id="ModeloNcoArea._id" name="ModeloNcoArea._id"
+                                [(ngModel)]="ModeloNcoArea._id" (ngModelChange)='capturarArea_Curso($event)'  matTooltip = "Seleccione el curso">
+                                    <option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12">
+                            <select class="browser-default" id="ModeloNcoCurso._id" name="ModeloNcoCurso._id"
+                                [(ngModel)]="ModeloNcoCurso._id"  matTooltip = "Seleccione el curso">
+                                    <option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col m2 anulaPaddMarr">
+                        <div class="input-field col m12" style="margin-top: 20px;">
+                          <button  class="waves-light btn col m12"  (click)="BuscarLibros()" matTooltip = "Buscar Libro">Buscar</button>
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+      
+            <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+      
+              <div class="col m12 ">
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;">Area</th>
+                      <th style="text-align: center;">Curso</th>
+                      <th style="text-align: center;">Titulo</th>
+                      <th style="text-align: center;">Nivel</th>
+                      <th style="text-align: center;">Grado</th>
+                      <th style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let libro of arrayLibro">
+                      <td style="text-align: center;">{{libro.areCod.ncoAreNom}}</td>
+                      <td style="text-align: center;">{{libro.curCod.ncoCurNom}}</td>
+                      <td style="text-align: center;">{{libro.libTtl}}</td>
+                      <td style="text-align: center;">{{libro.nivCod.nivDes}}</td>
+                      <td style="text-align: center;">{{libro.graCod.graDes}}</td>
+                      <td style="text-align: center;">
+                        
+                        <mat-icon svgIcon="editar" style="margin-right: 10px; cursor: pointer;" (click)="PreEditarLibro(libro)" matTooltip = "Editar"></mat-icon> 
+                        <mat-icon svgIcon="libro-abierto" style="cursor: pointer;" (click)="ShowListarTema(libro)" matTooltip = "Ver Libro"></mat-icon> 
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Crear Libro -->
+    <div class="row col m12 anulaPaddMarr" *ngIf="divCrearLibro">
+
+        <div class="row col m12 anulaPaddMarr">
+            <div class="col m2"></div>
+    
+            <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+                <div class="row col m12">
+        
+                    <div class="row col m12 center anulaPaddMarr">
+                    <div class="input-field col m12">
+                        <h5 class="center">Crear Libro</h5>
+                    </div>
+                    </div>
+        
+                    <div class="row col m12">
+                        <div class="col m12" style="margin-top: 50px;text-align: center !important;">
+
+                            <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+
+                                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                                    <label for="" style="font-size: 16px;">Nivel :</label>
+                                </div>
+                                <div class="col m3 anulaPaddMarr">
+                                    <div class="input-field col m12 anulaPaddMarr">
+                                    <select class="browser-default" id="ModeloNivel._id" [disabled]="disabledSelect" name="ModeloNivel._id"
+                                        [(ngModel)]="ModeloNivel._id">
+                                        <option *ngFor="let n of arrayNivel" [value]="n._id">{{n.nivDes}}</option>
+                                    </select>
+                                    </div>
+                                </div>
+
+                                <div class="col m1"></div>
+                
+                                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                                    <label for="" style="font-size: 16px;">Grado :</label>
+                                </div>
+                                <div class="col m3 anulaPaddMarr">
+                                    <div class="input-field col m12 anulaPaddMarr">
+                                    <select class="browser-default" id="ModeloGrado._id" [disabled]="disabledSelect" name="ModeloGrado._id"
+                                        [(ngModel)]="ModeloGrado._id">
+                                        <option *ngFor="let g of arrayGrado" [value]="g._id">{{g.graDes}}</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col m12 anulaPaddMarr" style="margin-top: 5px;">
+
+                                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                                <label for="" style="font-size: 16px;">Area :</label>
+                                </div>
+                                
+                                <div class="col m3 anulaPaddMarr">
+                                <div class="input-field col m12 anulaPaddMarr">
+                                    <select class="browser-default" (ngModelChange)='capturarArea_Curso($event)'
+                                    style="text-align: center !important; padding-right: 29px;" id="ModeloNcoArea._id"
+                                    name="ModeloNcoArea._id" [(ngModel)]="ModeloNcoArea._id">
+                                    <option *ngFor="let area of arraySelectNucleoArea" [value]="area._id">{{area.ncoAreNom}}</option>
+                                    </select>
+                                </div>
+                                </div>
+                                
+                                <div class="col m1"></div>
+                
+                                <div class="col m2 anulaPaddMarr" style="padding-top: 11px;">
+                                <label for="" style="font-size: 16px;">Curso :</label>
+                                </div>
+                                <div class="col m3 anulaPaddMarr">
+                                <div class="input-field col m12 anulaPaddMarr">
+                                    <select class="browser-default" style="text-align: center !important; padding-right: 29px;"
+                                    id="ModeloNcoCurso._id" name="ModeloNcoCurso._id" [(ngModel)]="ModeloNcoCurso._id">
+                                    <option *ngFor="let curso of arraySelectNucleocurso" [value]="curso._id">{{curso.ncoCurNom}}</option>
+                                    </select>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="row col m12 anulaPaddMarr"  style="margin-top: 15px;">
+                                <div class="input-field col m12">
+                                <input type="text" name="ModeloLibro.libTtl" id="ModeloLibro.libTtl"  [(ngModel)]="ModeloLibro.libTtl" placeholder="Titulo del Libro"
+                                    style="text-align: center;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col m12" style="margin-top: 10px;padding-bottom: 9px;">
+
+                            <div class="col m6 ">
+                                <button class="waves-light btn-small right" style="background-color: rgb(110, 178, 233)" (click)="CrearLibro()">{{nomBtnLib}} </button>
+                            </div>
+                
+                            <div class="col m6 ">
+                                <button class="waves-light btn-small left" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar('libro')">Cancelar</button>
+                            </div>
+
+                        </div>             
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    
+    </div>
+
+    <!-- Listar Tema -->
+    <div class="row col m12 anulaPaddMarr" *ngIf="divTema">
+
+        <div class="col m3 anulaPaddMarr" style="min-height: 900px; padding: 3px 3px 3px 3px;width: 17%;">
+
+            <div class="col m12 blue-grey anulaPaddMarr" style="height: 900px;">
+
+                <div class="col m12 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 20px;">
+                      <button  class="btn  col m12" style="background-color: rgb(10, 24, 44);" (click)="ShowListarLibros()" matTooltip = "Ir a Libros">Ver Libros</button>
+                    </div>
+                </div>
+
+                <div class="col m12 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 0px; padding-top: 0px;">
+                      <button  class="btn  col m12" style="background-color: rgb(10, 24, 44); margin-top: 0px; padding-top: 0px;" (click)="ShowCrearTema()" matTooltip = "Crear Tema">Crear Tema</button>
+                    </div>
+                </div>
+
+                <div class="col m12 " style="margin-top: 2px; height: auto;" *ngFor="let tema of arrayTema">
+                    <div class="col m12 anulaPaddMarr" style="margin-top: 0; margin-bottom: 0; height: auto;">
+                        <a  class="col m12 estilosListTema" (click)="ShowSubTemas(tema)" matTooltip = "Ver Tema">{{tema.temTtl}}</a>
+                    </div>
+
+                    <div class="col m12 center anulaPaddMarr" style="padding-top: 2%; height: auto;background-color: rgb(35, 41, 51); ">
+                        <a class="btn-small estilosBtnEditTema blue-grey darken-1" (click)="Pre_editarTema(tema)">Editar</a> 
+                    </div>
+
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div class="col m9 anulaPaddMarr" *ngIf="divLibroPre" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+       
+            <div class="col m12 anulaPaddMarr">
+                <div class="col m12 center" style="min-height: 50px; margin-bottom: 30px;">
+                    <div class="col m12 center">
+                        <h4><strong style="color: rgb(102, 105, 107);"><b>{{libroActual.libTtl}}</b></strong></h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col m12 anulaPaddMarr" style="margin-top: 50px;">
+                <div class="col m12 center" style="margin-bottom: 60px;">
+                    <div class="col m6 center" style="border-radius: 5px;">
+                        
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Area</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.areCod.ncoAreNom}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Curso</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.curCod.ncoCurNom}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                </div>
+
+                <div class="col m12 center" style="margin-bottom: 30px;">
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Nivel</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.nivCod.nivDes}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Grado</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.graCod.graDes}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+
+        <div class="col m9 anulaPaddMarr" *ngIf="divListsubTema" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+
+            <div class="col m12 anulaPaddMarr">
+                <div class="col m12 center" style="min-height: 50px; margin-bottom: 30px;">
+                    <div class="col m12 center">
+                        <h4><strong style="color: rgb(102, 105, 107);"><b>{{libroActual.libTtl}}</b></strong></h4>
+                    </div>
+                    <div class="col m12 center">
+                        <h6><strong style="color: rgb(102, 105, 107);"><b>{{temTtl}}</b></strong></h6>
+                    </div>
+                </div>
+
+                <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                    <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                        
+                        <div class="col m2 anulaPaddMarr">
+                            <div class="input-field col m12" style="margin-top: 20px;">
+                                <a class="waves-light btn-small right" style="background-color: rgb(48, 76, 119)" (click)="ShowVerEvaluacion()">Ver Evaluación</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col m12 anulaPaddMarr" *ngFor="let subTema of arraySubTema" style="min-height: 400px;background-color: rgb(176, 198, 202);padding: 2px 2px 2px 2px;">
+    
+                    <div class="col m12 blue-grey " style="min-height: 50px; margin-bottom: 2px;">
+                        <div class="col m8">
+
+                            <div class="col m12">
+                                <h5><strong style="color: white;">{{subTema.subTemTtl}}</strong></h5>
+                            </div>
+                            
+                        </div>
+                        <div class="col m4 anulaPaddMarr right" style="padding-top: 16px;">
+                            
+                            <div class="col m12">
+                                <div class="col m6 right" style="margin-top: 5px;margin-bottom: 10px;width: 46px !important; height: 42px !important;">
+                                   <label for="" style="color: white;padding-top: 10px;">{{subTema.nroOrd}}</label>
+                                </div>
+
+                                <div class="col m6 anulaPaddMarr right" style="padding-top: 16px;">
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+    
+                    <div class="col m12 blue-grey" style="margin-bottom: 25px;">
+                
+                        <div class=" row col m12 blue-grey darken-1" style="margin-top: 8px; padding-top: 15px; padding-bottom: 15px;">
+                            <div class="col m12 scroll2">
+                                <span class="col m12 textAreaClass"  readonly spellcheck="false" >
+                                    {{subTema.subTemDes}}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class=" row col m12 blue-grey darken-1" style="padding-top: 15px; padding-bottom: 15px;">
+    
+                            <div class="col m12 center" style="min-height: 15px;">
+                                
+                                <img  
+                                [src]="URL + subTema.imgCod.ImgAllRta || 'assets/no-image-icon-11.png'"
+                                style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 800px; max-height: 1500px ; padding: 0 0 0 0;"
+                                >
+                            </div>
+                        </div>
+    
+                        <div class="col m12 anulaPaddMarr center">
+                            <div class="col m3"></div>
+                            <div class="col m6 center">
+                                <div class="col m12 center" style="padding-bottom: 15px;">
+                                    <a class="waves-light btn-small right col m12" style="background-color: rgb(10, 24, 44);" (click)="pre_EditarSubTema(subTema)">Editar</a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div class="col m12 blue-grey ui-state-default" *ngIf="btnAgreSubTema" style="padding-top: 8px; padding-bottom: 8px;">
+                
+                <div class="col m2 " style="padding-bottom: 0px;">
+                    <a class="waves-light btn-small right" style="background-color: rgb(48, 76, 119)" (click)="ShowCrearSubtema()">Agregar subtema</a>
+                </div>
+
+                <div class="col m2 " style="padding-bottom: 0px;">
+                    <a class="waves-light btn-small right" style="background-color: rgb(48, 76, 119)" (click)="ShowVerEvaluacion()">Ver Evaluación</a>
+                </div>
+
+            </div>
+        </div>
+
+        <app-evaluacion *ngIf="appEvaluacion" [inputColCod]="inputColCod"  [codMbr]="codMbr" class="col m9" style="padding: 0px;"></app-evaluacion>
+
+
+
+        <div class="col m9 anulaPaddMarr right" *ngIf="divSubTema" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+            <div class="col m12 anulaPaddMarr" style="min-height: 400px;background-color: rgb(176, 198, 202);padding: 2px 2px 2px 2px;">
+
+                <div class="col m12 blue-grey" style="min-height: 50px; margin-bottom: 2px; padding-top: 8px; padding-bottom: 8px">
+                    <div class="col m12 blue-grey darken-3" style="padding-bottom: 8px; padding-top: 8px;">
+                        <div class="col m6">
+                            <input 
+                                type="text"
+                                name="ModeloSubTema.subTemTtl"
+                                id="ModeloSubTema.subTemTtl"  
+                                [(ngModel)]="ModeloSubTema.subTemTtl" 
+                                placeholder="Ingrese el titulo del subtema" 
+                                style="margin-bottom: 0;padding-bottom: 0; color: white;">
+                        </div>
+
+                        <div class="col m6">
+                            <div class="col m12 anulaPaddMarr right" style="margin-top: 5px;">
+
+                                <div class="col m6 right" style="margin-top: 5px;margin-bottom: 10px;width: 46px !important; height: 42px !important;border: solid #717172;">
+                                    <input name="ModeloSubTema.nroOrd" type="text" [(ngModel)]="ModeloSubTema.nroOrd" value="ModeloSubTema.nroOrd" style="height: 17px;width: 20px;margin-top: 10px;text-align: center;color: rgb(209, 206, 206);" maxlength="2">
+                                </div>
+
+                                <div class="col m6 anulaPaddMarr right" style="padding-top: 16px;">
+                                    <label style="font-size: 16px; color: rgb(209, 206, 206);">Numero de orden :</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col m12 blue-grey ">
+            
+                    <div class=" row col m12 blue-grey darken-3" style="margin-top: 8px; padding-top: 15px; padding-bottom: 15px;min-height: 100;">
+                        <div class="col m12 scroll2">
+                            <textarea 
+                            class="scroll2 col m12 textAreaClass"
+                            name="ModeloSubTema.subTemDes"
+                            id="ModeloSubTema.subTemDes"
+                            [(ngModel)]="ModeloSubTema.subTemDes"
+                            style="color: black;"
+                            cdkTextareaAutosize 
+                            placeholder="Ingrese el contenido del subtema">
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class=" row col m12 blue-grey darken-3" style="padding-top: 15px; padding-bottom: 15px;">
+
+                        <div class="col m12 center" style="min-height: 15px;">
+                            <input type="file" accept="image/jpeg" (change)="onPhotoSelected($event)" #photoInput style="display: none;"> 
+                            <img 
+                            class="responsive-img"
+                            [src]="photoSelected || 'assets/no-image-icon-11.png'" 
+                            alt="No image"
+                            (click)="photoInput.click()" 
+                            style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 800px; max-height: 1500px ; padding: 0 0 0 0;">
+                        </div>
+                    </div>
+
+                    <div class="col m12 anulaPaddMarr">
+                        <div class="col m6">
+                            <div class="col m12 " style="padding-bottom: 15px;">
+                                <a class="waves-light btn-small right col m8" style="background-color: rgb(10, 24, 44);" (click)="CrearSubTema()">Guardar</a> 
+                            </div>
+                        </div>
+
+                        <div class="col m6">
+                            <div class="col m12 " style="padding-bottom: 15px;">
+                                <a class="waves-light btn-small left col m8" style="background-color: rgb(10, 24, 44);" (click)="Cancelar('subtema')">Cancelar</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        
+
+    </div>
+
+    <!-- Crear Tema -->
+    <div class="row col m12 anulaPaddMarr" *ngIf="divCrearTema">
+
+        <div class="row col m12 anulaPaddMarr">
+            <div class="col m2"></div>
+    
+            <form class="col m8  anulaPaddMarr" style="margin-top: 40px;">
+                <div class="row col m12">
+        
+                    <div class="row col m12 center anulaPaddMarr">
+                        <div class="input-field col m12">
+                            <h5 class="center">Crear Tema</h5>
+                        </div>
+                    </div>
+        
+                    <form class="col m12">
+
+                        <div class="col m12 center" style="margin-top: 50px;text-align: center !important;">
+                            <div class="row col m12 center"  style="margin-top: 15px;">
+                                <div class="col m2"></div>
+                                <div class="input-field col m8 center">
+                                    <input type="text" name="ModeloTema.temTtl" id="ModeloTema.temTtl"  [(ngModel)]="ModeloTema.temTtl"
+                                     
+                                    class="col m12" placeholder="Titulo del Tema"
+                                        style="text-align: center;">
+                                </div>
+                                <div class="col m2"></div>
+                            </div>
+                        </div>
+
+                        <div class="row col m12 blue-grey darken-1" style="margin-top: 8px; padding-top: 20px; padding-bottom: 15px; border-radius: 20px;">
+                            <div class="col m1"></div>
+                            <div class="col m10 scroll2 center">
+                                <div class="col m12 center">
+
+                                    <div class="col m12 center" style="margin-bottom: 15px;">
+                                        <label style="font-size: 16px; color: white;"> Descripción </label>
+                                    </div>
+
+                                    <textarea class="scroll2 col m12 textAreaClass" name="ModeloTema.temDes" id="ModeloTema.temDes" style="min-height: 40px;" [(ngModel)]="ModeloTema.temDes" cdkTextareaAutosize placeholder="Ingrese una descripcion">
+                                    </textarea>
+                                </div>
+                                
+                            </div>
+                            <div class="col m1"></div>
+                        </div>
+
+                        <div class="row col m12 center" style="margin-top: 15px;">
+                            <div class="card col m12 center">
+                                <div class="card-content center">
+                                    <div class="col m6 anulaPaddMarr center" style="padding-top: 11px;">
+                                        <div class="col m12 anulaPaddMarr center">
+
+                                            <div class="col m6 anulaPaddMarr" style="padding-top: 11px;">
+                                                <label for="" style="font-size: 16px;">Numero de orden :</label>
+                                            </div>
+                                            <div class="col m6" style="margin-top: 0px;margin-bottom: 10px;width: 46px !important; height: 42px !important;border: solid #717172;">
+                                                <input name="ModeloTema.nroOrd" type="text" [(ngModel)]="ModeloTema.nroOrd" value="ModeloTema.nroOrd" style="height: 17px;width: 20px;margin-top: 10px;text-align: center;" maxlength="2">
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col m6 anulaPaddMarr center" style="padding-top: 11px;">
+                                        <div class="col m12 anulaPaddMarr center">
+                                            <div class="col m7 anulaPaddMarr" style="padding-top: 11px;">
+                                                <label for="" style="font-size: 16px;">Tiempo de evaluación :</label>
+                                            </div>
+                                            <div class="col m5" style="margin-top: 0px;margin-bottom: 10px;width: 56px !important; height: 42px !important;border: solid #717172;">
+                                                <input  name="timeEva" type="text" [(ngModel)]="timeEva" style="height: 17px;width: 28px;margin-top: 10px; text-align: center;" maxlength="3" placeholder="Min">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col m12" style="margin-top: 10px;padding-bottom: 9px;">
+                            <div class="col m6 ">
+                                <button type="button" class="waves-light btn-small right col m12" style="background-color: rgb(110, 178, 233)" (click)="CrearTema()">{{nomBtnTem}} </button>
+                            </div>
+                
+                            <div class="col m6 ">
+                                <button type="button" class="waves-light btn-small left col m12" style="background-color: rgb(110, 178, 233)"  (click)="Cancelar('tema')">Cancelar</button>
+                            </div>
+                        </div>             
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+

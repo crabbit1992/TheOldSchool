@@ -13,7 +13,7 @@ export class PersonaService {
 
   selectedPersona: Persona;
   personas:Persona[];
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Persona';
+  readonly URL_API='http://localhost:3000/Inicio/Persona';
   
   constructor(private http: HttpClient) { 
     this.selectedPersona=new Persona();

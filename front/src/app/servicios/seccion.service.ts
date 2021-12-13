@@ -9,7 +9,7 @@ export class SeccionService {
 
   selectedSeccion: Seccion;
   seccion:Seccion[];
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Seccion';
+  readonly URL_API='http://localhost:3000/Inicio/Seccion';
 
   constructor(private http: HttpClient) {
     this.selectedSeccion=new Seccion();

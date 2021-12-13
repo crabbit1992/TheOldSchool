@@ -7,8 +7,8 @@ import { HttpClient }from '@angular/common/http';
 })
 export class CursoGradoService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/CursoGrado';
-  readonly URL_API_GetCursoGrado='http://209.145.52.133:3000/Inicio/CursoGrado/GetCursoGrado';
+  readonly URL_API='http://localhost:3000/Inicio/CursoGrado';
+  readonly URL_API_GetCursoGrado='http://localhost:3000/Inicio/CursoGrado/GetCursoGrado';
 
   ObjFltSeleccionados:object;
 

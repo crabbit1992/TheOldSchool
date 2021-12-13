@@ -1,3 +1,10 @@
 
 
 docker run -d -p 8080:80 -v $(pwd)/dist/front:/usr/share/nginx/html nginx:alpine
+
+/*******************************************/
+Detener puerto En la ventana de su terminal, donde está ejecutando su aplicación; ejecute este comando:
+lsof -i:3000
+devolverá información relacionada con el proceso en ejecución; busque el número PID.
+a continuación, ejecute kill -9 [PID], pero reemplácelo [PID]con el número PID del primer comando.
+Eso matará el proceso por completo y podrá iniciarlo de nuevo.

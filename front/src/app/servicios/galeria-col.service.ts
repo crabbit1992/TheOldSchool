@@ -8,18 +8,18 @@ import { GaleriaCol } from '../modelos/galeria-col';
 })
 export class GaleriaColService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/colegioImg';
-  readonly URL_API_definirPtCentro='http://209.145.52.133:3000/Inicio/colegioImg/definirPtCentro';
-  readonly URL_API_definirPtIzquierda='http://209.145.52.133:3000/Inicio/colegioImg/definirPtIzquierda';
-  readonly URL_API_definirPtDerecha='http://209.145.52.133:3000/Inicio/colegioImg/definirPtDerecha';
+  readonly URL_API='http://localhost:3000/Inicio/colegioImg';
+  readonly URL_API_definirPtCentro='http://localhost:3000/Inicio/colegioImg/definirPtCentro';
+  readonly URL_API_definirPtIzquierda='http://localhost:3000/Inicio/colegioImg/definirPtIzquierda';
+  readonly URL_API_definirPtDerecha='http://localhost:3000/Inicio/colegioImg/definirPtDerecha';
 
-  readonly URL_API_getImages='http://209.145.52.133:3000/Inicio/colegioImg/getImages';
+  readonly URL_API_getImages='http://localhost:3000/Inicio/colegioImg/getImages';
 
-  readonly URL_API_getPortadas='http://209.145.52.133:3000/Inicio/colegioImg/getPortadas';
-  readonly URL_API_getAnuncios='http://209.145.52.133:3000/Inicio/colegioImg/getAnuncios';
+  readonly URL_API_getPortadas='http://localhost:3000/Inicio/colegioImg/getPortadas';
+  readonly URL_API_getAnuncios='http://localhost:3000/Inicio/colegioImg/getAnuncios';
 
 
-  readonly URL_API_getImagenesFiltro='http://209.145.52.133:3000/Inicio/colegioImg/getImagenesFiltro';
+  readonly URL_API_getImagenesFiltro='http://localhost:3000/Inicio/colegioImg/getImagenesFiltro';
   
 
   optionModal: string;

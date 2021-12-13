@@ -41,7 +41,7 @@ declare var M: any;
 })
 export class PerfilColegioComponent implements OnInit {
 
-  readonly URL='http://209.145.52.133:3000';
+  readonly URL='http://localhost:3000';
 
   btnGuardarEditar:string="Guardar"; 
   imgCodSelected:string;

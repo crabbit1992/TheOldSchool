@@ -25,7 +25,7 @@ import { MatriculaService } from '../../servicios/matricula.service';
 import { MantenimientoCargoService } from '../../servicios/mantenimiento-cargo.service'; 
 import { PersonaRepositorioService } from '../../servicios/persona-repositorio.service';
 import { MntAdminCrabbService } from 'src/app/servicios/mnt-admin-crabb.service';
-
+import { LibroService } from 'src/app/servicios/libro.service';
 
 import {Router} from '@angular/router';
 
@@ -38,7 +38,7 @@ import { GetAulaCurso } from '../../modelos/aula-curso';
 import { Promedio,PromedioArea, PromedioCursos,GetLibretaTrimestral,GetLibretaBimestral } from '../../modelos/promedio';
 import { DetallePeriodo } from '../../modelos/detalle-periodo';
 import { GetAlumApo } from '../../modelos/alumno';
-import { MisMatriculas } from '../../modelos/matricula';
+import { MisMatriculas,Matricula } from '../../modelos/matricula';
 import { GetHorario,HorarioModal }  from '../../modelos/horario';
 import { Nota, GetNotaSegunTipo, GetNotasFiltradas } from 'src/app/modelos/nota';
 import { PersonaRepositorio } from 'src/app/modelos/persona-repositorio';
@@ -46,7 +46,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Agenda, getAgenda }  from '../../modelos/agenda'; 
 /******* Importacion de Servicios******** */
 import { AgendaService } from '../../servicios/agenda.service';
-import { DatasocketService } from '../../servicios/datasocket.service';
+//import { DatasocketService } from '../../servicios/datasocket.service';
+
+/**  importacion de componentes */
+import { PagoComponent } from '../../componentes/pago/pago.component';
+import { PagoService } from 'src/app/servicios/pago.service';
+import { ArrayPago } from 'src/app/modelos/pago';
+
+
 declare const M
 
 declare var jQuery:any;
@@ -60,7 +67,7 @@ declare var $:any;
 export class VistaAlumnoComponent implements OnInit {
 
 
-  readonly URL='http://209.145.52.133:3000';
+  readonly URL='http://localhost:3000';
 
   autoplay:any;
   elems: any;
@@ -97,8 +104,6 @@ export class VistaAlumnoComponent implements OnInit {
   arrayLibretaBi:  GetLibretaBimestral[];
   sabadoDisable  :boolean=true;
 
-  
-
   lblCiclo: string="Sin datos";
   nroClo: string;
   cicloLibreta:string;
@@ -126,6 +131,8 @@ export class VistaAlumnoComponent implements OnInit {
   divLibreta: boolean=false;
   divHorario: boolean=true;
   divCronograma: boolean=false;
+  divListarPago:boolean=true;
+  divPago:boolean=false;
 
   divlibPromedioCursos:boolean=false;
   divlibDetallePromCursos:boolean=false;
@@ -144,6 +151,17 @@ export class VistaAlumnoComponent implements OnInit {
   
   divListarAgenda:boolean=false;
   divDetalleAgenda:boolean=false;
+
+  arrayPago: ArrayPago[];
+  arrayPagoFilter: ArrayPago[];
+
+  pagocomponent:PagoComponent;
+  lnSchoolTtl: string="LnSchool";
+
+  graCod:string;
+  nivCod:string;
+  curCod:string;
+  divLibroEva:  boolean=false;
 
   /**Referente al carousel */
   options = { fullWidth: false,pressed:true, duration:300, indicators: false };
@@ -166,7 +184,8 @@ export class VistaAlumnoComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private agendaService:AgendaService,
-    private datasocketService:DatasocketService,
+    private pagoService:PagoService,
+    private libroService:LibroService,
   ) {
     this.matIconRegistry.addSvgIcon(
       "detalle",
@@ -175,6 +194,10 @@ export class VistaAlumnoComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       "eliminar",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/eliminar.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      "libro-abierto",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/libro-abierto.svg")
     );
    }
 
@@ -202,11 +225,23 @@ export class VistaAlumnoComponent implements OnInit {
     this.divSelectAlum=false;
     this.divListarAgenda=false;
     this.divDetalleAgenda=false;
+    this.divListarPago=false;
+    this.divPago=false;
+    this.divLibroEva=false;
+  }
+
+  ShowLibroEva(curso: GetAulaCurso){
+    console.log(window.navigator.onLine);
+    console.log(curso);
+    this.curCod=curso.curCod._id;
+    this.HideDivs();
+    this.getMatriculaActual();
+    
   }
 
   clickShowMenu(){
     this.var_Menu=this.var_Menu+1;
-    console.log(this.var_Menu);
+ 
     if(this.var_Menu==2){
       this.var_Menu=0;
     }
@@ -253,12 +288,12 @@ export class VistaAlumnoComponent implements OnInit {
     let persona_id=JSON.parse(localStorage.getItem('idPerRep'));
     
     persona_id=this.mntAdminCrabbService.decript(persona_id);
-    console.log("id per :" + persona_id);
+
     this.personaRepositorioService.getPersonaById(persona_id)
     .subscribe(res=>{
       this.persona=res as PersonaRepositorio;
       this.lblNomUser=this.persona.perRepNom + ", " + this.persona.perRepApe;
-      console.log(this.lblNomUser);
+  
     })
   }
 
@@ -284,6 +319,7 @@ export class VistaAlumnoComponent implements OnInit {
     pfl= this.mntAdminCrabbService.decript(pfl);
     this.perRepCod= this.mntAdminCrabbService.decript(this.perRepCod);
     colCod= this.mntAdminCrabbService.decript(colCod);
+    this.getPagoUser(colCod);
 
     let cargo= pfl;
     if(cargo=="5e0a91c3c2a58d0b8872b2c0"){ //apoderado
@@ -294,8 +330,9 @@ export class VistaAlumnoComponent implements OnInit {
       this.mantenimientoCargoService.getAlumnosApoderado(colCod,this.perRepCod)
       .subscribe(res=>{
         this.opcMnuVarMisAlu=true;
+        this.divSelectAlum=true;
         this.arrayAlumApo=res as GetAlumApo[];
-        console.log(this.arrayAlumApo);
+       console.log(this.arrayAlumApo)
       })
 
       this.divNavBar=false;
@@ -308,6 +345,7 @@ export class VistaAlumnoComponent implements OnInit {
       this.divNavBar=true;
       this.CargarCursos();
     }
+
     
   }
 
@@ -344,16 +382,24 @@ export class VistaAlumnoComponent implements OnInit {
   /** Metodos referente a agenda */
   ShowMiAgenda(curCod:string){
 
+    console.log("Entro a show mi agenda");
+    console.log("esta es el aula : " +this.alvCod);
+    console.log("este es el curso : " + curCod);
+
     return  this.agendaService.getAgendas(this.alvCod, curCod)
     .subscribe(res=>{
       
       this.HideDivs();
       this.arrayAgenda = res as getAgenda[];
+      if(this.arrayAgenda.length==0){
+        this.divSinRegistros=true;
+      }
+      else{
+        this.divSinRegistros=false;
+      }
       console.log(this.arrayAgenda);
       this.divListarAgenda=true;
     });
-    
-
   }
 
   showDetalleAgenda(agenda){
@@ -363,9 +409,11 @@ export class VistaAlumnoComponent implements OnInit {
     this.agendaService.getAgenda(agenda._id)
     .subscribe(res=>{
       this.modeloGetAgenda= res as getAgenda;
-    })
 
-    console.log(agenda);
+
+
+    });
+
     this.id_agenda=agenda._id;
     this.divDetalleAgenda=true;
 
@@ -433,16 +481,13 @@ export class VistaAlumnoComponent implements OnInit {
         this.perRepCod= JSON.parse(localStorage.getItem('idPerRep'));
         this.perRepCod=this.mntAdminCrabbService.decript(this.perRepCod);
       }
-      console.log("Este es el perRepCod : "+this.perRepCod);
+  
       this.aulaCursoService.getMisCursos(this.perRepCod)
       .subscribe(res=>{
-        console.log("Esta es la respuesta de mis cursos perRepCod");
-        
+
         this.arrayAulaCurso=res as GetAulaCurso[];
-        console.log(this.arrayAulaCurso);
         if(this.arrayAulaCurso.length==0){
           //No hay cursos asignados aun
-          console.log("Entro al aula vaciaaaa");
           this.divSinRegistros=true;
         }
         else{
@@ -455,7 +500,7 @@ export class VistaAlumnoComponent implements OnInit {
         }
       });
     }else{
-      console.log("Entro aca");
+
       this.divSinRegistros=false;
       this.arrayAulaCurso=[];
       this.divHorario=true;
@@ -464,16 +509,12 @@ export class VistaAlumnoComponent implements OnInit {
         this.perRepCod= JSON.parse(localStorage.getItem('idPerRep'));
         this.perRepCod=this.mntAdminCrabbService.decript(this.perRepCod);
       }
-      console.log("Este es el perRepCod : "+this.perRepCod);
+ 
       this.aulaCursoService.getMisCursos(this.perRepCod)
       .subscribe(res=>{
-        console.log("Esta es la respuesta de mis cursos perRepCod");
-        
         this.arrayAulaCurso=res as GetAulaCurso[];
-        console.log(this.arrayAulaCurso);
         if(this.arrayAulaCurso.length==0){
           //No hay cursos asignados aun
-          console.log("Entro al aula vaciaaaa");
           this.divSinRegistros=true;
         }
         else{
@@ -490,13 +531,7 @@ export class VistaAlumnoComponent implements OnInit {
 
   }
 
-  ShowDocenteCurso(){
 
-  }
-
-  getDocenteCurso(){
-
-  }
 
   /** Metodos referente a Nota */
   ShowMisNotas(){ 
@@ -507,10 +542,9 @@ export class VistaAlumnoComponent implements OnInit {
 
 
   ObtenerCiclo(){
-      this.lblCiclo="Sin datos";
     return this.detallePeriodoService.getCiclo(this.prdCod)
     .subscribe(res=>{
-      console.log(res);
+
       this.lblCiclo=res["detPrdSgt"];
       this.nroClo=res["_id"];
     });
@@ -519,8 +553,6 @@ export class VistaAlumnoComponent implements OnInit {
   /** Metodos referente a Horario*/
   ShowMiHorario(){
     this.HideDivs();
-   
-
     this.CargarHorario();
   }
 
@@ -531,7 +563,6 @@ export class VistaAlumnoComponent implements OnInit {
     this.divHorario=true;
 
     if(this.alvCod==undefined){
-      console.log("no se encontro el aula");
       this.divSinRegistros=true;
       
     }
@@ -539,14 +570,9 @@ export class VistaAlumnoComponent implements OnInit {
       return this.horarioService.getHorario(this.colCod,this.alvCod)
       .subscribe(res=>{
         this.arrayHorario=res as GetHorario[];
-     
-        console.log(this.arrayHorario);
-  
         for(let i=0;i<this.arrayHorario.length;i++){
-          console.log(this.arrayHorario[i].sabado.ncoCurNom);
           if(this.arrayHorario[i].sabado.ncoCurNom!="Sin definir"){
             this.sabadoDisable=false;
-          
           }
         }
       })
@@ -575,7 +601,6 @@ export class VistaAlumnoComponent implements OnInit {
           this.divSinRegistros=true;
         }
         this.aluCod=this.arrayPromArea[0].aluCod;
-        console.log(this.lblCiclo);
       })
     }
 
@@ -593,10 +618,7 @@ export class VistaAlumnoComponent implements OnInit {
   CargarPromedioCursos(promedioArea:PromedioArea){
     this.promedioService.GetPromedioAreaPorCurso(this.perRepCod,promedioArea.nroClo, promedioArea.areCod._id)
     .subscribe(res=>{
-
-      
       this.arrayPromCursos=res as PromedioCursos[];
-      console.log(this.arrayPromCursos);
     })
   }
 
@@ -604,7 +626,6 @@ export class VistaAlumnoComponent implements OnInit {
   ShowDetallePromNta(curCod:string){
     this.HideDivs();
     this.divDetallePromCursos=true;
-
     this.CargarDetallePromNta(curCod);
   }
 
@@ -615,12 +636,10 @@ export class VistaAlumnoComponent implements OnInit {
       this.arrayDetallePromNta=res as GetNotaSegunTipo[];
 
       if(this.arrayDetallePromNta.length==0){
-        console.log("Entro acaaaa");
         this.divSinRegistros=true;
       }
       else{
         this.lblCurso=this.arrayDetallePromNta[0].curCod.ncoCurNom;
-        console.log(this.arrayDetallePromNta);
       }
     });
   }
@@ -630,14 +649,11 @@ export class VistaAlumnoComponent implements OnInit {
 
     this.HideDivs();
     this.divDetalleSgnTpoNta=true;
-    console.log(detalle.aluCod);
-    console.log(detalle.tpoNotCurCod);
 
     return this.notaService.getHstSgnTpoNta(detalle.perRepCod._id,detalle.tpoNotCurCod,this.nroClo)
     .subscribe(res=>{
 
       this.arrayNotasFiltradas=res as GetNotasFiltradas[];
-      console.log(res);
     });
   }
 
@@ -666,7 +682,7 @@ export class VistaAlumnoComponent implements OnInit {
       else{
 
         if(res[0]["primerBimestre"]!=undefined||res[0]["segundoBimestre"]!=undefined||res[0]["tercerBimestre"]!=undefined||res[0]["cuartoBimestre"]!=undefined){
-          console.log("Es bimestral!!!");
+    
           this.libTriBi=true;
   
           this.arrayLibretaBi=res as GetLibretaBimestral[];
@@ -674,24 +690,17 @@ export class VistaAlumnoComponent implements OnInit {
             this.divSinRegistros=true;
          
           }
-    
-          console.log(this.arrayLibretaBi);
-          this.lblGradoNivel=this.arrayLibretaBi[0].grado.graDes +" de " +this.arrayLibretaBi[0].nivel.nivDes;
-          console.log(this.lblGradoNivel)
   
+          this.lblGradoNivel=this.arrayLibretaBi[0].grado.graDes +" de " +this.arrayLibretaBi[0].nivel.nivDes;
         }
         else if(res[0]["primerTrimestre"]!=undefined||res[0]["segundoTrimestre"]!=undefined||res[0]["tercerTrimestre"]!=undefined){
-          console.log("Es trimestral!!!");
   
           this.arrayLibreta=res as GetLibretaTrimestral[];
           if(this.arrayLibreta.length==0||this.arrayLibreta==[]){
             this.divSinRegistros=true;
           }
-    
-    
-          console.log(this.arrayLibreta);
+  
           this.lblGradoNivel=this.arrayLibreta[0].grado.graDes +" de " +this.arrayLibreta[0].nivel.nivDes;
-          console.log(this.lblGradoNivel)
         }
       } 
     })
@@ -699,14 +708,13 @@ export class VistaAlumnoComponent implements OnInit {
 
   /** Metodos para mostrar detalles del ciclo seleccionado en la libreta*/
   ShowDetalleCiclo_Prd(libreta: object, numCiclo:number){
-    console.log(libreta);
+
     this.lblLibCiclo="Sin Datos"
 
     let trueOrfalse=false;
     let promedio=0;
    
       if(libreta["primerTrimestre"]!=undefined){
-        console.log("El ciclo es Trimestral");
   
         if(numCiclo==1){
           this.cicloLibreta=libreta["primerTrimestre"].nroClo;
@@ -725,8 +733,6 @@ export class VistaAlumnoComponent implements OnInit {
         }
       }
       else  if(libreta["primerBimestre"]!=undefined){
-        console.log("El ciclo es Bimestral");
-  
         if(numCiclo==1){
           this.cicloLibreta=libreta["primerBimestre"].nroClo;
           promedio=libreta["primerBimestre"].promedio;
@@ -767,15 +773,11 @@ export class VistaAlumnoComponent implements OnInit {
 
   ShowLibDetalleTpoNtas(obj:PromedioCursos){
 
-    console.log(obj)
     const curCod=obj.curCod._id.toString();
-    console.log(curCod);
     return this.notaService.getDetNotasSegunTipo(this.perRepCod,curCod,this.cicloLibreta)
     .subscribe(res=>{
       this.arrayDetallePromNta=res as GetNotaSegunTipo[];
-      console.log(this.arrayDetallePromNta);
       this.lblCurso=this.arrayDetallePromNta[0].curCod.ncoCurNom;
-      
       this.HideDivs();
       this.divlibDetallePromCursos=true;
     });
@@ -788,15 +790,8 @@ export class VistaAlumnoComponent implements OnInit {
       this.arrayNotasFiltradas=res as GetNotasFiltradas[];
       this.HideDivs();
       this.divlibHstSgnTpoNta=true;
-      console.log(res);
     });
   }
-
-
-  // Se necesita mostrar los select para elegir grado y nivel para pa busqueda de una libreta especifica
- 
-
-
 
   CargarMisGrados(){
     this.matriculaService.getMisMatriculas(this.perRepCod)
@@ -808,8 +803,6 @@ export class VistaAlumnoComponent implements OnInit {
   }
 
   GetSltGrado(val: any){
-    console.log("Esto es el grado seleccionado");
-    console.log(val);
     this.divSinRegistros=false
     //this.lblGradoNivel=val["grado"].graDes +" de " + val["nivel"].nivDes;
     let prdCod=val;
@@ -826,7 +819,7 @@ export class VistaAlumnoComponent implements OnInit {
       else{
 
         if(res[0]["primerBimestre"]!=undefined||res[0]["segundoBimestre"]!=undefined||res[0]["tercerBimestre"]!=undefined||res[0]["cuartoBimestre"]!=undefined){
-          console.log("Es bimestral!!!");
+  
           this.libTriBi=true;
   
           this.arrayLibretaBi=res as GetLibretaBimestral[];
@@ -834,24 +827,20 @@ export class VistaAlumnoComponent implements OnInit {
             this.divSinRegistros=true;
          
           }
-    
-          console.log(this.arrayLibretaBi);
+ 
           this.lblGradoNivel=this.arrayLibretaBi[0].grado.graDes +" de " +this.arrayLibretaBi[0].nivel.nivDes;
-          console.log(this.lblGradoNivel)
-  
         }
         else if(res[0]["primerTrimestre"]!=undefined||res[0]["segundoTrimestre"]!=undefined||res[0]["tercerTrimestre"]!=undefined){
-          console.log("Es trimestral!!!");
+
   
           this.arrayLibreta=res as GetLibretaTrimestral[];
           if(this.arrayLibreta.length==0||this.arrayLibreta==[]){
             this.divSinRegistros=true;
           }
           this.libTriBi=false;
-    
-          console.log(this.arrayLibreta);
+
           this.lblGradoNivel=this.arrayLibreta[0].grado.graDes +" de " +this.arrayLibreta[0].nivel.nivDes;
-          console.log(this.lblGradoNivel)
+
         }
       } 
     })
@@ -867,15 +856,13 @@ export class VistaAlumnoComponent implements OnInit {
     this.biografiaService.getPortadas(cl)
     .pipe(delay(100)).subscribe(res=>{
     this.arrayPortadas=res as GetBioPortada[];
-  
-    console.log(this.arrayPortadas);
     setTimeout(() => {
       this.elems = document.querySelectorAll('.carousel');
       this.instances = M.Carousel.init(this.elems, this.options);
 
       this.autoplay= setInterval(function() {
         $('.carousel').carousel('next');
-      }, 6000); 
+      }, 10000); 
       
     }, 1000);
   
@@ -887,6 +874,54 @@ export class VistaAlumnoComponent implements OnInit {
 
   }
 
+  listarPagos(){
+    return this.pagoService.getPagos(this.colCod)
+    .subscribe(res=>{
+
+      this.arrayPago= res as ArrayPago[];
+      this.arrayPagoFilter= res as ArrayPago[];
+      this.HideDivs();
+      this.divListarPago=true;
+    });
+  }
+
+  ShowDivPago(){
+    this.HideDivs();
+    this.divListarPago=true;
+  }
+
+  getPagoUser(colCod:string){
+    return this.pagoService.getPagoUser(this.perRepCod,colCod)
+    .subscribe(res=>{
+      this.arrayPago= res as ArrayPago[];
+      this.arrayPagoFilter= res as ArrayPago[];
+      this.HideDivs();
+    })
+  }
+  
+
+  getMatriculaActual(){
+    return this.matriculaService.getMisMatriculas(this.perRepCod)
+    .subscribe(res=>{
+
+      var arrayMat= res as Matricula[];
+
+      for(let i=0; i<arrayMat.length;i++){
+
+        if(arrayMat[i]["prdCod"]==this.prdCod){
+          this.graCod=arrayMat[i]["graCod"]["_id"];
+          this.nivCod=arrayMat[i]["nivCod"]["_id"];
+        }
+      }
+
+      this.libroService.curCod=this.curCod;
+      this.libroService.graCod=this.graCod;
+      this.libroService.nivCod=this.nivCod;
+      this.libroService.colCod=this.colCod;
+
+      this.divLibroEva=true;
+    })
+  }
 
   ngOnInit() {
     this.ValidarTipoUsuario();
@@ -899,7 +934,6 @@ export class VistaAlumnoComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    console.log("destruir");
     clearInterval(this.autoplay);
     this.elems;
     this.instances;

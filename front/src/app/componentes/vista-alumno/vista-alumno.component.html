@@ -103,10 +103,10 @@
                       <td scope="col" header="aula" colspan="5" style="text-align: center;">{{curso.areCod.ncoAreNom}}</td>
                       <td scope="col" header="aula" colspan="6" style="text-align: center;">{{curso.curCod.ncoCurNom}}</td>
                       <td scope="col" header="aula" colspan="1" style="text-align: center;">
-                        <a >
-                            <a class="waves-light btn-small btnDetalle" (click)="ShowMiAgenda(curso.curCod._id)" >Detalle</a>
-                        </a>
-                        </td>
+                        <mat-icon svgIcon="libro-abierto" style="cursor: pointer;" (click)="ShowLibroEva(curso)" matTooltip = "Ver Libro"></mat-icon>
+                        <i class="material-icons" style="cursor: pointer;color: rgb(96, 149, 230); padding-top: 10px;" matTooltip = "Ver Agenda" (click)="ShowMiAgenda(curso.curCod._id)">event_note
+                        </i>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -735,6 +735,14 @@
               </div>
             </div>   
           </div> 
+        </div>
+
+        <!-- Div Evaluacion-->
+        
+        <div class="row col m12 anulaPaddMarr" *ngIf="divLibroEva" style="min-height: 500px; margin-top: 70px;">
+        
+          <app-libro-evalucion  class="col s12" style="padding: 0px;"></app-libro-evalucion>
+
         </div>
 
      </div>

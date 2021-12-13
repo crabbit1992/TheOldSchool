@@ -183,6 +183,11 @@ export class AgendaComponent implements OnInit {
     return resFch;
   }
 
+  Cancelar(){
+    this.hideDivs();
+    this.divListarAgenda=true;
+  }
+
   ngOnInit() {
     this.showListarAgenda();
 

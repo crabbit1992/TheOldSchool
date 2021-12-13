@@ -252,6 +252,29 @@ export class AulaVirtualComponent implements OnInit {
     this.divRegAula=false;
   }
 
+
+  evaluarNivel(aulaVirtual: GetAulaVirtual){
+
+    var grado="";
+
+    if(aulaVirtual.nivCod._id=="5e0d267c99226017b4c953ac"){
+      
+      if(aulaVirtual.graCod.graNum==1){
+        grado=aulaVirtual.graCod.graNum + " " + "año"
+      }
+      else{
+        grado=aulaVirtual.graCod.graNum + " " + "años"
+      }
+
+    }
+    else{
+      grado= aulaVirtual.graCod.graDes;
+    }
+
+    return grado;
+
+  }
+
   habilitarDeshabilitar(aulaVirtual:GetAulaVirtual){
 
       if(aulaVirtual.estCod==="5e0a8a3b9644411040ebf292"){ //Estado habilitado (Deshabilitar aula)
@@ -721,7 +744,23 @@ export class AulaVirtualComponent implements OnInit {
       this.itemDetCurAul=true;
     }
 
-    this.lblNomAula=aula.graCod.graDes+" " +"'"+aula.secCod.secNom+"'" + " de " + aula.nivCod.nivDes
+
+    if(aula.nivCod._id=="5e0d267c99226017b4c953ac"){
+        this.lblNomAula=aula.graCod.graDes+" " +"'"+aula.secCod.secNom+"'" + " de " + aula.nivCod.nivDes;
+
+      if(aula.graCod.graNum==1){
+        this.lblNomAula= "Inicial - " + aula.graCod.graNum + " " + "año"
+       }
+      else{
+        this.lblNomAula= "Inicial - " + aula.graCod.graNum + " " + "años"
+      }
+
+    }
+    else{
+        this.lblNomAula=aula.graCod.graDes+" " +"'"+aula.secCod.secNom+"'" + " de " + aula.nivCod.nivDes
+    }
+
+    
     this.id_Alv=aula._id;
     this.varOptSetModal=1;
     

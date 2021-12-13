@@ -7,10 +7,6 @@ import { MntAdminCrabbService } from '../../servicios/mnt-admin-crabb.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-interface HtmlInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -33,14 +29,14 @@ export class ChatComponent implements OnInit{
   messageText: string;
   messageArray: Array<{user: string, message: string, time: string}> = [];
   historyArray: Item[] = [];
-  typingShow = {};
+  typingShow = {
+    user:'',
+    message:''
+  };
   Name = '';
   userName = '';
   showJoin = false;
   showTypingPara = false;
-
-  photoSelected: string | ArrayBuffer;
-  file: File;
   @ViewChild('chatWindow', { static: true }) chatWindow: ElementRef;
 
   constructor(
@@ -59,8 +55,11 @@ export class ChatComponent implements OnInit{
   .subscribe(data => {
     this.messageArray.push(data);
     this.playAudio();
-    this.typingShow = {};
-    this.messageText = '';
+    this.typingShow = {
+      user:'',
+      message:''
+    };
+    //this.messageText = '';
   });
 
   this.chatService.userTyping()
@@ -72,17 +71,6 @@ export class ChatComponent implements OnInit{
   this.chatService.allOnlineUsers()
   .subscribe( data => this.AllUsersOnline = data);
 
-  }
-
-  onPhotoSelected(event: HtmlInputEvent): void {
-    if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0];
-      // image preview
-      const reader = new FileReader();
-      reader.onload = e => this.photoSelected = reader.result;
-      reader.readAsDataURL(this.file);
-      console.log(this.file);
-    }
   }
 
   ngOnInit() {
@@ -137,15 +125,18 @@ export class ChatComponent implements OnInit{
     const date = new Date().toDateString();
     const time = new Date().toTimeString().split(' ')[0];
     this.chatService.sendMessage({user: this.Name, room: this.room, message: this.messageText, Date: date, Time: time});
+    this.messageText='';
     this.addMessage();
   }
   showTyping(event) {
     this.showTypingPara = true;
     if(event.code === "Enter"){
+      
     const date = new Date().toDateString();
     const time = new Date().toTimeString().split(' ')[0];
     this.chatService.sendMessage({user: this.Name, room: this.room, message: this.messageText, Date: date, Time: time});
     this.addMessage();
+    this.messageText='';
     this.showTypingPara = false;
     }
     this.chatService.typing({user: this.Name, room: this.room});

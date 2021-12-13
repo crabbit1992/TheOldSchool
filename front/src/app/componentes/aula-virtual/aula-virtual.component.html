@@ -97,7 +97,7 @@
                 <tbody>
                   <tr *ngFor="let aula of arrayAulaVirtual">
                     <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.nivCod.nivDes}}</td>
-                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.graCod.graDes}}</td>
+                    <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{evaluarNivel(aula)}}</td>
                     <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.secCod.secDes}}</td>
                     
                     <td [ngStyle]="{'color':aula.estCod === '5e0a8a479644411040ebf293' ? '#BCA9F5' : '#088A08' }" style="text-align: center;">{{aula.turCod.turNom}}</td>

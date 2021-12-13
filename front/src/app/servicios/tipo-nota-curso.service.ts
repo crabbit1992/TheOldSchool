@@ -9,7 +9,7 @@ import { TipoNotaCurso } from '../modelos/tipo-nota-curso';
 })
 export class TipoNotaCursoService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/TipoNotaCurso';
+  readonly URL_API='http://localhost:3000/Inicio/TipoNotaCurso';
 
   constructor(private http: HttpClient) { }
 

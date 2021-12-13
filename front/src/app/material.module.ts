@@ -15,6 +15,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 
 
@@ -24,14 +25,14 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       MatButtonModule, MatCheckboxModule,MatToolbarModule,MatCardModule,
       MatSnackBarModule,MatTableModule,MatGridListModule,MatIconModule,
       MatMenuModule,MatSidenavModule,MatListModule,MatTooltipModule,
-      MatSelectModule,MatAutocompleteModule
+      MatSelectModule,MatAutocompleteModule,TextFieldModule
     ],
   exports:
     [
       MatButtonModule, MatCheckboxModule,MatToolbarModule,MatCardModule,
       MatSnackBarModule,MatTableModule,MatGridListModule,MatIconModule,
       MatMenuModule,MatSidenavModule,MatListModule,MatTooltipModule,
-      MatSelectModule,MatAutocompleteModule
+      MatSelectModule,MatAutocompleteModule,TextFieldModule
     ],
 })
 export class MaterialModule { }

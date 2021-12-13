@@ -37,9 +37,6 @@ ChatCtrl.postChat = async (req, res) => {
         time:         req.body.time,
     }
 
-    const per=await PersonaRepositorio.find({_id: GP.perRepCod});
-    console.log(per);
-    
     const newChat=new Chat(GP);
     const resChat=await newChat.save();
     console.log(resChat);  

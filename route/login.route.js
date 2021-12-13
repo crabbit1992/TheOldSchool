@@ -5,5 +5,6 @@ const login=require('../controller/Login.Controller');
 
 
 router.post('/',login.loginPersona);
+router.post('/recoveryPass',login.enviarCorreo);
 
 module.exports=router;  

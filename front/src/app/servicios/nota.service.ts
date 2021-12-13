@@ -8,8 +8,8 @@ import {HttpClient }from '@angular/common/http'
 })
 export class NotaService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Nota';
-  readonly URL_API_hstSgnTpoNta='http://209.145.52.133:3000/Inicio/Nota/hst';
+  readonly URL_API='http://localhost:3000/Inicio/Nota';
+  readonly URL_API_hstSgnTpoNta='http://localhost:3000/Inicio/Nota/hst';
 
   constructor(private http: HttpClient) { }
 

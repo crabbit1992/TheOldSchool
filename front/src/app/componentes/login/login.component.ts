@@ -23,8 +23,27 @@ declare const M;
 export class LoginComponent implements OnInit {
 
   perfiles:Perfil[];
-  
-  readonly URL_API='http://localhost:3000/Inicio/Login';
+
+  ModeloLogin: Login=new Login();
+  ModeloResToken: ResToken=new ResToken();
+
+  errorMessage: string;
+  admCeo:boolean=false;
+
+  divLogin:boolean=true;
+  divRecoveryPass:boolean=false;
+  divGetCodigo:boolean=false;
+  divNewPass:boolean=false;
+
+  correo: string;
+  codigo: string;
+
+  newPass:string;
+  confirNewPass:string;
+
+
+
+  readonly URL_API='http://209.145.52.133:3000/Inicio/Login';
   constructor(
               private loginService: LoginService,
               private mntAdminCrabbService: MntAdminCrabbService,
@@ -33,19 +52,19 @@ export class LoginComponent implements OnInit {
               public dialog       : MatDialog
             ){ }
 
-    openDialog():void {
-      const dialogRef =this.dialog.open(ConfirmDialogComponent,{width: '250px',});
-      dialogRef.afterClosed().subscribe(res=>{
-        console.log(res);
-      });
-    }
+  openDialog():void {
+    const dialogRef =this.dialog.open(ConfirmDialogComponent,{width: '250px',});
+    dialogRef.afterClosed().subscribe(res=>{
+    });
+  }
 
-  ModeloLogin: Login=new Login();
-  ModeloResToken: ResToken=new ResToken();
 
-  errorMessage: string;
-  admCeo:boolean=false;
-
+  HideDivs(){
+    this.divLogin=false;
+    this.divRecoveryPass=false;
+    this.divGetCodigo=false;
+    this.divNewPass=false;
+  }
 
   Login(){
     var loginUser={
@@ -56,7 +75,6 @@ export class LoginComponent implements OnInit {
     this.loginService.postLogin(loginUser)
     .subscribe(res=>{
 
-      console.log(res);
       var status= res["status"];
 
       if(status==419){
@@ -71,12 +89,55 @@ export class LoginComponent implements OnInit {
         const idPerRep= this.mntAdminCrabbService.encript(this.ModeloResToken.idPerRep);
 
         localStorage.setItem('idPerRep',JSON.stringify(idPerRep));
-        console.log(localStorage.getItem('token'));
         this.rutas.navigateByUrl("perfil");
       
       }
     });
   }
+
+  ShowRecoveryPass(){
+    this.HideDivs();
+    this.divRecoveryPass=true;
+  }
+
+  ShowGetCodigo(){
+    this.HideDivs();
+    this.divGetCodigo=true;
+  }
+
+  ShowNewPass(){
+    this.HideDivs();
+    this.divNewPass=true;
+  }
+
+  EnviarCorreo(){
+    this.HideDivs()
+    this.divLogin=true;
+
+    console.log(this.correo);
+
+    const objCorreo={
+      correo :this.correo
+    }
+
+    return this.loginService.recoveryPass(objCorreo)
+    .subscribe(res=>{
+      console.log(res)
+    })
+
+
+
+  }
+
+
+
+
+
+  Cancelar(){
+    this.HideDivs();
+    this.divLogin=true;
+  }
+
 
   ngOnInit() {
 

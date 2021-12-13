@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-  <div class="row col m12 s12">
+  <div class="row col m12 s12" *ngIf="divLogin">
 
     <form class="col m4 s12 right" style="margin-top: 0px;margin-bottom: 0px;">
       <div class="row  center" style="text-align: center;">
@@ -23,6 +23,26 @@
           </div>
         </div>
 
+        <div class="row col m12 s12" style="margin-top: 5px;">
+          <div class="input-field col s6 m6 center">
+            <a (click)="ShowRecoveryPass()">
+              <label style="font-family: cursive; font-family: cursive; color: rgb(7, 18, 34);font-size: 15px; cursor: pointer;">
+                <b>Olvide mi contraseña</b>
+              </label>
+            </a>
+          </div>
+
+          <div class="input-field col s6 m6 center">
+            <a (click)="ShowGetCodigo()">
+              <label style="font-family: cursive; font-family: cursive; color: rgb(7, 18, 34);font-size: 15px; cursor: pointer;">
+                <b>Tengo un codigo</b>
+              </label>
+            </a>
+          </div>
+
+
+        </div>
+
         <div class="row col m12 s12 center" style="margin-top: 20px;">
           <div class="col m2 s0"></div>
           <div class="input-field col m8 s12">
@@ -36,6 +56,166 @@
   </form>
 
   </div>
+
+  <div class="row col m12 s12" *ngIf="divRecoveryPass" style="height: 600px; background-color: rgb(241, 251, 253);">
+
+    <div class="col m4"></div>
+    <form class="col m4 s12 center card card-panel" style="margin-top: 60px;margin-bottom: 0px; background-color: rgb(241, 251, 253);border-radius: 10px;">
+
+      <div class="col m12 s12" style="margin-top: 40px;">
+        <h6>
+          <b style="font-family: cursive; color: rgb(7, 18, 34);font-size: 20px;">
+            Recuperar contraseña
+          </b>
+        </h6>
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="col m12 s12" style="background-color: rgb(42, 52, 68); border-radius: 30px; margin-top: 20px;height: 58px;padding-top: 6px;">
+          <input id="correo" name="correo" [(ngModel)]="correo" placeholder="Ingrese su correo" style="color: rgb(255, 255, 255); text-align: center;border-radius: 30px;">
+        </div>
+        
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="EnviarCorreo()">Recuperar Contraseña</a>
+        </div>
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="Cancelar()">Cancelar</a>
+        </div>
+
+      </div>
+
+      <div class="col m12 s12" style="margin-top: 20px;margin-bottom: 10px;">
+        <label>
+          <b style="font-family: cursive; color: rgb(7, 18, 34);;font-size: 11px;">
+            **Se enviara un mensaje a su correo, revise el mensaje e ingrese el codigo
+          </b>
+        </label>
+      </div>
+
+
+    
+
+    </form>
+    <div class="col m4"></div>
+  </div>
+
+  <div class="row col m12 s12" *ngIf="divGetCodigo" style="height: 600px; background-color: rgb(241, 251, 253);">
+
+    <div class="col m4"></div>
+    <form class="col m4 s12 center card card-panel" style="margin-top: 60px;margin-bottom: 0px; background-color: rgb(241, 251, 253);border-radius: 10px;">
+
+      <div class="col m12 s12" style="margin-top: 40px;">
+        <h6>
+          <b style="font-family: cursive; color: rgb(7, 18, 34);font-size: 20px;">
+            Recuperar contraseña
+          </b>
+        </h6>
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="col m12 s12" style="background-color: rgb(42, 52, 68); border-radius: 30px; margin-top: 20px;height: 58px;padding-top: 6px;">
+          <input id="correo" name="correo" placeholder="Ingrese su correo" style="color: rgb(255, 255, 255); text-align: center;border-radius: 30px;">
+        </div>
+        
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="col m12 s12" style="background-color: rgb(42, 52, 68); border-radius: 30px; margin-top: 20px;height: 58px;padding-top: 6px;">
+          <input id="correo" name="correo" placeholder="Ingrese el codigo" style="color: rgb(255, 255, 255); text-align: center;border-radius: 30px;">
+        </div>
+        
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="ShowNewPass()">Validar</a>
+        </div>
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="Cancelar()">Cancelar</a>
+        </div>
+
+      </div>
+
+    </form>
+    <div class="col m4"></div>
+  </div>
+
+  <div class="row col m12 s12" *ngIf="divNewPass" style="height: 600px; background-color: rgb(241, 251, 253);">
+
+    <div class="col m4"></div>
+    <form class="col m4 s12 center card card-panel" style="margin-top: 60px;margin-bottom: 0px; background-color: rgb(241, 251, 253);border-radius: 10px;">
+
+      <div class="col m12 s12" style="margin-top: 40px;">
+        <h6>
+          <b style="font-family: cursive; color: rgb(7, 18, 34);font-size: 20px;">
+            Nueva contraseña
+          </b>
+        </h6>
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="col m12 s12" style="background-color: rgb(42, 52, 68); border-radius: 30px; margin-top: 20px;height: 58px;padding-top: 6px;">
+          <input id="correo" name="correo" placeholder="Ingrese su contraseña" style="color: rgb(255, 255, 255); text-align: center;border-radius: 30px;">
+        </div>
+        
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="col m12 s12" style="background-color: rgb(42, 52, 68); border-radius: 30px; margin-top: 20px;height: 58px;padding-top: 6px;">
+          <input id="correo" name="correo" placeholder="Confirmar contraseña" style="color: rgb(255, 255, 255); text-align: center;border-radius: 30px;">
+        </div>
+        
+      </div>
+
+      <div class="col m12 s12">
+
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="EnviarCorreo()">Confirmar</a>
+        </div>
+        <div class="input-field col m6 s6">
+          <a class="btn waves-effect waves-light col m12 s12" style=
+           "background-color: rgb(10, 24, 44);
+            border-radius: 10px; 
+            font-family: cursive;
+            font-size: 10px !important;" (click)="Cancelar()">Cancelar</a>
+        </div>
+
+      </div>
+
+    </form>
+    <div class="col m4"></div>
+  </div>
+
 
 </div>
 

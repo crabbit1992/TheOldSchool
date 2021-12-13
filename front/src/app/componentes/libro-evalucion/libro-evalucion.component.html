@@ -1,0 +1,369 @@
+<div class="col m12 container-fluid anulaPaddMarr">
+
+    <div class="row col m12 anulaPaddMarr" *ngIf="divlistaLibros" style="min-height: 400px; margin-bottom: 20px; margin-top: 20px;">
+        <div class="col m12 anulaPaddMarr">
+            <div class="col m12">      
+              <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                    
+                    
+
+                </div>
+              </div>
+            </div>
+      
+            <form class="col m12 center anulaPaddMarr" style="padding: 0px;margin: 0px;">
+      
+              <div class="col m12 ">
+                <table class="centered responsive-table striped ">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;">Area</th>
+                      <th style="text-align: center;">Curso</th>
+                      <th style="text-align: center;">Titulo</th>
+                      <th style="text-align: center;">Nivel</th>
+                      <th style="text-align: center;">Grado</th>
+                      <th style="text-align: center;">Opciones</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let libro of arrayLibro">
+                      <td style="text-align: center;">{{libro.areCod.ncoAreNom}}</td>
+                      <td style="text-align: center;">{{libro.curCod.ncoCurNom}}</td>
+                      <td style="text-align: center;">{{libro.libTtl}}</td>
+                      <td style="text-align: center;">{{libro.nivCod.nivDes}}</td>
+                      <td style="text-align: center;">{{libro.graCod.graDes}}</td>
+                      <td style="text-align: center;">
+                        
+                        <mat-icon svgIcon="editar" style="margin-right: 10px; cursor: pointer;" (click)="PreEditarLibro(libro)" matTooltip = "Editar"></mat-icon> 
+                        <mat-icon svgIcon="libro-abierto" style="cursor: pointer;" (click)="ShowListarTema(libro)" matTooltip = "Ver Libro"></mat-icon> 
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Listar Tema -->
+    <div class="row col m12 anulaPaddMarr" *ngIf="divTema">
+
+        <div class="col m3 anulaPaddMarr" style="min-height: 900px; padding: 3px 3px 3px 3px;width: 17%;">
+
+            <div class="col m12 blue-grey anulaPaddMarr" style="height: 900px;">
+
+                <div class="col m12 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 20px;">
+                        <button  class="btn  col m12" style="background-color: rgb(10, 24, 44);" (click)="ShowListarLibros()" matTooltip = "Ir a Libros">Ver Libros</button>
+                    </div>
+                </div>
+
+                <div class="col m12 " style="margin-top: 2px; height: auto;" *ngFor="let tema of arrayTema">
+                    <div class="col m12 anulaPaddMarr" style="margin-top: 0; margin-bottom: 0; height: auto;">
+                        <a  class="col m12 estilosListTema" (click)="ShowSubTemas(tema)" matTooltip = "Ver Tema">{{tema.temTtl}}</a>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div class="col m9 anulaPaddMarr" *ngIf="divLibroPre" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+        
+            <div class="col m12 anulaPaddMarr">
+                <div class="col m12 center" style="min-height: 50px; margin-bottom: 30px;">
+                    <div class="col m12 center">
+                        <h4><strong style="color: rgb(102, 105, 107);"><b>{{libroActual.libTtl}}</b></strong></h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col m12 anulaPaddMarr" style="margin-top: 50px;">
+                <div class="col m12 center" style="margin-bottom: 60px;">
+                    <div class="col m6 center" style="border-radius: 5px;">
+                        
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Area</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.areCod.ncoAreNom}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Curso</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.curCod.ncoCurNom}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                </div>
+
+                <div class="col m12 center" style="margin-bottom: 30px;">
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Nivel</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.nivCod.nivDes}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                    <div class="col m6 center">
+
+                        <div class="col m1"></div>
+                        <div class="col m10 center blue-grey" style="border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                            <div class="col m12 center" style="margin-bottom: 8px;">
+                                <label style="color: rgb(240, 240, 240); font-size: 15px; text-align: center;">Grado</label>
+                            </div>
+
+                            <div class="col m12 center">
+                                <label style="color: rgb(240, 240, 240); font-size: 20px; text-align: center;"><b>{{libroActual.graCod.graDes}}</b></label>
+                            </div>
+                        </div>
+                        <div class="col m1"></div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="col m9 anulaPaddMarr" *ngIf="divListsubTema" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+
+            <div class="col m12 anulaPaddMarr">
+                <div class="col m12 center" style="min-height: 50px; margin-bottom: 30px;">
+                    <div class="col m12 center">
+                        <h4><strong style="color: rgb(102, 105, 107);"><b>{{libroActual.libTtl}}</b></strong></h4>
+                    </div>
+                    <div class="col m12 center">
+                        <h6><strong style="color: rgb(102, 105, 107);"><b>{{temTtl}}</b></strong></h6>
+                    </div>
+                </div>
+
+                <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+                    <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                        
+                   
+                    </div>
+                </div>
+            
+                <div class="col m12 anulaPaddMarr" *ngFor="let subTema of arraySubTema" style="min-height: 400px;background-color: rgb(176, 198, 202);padding: 2px 2px 2px 2px;">
+    
+                    <div class="col m12 blue-grey " style="min-height: 50px; margin-bottom: 2px;">
+                        <div class="col m8">
+
+                            <div class="col m12">
+                                <h5><strong style="color: white;">{{subTema.subTemTtl}}</strong></h5>
+                            </div>
+                            
+                        </div>
+                        <div class="col m4 anulaPaddMarr right" style="padding-top: 16px;">
+                            
+                            <div class="col m12">
+                                <div class="col m6 right" style="margin-top: 5px;margin-bottom: 10px;width: 46px !important; height: 42px !important;">
+                                    <label for="" style="color: white;padding-top: 10px;">{{subTema.nroOrd}}</label>
+                                </div>
+
+                                <div class="col m6 anulaPaddMarr right" style="padding-top: 16px;">
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+    
+                    <div class="col m12 blue-grey" style="margin-bottom: 25px;">
+                
+                        <div class=" row col m12 blue-grey darken-1" style="margin-top: 8px; padding-top: 15px; padding-bottom: 15px;">
+                            <div class="col m12 scroll2">
+                                <span class="col m12 textAreaClass"  readonly spellcheck="false" >
+                                    {{subTema.subTemDes}}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class=" row col m12 blue-grey darken-1" style="padding-top: 15px; padding-bottom: 15px;">
+    
+                            <div class="col m12 center" style="min-height: 15px;">
+                                
+                                <img  
+                                [src]="URL + subTema.imgCod.ImgAllRta || 'assets/no-image-icon-11.png'"
+                                style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 800px; max-height: 1500px ; padding: 0 0 0 0;"
+                                >
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>  
+            </div>
+            <div class="col m12 blue-grey ui-state-default" style="padding-top: 8px; padding-bottom: 8px;">
+
+                <div class="col m3" style="padding-bottom: 0px;">
+                    <a class="waves-light btn-small right" style="background-color: rgb(48, 76, 119)" (click)="ShowVerEvaluacion()">Realizar Evaluación</a>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+
+
+        <div class="col m9 anulaPaddMarr right" *ngIf="divSubTema" style="height: auto; padding: 2px 2px 2px 2px;width: 83%;">
+            <div class="col m12 anulaPaddMarr" style="min-height: 400px;background-color: rgb(176, 198, 202);padding: 2px 2px 2px 2px;">
+
+                <div class="col m12 blue-grey" style="min-height: 50px; margin-bottom: 2px; padding-top: 8px; padding-bottom: 8px">
+                    <div class="col m12 blue-grey darken-3" style="padding-bottom: 8px; padding-top: 8px;">
+                        <div class="col m6">
+                            <input 
+                                type="text"
+                                name="ModeloSubTema.subTemTtl"
+                                id="ModeloSubTema.subTemTtl"  
+                                [(ngModel)]="ModeloSubTema.subTemTtl" 
+                                placeholder="Ingrese el titulo del subtema" 
+                                style="margin-bottom: 0;padding-bottom: 0; color: white;">
+                        </div>
+
+                        <div class="col m6">
+                            <div class="col m12 anulaPaddMarr right" style="margin-top: 5px;">
+
+                                <div class="col m6 right" style="margin-top: 5px;margin-bottom: 10px;width: 46px !important; height: 42px !important;border: solid #717172;">
+                                    <input name="ModeloSubTema.nroOrd" type="text" [(ngModel)]="ModeloSubTema.nroOrd" value="ModeloSubTema.nroOrd" style="height: 17px;width: 20px;margin-top: 10px;text-align: center;color: rgb(209, 206, 206);" maxlength="2">
+                                </div>
+
+                                <div class="col m6 anulaPaddMarr right" style="padding-top: 16px;">
+                                    <label style="font-size: 16px; color: rgb(209, 206, 206);">Numero de orden :</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col m12 blue-grey ">
+            
+                    <div class=" row col m12 blue-grey darken-3" style="margin-top: 8px; padding-top: 15px; padding-bottom: 15px;min-height: 100;">
+                        <div class="col m12 scroll2">
+                            <textarea 
+                            class="scroll2 col m12 textAreaClass"
+                            name="ModeloSubTema.subTemDes"
+                            id="ModeloSubTema.subTemDes"
+                            [(ngModel)]="ModeloSubTema.subTemDes"
+                            style="color: black;"
+                            cdkTextareaAutosize 
+                            placeholder="Ingrese el contenido del subtema">
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class=" row col m12 blue-grey darken-3" style="padding-top: 15px; padding-bottom: 15px;">
+
+                        <div class="col m12 center" style="min-height: 15px;">
+                            <input type="file" accept="image/jpeg" (change)="onPhotoSelected($event)" #photoInput style="display: none;"> 
+                            <img 
+                            class="responsive-img"
+                            [src]="photoSelected || 'assets/no-image-icon-11.png'" 
+                            alt="No image"
+                            (click)="photoInput.click()" 
+                            style="margin-bottom: 0px !important;padding-bottom: 0px !important;max-width: 800px; max-height: 1500px ; padding: 0 0 0 0;">
+                        </div>
+                    </div>
+
+                    <div class="col m12 anulaPaddMarr">
+                        <div class="col m6">
+                            <div class="col m12 " style="padding-bottom: 15px;">
+                                <a class="waves-light btn-small right col m8" style="background-color: rgb(10, 24, 44);" (click)="CrearSubTema()">Guardar</a> 
+                            </div>
+                        </div>
+
+                        <div class="col m6">
+                            <div class="col m12 " style="padding-bottom: 15px;">
+                                <a class="waves-light btn-small left col m8" style="background-color: rgb(10, 24, 44);" (click)="Cancelar('subtema')">Cancelar</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        
+
+    </div>
+
+    <div class="col m12" *ngIf="divEvaluacion" style="margin-top: 30px;">
+    
+        <div class="col m12 anulaPaddMarr">
+            <div class="col m12 blue-grey darken-1" style="margin-bottom: 10px;padding-top: 9px;padding-bottom: 10px;" *ngFor="let evaluacion of arrayEvaluacion">
+                <div class="col m12 divPregunta" style="background-color: rgb(218, 221, 226);">
+
+                    <div class="col m12 center">
+                        <p>
+                            <label style="color: rgb(2, 4, 32);font-family: cursive;font-size: 16px;">
+                               <strong>{{evaluacion.evaPta}}</strong>
+                            </label>
+                        </p>
+                    </div>
+
+                    <form class="col m12" style="margin-top: 20px;">
+                        <div class="col m12">
+                            <p class="col m6" *ngFor="let opc of evaluacion.evaOpc">
+                                <label>
+                                    <input (click)="addOpcSelected(evaluacion,opc.evaOpc)" type="checkbox" />
+                                    <span  style="color: rgb(0, 0, 0);">{{opc.evaOpc}}</span>
+                                </label>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col m12 anulaPaddMarr center" style="margin-bottom: 10px;">
+                <div class="col m4"></div>
+                <div class="input-field col m4 center" style="margin-top: 5px;">
+                    <button  class="btn col m12 blue-grey ui-state-default" (click)="Puntuacion()" matTooltip = "Terminar practica">Completar evaluación</button>
+                </div>
+                <div class="col m4"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col m12 center" *ngIf="divResultados" style="margin-top: 30px;">
+    
+        <div class="col m12 center" style="margin-top: 150px;">
+
+            <div class="col m12">
+                <span style="margin-top: 70px;">
+                    <strong style="font-family: cursive;color: rgb(3, 88, 109);font-size: 40px;">
+                        Puntuación
+                    </strong>
+                </span>
+            </div>
+           
+            <div  class="col m12" style="margin-top: 70px;">
+                <span id=lblPuntos style="font-size: 60px;color: rgb(3, 88, 109); font-family: cursive">
+                    <b>{{lblPuntosTotales}}</b> 
+                </span>
+            </div>
+          
+        </div>
+    </div>
+
+</div>

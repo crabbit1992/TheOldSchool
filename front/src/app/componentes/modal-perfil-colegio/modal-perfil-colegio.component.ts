@@ -19,7 +19,7 @@ declare var M: any;
 })
 export class ModalPerfilColegioComponent implements OnInit {
 
-  readonly URL='http://209.145.52.133:3000';
+  readonly URL='http://localhost:3000';
 
   photoSelected: string | ArrayBuffer;
   tituloImg:string;
@@ -48,21 +48,24 @@ export class ModalPerfilColegioComponent implements OnInit {
     verImagen(){
 
      // console.log(this.message["imagen"])
+      console.log("esto es la rutaa")
+      console.log(this.message["colImgRta"]);
 
-
-      if(this.message["ncoImgRta"]==undefined){
+      if(this.message["colImgRta"]==undefined){
         console.log("No existe");
-        var ruta=this.message["ncoImgRta"];
+        var ruta=this.message["colImgRta"];
         this.tituloImg=this.message["ncoImgTtl"];
   
-        this.photoSelected=this.URL+ruta.toString();
+        this.photoSelected=this.URL+ruta;
+        console.log(this.photoSelected);
 
       }
       else{
-        var ruta=this.message["ncoImgRta"];
+        var ruta=this.message["colImgRta"];
         this.tituloImg=this.message["ncoImgTtl"];
   
-        this.photoSelected=this.URL+ruta.toString();
+        this.photoSelected=this.URL+ruta;
+        console.log(this.photoSelected);
       }
     }
 

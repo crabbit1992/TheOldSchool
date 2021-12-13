@@ -5,6 +5,7 @@ const Matricula = require('../model/Matricula');
 const NucleoCurso = require('../model/NucleoCurso');
 const Promedio = require('../model/Promedio');
 const PromedioArea = require('../model/PromedioArea');
+const EvaluacionTema = require('../model/EvaluacionTema');
 const { updateMany } = require('../model/AulaVirtual');
 const NotaCtrl = {};
 

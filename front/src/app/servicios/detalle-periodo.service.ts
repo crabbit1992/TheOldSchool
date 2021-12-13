@@ -8,9 +8,9 @@ import {HttpClient }from '@angular/common/http';
 })
 export class DetallePeriodoService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/DetallePeriodo';
-  readonly URL_API_GetCiclo='http://209.145.52.133:3000/Inicio/DetallePeriodo/GetCiclo';
-  readonly URL_API_getDetPrdSegunFch='http://209.145.52.133:3000/Inicio/DetallePeriodo/getDetPrdSegunFch';
+  readonly URL_API='http://localhost:3000/Inicio/DetallePeriodo';
+  readonly URL_API_GetCiclo='http://localhost:3000/Inicio/DetallePeriodo/GetCiclo';
+  readonly URL_API_getDetPrdSegunFch='http://localhost:3000/Inicio/DetallePeriodo/getDetPrdSegunFch';
 
   constructor(private http: HttpClient) {
   }

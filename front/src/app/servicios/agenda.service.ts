@@ -11,10 +11,7 @@ export class AgendaService {
   readonly URL_API='http://localhost:3000/Inicio/Agenda';
   readonly URL_API_agendaCurso='http://localhost:3000/Inicio/Agenda/agendaCurso';
 
-
   constructor( private http: HttpClient ) { }
-
-
 
   //save agenda
   saveAgenda(agenda:Agenda) {

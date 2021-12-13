@@ -7,7 +7,7 @@ export class ChatService {
   
   constructor( private httpClient: HttpClient) { }
 
-  private socket = io('http://localhost:3000');
+  private socket = io('http://localhost:3000', {'transports': ['websocket', 'polling']});
 
 
   joinRoom(data) {

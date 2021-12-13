@@ -1,0 +1,31 @@
+.scroll2::-webkit-scrollbar{
+    background-color: rgb(161, 163, 167);
+    width: 10px;
+    cursor: pointer;
+}
+
+.scroll2::-webkit-scrollbar-thumb {
+    background: rgb(161, 163, 167);
+    border-radius: 4px;
+    cursor: pointer;
+}
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.scroll2::-webkit-scrollbar-thumb:hover {
+    background: #202f5f;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+/* Cambiamos el fondo cuando esté en active */
+.scroll2::-webkit-scrollbar-thumb:active {
+    background-color: #202f5f;
+    cursor: pointer;
+}
+
+.textAreaClass{
+
+    color: white !important;
+    cursor: default;
+    border: none;
+    border-radius: 20px;
+    min-height: 90px;
+}

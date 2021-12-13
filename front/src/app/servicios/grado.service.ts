@@ -9,7 +9,7 @@ export class GradoService {
 
   selectedGrado: Grado;
   grados:Grado[];
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Grado';
+  readonly URL_API='http://localhost:3000/Inicio/Grado';
 
   constructor(private http: HttpClient) {
 

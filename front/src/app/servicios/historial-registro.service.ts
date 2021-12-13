@@ -10,7 +10,7 @@ import {HttpClient,HttpErrorResponse,HttpHeaders }from '@angular/common/http'
 export class HistorialRegistroService {
   selectedHistoria: HistorialRegistro;
   HistoriaRegistros:HistorialRegistro[];
-  readonly URL_API='http://209.145.52.133:3000/Inicio/HistorialRegistro';
+  readonly URL_API='http://localhost:3000/Inicio/HistorialRegistro';
   constructor(private http: HttpClient) {
     this.selectedHistoria=new HistorialRegistro();
    }

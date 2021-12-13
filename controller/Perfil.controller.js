@@ -83,7 +83,7 @@ PerfilCtrl.getPerfilColegio = async (req, res) => {
 };
 
 PerfilCtrl.getPerfilUsuario = async (req, res) => {
-  
+    console.log();
     const GetParam = {
         perRepCod: req.params.perRepCod
     }
@@ -143,27 +143,27 @@ PerfilCtrl.DeshabilitarPerfil = async (req, res) => {
     
 
     if(GetParam.carCod==="5e0a916dc2a58d0b8872b2b9"){           //Codigo de cargo de director
-        await Director.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Director.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a9176c2a58d0b8872b2ba"){      //Codigo de cargo de subdirector
-        await SubDirector.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await SubDirector.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a917ec2a58d0b8872b2bb"){      //Codigo de cargo de coordinador
-        await Coordinador.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Coordinador.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a918cc2a58d0b8872b2bc"){      //Codigo de cargo de secretaria
-        await Secretaria.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Secretaria.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a91c3c2a58d0b8872b2c0"){      //Codigo de cargo de apoderado
-        await Secretaria.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Secretaria.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a9197c2a58d0b8872b2be"){      //Codigo de cargo de profesor
-        await Profesor.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Profesor.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         console.log('Profesor Deshabilitado');
 
       
@@ -180,12 +180,12 @@ PerfilCtrl.DeshabilitarPerfil = async (req, res) => {
 
         console.log(id_periodo);
       
-        await AulaCurso.update({prfCod:GetParam.codMiem,colCod: GetParam.colCod},{$set: objAulaCurso},{multi:true});
+        await AulaCurso.updateMany({prfCod:GetParam.codMiem,colCod: GetParam.colCod},{$set: objAulaCurso},{multi:true});
         
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a9191c2a58d0b8872b2bd"){      //Codigo de cargo de auxiliar
-        await Auxiliar.update({_id:id_codMiem},{$set:EstadoDeshabilitado});
+        await Auxiliar.updateOne({_id:id_codMiem},{$set:EstadoDeshabilitado});
         res.json({status:200});  
     }
     else if(GetParam.carCod==="5e0a91bbc2a58d0b8872b2bf"){      //Codigo de cargo de alumno
@@ -249,8 +249,8 @@ PerfilCtrl.HabilitarPerfil = async (req, res) => {
                 console.log("Se enconttro un perfil habilitadoooxx");
                res.json({status:523});
             }else{
-                await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-                await Director.update({_id:id_codMiem},{$set:EstadoHabilitado});
+                await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+                await Director.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
                 res.json({status:200});  
             }
 
@@ -267,8 +267,8 @@ PerfilCtrl.HabilitarPerfil = async (req, res) => {
                 console.log("Se enconttro un perfil habilitado");
                res.json({status:523});
             }else{
-                await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-                await SubDirector.update({_id:id_codMiem},{$set:EstadoHabilitado});
+                await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+                await SubDirector.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
                 res.json({status:200});   
             }
 
@@ -285,29 +285,29 @@ PerfilCtrl.HabilitarPerfil = async (req, res) => {
                 console.log("Se enconttro un perfil habilitado");
                res.json({status:523});
             }else{
-                await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-                await Coordinador.update({_id:id_codMiem},{$set:EstadoHabilitado});
+                await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+                await Coordinador.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
                 res.json({status:200});  
             }
 
            
         }
         else if(GetParam.carCod==="5e0a918cc2a58d0b8872b2bc"){      //Codigo de cargo de secretaria
-            await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-            await Secretaria.update({_id:id_codMiem},{$set:EstadoHabilitado});
+            await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+            await Secretaria.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
             res.json({status:200});  
            
         }
         else if(GetParam.carCod==="5e0a91c3c2a58d0b8872b2c0"){      //Codigo de cargo de apoderado
-            await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-            await Apoderado.update({_id:id_codMiem},{$set:EstadoHabilitado});
+            await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+            await Apoderado.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
             res.json({status:200});  
 
            
         }
         else if(GetParam.carCod==="5e0a9197c2a58d0b8872b2be"){      //Codigo de cargo de profesor
-            await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-            await Profesor.update({_id:id_codMiem},{$set:EstadoHabilitado});
+            await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+            await Profesor.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
             console.log('Profesor Habilitado');
     
           
@@ -324,13 +324,13 @@ PerfilCtrl.HabilitarPerfil = async (req, res) => {
     
             console.log(id_periodo);
           
-            await AulaCurso.update({prfCod:GetParam.codMiem,colCod: GetParam.colCod},{$set: objAulaCurso},{multi:true});
+            await AulaCurso.updateMany({prfCod:GetParam.codMiem,colCod: GetParam.colCod},{$set: objAulaCurso},{multi:true});
             
             res.json({status:200});  
         }
         else if(GetParam.carCod==="5e0a9191c2a58d0b8872b2bd"){      //Codigo de cargo de auxiliar
-            await Perfil.update({_id:id_codPfl},{$set:EstadoHabilitado});
-            await Auxiliar.update({_id:id_codMiem},{$set:EstadoHabilitado});
+            await Perfil.updateOne({_id:id_codPfl},{$set:EstadoHabilitado});
+            await Auxiliar.updateOne({_id:id_codMiem},{$set:EstadoHabilitado});
             res.json({status:200});  
         }
         else if(GetParam.carCod==="5e0a91bbc2a58d0b8872b2bf"){      //Codigo de cargo de alumno
@@ -383,32 +383,6 @@ PerfilCtrl.DeletePerfil = async (req, res) => {
         await Perfil.findByIdAndRemove(id);
         res.json({status:200});
 };
-
-
-/*
-PerfilCtrl.getPerfil = async (req, res) => {
-    const perfil={
-        perCod=req.perCod,
-        colCod=req.colCod,
-        estCod="5d32b928b20adc1e18026651"
-    }
-    const perfil= await Perfil.findById(req.params.id); //Buscar perfiles que corresponda con 3 parametros enviados
-    console.log(perfil);
-    res.json(perfil); 
-};
-*/
-
-
-/*
-PerfilCtrl.eliminarPerfil = async (req,res)=> {
-    const {id}=req.params;
-    const perfil={
-        estCod:"5d32bba953761812cc1698be" //id del documento estado que se refiere a una baja temporal
-    }
-    await Perfil.findByIdAndUpdate(id,{$set:perfil});
-    res.json({status:'Perfil Eliminado' });
-};
-*/
 
 PerfilCtrl.deletePerfil = async (req,res)=> {
 

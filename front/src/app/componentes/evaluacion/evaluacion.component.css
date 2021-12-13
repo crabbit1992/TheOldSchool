@@ -1,0 +1,36 @@
+.anulaPaddMarr{
+    padding: 0;
+    margin: 0;
+}
+
+.divPregunta{
+    padding: 5px;
+    height: auto;
+}
+
+.textAreaClass{
+
+
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    width: 100px;
+    /* Control de la altura con base en el texto del div*/
+    height: auto;
+    word-wrap: break-word;
+    
+}
+
+i.icon-blue {
+    color: rgb(41, 64, 105);
+}
+
+.ui-state-default {
+    cursor: pointer;
+}
+
+.ui-state-default:hover {
+text-decoration: none;
+background: #f99;
+color: #fff;
+
+}

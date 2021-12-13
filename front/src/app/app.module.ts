@@ -43,10 +43,14 @@ import { VistaAlumnoComponent } from './componentes/vista-alumno/vista-alumno.co
 import { ColegioComponent } from './componentes/colegio/colegio.component';
 import { PagoComponent } from './componentes/pago/pago.component';
 import { AgendaComponent } from './componentes/agenda/agenda.component';
+import { LibroEvalucionComponent } from './componentes/libro-evalucion/libro-evalucion.component';
 
 /** Cuadro de dialogo (Modales) */
 import { ConfirmDialogComponent } from './componentes/confirm-dialog/confirm-dialog.component';
 import { HorarioModalComponent } from './componentes/horario-modal/horario-modal.component';
+import { ChatComponent } from './componentes/chat/chat.component';
+import { LibroComponent } from './componentes/libro/libro.component';
+import { EvaluacionComponent } from './componentes/evaluacion/evaluacion.component';
 
 import { ModalOptionsComponent } from './componentes/modal-options/modal-options.component';
 import { ModalOptPeriodoComponent } from './componentes/modal-opt-periodo/modal-opt-periodo.component';
@@ -58,7 +62,8 @@ import { ModalOptBarraComponent } from './componentes/modal-opt-barra/modal-opt-
 import { ModalOptPlanillaNotasComponent } from './componentes/modal-opt-planilla-notas/modal-opt-planilla-notas.component';
 import { ModalOptCursoComponent } from './componentes/modal-opt-curso/modal-opt-curso.component';
 import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
-import { ChatComponent } from './componentes/chat/chat.component';
+import { ModalOptLibroComponent } from './componentes/modal-opt-libro/modal-opt-libro.component';
+
 
 //Servicios
 import {PersonaService} from './servicios/persona.service';
@@ -118,7 +123,11 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     ColegioComponent,
     PagoComponent,
     AgendaComponent,
-    ChatComponent
+    ChatComponent,
+    LibroComponent,
+    EvaluacionComponent,
+    ModalOptLibroComponent,
+    LibroEvalucionComponent
   ],
   imports: [
     BrowserModule,
@@ -144,6 +153,7 @@ import {TokenInterceptorService} from './servicios/token-interceptor.service';
     ModalOptBarraComponent,
     ModalOptCursoComponent,
     ModalPagoComponent,
+    ModalOptLibroComponent,
   ]
   ,
   providers: [

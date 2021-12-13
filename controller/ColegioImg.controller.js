@@ -14,6 +14,7 @@ const { unlink } = require('fs-extra');
 const ColegioImgCtrl = {};
 
 ColegioImgCtrl.getColegioImgs = async (req, res) => {
+    console.log("111111111111111111");
 
     const colCod=req.params.colCod;
 
@@ -23,6 +24,7 @@ ColegioImgCtrl.getColegioImgs = async (req, res) => {
 
 ColegioImgCtrl.getImagenes = async (req, res) => { //Todas las imagenes
 
+  console.log("222222222222222222222");
   const colCod=req.params.colCod;
 
   const colegioImg = await ColegioImg.find({$and:[{
@@ -32,6 +34,9 @@ ColegioImgCtrl.getImagenes = async (req, res) => { //Todas las imagenes
 };
 
 ColegioImgCtrl.createColegioImg = async (req, res) => {
+
+
+  console.log("4444444444444444444444");
 
     const GP={
         colImgTtl:  req.body.colImgTtl,
@@ -131,8 +136,8 @@ ColegioImgCtrl.deleteImg = async (req,res)=> {
                                     
                                       if (photo) {
                                     
-                                        await unlink(path.resolve('./server/public' + photo.colImgRta));
-                                        //await fs.unlink(path.resolve(photo.colImgRta.toString()));
+                                        await unlink(path.resolve('./public' + photo.colImgRta));
+                                        
                                         
                                       } 
                                     }

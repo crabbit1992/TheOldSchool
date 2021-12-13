@@ -1,4 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // Importacion de modelos
 import { GetAulaVirtual }  from '../../modelos/aula-virtual';
@@ -11,6 +13,9 @@ import { Nota, GetNotaSegunTipo, GetNotasFiltradas } from 'src/app/modelos/nota'
 import { TipoNota }  from '../../modelos/tipo-nota';
 import { Promedio }  from '../../modelos/promedio';
 import { GetHorario,HorarioModal }  from '../../modelos/horario';
+import { Libro, GetLibro } from '../../modelos/libro';
+import { Tema, GetTema } from '../../modelos/tema';
+import { EvaluacionTema } from '../../modelos/evaluacion-tema';
 
 import { MatDialog } from '@angular/material';
 import { ModalOptPlanillaNotasComponent } from '../modal-opt-planilla-notas/modal-opt-planilla-notas.component';
@@ -25,9 +30,10 @@ import { DetallePeriodoService } from '../../servicios/detalle-periodo.service';
 import { NotaService } from '../../servicios/nota.service';
 import { TipoNotaService } from '../../servicios/tipo-nota.service';
 import { PromedioService } from '../../servicios/promedio.service';
-import { parse } from 'querystring';
 import { HorarioService } from '../../servicios/horario.service'; 
-import { Alumno } from 'src/app/modelos/cargos';
+import { LibroService } from '../../servicios/libro.service';
+import { TemaService } from '../../servicios/tema.service';
+import { EvaluacionTemaService } from '../../servicios/evaluacion-tema.service';
 
 declare var M: any;
 
@@ -130,7 +136,16 @@ export class PlanillaNotasComponent implements OnInit {
     outPutCurCod: string;
 
     sabadoDisable  :boolean=true;
+
+    divLibro:boolean=false;
+    divTema:boolean=false;
+    divEvaTema:boolean=false;
     
+    arrayLibro: GetLibro[];
+    arrayTema: GetTema[];
+    arrayEva: EvaluacionTema[];
+    temCod:string;
+    libCod:string;
 
   constructor(
     private aulaCursoService:AulaCursoService,
@@ -143,7 +158,25 @@ export class PlanillaNotasComponent implements OnInit {
     private promedioService:PromedioService,
     private horarioService:HorarioService,
     public  dialog            : MatDialog,
-    ) { }
+    private libroService:LibroService, 
+    private temaService: TemaService,
+    private evaluacionTemaService: EvaluacionTemaService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    ) { 
+      this.matIconRegistry.addSvgIcon(
+        "editar",
+        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/editar.svg")
+      );
+      this.matIconRegistry.addSvgIcon(
+        "libro-abierto",
+        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/libro-abierto.svg")
+      );
+      this.matIconRegistry.addSvgIcon(
+        "examen",
+        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/examen.svg")
+      );
+    }
 
     HideDivs(){
       this.divListaAlum=false;
@@ -157,6 +190,9 @@ export class PlanillaNotasComponent implements OnInit {
       this.divHstSgnTpoNta=false;
       this.divSinRegistros=false;
       this.divAgenda=false;
+      this.divLibro=false;
+      this.divTema=false;
+      this.divEvaTema=false;
     }
 
     HideOpciones(){
@@ -204,7 +240,86 @@ export class PlanillaNotasComponent implements OnInit {
     cambiarCicloEvent(e){
       this.openDialog("1");
     }
+
+    ShowLibros(){
+   
+      this.HideDivs();
+  
+      this.CargarLibro();
     
+    }
+
+    ShowTemas(libro: Libro){
+
+      this.HideDivs();
+      this.libCod=libro._id;
+      this.ListarTema();
+
+    }
+
+    ShowTemaNota(tema:Tema){
+      this.HideDivs();
+      this.temCod=tema._id;
+
+      const objEvaTem = {
+
+        prdCod  :this.prdCod,
+        graCod  :this.graCod,
+        secCod  :this.secCod,
+        nivCod  :this.NivCod,
+        libCod  :this.libCod,
+        temCod  :this.temCod,
+
+      }
+
+      this.evaluacionTemaService.getEvaTemAula(objEvaTem)
+      .subscribe(res=>{
+        this.arrayEva= res as EvaluacionTema[];
+        console.log(this.arrayEva);
+        this.divEvaTema=true;
+      })
+
+    }
+    
+    CargarLibro(){
+
+      const objLibro={
+        colCod: this.inputColCod,
+        graCod: this.graCod,
+        nivCod: this.NivCod,
+        curCod: this.curCod,
+      }
+  
+      return this.libroService.getLibrosCur(objLibro)
+      .subscribe(res=>{
+        console.log(res);
+        this.arrayLibro= res as GetLibro[];
+        this.divLibro=true;
+      })
+    }
+
+    ListarTema(){
+      console.log(this.libCod);
+      return this.temaService.getTema(this.libCod)
+      .subscribe(res=>{
+        this.arrayTema=res as GetTema[];
+        this.divTema=true;
+        console.log(this.arrayTema);
+      })
+    }
+
+    GetUltimoPeriodo(){
+
+      return this.periodoService.getPeriodoUltimo(this.inputColCod)
+      .subscribe(res=>{
+  
+        console.log("GetUltimoPeriodo");
+        this.prdCod= res["_id"]
+        console.log(this.prdCod);
+  
+      });
+  
+    }
    
 
     pre_eliminarNota(nota: GetNotasFiltradas){
@@ -263,7 +378,16 @@ export class PlanillaNotasComponent implements OnInit {
       this.secCod=aulaVirtual.secCod._id;
       this.NivCod=aulaVirtual.nivCod._id;
       this.TurCod=aulaVirtual.turCod._id;
-      this.gradoSeccion=aulaVirtual.graCod.graDes +" - " + aulaVirtual.secCod.secDes ;
+
+      if(aulaVirtual.nivCod._id=="5e0d267c99226017b4c953ac"){
+        this.gradoSeccion= "Inicial " + aulaVirtual.graCod.graNum +" años";
+      }
+      else{
+        this.gradoSeccion=aulaVirtual.graCod.graDes +" - " + aulaVirtual.secCod.secDes ;
+      }
+
+
+      
       this.GetHorario();
       this.CargarCursosSegunAula(this.alvCod,this.codMbr);
       this.ObtenerCiclo();
@@ -879,12 +1003,35 @@ export class PlanillaNotasComponent implements OnInit {
       })
     }
 
+    evaluarNivel(aulaVirtual: GetAulaVirtual){
+
+      var grado="";
+  
+      if(aulaVirtual.nivCod._id=="5e0d267c99226017b4c953ac"){
+        
+        if(aulaVirtual.graCod.graNum==1){
+          grado=aulaVirtual.graCod.graNum + " " + "año"
+        }
+        else{
+          grado=aulaVirtual.graCod.graNum + " " + "años"
+        }
+  
+      }
+      else{
+        grado= aulaVirtual.graCod.graDes;
+      }
+  
+      return grado;
+  
+    }
+
 
   ngOnInit() {
 
     this.ObtenerPeriodo();
     this.CargarAulasDocente();
     this.CargarSelectTpoNota();
+    this.GetUltimoPeriodo();
     this.ModeloTipoNota._id="string";
     this.ModeloTipoNotaCurso.tpoNtaCod="string";
 

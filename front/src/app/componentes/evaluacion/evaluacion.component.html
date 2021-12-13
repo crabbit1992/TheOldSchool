@@ -1,0 +1,376 @@
+<div class="col m12 container-fluid anulaPaddMarr">
+
+    <div *ngIf="divPresentacion" class="col m12 center">
+        <div class="col m12">
+            <h6>Evaluacion del tema</h6>
+        </div>
+        <div class="col m12">
+            <h6>{{tema.temTtl}}</h6>
+        </div>
+    </div>
+
+    <div class="col m12 anulaPaddMarr" *ngIf="divListarPreguntas" style="margin-top: 30px;">
+        <div class="col m12">
+            <div class="row card-panel col m12" style="margin-top: 0px; height: 75px;">
+              <div class="col m12 anulaPaddMarr" style="height: 30px;">
+                <div class="col m3 anulaPaddMarr">
+                  <div class="input-field col m12" style="margin-top: 20px;">
+                    <button   class="btn col m12 blue-grey darken-3" (click)="ShowCrearPregunta()" matTooltip = "Crear Pregunta">Crear Pregunta</button>
+                  </div>
+                </div>
+                <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 20px;">
+                      <button   class="btn col m12 blue-grey darken-3" (click)="ShowRealizarEvaluacion()" matTooltip = "Realizar Evaluacion">Realizar Evaluación</button>
+                    </div>
+                 </div>
+
+                 <div class="col m3 anulaPaddMarr">
+                    <div class="input-field col m12" style="margin-top: 20px;">
+                      <button   class="btn col m12 blue-grey darken-3" *ngIf="btnTemEvaAdm" (click)="ShowConfigurarEvaluacion()" matTooltip = "Configurar evaluación">Configuración</button>
+                    </div>
+                 </div>
+              </div>
+            </div>
+        </div>
+
+      
+
+        <div class="col m12 anulaPaddMarr">
+            
+            <div class="col m12 blue-grey darken-1" style="margin-bottom: 10px;padding-top: 9px;" *ngFor="let evaluacion of arrayEvaluacion">
+                <div class="col m12 divPregunta" style="background-color: rgb(218, 221, 226);">
+
+                    <div class="col m12 center">
+                        <p>
+                            <label style="color: rgb(2, 4, 32);font-family: cursive;font-size: 16px;">
+                               <strong>{{evaluacion.evaPta}}</strong>
+                            </label>
+                        </p>
+
+                    </div>
+
+                    <form class="col m12" style="margin-top: 20px;">
+                        <div class="col m12">
+                            <p class="col m6" *ngFor="let opc of evaluacion.evaOpc">
+                                <label>
+                                    <input type="checkbox" />
+                                    <span style="color: rgb(0, 0, 0);">{{opc.evaOpc}}</span>
+                                </label>
+                            </p>
+                        </div>
+                        
+                    </form>
+
+                </div>
+
+                <div class="col m12 anulaPaddMarr center">
+                    <div class="col m4"></div>
+                    <div class="input-field col m4 center" style="margin-top: 5px;">
+                        <button  class="btn col m12 blue-grey" (click)="pre_EditarPregunta(evaluacion)" matTooltip = "Editar pregunta">Editar Pregunta</button>
+                    </div>
+                    <div class="col m4"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+       
+    </div>
+
+    <div class="col m12 anulaPaddMarr" *ngIf="divConfigEva" style="margin-top: 70px;margin-bottom: 40px;">
+
+        <div class="col m1"></div>
+    
+        <form class="col m10">
+
+            <div class="row col m6 anulaPaddMarr"  style="margin-top: 15px;">
+                <div class="col m12 center">
+                    <label style="font-size: 17px;">Libro</label>
+                </div>
+                <div class="input-field col m12">
+                  <input type="text" name="libCod" id="libCod" readonly [(ngModel)]="ModeloEvaluacionAdm.libCod.libTtl" 
+                    style="text-align: center;">
+                </div>
+            </div>
+
+            <div class="row col m6 anulaPaddMarr"  style="margin-top: 15px;">
+                <div class="col m12 center">
+                    <label style="font-size: 17px;">Tema</label>
+                </div>
+                <div class="input-field col m12">
+                  <input type="text" name="temCod" id="temCod" readonly [(ngModel)]="ModeloEvaluacionAdm.temCod.temTtl" 
+                    style="text-align: center;">
+                </div>
+            </div>
+
+            <div class="col m12 card-panel">
+                <div class="row col m6 anulaPaddMarr"  style="margin-top: 15px;">
+                    <div class="col m12 center">
+                        <label style="font-size: 17px;">Numero de intentos</label>
+                    </div>
+                    <div class="input-field col m12">
+                      <input 
+                      type="text" 
+                      name="evaNroIts" 
+                      id="evaNroIts" 
+                      [(ngModel)]="ModeloEvaluacionAdm.evaNroIts" 
+                      placeholder="Ingrese el numero de intentos"
+                      maxlength="2"
+                      style="text-align: center;">
+                    </div>
+                </div>
+    
+                <div class="row col m6 anulaPaddMarr"  style="margin-top: 15px;">
+                    <div class="col m12 center">
+                        <label style="font-size: 17px;">Tiempo de evaluación</label>
+                    </div>
+                    <div class="input-field col m12">
+                      <input 
+                      type="text" 
+                      name="evaTim" 
+                      id="evaTim" 
+                      [(ngModel)]="ModeloEvaluacionAdm.evaTim" 
+                      placeholder="Ingrese el tiempo en minutos "
+                      maxlength="2"
+                      style="text-align: center;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col m12 anulaPaddMarr center">
+                <div class="col m2"></div>
+                <div class="input-field col m4 center" style="margin-top: 5px;">
+                    <button  class="btn col m12 blue-grey" (click)="GuardarTemaEvaAdm()" matTooltip = "Guardar">Guardar</button>
+                </div>
+                <div class="input-field col m4 center" style="margin-top: 5px;">
+                    <button  class="btn col m12 blue-grey" (click)="CancelarTemaEvaAdm()" matTooltip = "Cancelar">Cancelar</button>
+                </div>
+                <div class="col m2"></div>
+            </div>
+
+
+            
+
+
+
+
+        </form>
+
+
+    </div>
+
+
+    <div class="col m12 anulaPaddMarr" *ngIf="divCrearPregunta" style="margin-top: 70px;margin-bottom: 40px;">
+
+        <div class="col m12 center">
+            <h4><strong style="color: rgb(37, 63, 102);"><b>Crear Pregunta</b></strong></h4>
+        </div>
+
+        <div class="col m12" style="margin-top: 30px;">
+
+            <form class="col m12">
+
+                <div class="row card-panel col m12" style="margin-top: 0px; min-height: 100px;">
+                    <div class="row col m10 anulaPaddMarr"  style="margin-top: 15px;">
+                        <div class="input-field col m12">
+                        <input type="text" name="evaPta" id="evaPta" [(ngModel)]="ModeloEvaluacion.evaPta" placeholder="Escriba una pregunta"
+                            style="text-align: center; font-family: cursive; color: rgb(37, 63, 102);">
+                        </div>
+                    </div>
+                    <div class="row col m2 anulaPaddMarr"  style="margin-top: 15px;">
+                        <div class="input-field col m12">
+                        <input type="text" name="evaPtsEqt" id="evaPtsEqt" [(ngModel)]="ModeloEvaluacion.evaPtsEqt" placeholder="Puntos"
+                            style="text-align: center; font-family: cursive; color: rgb(37, 63, 102);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row card-panel col m12" style="margin-top: 0px; min-height: 100px;">
+                    <div class="row col m12 anulaPaddMarr"  style="margin-top: 15px;">
+                      
+                            <div class="col m6 anulaPaddMarr" style="margin-bottom: 10px;">
+                         
+                                <div class="col m12 center" style="margin-bottom: 30px;">
+                                    <span class="card-title" style="color: rgb(37, 63, 102);"><b>Respuestas</b></span>
+                                </div>
+                                 
+                                 
+                                <div class="col m12 anulaPaddMarr" *ngFor="let res of arrayRespuestas" style="background-color: rgb(235, 237, 243); margin-bottom: 2px;">
+                                    <div class="col m1 anulaPaddMarr">
+                                        <a ><i class="material-icons icon-blue" style="cursor: pointer;" (click)="deleteRespuesta(res)">delete</i></a>
+                                    </div>
+
+                                    <div class="row col m11 anulaPaddMarr" >
+                                        <div class="col m12 anulaPaddMarr">
+                                            <span class="col m12 textAreaClass"  readonly spellcheck="false" >
+                                                {{res.evaRpt}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col m6" style="margin-bottom: 10px;">
+
+                                <div class="col m12 center" style="margin-bottom: 30px;">
+                                    <span class="card-title" style="color: rgb(37, 63, 102);"><b>Opciones</b></span>
+                                </div>
+                                 
+                                 
+                                <div class="col m12 anulaPaddMarr" *ngFor="let opc of arrayOpciones" style="background-color: rgb(235, 237, 243); margin-bottom: 2px;">
+                                    <div class="col m1 anulaPaddMarr">
+                                        <a ><i class="material-icons icon-blue" style="cursor: pointer;" (click)="deleteOpcione(opc)">delete</i></a>
+                                    </div>
+
+                                    <div class="row col m11 anulaPaddMarr" >
+                                        <div class="col m12 anulaPaddMarr">
+                                            <span class="col m12 textAreaClass"  readonly spellcheck="false" >
+                                                {{opc.evaOpc}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                              </div>
+                      
+                    </div>
+                </div>
+
+                <div class="row col m12 anulaPaddMarr center"  style="margin-top: 8px;">
+
+                    <div class="row card-panel col m12 center" style="margin-top: 0px; min-height: 100px;">
+                        <div class="row col m12 center"  style="margin-top: 15px;">
+
+                            <div class="col m6">
+
+                                <div class="row card-panel col m12 center" style="margin-top: 16px;">
+                                    <div class="row col m12 center">
+
+                                        <form class="col m12">
+                                            <div class="input-field col m12">
+                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="respuesta" placeholder="Escriba una respuesta"
+                                                    style="text-align: center;">
+                                            </div>
+            
+                                            <div class="col m12 center" style="padding-top: 5px;">
+                                                <div class="col m2"></div>
+                                                <button  class="btn-small center col m8" style="background-color: rgb(29, 51, 85);font-style: normal;"   (click)="pushPregunta()">Agregar respuesta</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col m6">
+
+                                <div class="row card-panel col m12 center" style="margin-top: 16px;">
+                                    <div class="row col m12 center">
+
+                                        <form class="col m12">
+                                            <div class="input-field col m12">
+                                                <input type="text" name="opciones" id="opciones" [(ngModel)]="opcion" placeholder="Escriba una opción"
+                                                    style="text-align: center;">
+                                            </div>
+            
+                                            <div class="col m12 center" style="padding-top: 5px;">
+                                                <div class="col m2"></div>
+                                                <button  class="btn-small center col m8" style="background-color: rgb(29, 51, 85);font-style: normal;"  (click)="pushOpcion()">Agregar opción</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col m12 anulaPaddMarr center"  style="margin-top: 5px;">
+               
+                    <div class="col m6" style="padding-bottom: 0px;">
+                        <a class="btn-small right col m12" style="background-color: rgb(29, 51, 85);" (click)="CrearPregunta()">{{nomBtnPregunta}}</a>
+                    </div>
+    
+                    <div class="col m6 " style="padding-bottom: 0px;">
+                        <a class="btn-small left col m12" style="background-color: rgb(29, 51, 85);" (click)="Cancelar()">Cancelar</a>
+                    </div>
+                 
+                </div>
+
+
+                
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="col m12" *ngIf="divEvaluacion" style="margin-top: 30px;">
+    
+        <div class="col m12 anulaPaddMarr">
+            <div class="col m12 blue-grey darken-1" style="margin-bottom: 10px;padding-top: 9px;padding-bottom: 10px;" *ngFor="let evaluacion of arrayEvaluacion">
+                <div class="col m12 divPregunta" style="background-color: rgb(218, 221, 226);">
+
+                    <div class="col m12 center">
+                        <p>
+                            <label style="color: rgb(2, 4, 32);font-family: cursive;font-size: 16px;">
+                               <strong>{{evaluacion.evaPta}}</strong>
+                            </label>
+                        </p>
+                    </div>
+
+                    <form class="col m12" style="margin-top: 20px;">
+                        <div class="col m12">
+                            <p class="col m6" *ngFor="let opc of evaluacion.evaOpc">
+                                <label>
+                                    <input (click)="addOpcSelected(evaluacion,opc.evaOpc)" type="checkbox" />
+                                    <span  style="color: rgb(0, 0, 0);">{{opc.evaOpc}}</span>
+                                </label>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col m12 anulaPaddMarr center" style="margin-bottom: 10px;">
+                <div class="col m4"></div>
+                <div class="input-field col m4 center" style="margin-top: 5px;">
+                    <button  class="btn col m12 blue-grey ui-state-default" (click)="Puntuacion()" matTooltip = "Terminar practica">Completar evaluación</button>
+                </div>
+                <div class="col m4"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col m12 center" *ngIf="divResultados" style="margin-top: 30px;">
+    
+        <div class="col m12 center" style="margin-top: 150px;">
+
+            <div class="col m12">
+                <span style="margin-top: 70px;">
+                    <strong style="font-family: cursive;color: rgb(3, 88, 109);font-size: 40px;">
+                        Puntuación
+                    </strong>
+                </span>
+            </div>
+           
+            <div  class="col m12" style="margin-top: 70px;">
+                <span id=lblPuntos style="font-size: 60px;color: rgb(3, 88, 109); font-family: cursive">
+                    <b>{{lblPuntosTotales}}</b> 
+                </span>
+            </div>
+          
+        </div>
+    </div>
+
+
+
+</div>

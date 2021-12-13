@@ -10,8 +10,8 @@ export class CienciaService {
   selectedCiencia: Ciencia;
   ciencia:Ciencia[];
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/Ciencia';
-  readonly URL_API_GetCiencia='http://209.145.52.133:3000/Inicio/Ciencia/GetCiencia';
+  readonly URL_API='http://localhost:3000/Inicio/Ciencia';
+  readonly URL_API_GetCiencia='http://localhost:3000/Inicio/Ciencia/GetCiencia';
 
   constructor(private http: HttpClient) {}
 

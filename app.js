@@ -3,33 +3,45 @@ const mongoose=require('mongoose');
 const {database} =require('./keys');
 const config=require('./config');
 const app =config(express()); 
+const server = require('http').createServer(app);
 const morgan=require('morgan');
 const cors=require('cors');
-var socket = require('socket.io');
+const io = require('socket.io')(server);
+
 
 
 const multer = require('multer');
-var uuid = require('uuid');
+var { v4: uuidv4 } = require('uuid');
 const path = require('path');
-uuid=uuid.v4();
-console.log(uuid);
+
 
 app.set('views', path.join(__dirname, 'views'));
 
-const storage = multer.diskStorage({
-    destination: path.join(__dirname, 'public/img/uploads'),
-    filename: (req, file, cb, filename) => {
+const imageFolderPath = 'public/img/uploads';
+const pdfFolderPath = 'public/pdf/uploads';
 
-        cb(null, uuid() + path.extname(file.originalname));
+const storage = multer.diskStorage({
+    destination: (req, file, cb ) => {
+        if (file.fieldname === 'image') { // check the fieldname
+            cb(null, imageFolderPath);
+        }
+        else {
+            cb(null, pdfFolderPath);
+        }
+     },
+    filename: (req, file, cb, filename) => {
+        cb(null, uuidv4() + path.extname(file.originalname));
     }
 }) 
+
+
 app.use(multer({storage}).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Iniciando el servidor
-const server = app.listen(app.get('port'),()=>{
-    console.log('Server on port',app.get('port')); 
+server.listen(app.get('port'),()=>{
+    console.log('Server on port',app.get('port'));
 });
 
 
@@ -55,8 +67,6 @@ mongoose.connect(database.uri, {useNewUrlParser: true, useUnifiedTopology: true}
     console.log('DB is connected');
 })
 .catch(err=>console.error(err));
-
-var io = socket(server);
 
 
 io.on('connection', function(socket) {
@@ -220,3 +230,10 @@ app.use('/Inicio/TipoPago',require('./route/tipoPago.route'));
 app.use('/Inicio/Pago',require('./route/pago.route')); 
 app.use('/Inicio/Agenda',require('./route/agenda.route')); 
 app.use('/Inicio/Chat',require('./route/chat.route')); 
+
+app.use('/Inicio/Libro',require('./route/libro.route')); 
+app.use('/Inicio/Tema',require('./route/tema.route')); 
+app.use('/Inicio/SubTema',require('./route/subTema.route')); 
+app.use('/Inicio/EvaluacionTema',require('./route/evaluacionTema.route'));
+app.use('/Inicio/Evaluacion',require('./route/evaluacion.route')); 
+app.use('/Inicio/EvaluacionAdm',require('./route/evaluacionAdm.route')); 

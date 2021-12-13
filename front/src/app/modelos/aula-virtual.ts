@@ -14,7 +14,7 @@ export class GetAulaVirtual{
         graCod: {
             estCod: string;
             _id: string;
-            graNum: string;
+            graNum: number;
             graDes: string;
             timestamp: string;
             __v: number;

@@ -14,10 +14,18 @@ export class LoginService {
 
   selectedtoken: ResToken;
   readonly URL_API='http://localhost:3000/Inicio/Login';
+  readonly URL_API_recoveryPass='http://localhost:3000/Inicio/Login/recoveryPass';
   constructor(private http: HttpClient ) { }
 
   postLogin(login:Login){
     return this.http.post<ResToken>(this.URL_API,login).pipe(
+      tap(data => 
+      catchError(this.handleError)
+      ));
+  }
+
+  recoveryPass(correo:object){
+    return this.http.post<ResToken>(this.URL_API_recoveryPass,correo).pipe(
       tap(data => 
       catchError(this.handleError)
       ));

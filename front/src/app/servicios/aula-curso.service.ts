@@ -7,14 +7,14 @@ import { HttpClient }from '@angular/common/http';
 })
 export class AulaCursoService {
 
-  readonly URL_API='http://209.145.52.133:3000/Inicio/AulaCurso';
-  readonly URL_API_MisCursos='http://209.145.52.133:3000/Inicio/AulaCurso/MisCursos';
-  readonly URL_API_editDocenteCurso='http://209.145.52.133:3000/Inicio/AulaCurso/editDocenteCurso';
-  readonly URL_API_CursosAula='http://209.145.52.133:3000/Inicio/AulaCurso/CursosAula';
-  readonly URL_API_DocenteCurso='http://209.145.52.133:3000/Inicio/AulaCurso/DocenteCurso';
-  readonly URL_API_AulasDocente='http://209.145.52.133:3000/Inicio/AulaCurso/AulasDocente';
-  readonly URL_API_CursosAulaDocente='http://209.145.52.133:3000/Inicio/AulaCurso/CursosAulaDocente';
-  readonly URL_API_DocentesPorAula='http://209.145.52.133:3000/Inicio/AulaCurso/DocentesPorAula';
+  readonly URL_API='http://localhost:3000/Inicio/AulaCurso';
+  readonly URL_API_MisCursos='http://localhost:3000/Inicio/AulaCurso/MisCursos';
+  readonly URL_API_editDocenteCurso='http://localhost:3000/Inicio/AulaCurso/editDocenteCurso';
+  readonly URL_API_CursosAula='http://localhost:3000/Inicio/AulaCurso/CursosAula';
+  readonly URL_API_DocenteCurso='http://localhost:3000/Inicio/AulaCurso/DocenteCurso';
+  readonly URL_API_AulasDocente='http://localhost:3000/Inicio/AulaCurso/AulasDocente';
+  readonly URL_API_CursosAulaDocente='http://localhost:3000/Inicio/AulaCurso/CursosAulaDocente';
+  readonly URL_API_DocentesPorAula='http://localhost:3000/Inicio/AulaCurso/DocentesPorAula';
 
   constructor(private http: HttpClient) { }
 
